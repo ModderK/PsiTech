@@ -1,0 +1,241 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{D7D21B4A-1DA7-41D8-B202-C58CA8FA62AA}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>PsiTech</RootNamespace>
+    <AssemblyName>PsiTech</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <LangVersion>8</LangVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>false</DebugSymbols>
+    <DebugType>none</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\Assemblies\</OutputPath>
+    <DefineConstants>
+    </DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>none</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\..\PsiTech - Release\Assemblies\</OutputPath>
+    <DefineConstants>
+    </DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="0Harmony, Version=2.0.0.8, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\..\..\Harmony.2.0.0.8\Release\net472\0Harmony.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Assembly-CSharp, Version=1.1.7429.26604, Culture=neutral, PublicKeyToken=null">
+      <HintPath>../../../RimWorldLinux_Data/Managed/Assembly-CSharp.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <None Include="..\About\**" />
+    <None Include="..\Defs\**" />
+    <None Include="..\Languages\**" />
+    <None Include="..\Patches\**" />
+    <Reference Include="UnityEngine, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>../../../RimWorldLinux_Data/Managed/UnityEngine.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>../../../RimWorldLinux_Data/Managed/UnityEngine.CoreModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.IMGUIModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>../../../RimWorldLinux_Data/Managed/UnityEngine.IMGUIModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.InputModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>../../../RimWorldLinux_Data/Managed/UnityEngine.InputModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.TextCoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>../../../RimWorldLinux_Data/Managed/UnityEngine.TextCoreModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.TextRenderingModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>../../../RimWorldLinux_Data/Managed/UnityEngine.TextRenderingModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.UI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>../../../RimWorldLinux_Data/Managed/UnityEngine.UI.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.UIElementsModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>../../../RimWorldLinux_Data/Managed/UnityEngine.UIElementsModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.UIModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>../../../RimWorldLinux_Data/Managed/UnityEngine.UIModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <None Update="..\Defs\ThingDefs\Equipment\PsiTechAdvancedTinFoil.xml">
+      <Link>Equipment\PsiTechAdvancedTinFoil.xml</Link>
+    </None>
+    <None Update="..\Defs\AdditionalTargetFilterDefs\PsiTechAutocastConditionDefs.xml">
+      <Link>AdditionalTargetFilterDefs\PsiTechAutocastConditionDefs.xml</Link>
+    </None>
+    <None Update="..\Defs\HediffDefs\PsiTechDebuffs.xml">
+      <Link>HediffDefs\PsiTechDebuffs.xml</Link>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AbilityEffects\AbilityEffect.cs" />
+    <Compile Include="AbilityEffects\AbilityEffectAddHediff.cs" />
+    <Compile Include="AbilityEffects\AbilityEffectDamage.cs" />
+    <Compile Include="AbilityEffects\AbilityEffectDamagePart.cs" />
+    <Compile Include="AbilityEffects\AbilityEffectHeal.cs" />
+    <Compile Include="AbilityEffects\AbilityEffectMentalBreak.cs" />
+    <Compile Include="AbilityEffects\AbilityEffectMentalState.cs" />
+    <Compile Include="AbilityEffects\AbilityEffectRemoveMentalState.cs" />
+    <Compile Include="AbilityEffects\AbilityEffectSkillTransfer.cs" />
+    <Compile Include="AbilityEffects\AbilityEffectStun.cs" />
+    <Compile Include="AbilityEffects\AbilityEffectThought.cs" />
+    <Compile Include="AI\JobDriver_BurstPsionic.cs" />
+    <Compile Include="AI\JobDriver_SingleTargetPsionic.cs" />
+    <Compile Include="AI\JobGiver_Autocast.cs" />
+    <Compile Include="AI\JobGiver_TrainInTube.cs" />
+    <Compile Include="AI\Stance_PsiWarmup.cs" />
+    <Compile Include="AI\ThinkNodeConditionalPsiAutocast.cs" />
+    <Compile Include="AI\WorkGiver_TrainInTube.cs" />
+    <Compile Include="AutocastManagement\AdditionalTargetFilterDef.cs" />
+    <Compile Include="AutocastManagement\AdditionalTargetFilter.cs" />
+    <Compile Include="AutocastManagement\AdditionalTargetFilter_Boolean.cs" />
+    <Compile Include="AutocastManagement\AdditionalTargetFilter_Energy.cs" />
+    <Compile Include="AutocastManagement\AdditionalTargetFilter_HealthPercent.cs" />
+    <Compile Include="AutocastManagement\AdditionalTargetFilter_IsDowned.cs" />
+    <Compile Include="AutocastManagement\AdditionalTargetFilter_IsPsion.cs" />
+    <Compile Include="AutocastManagement\AdditionalTargetFilter_Mood.cs" />
+    <Compile Include="AutocastManagement\AdditionalTargetFilter_Pain.cs" />
+    <Compile Include="AutocastManagement\AdditionalTargetFilter_PsionLevel.cs" />
+    <Compile Include="AutocastManagement\AdditionalTargetFilter_ThresholdInt.cs" />
+    <Compile Include="AutocastManagement\AdditionalTargetFilter_ThresholdPercent.cs" />
+    <Compile Include="AutocastManagement\AutocastCondition_AbilityModifier.cs" />
+    <Compile Include="AutocastManagement\AutocastCondition_Drafted.cs" />
+    <Compile Include="AutocastManagement\AutocastCondition.cs" />
+    <Compile Include="AutocastManagement\AutocastConditionDef.cs" />
+    <Compile Include="AutocastManagement\AutocastCondition_Boolean.cs" />
+    <Compile Include="AutocastManagement\AutocastCondition_Energy.cs" />
+    <Compile Include="AutocastManagement\AutocastCondition_EnergyRemaining.cs" />
+    <Compile Include="AutocastManagement\AutocastCondition_HealthPercent.cs" />
+    <Compile Include="AutocastManagement\AutocastCondition_Pain.cs" />
+    <Compile Include="AutocastManagement\AutocastCondition_ThresholdInt.cs" />
+    <Compile Include="AutocastManagement\AutocastCondition_ThresholdPercent.cs" />
+    <Compile Include="AutocastManagement\AutocastFilter.cs" />
+    <Compile Include="AutocastManagement\AutocastFilterSelector.cs" />
+    <Compile Include="AutocastManagement\AutocastFilterSelectorDef.cs" />
+    <Compile Include="AutocastManagement\AutocastFilterSelector_Closest.cs" />
+    <Compile Include="AutocastManagement\AutocastFilterSelector_HighestSuccessChance.cs" />
+    <Compile Include="AutocastManagement\AutocastFilterSelector_LowestHealthPercent.cs" />
+    <Compile Include="AutocastManagement\AutocastFilterSelector_LowestMood.cs" />
+    <Compile Include="AutocastManagement\AutocastFilterSelector_MostDangerous.cs" />
+    <Compile Include="AutocastManagement\AutocastFilterSelector_MostPain.cs" />
+    <Compile Include="AutocastManagement\AutocastFilter_Burst.cs" />
+    <Compile Include="AutocastManagement\AutocastFilter_SingleTarget.cs" />
+    <Compile Include="AutocastManagement\AutocastProfileDef.cs" />
+    <Compile Include="AutocastManagement\AutocastProfileUtility.cs" />
+    <Compile Include="Interface\AbilityWindow.cs" />
+    <Compile Include="Interface\ITab_Pawn_Psi.cs" />
+    <Compile Include="Interface\PawnPsiCard.cs" />
+    <Compile Include="Interface\PsiTechUiTextureHelper.cs" />
+    <Compile Include="Misc\CommandIndicator.cs" />
+    <Compile Include="Misc\CommandPsionic.cs" />
+    <Compile Include="Misc\CommandTargetedPsionic.cs" />
+    <Compile Include="Misc\EquipmentEnhancementDef.cs" />
+    <Compile Include="Misc\MoteLink.cs" />
+    <Compile Include="Misc\MotePointer.cs" />
+    <Compile Include="Misc\PsiTechEquipmentTracker.cs" />
+    <Compile Include="Misc\PsiTechPawnKindDef.cs" />
+    <Compile Include="Misc\PsiTechThoughtMemory.cs" />
+    <Compile Include="Misc\SpecialThingFilterWorker_PsychicEquipment.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Psionics\PsiTechAbility.cs" />
+    <Compile Include="Psionics\PsiTechAbilityAreaBurst.cs" />
+    <Compile Include="Psionics\PsiTechAbilityDef.cs" />
+    <Compile Include="Psionics\PsiTechAbilityScaledPassive.cs" />
+    <Compile Include="Psionics\PsiTechAbilityTargetedMentalState.cs" />
+    <Compile Include="Psionics\PsiTechAbilityTargetedMentalStateRemoval.cs" />
+    <Compile Include="Psionics\PsiTechAbilityTargetedSkillTransfer.cs" />
+    <Compile Include="Psionics\PsiTechAbilityTriggeredPassive.cs" />
+    <Compile Include="Psionics\PsiTechAbilityUnscaledPassive.cs" />
+    <Compile Include="Psionics\PsiTechAbilityTargeted.cs" />
+    <Compile Include="Psionics\PsiTechTracker.cs" />
+    <Compile Include="Psionics\Verb_Psionic.cs" />
+    <Compile Include="TargetValidators\TargetValidator.cs" />
+    <Compile Include="TargetValidators\TargetValidatorAny.cs" />
+    <Compile Include="TargetValidators\TargetValidatorAnyButUser.cs" />
+    <Compile Include="TargetValidators\TargetValidatorFriendlies.cs" />
+    <Compile Include="TargetValidators\TargetValidatorHostiles.cs" />
+    <Compile Include="TargetValidators\TargetValidatorPsion.cs" />
+    <Compile Include="TargetValidators\TargetValidatorSelf.cs" />
+    <Compile Include="Training\BuildingPsiTechTrainer.cs" />
+    <Compile Include="Training\CompPropertiesPsiTechBuilding.cs" />
+    <Compile Include="Training\CompPsiTechTrainer.cs" />
+    <Compile Include="Utility\ExtensionMethods.cs" />
+    <Compile Include="Utility\HarmonyPatches.cs" />
+    <Compile Include="Utility\PsiTech.cs" />
+    <Compile Include="Utility\PsiTechAlienRacesPatcherUtility.cs" />
+    <Compile Include="Utility\PsiTechCachingUtility.cs" />
+    <Compile Include="Utility\PsiTechDefOf.cs" />
+    <Compile Include="Utility\PsiTechManager.cs" />
+    <Compile Include="Utility\PsiTechRenderUtility.cs" />
+    <Compile Include="Utility\PsiTechSettings.cs" />
+    <Compile Include="Utility\PsiTechSkillTransferUtility.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="..\Defs\EquipmentEnhancementDef">
+      <Link>EquipmentEnhancementDef</Link>
+    </Folder>
+    <Folder Include="..\Defs\PawnKindDefs">
+      <Link>PawnKindDefs</Link>
+    </Folder>
+    <Folder Include="..\Languages\English\Strings">
+      <Link>English\Strings</Link>
+    </Folder>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PreBuildEvent>
+    </PreBuildEvent>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartAction>Program</StartAction>
+    <StartProgram>$(SolutionDir)..\..\RimWorldWin.exe</StartProgram>
+  </PropertyGroup>
+  <Target Name="AfterBuild">
+    <ItemGroup>
+      <_Assemblies Include="$(ProjectDir)../Assemblies/**/*.*" />
+      <_Defs Include="$(ProjectDir)../Defs/**/*.*" />
+      <_Patches Include="$(ProjectDir)../Patches/**/*.*" />
+      <_Languages Include="$(ProjectDir)../Languages/**/*.*" />
+      <_Sounds Include="$(ProjectDir)../Sounds/**/*.*" />
+      <_Textures Include="$(ProjectDir)../Textures/**/*.*" />
+    </ItemGroup>
+    <Copy SourceFiles="$(ProjectDir)../About/About-$(ConfigurationName).xml" DestinationFiles="$(TargetDir)../About/About.xml" />
+    <Copy Condition="'$(ConfigurationName)' == 'Release'" SourceFiles="$(ProjectDir)../About/Preview.png" DestinationFiles="$(TargetDir)../About/Preview.png" />
+    <!--<Copy Condition="'$(ConfigurationName)' == 'Release'" SourceFiles="@(_Assemblies)" DestinationFolder="$(TargetDir)../Assemblies" />-->
+    <Copy Condition="'$(ConfigurationName)' == 'Release'" SourceFiles="@(_Defs)" DestinationFolder="$(TargetDir)../Defs/%(RecursiveDir)" SkipUnchangedFiles="true" />
+    <Copy Condition="'$(ConfigurationName)' == 'Release'" SourceFiles="@(_Patches)" DestinationFolder="$(TargetDir)../Patches/%(RecursiveDir)" SkipUnchangedFiles="true" />
+    <Copy Condition="'$(ConfigurationName)' == 'Release'" SourceFiles="@(_Languages)" DestinationFolder="$(TargetDir)../Languages/%(RecursiveDir)" SkipUnchangedFiles="true" />
+    <Copy Condition="'$(ConfigurationName)' == 'Release'" SourceFiles="@(_Sounds)" DestinationFolder="$(TargetDir)../Sounds/%(RecursiveDir)" SkipUnchangedFiles="true" />
+    <Copy Condition="'$(ConfigurationName)' == 'Release'" SourceFiles="@(_Textures)" DestinationFolder="$(TargetDir)../Textures/%(RecursiveDir)" SkipUnchangedFiles="true" />
+  </Target>
+</Project>

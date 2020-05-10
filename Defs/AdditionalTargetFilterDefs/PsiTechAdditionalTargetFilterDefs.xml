@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<!-- Copyright 2019, 2020, K
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+    
+        http://www.apache.org/licenses/LICENSE-2.0
+    
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+
+<Defs>
+
+    <!-- These defs don't really do much -->
+    <!-- They're use to track the types of additional filters, label them, and give them descriptions -->
+    <!-- All the heavy lifting is done in C# -->
+    <!-- As you might notice, these defs are basically the same as the condition defs -->
+    <!-- It's just bad OOP, okay? Sorry -->
+    
+    <Def Class="PsiTech.AutocastManagement.AdditionalTargetFilterDef">
+        <defName>PTAdditionalFilter_IsPsion</defName>
+        <label>Is Psion</label>
+        <description>Removes all targets which are not psions from the target pool.\n\nWhen inverted, removes all targets which are psions from the pool.</description>
+        <FilterClass>PsiTech.AutocastManagement.AdditionalTargetFilter_IsPsion</FilterClass>
+    </Def>
+
+    <Def Class="PsiTech.AutocastManagement.AdditionalTargetFilterDef">
+        <defName>PTAdditionalFilter_IsDowned</defName>
+        <label>Is Downed</label>
+        <description>Removes all targets which are not downed from the target pool.\n\nWhen inverted, removes all targets which are downed from the pool.</description>
+        <FilterClass>PsiTech.AutocastManagement.AdditionalTargetFilter_IsDowned</FilterClass>
+    </Def>
+
+    <Def Class="PsiTech.AutocastManagement.AdditionalTargetFilterDef">
+        <defName>PTAdditionalFilter_Pain</defName>
+        <label>Pain Threshold</label>
+        <description>Removes all targets which are in less than a certain amount of pain from the target pool.\n\nWhen inverted, removes all targets which are in more than a certain amount of pain from the pool.</description>
+        <FilterClass>PsiTech.AutocastManagement.AdditionalTargetFilter_Pain</FilterClass>
+    </Def>
+
+    <Def Class="PsiTech.AutocastManagement.AdditionalTargetFilterDef">
+        <defName>PTAdditionalFilter_HealthPercent</defName>
+        <label>Health Percent Threshold</label>
+        <description>Removes all targets which have less than a certain health percent from the target pool.\n\nWhen inverted, removes all targets which have more than a certain health percent from the pool.</description>
+        <FilterClass>PsiTech.AutocastManagement.AdditionalTargetFilter_HealthPercent</FilterClass>
+    </Def>
+
+    <Def Class="PsiTech.AutocastManagement.AdditionalTargetFilterDef">
+        <defName>PTAdditionalFilter_Mood</defName>
+        <label>Mood Threshold</label>
+        <description>Removes all targets which have less than a certain mood percent from the target pool.\n\nWhen inverted, removes all targets which have more than a certain mood percent from the pool.</description>
+        <FilterClass>PsiTech.AutocastManagement.AdditionalTargetFilter_Mood</FilterClass>
+    </Def>
+
+    <Def Class="PsiTech.AutocastManagement.AdditionalTargetFilterDef">
+        <defName>PTAdditionalFilter_Energy</defName>
+        <label>Psi Energy Threshold</label>
+        <description>Removes all targets which have less than a certain amount of psi energy from the target pool.\n\nWhen inverted, removes all targets which have more than a certain amount of psi energy from the pool.</description>
+        <FilterClass>PsiTech.AutocastManagement.AdditionalTargetFilter_Energy</FilterClass>
+    </Def>
+
+    <Def Class="PsiTech.AutocastManagement.AdditionalTargetFilterDef">
+        <defName>PTAdditionalFilter_PsionLevel</defName>
+        <label>Psion Level Threshold</label>
+        <description>Removes all targets which are at less than a certain psion level from the target pool.\n\nWhen inverted, removes all targets which have more than a certain psion level from the pool.\n\nPsion level is the combination of energy and focus level. It ranges from 2 to 6. Note that this threshold is inclusive.</description>
+        <FilterClass>PsiTech.AutocastManagement.AdditionalTargetFilter_PsionLevel</FilterClass>
+    </Def>
+    
+</Defs>

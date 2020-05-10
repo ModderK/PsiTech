@@ -1,0 +1,531 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<!-- Copyright 2019, 2020, K
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+    
+        http://www.apache.org/licenses/LICENSE-2.0
+    
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+
+<Defs>
+
+    <!-- Projection Theory Abilities -->
+    <Def Class="PsiTech.Psionics.PsiTechAbilityDef">
+        <defName>PTPerfectedDefence</defName>
+        <label>Perfected Defense</label>
+        <description>Perfected defense is an advanced defensive technique that decreases a psion's susceptibility to psionic abilities, including friendly ones.\n\nTo train perfected defense, the psion must already be trained in psi defence. Psi defence will be upgraded to its perfected variant upon training completion.</description>
+        <AbilityClass>PsiTech.Psionics.PsiTechAbilityScaledPassive</AbilityClass>
+        <Tier>2</Tier>
+        <TrainingTimeDays>2</TrainingTimeDays>
+        <AddedValueForThreat>0</AddedValueForThreat>
+        <AbilityCostForRaid>30</AbilityCostForRaid>
+        <StatOffsets>
+            <PTPsiDefence>0.65</PTPsiDefence>
+        </StatOffsets>
+        <RequiredResearch>
+            <li>PTProjectionTheory</li>
+        </RequiredResearch>
+        <RequiredAbilities>
+            <li>PTPsiDefence</li>
+        </RequiredAbilities>
+        <ConflictingAbilities>
+            <li>PTPsiDefence</li>
+            <li>PTTranscendentDefense</li>
+        </ConflictingAbilities>
+    </Def>
+    
+    <Def Class="PsiTech.Psionics.PsiTechAbilityDef">
+        <defName>PTMindfray</defName>
+        <label>Mindfray</label>
+        <description>Mindfray is a targeted ability that can cause the target to momentarily lose touch with reality. It doesn't take much energy to use and has a short cooldown.</description>
+        <AbilityClass>PsiTech.Psionics.PsiTechAbilityTargetedMentalState</AbilityClass>
+        <GizmoDesc>Use mindfray on a target</GizmoDesc>
+        <PathToIcon>Abilities/Mindfray</PathToIcon>
+        <Tier>2</Tier>
+        <TrainingTimeDays>2</TrainingTimeDays>
+        <AddedValueForThreat>100</AddedValueForThreat>
+        <AbilityCostForRaid>50</AbilityCostForRaid>
+        <Autocastable>True</Autocastable>
+        <AutocastFilterClass>PsiTech.AutocastManagement.AutocastFilter_SingleTarget</AutocastFilterClass>
+        <Violent>True</Violent>
+        <EnergyPerUse>20</EnergyPerUse>
+        <Range>15</Range>
+        <CooldownSeconds>10</CooldownSeconds>
+        <BaseSuccessChance>0.5</BaseSuccessChance>
+        <PossibleEffects>
+            <li Class="PsiTech.AbilityEffects.AbilityEffectMentalState">
+                <Title>Mindfray</Title>
+                <Description>Causes the target to lose touch with reality for a short time.</Description>
+                <Weight>1</Weight>
+                <MentalState>PTMindfray</MentalState>
+            </li>
+        </PossibleEffects>
+        <SoundDefSuccessOnCaster>PTCastSuccessOnCasterOneshot</SoundDefSuccessOnCaster>
+        <SoundDefFailure>PTCastFailureOnCasterOneshot</SoundDefFailure>
+        <MoteOnTarget>PTMotePsiBlast</MoteOnTarget>
+        <MoteSuccessPointer>PTMotePointer</MoteSuccessPointer>
+        <MoteOnUserFailure>PTMoteFailure</MoteOnUserFailure>
+        <CastTimeTicks>30</CastTimeTicks>
+        <RequiredResearch>
+            <li>PTProjectionTheory</li>
+        </RequiredResearch>
+    </Def>
+
+    <Def Class="PsiTech.Psionics.PsiTechAbilityDef">
+        <defName>PTMindSuppression</defName>
+        <label>Mind Suppression</label>
+        <description>Mind suppression is a targeted ability that decreases the psychic sensitivity of the target for some time.</description>
+        <AbilityClass>PsiTech.Psionics.PsiTechAbilityTargeted</AbilityClass>
+        <GizmoDesc>Use mind suppression on a target</GizmoDesc>
+        <PathToIcon>Abilities/Suppression</PathToIcon>
+        <Tier>2</Tier>
+        <AddedValueForThreat>200</AddedValueForThreat>
+        <AbilityCostForRaid>1000000</AbilityCostForRaid> <!-- This is mind domination lite so not for raids -->
+        <Autocastable>True</Autocastable>
+        <AutocastFilterClass>PsiTech.AutocastManagement.AutocastFilter_SingleTarget</AutocastFilterClass>
+        <Violent>False</Violent>
+        <TrainingTimeDays>2</TrainingTimeDays>
+        <EnergyPerUse>50</EnergyPerUse>
+        <Range>35</Range>
+        <CooldownSeconds>30</CooldownSeconds>
+        <BaseSuccessChance>0.5</BaseSuccessChance>
+        <PossibleEffects>
+            <li Class="PsiTech.AbilityEffects.AbilityEffectAddHediff">
+                <Title>Psychic Suppression</Title>
+                <Description>Decreases the psychic sensitivity of the target for some time.</Description>
+                <Weight>0.8</Weight>
+                <Hediff>PTPsychicSuppression</Hediff>
+            </li>
+            <li Class="PsiTech.AbilityEffects.AbilityEffectAddHediff">
+                <Title>Psychic Silence</Title>
+                <Description>Massively decreases the psychic sensitivity of the target for some time.</Description>
+                <Weight>0.2</Weight>
+                <Hediff>PTPsychicSilence</Hediff>
+            </li>
+        </PossibleEffects>
+        <SoundDefSuccessOnCaster>PTCastSuccessOnCasterOneshot</SoundDefSuccessOnCaster>
+        <SoundDefFailure>PTCastFailureOnCasterOneshot</SoundDefFailure>
+        <MoteOnTarget>PTMotePsiBlast</MoteOnTarget>
+        <MoteSuccessPointer>PTMotePointer</MoteSuccessPointer>
+        <MoteOnUserFailure>PTMoteFailure</MoteOnUserFailure>
+        <CastTimeTicks>90</CastTimeTicks>
+        <RequiredResearch>
+            <li>PTProjectionTheory</li>
+        </RequiredResearch>
+    </Def>
+
+    <Def Class="PsiTech.Psionics.PsiTechAbilityDef">
+        <defName>PTInspire</defName>
+        <label>Inspire</label>
+        <description>Inspire is a targeted ability that gives the target an inspiring thought, increasing their mood for a while.</description>
+        <AbilityClass>PsiTech.Psionics.PsiTechAbilityTargeted</AbilityClass>
+        <GizmoDesc>Use inspire on a target</GizmoDesc>
+        <PathToIcon>Abilities/Inspire</PathToIcon>
+        <Tier>2</Tier>
+        <AddedValueForThreat>0</AddedValueForThreat>
+        <AbilityCostForRaid>30</AbilityCostForRaid>
+        <Autocastable>True</Autocastable>
+        <AutocastFilterClass>PsiTech.AutocastManagement.AutocastFilter_SingleTarget</AutocastFilterClass>
+        <DefaultFilterTargetType>Friendlies</DefaultFilterTargetType>
+        <TrainingTimeDays>2</TrainingTimeDays>
+        <EnergyPerUse>30</EnergyPerUse>
+        <Range>15</Range>
+        <CooldownSeconds>30</CooldownSeconds>
+        <BaseSuccessChance>0.7</BaseSuccessChance>
+        <PossibleEffects>
+            <li Class="PsiTech.AbilityEffects.AbilityEffectThought">
+                <Title>Inspire</Title>
+                <Description>Gives the target an inspiring thought, improving their mood significantly.</Description>
+                <Weight>1</Weight>
+                <Thought>PTInspired</Thought>
+            </li>
+        </PossibleEffects>
+        <SoundDefSuccessOnCaster>PTCastSuccessOnCasterOneshot</SoundDefSuccessOnCaster>
+        <SoundDefFailure>PTCastFailureOnCasterOneshot</SoundDefFailure>
+        <MoteOnTarget>PTMotePsiBlastGood</MoteOnTarget>
+        <MoteSuccessPointer>PTMotePointerGood</MoteSuccessPointer>
+        <MoteOnUserFailure>PTMoteFailure</MoteOnUserFailure>
+        <CastTimeTicks>30</CastTimeTicks>
+        <RequiredResearch>
+            <li>PTProjectionTheory</li>
+        </RequiredResearch>
+    </Def>
+
+    <!-- Perfected Synchronicity -->
+    <Def Class="PsiTech.Psionics.PsiTechAbilityDef">
+        <defName>PTPerfectedSynchronicity</defName>
+        <label>Perfected Synchronicity</label>
+        <description>Perfected synchronicity is an advanced technique developed to allow a psion to properly utilize the potential of a psychic weapon. Without any training, psychic weapons are no different from their normal couterparts. With perfected synchronicity, the psion can significantly improve the performance of psychic weapons.\n\nTo train perfected synchronicity, the psion must already be trained in weapon synchronicity. Weapon synchronicity will be upgraded to its perfected variant upon training completion.</description>
+        <AbilityClass>PsiTech.Psionics.PsiTechAbilityScaledPassive</AbilityClass>
+        <Tier>2</Tier>
+        <TrainingTimeDays>2</TrainingTimeDays>
+        <AddedValueForThreat>100</AddedValueForThreat>
+        <AbilityCostForRaid>100</AbilityCostForRaid>
+        <StatOffsets>
+            <PTPsiWeaponSynchronicity>0.6</PTPsiWeaponSynchronicity>
+        </StatOffsets>
+        <RequiredResearch>
+            <li>PTPsychicWeapons</li>
+        </RequiredResearch>
+        <RequiredAbilities>
+            <li>PTWeaponSynchronicity</li>
+        </RequiredAbilities>
+        <ConflictingAbilities>
+            <li>PTWeaponSynchronicity</li>
+        </ConflictingAbilities>
+    </Def>
+    
+    <!-- Perfected Meditation Abilities -->
+    <Def Class="PsiTech.Psionics.PsiTechAbilityDef">
+        <defName>PTPerfectedAttunement</defName>
+        <label>Perfected Attunement</label>
+        <description>Perfected attunement is an advanced meditation technique increases a psion's synchronization with psychic phenomenon, increasing their psychic sensitivity by 80%.\n\nTo train perfected attunement, the psion must already be trained in psi attunement. Psi attunement will be upgraded to its perfected variant upon training completion.</description>
+        <AbilityClass>PsiTech.Psionics.PsiTechAbilityUnscaledPassive</AbilityClass>
+        <Tier>2</Tier>
+        <TrainingTimeDays>2</TrainingTimeDays>
+        <AddedValueForThreat>200</AddedValueForThreat>
+        <AbilityCostForRaid>75</AbilityCostForRaid>
+        <StatOffsets>
+            <PsychicSensitivity>0.8</PsychicSensitivity>
+        </StatOffsets>
+        <RequiredResearch>
+            <li>PTPerfectedMeditation</li>
+        </RequiredResearch>
+        <RequiredAbilities>
+            <li>PTPsiAttunement</li>
+        </RequiredAbilities>
+        <ConflictingAbilities>
+            <li>PTPsiAttunement</li>
+        </ConflictingAbilities>
+    </Def>
+
+    <Def Class="PsiTech.Psionics.PsiTechAbilityDef">
+        <defName>PTPerfectedFocus</defName>
+        <label>Perfected Focus</label>
+        <description>Perfected focus is an advanced meditation technique that increases a psion's psi energy regeneration by 1, scaled by their ability modifier.\n\nTo train perfected focus, the psion must already be trained in psi focus. Psi focus will be upgraded to its perfected variant upon training completion.\n\nPerfected focus is not counted for the purposes of unlocking new ability slots.</description>
+        <AbilityClass>PsiTech.Psionics.PsiTechAbilityScaledPassive</AbilityClass>
+        <Tier>2</Tier>
+        <TrainingTimeDays>2</TrainingTimeDays>
+        <AddedValueForThreat>100</AddedValueForThreat>
+        <AbilityCostForRaid>50</AbilityCostForRaid>
+        <StatOffsets>
+            <PTPsiEnergyRegeneration>1</PTPsiEnergyRegeneration>
+        </StatOffsets>
+        <RequiredResearch>
+            <li>PTPerfectedMeditation</li>
+        </RequiredResearch>
+        <RequiredAbilities>
+            <li>PTPsiFocus</li>
+        </RequiredAbilities>
+        <ConflictingAbilities>
+            <li>PTPsiFocus</li>
+        </ConflictingAbilities>
+    </Def>
+
+    <Def Class="PsiTech.Psionics.PsiTechAbilityDef">
+        <defName>PTPerfectedCapacitance</defName>
+        <label>Perfected Capacitance</label>
+        <description>Perfected capacitance is an advanced meditation technique that increases a psion's maximum psi energy by 100, scaled by their ability modifier.\n\nTo train perfected capacitance, the psion must already be trained in psi capacitance. Psi capacitance will be upgraded to its perfected variant upon training completion.\n\nPerfected capacitance is not counted for the purposes of unlocking new ability slots.</description>
+        <AbilityClass>PsiTech.Psionics.PsiTechAbilityScaledPassive</AbilityClass>
+        <Tier>2</Tier>
+        <TrainingTimeDays>2</TrainingTimeDays>
+        <AddedValueForThreat>100</AddedValueForThreat>
+        <AbilityCostForRaid>50</AbilityCostForRaid>
+        <StatOffsets>
+            <PTMaxPsiEnergy>100</PTMaxPsiEnergy>
+        </StatOffsets>
+        <RequiredResearch>
+            <li>PTPerfectedMeditation</li>
+        </RequiredResearch>
+        <RequiredAbilities>
+            <li>PTPsiCapacitance</li>
+        </RequiredAbilities>
+        <ConflictingAbilities>
+            <li>PTPsiCapacitance</li>
+        </ConflictingAbilities>
+    </Def>
+
+    <!-- Battlefield Mastery Abilities -->
+    <Def Class="PsiTech.Psionics.PsiTechAbilityDef">
+        <defName>PTBattlefieldPrecognition</defName>
+        <label>Battlefield Precognition</label>
+        <description>Battlefield precognition is a powerful technique that gives a psion extended awareness of the battlefield, allowing them to periodically dodge damage from psychically active attackers.\n\nPsions using battlefield precognition can't dodge more than 60% of the time, ever. The chance to dodge is scaled by the attacker's psychic sensitivity, meaning that attacks from psions can be dodged easily, and attacks from psychically dead individuals are harder to dodge.</description>
+        <AbilityClass>PsiTech.Psionics.PsiTechAbilityScaledPassive</AbilityClass>
+        <Tier>2</Tier>
+        <TrainingTimeDays>2</TrainingTimeDays>
+        <AddedValueForThreat>200</AddedValueForThreat>
+        <AbilityCostForRaid>150</AbilityCostForRaid>
+        <StatOffsets>
+            <PTDamageDodgeChance>0.15</PTDamageDodgeChance>
+        </StatOffsets>
+        <RequiredResearch>
+            <li>PTBattlefieldMastery</li>
+        </RequiredResearch>
+    </Def>
+
+    <Def Class="PsiTech.Psionics.PsiTechAbilityDef">
+        <defName>PTBattlefieldPrecision</defName>
+        <label>Battlefield Precision</label>
+        <description>Battlefield precision is a powerful technique that gives a psion extended awareness of the battlefield, allowing them to place attacks better, increasing their damage dealt to psychically active targets.\n\nThe damage modifier is scaled by the target's psychic sensitivity, meaning that attacks against psions have significantly increased damage, and attacks from psychically dead individuals have a diminished damage increase.</description>
+        <AbilityClass>PsiTech.Psionics.PsiTechAbilityScaledPassive</AbilityClass>
+        <Tier>2</Tier>
+        <TrainingTimeDays>2</TrainingTimeDays>
+        <AddedValueForThreat>200</AddedValueForThreat>
+        <AbilityCostForRaid>150</AbilityCostForRaid>
+        <StatOffsets>
+            <PTDamageMultiplier>0.15</PTDamageMultiplier>
+        </StatOffsets>
+        <RequiredResearch>
+            <li>PTBattlefieldMastery</li>
+        </RequiredResearch>
+    </Def>
+    
+    <!-- Mind Soothe Abilities -->
+
+    <!-- Mind link incorporates a state tracker that isn't easily implementable with the effects system, so effects
+         don't actually do anything for it. The one here is only for display purposes. -->
+    <Def Class="PsiTech.Psionics.PsiTechAbilityDef">
+        <defName>PTMindlink</defName>
+        <label>Mindlink</label>
+        <description>Mindlink is a targeted ability that grants the target a portion of the user's skills while active. Consumes a lot of energy while active.</description>
+        <AbilityClass>PsiTech.Psionics.PsiTechAbilityTargetedSkillTransfer</AbilityClass>
+        <GizmoDesc>Use mindlink on a target</GizmoDesc>
+        <PathToIcon>Abilities/Mindlink</PathToIcon>
+        <Tier>2</Tier>
+        <TrainingTimeDays>3</TrainingTimeDays>
+        <AddedValueForThreat>0</AddedValueForThreat>
+        <AbilityCostForRaid>100000</AbilityCostForRaid> <!-- Can't spawn for raids since the autocast AI can't handle it -->
+        <EnergyPerUse>15</EnergyPerUse>
+        <EnergyPerSecondActive>5</EnergyPerSecondActive>
+        <Range>20</Range>
+        <CooldownSeconds>120</CooldownSeconds>
+        <BaseSuccessChance>0.85</BaseSuccessChance>
+        <BaseSkillTransfer>0.2</BaseSkillTransfer>
+        <PossibleEffects>
+            <li Class="PsiTech.AbilityEffects.AbilityEffectSkillTransfer">
+                <Title>Mindlink</Title>
+                <Description>Grants a portion of the user's skills to the target, but only for skills which the target is worse at. Unlike most abilities, the transfer is affected by both the user's and the target's ability modifiers.</Description>
+                <Weight>1</Weight>
+                <BaseSkillTransfer>0.2</BaseSkillTransfer>
+            </li>
+        </PossibleEffects>
+        <SoundDefSuccessOnCaster>PTCastSuccessOnCasterOneshot</SoundDefSuccessOnCaster>
+        <SoundDefFailure>PTCastFailureOnCasterOneshot</SoundDefFailure>
+        <MoteOnTarget>PTMotePsiBlastGood</MoteOnTarget>
+        <MoteLink>PTMotePsiLinkGood</MoteLink>
+        <MoteOnUserFailure>PTMoteFailure</MoteOnUserFailure>
+        <LinkPulseTicks>300</LinkPulseTicks>
+        <CastTimeTicks>60</CastTimeTicks>
+        <RequiredResearch>
+            <li>PTMindConnection</li>
+        </RequiredResearch>
+    </Def>
+
+    <Def Class="PsiTech.Psionics.PsiTechAbilityDef">
+        <defName>PTPsiHeal</defName>
+        <label>Psi Heal</label>
+        <description>Psi heal is a targeted ability that uses psychic energy to mend injuries in the target. It takes a lot of training to use effectively, as its base healing is quite low.</description>
+        <AbilityClass>PsiTech.Psionics.PsiTechAbilityTargeted</AbilityClass>
+        <GizmoDesc>Use psi heal on a target</GizmoDesc>
+        <PathToIcon>Abilities/Heal</PathToIcon>
+        <Tier>2</Tier>
+        <AddedValueForThreat>0</AddedValueForThreat>
+        <AbilityCostForRaid>30</AbilityCostForRaid>
+        <Autocastable>True</Autocastable>
+        <AutocastFilterClass>PsiTech.AutocastManagement.AutocastFilter_SingleTarget</AutocastFilterClass>
+        <DefaultFilterTargetType>Friendlies</DefaultFilterTargetType>
+        <TrainingTimeDays>3</TrainingTimeDays>
+        <EnergyPerUse>50</EnergyPerUse>
+        <Range>20</Range>
+        <CooldownSeconds>120</CooldownSeconds>
+        <BaseSuccessChance>0.75</BaseSuccessChance>
+        <PossibleEffects>
+            <li Class="PsiTech.AbilityEffects.AbilityEffectHeal">
+                <Title>Heal</Title>
+                <Description>Heals the target using psychic energy.</Description>
+                <Weight>1</Weight>
+                <BaseHeal>10</BaseHeal>
+            </li>
+        </PossibleEffects>
+        <SoundDefSuccessOnCaster>PTCastSuccessOnCasterOneshot</SoundDefSuccessOnCaster>
+        <SoundDefFailure>PTCastFailureOnCasterOneshot</SoundDefFailure>
+        <MoteOnTarget>PTMotePsiBlastGood</MoteOnTarget>
+        <MoteSuccessPointer>PTMotePointerGood</MoteSuccessPointer>
+        <MoteOnUserFailure>PTMoteFailure</MoteOnUserFailure>
+        <CastTimeTicks>60</CastTimeTicks>
+        <TargetValidator Class="PsiTech.TargetValidators.TargetValidatorAny"/>
+        <RequiredResearch>
+            <li>PTMindConnection</li>
+        </RequiredResearch>
+    </Def>
+
+    <Def Class="PsiTech.Psionics.PsiTechAbilityDef">
+        <defName>PTMindsoothe</defName>
+        <label>Mindsoothe</label>
+        <description>Mindsoothe is a targeted ability that attempts to bring the target out of a mental state. Beyond the typical success chance factors, it is additionally more difficult to bring a target out of a recently started mental state.</description>
+        <AbilityClass>PsiTech.Psionics.PsiTechAbilityTargetedMentalStateRemoval</AbilityClass>
+        <GizmoDesc>Use mindsoothe on a target</GizmoDesc>
+        <PathToIcon>Abilities/Mindsoothe</PathToIcon>
+        <Tier>2</Tier>
+        <AddedValueForThreat>0</AddedValueForThreat>
+        <AbilityCostForRaid>30</AbilityCostForRaid>
+        <Autocastable>True</Autocastable>
+        <AutocastFilterClass>PsiTech.AutocastManagement.AutocastFilter_SingleTarget</AutocastFilterClass>
+        <DefaultFilterTargetType>Friendlies</DefaultFilterTargetType>
+        <TrainingTimeDays>3</TrainingTimeDays>
+        <EnergyPerUse>50</EnergyPerUse>
+        <Range>20</Range>
+        <CooldownSeconds>90</CooldownSeconds>
+        <BaseSuccessChance>0.5</BaseSuccessChance>
+        <PossibleEffects>
+            <li Class="PsiTech.AbilityEffects.AbilityEffectRemoveMentalState">
+                <Title>Soothe</Title>
+                <Description>Breaks the target out of their current mental state.</Description>
+                <Weight>1</Weight>
+            </li>
+        </PossibleEffects>
+        <SoundDefSuccessOnCaster>PTCastSuccessOnCasterOneshot</SoundDefSuccessOnCaster>
+        <SoundDefFailure>PTCastFailureOnCasterOneshot</SoundDefFailure>
+        <MoteOnTarget>PTMotePsiBlastGood</MoteOnTarget>
+        <MoteSuccessPointer>PTMotePointerGood</MoteSuccessPointer>
+        <MoteOnUserFailure>PTMoteFailure</MoteOnUserFailure>
+        <CastTimeTicks>60</CastTimeTicks>
+        <AdditionalDifficultyCurve>
+            <points>
+                <li>(0, 0.5)</li>
+                <li>(8000, 1)</li>
+            </points>
+        </AdditionalDifficultyCurve>
+        <RequiredResearch>
+            <li>PTMindConnection</li>
+        </RequiredResearch>
+    </Def>
+    
+    <!-- Mind Invasion Abilities -->
+    <Def Class="PsiTech.Psionics.PsiTechAbilityDef">
+        <defName>PTInsanity</defName>
+        <label>Insanity</label>
+        <description>Insanity is a targeted ability that can cause the target to go insane, attacking anything near them. It takes a lot of training to use properly, as it has a low base success chance.</description>
+        <AbilityClass>PsiTech.Psionics.PsiTechAbilityTargetedMentalState</AbilityClass>
+        <GizmoDesc>Use insanity on a target</GizmoDesc>
+        <PathToIcon>Abilities/Insanity</PathToIcon>
+        <Tier>2</Tier>
+        <AddedValueForThreat>500</AddedValueForThreat>
+        <AbilityCostForRaid>400</AbilityCostForRaid>
+        <Autocastable>True</Autocastable>
+        <AutocastFilterClass>PsiTech.AutocastManagement.AutocastFilter_SingleTarget</AutocastFilterClass>
+        <Violent>True</Violent>
+        <TrainingTimeDays>3</TrainingTimeDays>
+        <EnergyPerUse>75</EnergyPerUse>
+        <Range>30</Range>
+        <CooldownSeconds>60</CooldownSeconds>
+        <BaseSuccessChance>0.25</BaseSuccessChance>
+        <PossibleEffects>
+            <li Class="PsiTech.AbilityEffects.AbilityEffectMentalState">
+                <Title>Insanity</Title>
+                <Description>Causes the target to go insane for some time, attacking anyone nearby.</Description>
+                <Weight>1</Weight>
+                <MentalState>PTInsanity</MentalState>
+            </li>
+        </PossibleEffects>
+        <SoundDefSuccessOnCaster>PTCastSuccessOnCasterOneshot</SoundDefSuccessOnCaster>
+        <SoundDefFailure>PTCastFailureOnCasterOneshot</SoundDefFailure>
+        <MoteOnTarget>PTMotePsiBlast</MoteOnTarget>
+        <MoteSuccessPointer>PTMotePointer</MoteSuccessPointer>
+        <MoteOnUserFailure>PTMoteFailure</MoteOnUserFailure>
+        <CastTimeTicks>120</CastTimeTicks>
+        <RequiredResearch>
+            <li>PTMindInvasion</li>
+        </RequiredResearch>
+    </Def>
+    
+    <Def Class="PsiTech.Psionics.PsiTechAbilityDef">
+        <defName>PTMindmelt</defName>
+        <label>Mindmelt</label>
+        <description>Mindmelt is a targeted ability that overloads the target with raw psychic energy, causing injuries. It takes a lot of training to use effectively, as its base damage is quite low.\n\nPsychic injuries take a variety of horrifying forms that are generally painful and impossible to treat. Often, the effects are as much psychosomatic as physical, resulting in far greater pain than one would expect for the damage caused.</description>
+        <AbilityClass>PsiTech.Psionics.PsiTechAbilityTargeted</AbilityClass>
+        <GizmoDesc>Use mindmelt on a target</GizmoDesc>
+        <PathToIcon>Abilities/Mindmelt</PathToIcon>
+        <Tier>2</Tier>
+        <AddedValueForThreat>500</AddedValueForThreat>
+        <AbilityCostForRaid>300</AbilityCostForRaid>
+        <Autocastable>True</Autocastable>
+        <AutocastFilterClass>PsiTech.AutocastManagement.AutocastFilter_SingleTarget</AutocastFilterClass>
+        <Violent>True</Violent>
+        <TrainingTimeDays>3</TrainingTimeDays>
+        <EnergyPerUse>75</EnergyPerUse>
+        <Range>30</Range>
+        <CooldownSeconds>20</CooldownSeconds>
+        <BaseSuccessChance>0.75</BaseSuccessChance>
+        <PossibleEffects>
+            <li Class="PsiTech.AbilityEffects.AbilityEffectDamage">
+                <Title>Psionic Damage</Title>
+                <Description>Inflicts psionic damage on the target, causing them extreme pain and some injury.</Description>
+                <Weight>0.9</Weight>
+                <BaseDamage>10</BaseDamage>
+                <DamageType>PTPsychicDamage</DamageType>
+            </li>
+            <li Class="PsiTech.AbilityEffects.AbilityEffectDamagePart">
+                <Title>Mindmelt</Title>
+                <Description>Inflicts psionic damage on the target, but inflicts all of it directly on the brain. Instantly kills the target most of the time.</Description>
+                <Weight>0.1</Weight>
+                <BaseDamage>10</BaseDamage>
+                <DamageType>PTPsychicDamage</DamageType>
+                <Part>Brain</Part>
+            </li>
+        </PossibleEffects>
+        <SoundDefSuccessOnCaster>PTCastSuccessOnCasterOneshot</SoundDefSuccessOnCaster>
+        <SoundDefFailure>PTCastFailureOnCasterOneshot</SoundDefFailure>
+        <MoteOnTarget>PTMotePsiBlast</MoteOnTarget>
+        <MoteSuccessPointer>PTMotePointer</MoteSuccessPointer>
+        <MoteOnUserFailure>PTMoteFailure</MoteOnUserFailure>
+        <CastTimeTicks>120</CastTimeTicks>
+        <RequiredResearch>
+            <li>PTMindInvasion</li>
+        </RequiredResearch>
+    </Def>
+
+    <Def Class="PsiTech.Psionics.PsiTechAbilityDef">
+        <defName>PTMindlash</defName>
+        <label>Mindlash</label>
+        <description>Mindlash is an ability that stuns anyone who attacks the psion for a short time.\n\nMindlash is not an active ability, and is triggered when the psion is attacked.</description>
+        <AbilityClass>PsiTech.Psionics.PsiTechAbilityTriggeredPassive</AbilityClass>
+        <GizmoDesc>When the psion is attacked they will the attacker for a short time.</GizmoDesc>
+        <PathToIcon>Abilities/Mindlash</PathToIcon>
+        <Tier>2</Tier>
+        <AddedValueForThreat>0</AddedValueForThreat>
+        <AbilityCostForRaid>200</AbilityCostForRaid>
+        <Violent>True</Violent>
+        <TrainingTimeDays>3</TrainingTimeDays>
+        <EnergyPerUse>0</EnergyPerUse>
+        <CooldownSeconds>1</CooldownSeconds>
+        <BaseSuccessChance>0.5</BaseSuccessChance>
+        <PossibleEffects>
+            <li Class="PsiTech.AbilityEffects.AbilityEffectStun">
+                <Title>Mindlash</Title>
+                <Description>Stuns the attacker for a short time.</Description>
+                <Weight>1</Weight>
+                <BaseStunSeconds>0.5</BaseStunSeconds>
+                <IsPassive>true</IsPassive>
+            </li>
+        </PossibleEffects>
+        <SoundDefSuccessOnTarget>PTCastSuccessOnTargetOneshot</SoundDefSuccessOnTarget>
+        <SoundDefFailure>PTCastFailureOnCasterOneshot</SoundDefFailure>
+        <MoteOnTarget>PTMotePsiBlast</MoteOnTarget>
+        <CastTimeTicks>0</CastTimeTicks>
+        <Trigger>Attacked</Trigger>
+        <Target>Attacker</Target>
+        <RequiredResearch>
+            <li>PTMindInvasion</li>
+        </RequiredResearch>
+    </Def>
+    
+</Defs>

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<!-- Copyright 2019, 2020, K
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+    
+        http://www.apache.org/licenses/LICENSE-2.0
+    
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+
+<Defs>
+
+    <HediffDef Name="PsiTechInjuryBase" Abstract="True">
+        <hediffClass>Hediff_Injury</hediffClass>
+        <tendable>true</tendable>
+        <displayWound>true</displayWound>
+        <labelNounPretty>{0} in the {1}</labelNounPretty>
+    </HediffDef>
+
+    <HediffDef ParentName="PsiTechInjuryBase">
+        <defName>PTPsychicDamage</defName>
+        <label>Psychic damage</label>
+        <labelNoun>Some psychic damage</labelNoun>
+        <description>An injury caused by concentrated psychic energy.\n\nPsychic injuries take a variety of horrifying forms that are generally very painful. Often, the effects are as much psychosomatic as physical, resulting in far greater pain than one would expect for the damage caused.</description>
+        <comps>
+            <li Class="HediffCompProperties_TendDuration">
+                <labelTendedWell>tended</labelTendedWell>
+                <labelTendedWellInner>tended</labelTendedWellInner>
+                <labelSolidTendedWell>tended</labelSolidTendedWell>
+            </li>
+        </comps>
+        <injuryProps>
+            <painPerSeverity>0.02</painPerSeverity>
+            <canMerge>true</canMerge>
+            <destroyedLabel>Psychically overloaded</destroyedLabel>
+        </injuryProps>
+    </HediffDef>
+    
+</Defs>

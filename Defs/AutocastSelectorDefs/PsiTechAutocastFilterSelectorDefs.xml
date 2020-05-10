@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<!-- Copyright 2019, 2020, K
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+    
+        http://www.apache.org/licenses/LICENSE-2.0
+    
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+
+<Defs>
+
+    <!-- These defs don't really do much -->
+    <!-- They're use to track the types of selectors, label them, and give them descriptions -->
+    <!-- All the heavy lifting is done in C# -->
+    <Def Class="PsiTech.AutocastManagement.AutocastFilterSelectorDef">
+        <defName>PTAutocastFilterSelector_Closest</defName>
+        <label>Closest</label>
+        <description>Selects the closest target that matches the filter.\n\nWhen inverted, this selector selects the farthest target.</description>
+        <SelectorClass>PsiTech.AutocastManagement.AutocastFilterSelector_Closest</SelectorClass>
+    </Def>
+
+    <Def Class="PsiTech.AutocastManagement.AutocastFilterSelectorDef">
+        <defName>PTAutocastFilterSelector_HighestSuccessChance</defName>
+        <label>Highest Success Chance</label>
+        <description>Selects the target that the ability has the highest success chance on that matches the filter.\n\nFor psions with a maxed chance to hit on most targets, this selector will choose a random target with 100% hit chance.\n\nWhen inverted, this selector selects the target with the lowest success chance.</description>
+        <SelectorClass>PsiTech.AutocastManagement.AutocastFilterSelector_MostDangerous</SelectorClass>
+    </Def>
+
+    <Def Class="PsiTech.AutocastManagement.AutocastFilterSelectorDef">
+        <defName>PTAutocastFilterSelector_LowestMood</defName>
+        <label>Lowest Mood</label>
+        <description>Selects the target with the lowest mood that matches the filter.\n\nWhen inverted, this selector selects the target with the highest mood.</description>
+        <SelectorClass>PsiTech.AutocastManagement.AutocastFilterSelector_LowestMood</SelectorClass>
+    </Def>
+
+    <Def Class="PsiTech.AutocastManagement.AutocastFilterSelectorDef">
+        <defName>PTAutocastFilterSelector_MostPain</defName>
+        <label>Most Pain</label>
+        <description>Selects the target with the most pain that matches the filter.\n\nWhen inverted, this selector selects the target in the least pain.</description>
+        <SelectorClass>PsiTech.AutocastManagement.AutocastFilterSelector_MostPain</SelectorClass>
+    </Def>
+
+    <Def Class="PsiTech.AutocastManagement.AutocastFilterSelectorDef">
+        <defName>PTAutocastFilterSelector_LowestHealthPercent</defName>
+        <label>Lowest Health Percent</label>
+        <description>Selects the target with the lowest health percent that matches the filter.\n\nWhen inverted, this selector selects the target with the highest health.</description>
+        <SelectorClass>PsiTech.AutocastManagement.AutocastFilterSelector_MostPain</SelectorClass>
+    </Def>
+
+    <Def Class="PsiTech.AutocastManagement.AutocastFilterSelectorDef">
+        <defName>PTAutocastFilterSelector_MostDangerous</defName>
+        <label>Most Dangerous</label>
+        <description>Selects the most dangerous target that matches the filter.\n\nThis selector uses several heuristics to assess the danger posed by a pawn and may not be completely accurate.\n\nWhen inverted, this selector selects the target assessed to be least dangerous.</description>
+        <SelectorClass>PsiTech.AutocastManagement.AutocastFilterSelector_MostDangerous</SelectorClass>
+    </Def>
+    
+</Defs>

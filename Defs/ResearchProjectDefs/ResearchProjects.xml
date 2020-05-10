@@ -1,0 +1,335 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<!-- Copyright 2019, 2020, K
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+    
+        http://www.apache.org/licenses/LICENSE-2.0
+    
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+
+<Defs>
+    
+    <ResearchTabDef>
+        <defName>PsiTech</defName>
+        <label>PsiTech</label>
+    </ResearchTabDef>
+
+    <ResearchProjectDef Name="PsiTechProjectBase" Abstract="True">
+        <requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
+        <requiredResearchFacilities>
+            <li>MultiAnalyzer</li>
+        </requiredResearchFacilities>
+        <tab>PsiTech</tab>
+    </ResearchProjectDef>
+    
+    <!-- Tier 0 - base project -->
+    
+    <ResearchProjectDef>
+        <defName>PTAtheniumReclamation</defName>
+        <label>Athenium Reclamation</label>
+        <tab>PsiTech</tab>
+        <description>We've discovered a new material inside psychic artifacts: athenium. With some research, we could learn how to extract it from these artifacts.</description>
+        <baseCost>1500</baseCost>
+        <techLevel>Industrial</techLevel>
+        <requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
+        <prerequisites>
+            <li>Machining</li>
+        </prerequisites>
+        <researchViewX>0</researchViewX>
+        <researchViewY>3</researchViewY>
+    </ResearchProjectDef>
+    
+    <!-- Tier 1 -->
+
+    <ResearchProjectDef ParentName="PsiTechProjectBase">
+        <defName>PTPsionics</defName>
+        <label>Psionics</label>
+        <description>Athenium can be used for far more than making artifacts. Using it, we could build a "psychic trainer", a device capable of giving a human psychic abilities. This will require research, of course.</description>
+        <baseCost>2000</baseCost>
+        <techLevel>Spacer</techLevel>
+        <prerequisites>
+            <li>MultiAnalyzer</li>
+            <li>PTAtheniumReclamation</li>
+        </prerequisites>
+        <researchViewX>1</researchViewX>
+        <researchViewY>3</researchViewY>
+    </ResearchProjectDef>
+    
+    <!-- Tier 2 -->
+    <ResearchProjectDef ParentName="PsiTechProjectBase">
+        <defName>PTPsychicWorkbench</defName>
+        <label>Psychic Workbench</label>
+        <description>Creating a unified psychic workbench will greatly simplify the process of working with athenium.</description>
+        <baseCost>2000</baseCost>
+        <techLevel>Spacer</techLevel>
+        <prerequisites>
+            <li>PTPsionics</li>
+        </prerequisites>
+        <researchViewX>2</researchViewX>
+        <researchViewY>3</researchViewY>
+    </ResearchProjectDef>
+    
+    <ResearchProjectDef ParentName="PsiTechProjectBase">
+        <defName>PTUnlockingTheSubconscious</defName>
+        <label>Unlocking the Subconscious</label>
+        <description>Though we can awaken psychic abilites in people, we still don't know how to train the use of them. Investigations into the subconscious may provide us with ideas on how to train simple psionic abilites.</description>
+        <baseCost>2000</baseCost>
+        <techLevel>Spacer</techLevel>
+        <prerequisites>
+            <li>PTPsionics</li>
+        </prerequisites>
+        <researchViewX>2</researchViewX>
+        <researchViewY>4</researchViewY>
+    </ResearchProjectDef>
+    
+    <!-- Tier 2.5 -->
+    <ResearchProjectDef ParentName="PsiTechProjectBase">
+        <defName>PTMindAndBody</defName>
+        <label>Mind and Body</label>
+        <description>Psionics and cybernetics don't mix, limiting our ability to physically enhance our psions. However, new techniques could be developed that enhance the physical abilities of our psions through psionics.</description>
+        <baseCost>1500</baseCost>
+        <techLevel>Spacer</techLevel>
+        <prerequisites>
+            <li>PTUnlockingTheSubconscious</li>
+        </prerequisites>
+        <researchViewX>2.8</researchViewX>
+        <researchViewY>4.5</researchViewY>
+    </ResearchProjectDef>
+
+    <ResearchProjectDef ParentName="PsiTechProjectBase">
+        <defName>PTPsiEmpaty</defName>
+        <label>Psi Empathy</label>
+        <description>Psions have the capability of being much more sensitive to the emotions of others, if we train them properly. By developing techniques that utilize this phenomenon, we could enhance the social skills of our psions.</description>
+        <baseCost>1500</baseCost>
+        <techLevel>Spacer</techLevel>
+        <prerequisites>
+            <li>PTUnlockingTheSubconscious</li>
+        </prerequisites>
+        <researchViewX>2.8</researchViewX>
+        <researchViewY>5</researchViewY>
+    </ResearchProjectDef>
+    
+    <ResearchProjectDef ParentName="PsiTechProjectBase">
+        <defName>PTPsiMeditation</defName>
+        <label>Psi Meditation</label>
+        <description>Use of psionic abilites requires immense focus and energy. By training our psions in specialized psi meditation techniques, we can improve their mastery of psionic abilites.</description>
+        <baseCost>1500</baseCost>
+        <techLevel>Spacer</techLevel>
+        <prerequisites>
+            <li>PTUnlockingTheSubconscious</li>
+        </prerequisites>
+        <researchViewX>3.6</researchViewX>
+        <researchViewY>4.5</researchViewY>
+    </ResearchProjectDef>
+
+    <ResearchProjectDef ParentName="PsiTechProjectBase">
+        <defName>PTPsiCombat</defName>
+        <label>Psi Combat</label>
+        <description>Direct attacks using psionic abilities are still beyond our grasp, however, new techniques could be developed that improve our psions effectiveness in combat.</description>
+        <baseCost>1500</baseCost>
+        <techLevel>Spacer</techLevel>
+        <prerequisites>
+            <li>PTUnlockingTheSubconscious</li>
+        </prerequisites>
+        <researchViewX>3.6</researchViewX>
+        <researchViewY>5</researchViewY>
+    </ResearchProjectDef>
+    
+    <!-- Tier 3 -->
+    <ResearchProjectDef ParentName="PsiTechProjectBase">
+        <defName>PTPsychicEquipment</defName>
+        <label>Psychic Equipment</label>
+        <description>Weaving threads of athenium into a fabric can allow us to create psychically active equipment. This new equipment won't protect too well, though.</description>
+        <baseCost>1500</baseCost>
+        <techLevel>Spacer</techLevel>
+        <prerequisites>
+            <li>PTPsychicWorkbench</li>
+        </prerequisites>
+        <researchViewX>3</researchViewX>
+        <researchViewY>3</researchViewY>
+    </ResearchProjectDef>
+
+    <ResearchProjectDef ParentName="PsiTechProjectBase">
+        <defName>PTPsychicWeapons</defName>
+        <label>Psychic Weapons</label>
+        <description>By integrating athenium with existing weapon designs, we can create psychically active weapons that integrate directly with the user's mind. Using such weapons effectively will also require training.</description>
+        <baseCost>2000</baseCost>
+        <techLevel>Spacer</techLevel>
+        <prerequisites>
+            <li>PTPsychicWorkbench</li>
+        </prerequisites>
+        <researchViewX>3</researchViewX>
+        <researchViewY>2</researchViewY>
+    </ResearchProjectDef>
+
+    <ResearchProjectDef ParentName="PsiTechProjectBase">
+        <defName>PTArtifactCreation</defName>
+        <label>Artifact Creation</label>
+        <description>We've disassembled enough psychic artifacts to know a little about how they work. With some research, we could create such artifacts from athenium and some plasteel.</description>
+        <baseCost>1500</baseCost>
+        <techLevel>Spacer</techLevel>
+        <prerequisites>
+            <li>PTPsychicWorkbench</li>
+        </prerequisites>
+        <researchViewX>3</researchViewX>
+        <researchViewY>1</researchViewY>
+    </ResearchProjectDef>
+
+    <ResearchProjectDef ParentName="PsiTechProjectBase">
+        <defName>PTAtheniumCreation</defName>
+        <label>Athenium Creation</label>
+        <description>Athenium supply is a limiting factor in our ability to utilize psionics. Learning how to create it would be incredibly useful.</description>
+        <baseCost>2000</baseCost>
+        <techLevel>Ultra</techLevel>
+        <prerequisites>
+            <li>PTPsychicWorkbench</li>
+        </prerequisites>
+        <researchViewX>4</researchViewX>
+        <researchViewY>2</researchViewY>
+    </ResearchProjectDef>
+    
+    <ResearchProjectDef ParentName="PsiTechProjectBase">
+        <defName>PTProjectionTheory</defName>
+        <label>Projection Theory</label>
+        <description>So far our psionic abilities have been limited to affecting only the user. With research though, we could discover how to project psychic phenomenon into other people.</description>
+        <baseCost>2000</baseCost>
+        <techLevel>Ultra</techLevel>
+        <prerequisites>
+            <li>PTUnlockingTheSubconscious</li>
+        </prerequisites>
+        <researchViewX>4</researchViewX>
+        <researchViewY>4</researchViewY>
+    </ResearchProjectDef>
+    
+    <!-- Tier 3.5 -->
+    <ResearchProjectDef ParentName="PsiTechProjectBase">
+        <defName>PTPerfectedMeditation</defName>
+        <label>Perfected Meditation</label>
+        <description>Expanding upon existing psi meditation techniques, new and even more powerful techniques can be developed.</description>
+        <baseCost>1500</baseCost>
+        <techLevel>Ultra</techLevel>
+        <prerequisites>
+            <li>PTProjectionTheory</li>
+            <li>PTPsiMeditation</li>
+        </prerequisites>
+        <researchViewX>4.8</researchViewX>
+        <researchViewY>4.5</researchViewY>
+    </ResearchProjectDef>
+
+    <ResearchProjectDef ParentName="PsiTechProjectBase">
+        <defName>PTBattlefieldMastery</defName>
+        <label>Battlefield Mastery</label>
+        <description>Projection theory doesn't just allow the projection of effects to others, but also an expanded ability to receive signals from targets. Using this, advanced psi combat techniques could be developed.</description>
+        <baseCost>1500</baseCost>
+        <techLevel>Ultra</techLevel>
+        <prerequisites>
+            <li>PTProjectionTheory</li>
+            <li>PTPsiCombat</li>
+        </prerequisites>
+        <researchViewX>4.8</researchViewX>
+        <researchViewY>5</researchViewY>
+    </ResearchProjectDef>
+    
+    <ResearchProjectDef ParentName="PsiTechProjectBase">
+        <defName>PTMindConnection</defName>
+        <label>Mind Connection</label>
+        <description>Psychic projection can be used for more than harming people. New projection techniques can have a variety of helpful effects.</description>
+        <baseCost>1500</baseCost>
+        <techLevel>Ultra</techLevel>
+        <prerequisites>
+            <li>PTProjectionTheory</li>
+        </prerequisites>
+        <researchViewX>5.6</researchViewX>
+        <researchViewY>4.5</researchViewY>
+    </ResearchProjectDef>
+
+    <ResearchProjectDef ParentName="PsiTechProjectBase">
+        <defName>PTMindInvasion</defName>
+        <label>Mind Invasion</label>
+        <description>Psychic projection can be used for devastating abilities that destroy the minds of those they touch, if we developed methods to do so.</description>
+        <baseCost>1500</baseCost>
+        <techLevel>Ultra</techLevel>
+        <prerequisites>
+            <li>PTProjectionTheory</li>
+        </prerequisites>
+        <researchViewX>5.6</researchViewX>
+        <researchViewY>5</researchViewY>
+    </ResearchProjectDef>
+    
+    <!-- Tier 4 -->
+    <ResearchProjectDef ParentName="PsiTechProjectBase">
+        <defName>PTAdvancedPsychicEquipment</defName>
+        <label>Advanced Psychic Equipment</label>
+        <description>Developing new athenium composites will allow us to make psychically active armor that both protects the user and enhances their psychic abilities.</description>
+        <baseCost>2000</baseCost>
+        <techLevel>Ultra</techLevel>
+        <prerequisites>
+            <li>PTAtheniumCreation</li>
+            <li>PTPsychicEquipment</li>
+        </prerequisites>
+        <researchViewX>5</researchViewX>
+        <researchViewY>3</researchViewY>
+    </ResearchProjectDef>
+    
+    <ResearchProjectDef ParentName="PsiTechProjectBase">
+        <defName>PTPsiTranscendence</defName>
+        <label>Psi Transcendence</label>
+        <description>We haven't reached the peak of psionic abilites yet. Further research will enable us to use the most powerful psionic abilities. Perhaps they don't rival the powers of the archotechs, but we will reign supreme among human psions.</description>
+        <baseCost>2000</baseCost>
+        <techLevel>Archotech</techLevel>
+        <prerequisites>
+            <li>PTProjectionTheory</li>
+        </prerequisites>
+        <researchViewX>6</researchViewX>
+        <researchViewY>4</researchViewY>
+    </ResearchProjectDef>
+    
+    <!-- Tier 4.5 -->
+    <ResearchProjectDef ParentName="PsiTechProjectBase">
+        <defName>PTMindFortress</defName>
+        <label>Mind Fortress</label>
+        <description>The ultimate psionic defence technique. Mind fortress makes the psion immune to psionic attacks, but not without great cost as use of the mind fortress technique makes the psion unable to use any active abilities.</description>
+        <baseCost>1500</baseCost>
+        <techLevel>Archotech</techLevel>
+        <prerequisites>
+            <li>PTPsiTranscendence</li>
+        </prerequisites>
+        <researchViewX>6.8</researchViewX>
+        <researchViewY>4.5</researchViewY>
+    </ResearchProjectDef>
+    
+    <ResearchProjectDef ParentName="PsiTechProjectBase">
+        <defName>PTPsiRally</defName>
+        <label>Psi Rally</label>
+        <description>The ultimate psionic support ability. By temporarily disconnecting from their body, the psion can connect with other minds and route them to each other, increasing everyone's abilities for a time.</description>
+        <baseCost>1500</baseCost>
+        <techLevel>Archotech</techLevel>
+        <prerequisites>
+            <li>PTPsiTranscendence</li>
+        </prerequisites>
+        <researchViewX>7.6</researchViewX>
+        <researchViewY>4.5</researchViewY>
+    </ResearchProjectDef>
+
+    <ResearchProjectDef ParentName="PsiTechProjectBase">
+        <defName>PTPsiStorm</defName>
+        <label>Psi Storm</label>
+        <description>The ultimate psionic attack ability. By temporarily disconnecting from their body, the psion can assault other minds, causing varying levels of insanity to every enemy near them.</description>
+        <baseCost>1500</baseCost>
+        <techLevel>Archotech</techLevel>
+        <prerequisites>
+            <li>PTPsiTranscendence</li>
+        </prerequisites>
+        <researchViewX>7.6</researchViewX>
+        <researchViewY>5</researchViewY>
+    </ResearchProjectDef>
+    
+</Defs>

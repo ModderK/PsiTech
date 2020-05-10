@@ -1,0 +1,288 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<!-- Copyright 2019, 2020, K
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+    
+        http://www.apache.org/licenses/LICENSE-2.0
+    
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+
+<Defs>
+    
+    <!-- Psi Transcendence Abilities -->
+    <Def Class="PsiTech.Psionics.PsiTechAbilityDef">
+        <defName>PTTranscendentDefense</defName>
+        <label>Transcendent Defense</label>
+        <description>Transcendent defense is a highly advanced defensive technique that decreases a psion's susceptibility to psionic abilities, including friendly ones.\n\nTo train transcendent defense, the psion must already be trained in perfected defence. Perfected defence will be upgraded to its transcendent variant upon training completion.</description>
+        <AbilityClass>PsiTech.Psionics.PsiTechAbilityScaledPassive</AbilityClass>
+        <Tier>3</Tier>
+        <AddedValueForThreat>0</AddedValueForThreat>
+        <AbilityCostForRaid>100</AbilityCostForRaid>
+        <TrainingTimeDays>4</TrainingTimeDays>
+        <StatOffsets>
+            <PTPsiDefence>0.85</PTPsiDefence>
+        </StatOffsets>
+        <RequiredResearch>
+            <li>PTPsiTranscendence</li>
+        </RequiredResearch>
+        <RequiredAbilities>
+            <li>PTPerfectedDefence</li>
+        </RequiredAbilities>
+        <ConflictingAbilities>
+            <li>PTPsiDefence</li>
+            <li>PTPerfectedDefence</li>
+        </ConflictingAbilities>
+    </Def>
+
+    <Def Class="PsiTech.Psionics.PsiTechAbilityDef">
+        <defName>PTMindDomination</defName>
+        <label>Mind Domination</label>
+        <description>Mind domination is a long-range targeted ability that overloads the target's brain with psychic energy, killing them instantly most of the time. Mind domination can only be used on other psions.</description>
+        <AbilityClass>PsiTech.Psionics.PsiTechAbilityTargeted</AbilityClass>
+        <GizmoDesc>Use mind domination on a target</GizmoDesc>
+        <PathToIcon>Abilities/Domination</PathToIcon>
+        <Tier>3</Tier>
+        <AddedValueForThreat>5000</AddedValueForThreat>
+        <AbilityCostForRaid>1000000</AbilityCostForRaid> <!-- Mind domination is the player's trump card - not the AI's -->
+        <Autocastable>True</Autocastable>
+        <AutocastFilterClass>PsiTech.AutocastManagement.AutocastFilter_SingleTarget</AutocastFilterClass>
+        <Violent>True</Violent>
+        <TrainingTimeDays>4</TrainingTimeDays>
+        <EnergyPerUse>150</EnergyPerUse>
+        <Range>55</Range>
+        <CooldownSeconds>120</CooldownSeconds>
+        <BaseSuccessChance>0.25</BaseSuccessChance>
+        <PossibleEffects>
+            <li Class="PsiTech.AbilityEffects.AbilityEffectDamagePart">
+                <Title>Destroy Mind</Title>
+                <Description>Inflicts massive psionic damage on the target's brain, killing them instantly most of the time.</Description>
+                <Weight>1</Weight>
+                <BaseDamage>25</BaseDamage>
+                <DamageType>PTPsychicDamage</DamageType>
+                <Part>Brain</Part>
+            </li>
+        </PossibleEffects>
+        <SoundDefSuccessOnCaster>PTCastSuccessOnCasterOneshot</SoundDefSuccessOnCaster>
+        <SoundDefSuccessOnTarget>PTCastSuccessOnTargetOneshot</SoundDefSuccessOnTarget>
+        <SoundDefFailure>PTCastFailureOnCasterOneshot</SoundDefFailure>
+        <MoteOnTarget>PTMotePsiBlast</MoteOnTarget>
+        <MoteSuccessPointer>PTMotePointer</MoteSuccessPointer>
+        <MoteOnUserFailure>PTMoteFailure</MoteOnUserFailure>
+        <CastTimeTicks>300</CastTimeTicks>
+        <TargetValidator Class="PsiTech.TargetValidators.TargetValidatorPsion"/>
+        <RequiredResearch>
+            <li>PTPsiTranscendence</li>
+        </RequiredResearch>
+    </Def>
+    
+    <Def Class="PsiTech.Psionics.PsiTechAbilityDef">
+        <defName>PTPhoenix</defName>
+        <label>Phoenix</label>
+        <description>Phoenix is an ability that allows the psion to draw on the psychic energies around them to heal themselves when in need.\n\nPhoenix is not an active ability, and is triggered when the psion is close to death.</description>
+        <AbilityClass>PsiTech.Psionics.PsiTechAbilityTriggeredPassive</AbilityClass>
+        <GizmoDesc>When the psion takes damage that would down or kill them, phoenix heals them</GizmoDesc>
+        <PathToIcon>Abilities/Phoenix</PathToIcon>
+        <Tier>3</Tier>
+        <AddedValueForThreat>1000</AddedValueForThreat>
+        <AbilityCostForRaid>300</AbilityCostForRaid>
+        <TrainingTimeDays>4</TrainingTimeDays>
+        <EnergyPerUse>150</EnergyPerUse>
+        <CooldownSeconds>1000</CooldownSeconds>
+        <BaseSuccessChance>1</BaseSuccessChance>
+        <PossibleEffects>
+            <li Class="PsiTech.AbilityEffects.AbilityEffectHeal">
+                <Title>Resurgence</Title>
+                <Description>Heals wounds on the user.</Description>
+                <Weight>0.8</Weight>
+                <BaseHeal>50</BaseHeal>
+                <IsPassive>true</IsPassive>
+            </li>
+            <li Class="PsiTech.AbilityEffects.AbilityEffectHeal">
+                <Title>Resurrection</Title>
+                <Description>Heals the user for a massive amount.</Description>
+                <Weight>0.2</Weight>
+                <BaseHeal>200</BaseHeal>
+                <IsPassive>true</IsPassive>
+            </li>
+        </PossibleEffects>
+        <AlwaysHits>true</AlwaysHits>
+        <SoundDefSuccessOnCaster>PTPhoenixOneshot</SoundDefSuccessOnCaster>
+        <MoteOnTarget>PTMotePsiBlastGood</MoteOnTarget>
+        <CastTimeTicks>0</CastTimeTicks>
+        <TargetValidator Class="PsiTech.TargetValidators.TargetValidatorSelf"/>
+        <Trigger>AlmostDead</Trigger>
+        <Target>Single</Target>
+        <RequiredResearch>
+            <li>PTPsiTranscendence</li>
+        </RequiredResearch>
+    </Def>
+    
+    <!-- Mind fortress -->
+    <Def Class="PsiTech.Psionics.PsiTechAbilityDef">
+        <defName>PTMindFortress</defName>
+        <label>Mind Fortress</label>
+        <description>Mind fortress is a powerful defensive technique that makes the psion immune to psionic abilities. Unfortunately, this technique also makes them unable to use active abilities.</description>
+        <AbilityClass>PsiTech.Psionics.PsiTechAbilityUnscaledPassive</AbilityClass>
+        <Tier>3</Tier>
+        <AddedValueForThreat>0</AddedValueForThreat>
+        <AbilityCostForRaid>300</AbilityCostForRaid>
+        <TrainingTimeDays>5</TrainingTimeDays>
+        <StatFactors>
+            <PTPsiProjectionAbility>0</PTPsiProjectionAbility>
+        </StatFactors>
+        <RequiredResearch>
+            <li>PTMindFortress</li>
+        </RequiredResearch>
+    </Def>
+    
+    <!-- Psi Rally -->
+    <Def Class="PsiTech.Psionics.PsiTechAbilityDef">
+        <defName>PTPsiRally</defName>
+        <label>Psi Rally</label>
+        <description>Psi rally is a powerful ability that can grant a variety of bonuses to friendly pawns around the psion.\n\nDue to the intense focus needed to channel psi rally, damage will interrupt casting.</description>
+        <AbilityClass>PsiTech.Psionics.PsiTechAbilityAreaBurst</AbilityClass>
+        <GizmoDesc>Channel psi rally</GizmoDesc>
+        <PathToIcon>Abilities/Rally</PathToIcon>
+        <Tier>3</Tier>
+        <AddedValueForThreat>0</AddedValueForThreat>
+        <AbilityCostForRaid>1000</AbilityCostForRaid>
+        <Autocastable>True</Autocastable>
+        <AutocastFilterClass>PsiTech.AutocastManagement.AutocastFilter_Burst</AutocastFilterClass>
+        <DefaultFilterTargetType>Friendlies</DefaultFilterTargetType>
+        <TrainingTimeDays>5</TrainingTimeDays>
+        <EnergyPerUse>200</EnergyPerUse>
+        <Range>40</Range>
+        <CooldownSeconds>300</CooldownSeconds>
+        <BaseSuccessChance>0.5</BaseSuccessChance>
+        <PossibleEffects>
+            <li Class="PsiTech.AbilityEffects.AbilityEffectAddHediff">
+                <Title>Battle trance</Title>
+                <Description>Puts the target into a battle trance, improving their combat efficiency.</Description>
+                <Weight>0.5</Weight>
+                <Hediff>PTBattleTrance</Hediff>
+            </li>
+            <li Class="PsiTech.AbilityEffects.AbilityEffectAddHediff">
+                <Title>Battlefield awakening</Title>
+                <Description>Awakens latent battlefield abilities in the target, massively improving their combat efficiency.</Description>
+                <Weight>0.1</Weight>
+                <Hediff>PTBattlefieldAwakening</Hediff>
+            </li>
+            <li Class="PsiTech.AbilityEffects.AbilityEffectAddHediff">
+                <Title>Melee mastery</Title>
+                <Description>Grants the target melee mastery for a time, improving their melee weapon abilities.</Description>
+                <Weight>0.1</Weight>
+                <Hediff>PTMeleeMastery</Hediff>
+            </li>
+            <li Class="PsiTech.AbilityEffects.AbilityEffectAddHediff">
+                <Title>Ranged mastery</Title>
+                <Description>Grants the target ranged mastery for a time, improving their ranged weapon abilities.</Description>
+                <Weight>0.1</Weight>
+                <Hediff>PTRangedMastery</Hediff>
+            </li>
+            <li Class="PsiTech.AbilityEffects.AbilityEffectThought">
+                <Title>Inspire</Title>
+                <Description>Gives the target an inspiring thought, improving their mood significantly.</Description>
+                <Weight>0.1</Weight>
+                <Thought>PTInspired</Thought>
+            </li>
+            <li Class="PsiTech.AbilityEffects.AbilityEffectHeal">
+                <Title>Heal</Title>
+                <Description>Heals the target using psychic energy.</Description>
+                <Weight>0.1</Weight>
+                <BaseHeal>15</BaseHeal>
+            </li>
+        </PossibleEffects>
+        <SoundDefSuccessOnCaster>PTPsiRallyOneshot</SoundDefSuccessOnCaster>
+        <MoteOnUserSuccess>PTMotePsiRally</MoteOnUserSuccess>
+        <CastTimeTicks>600</CastTimeTicks>
+        <TargetValidator Class="PsiTech.TargetValidators.TargetValidatorFriendlies"/>
+        <RequiredResearch>
+            <li>PTPsiRally</li>
+        </RequiredResearch>
+    </Def>
+    
+    <!-- Psi Storm -->
+    <Def Class="PsiTech.Psionics.PsiTechAbilityDef">
+        <defName>PTPsiStorm</defName>
+        <label>Psi Storm</label>
+        <description>Psi storm is a powerful ability that can cause a variety of damaging effects to hostile pawns around the psion.\n\nDue to the intense focus needed to channel psi storm, damage will interrupt casting.</description>
+        <AbilityClass>PsiTech.Psionics.PsiTechAbilityAreaBurst</AbilityClass>
+        <GizmoDesc>Channel psi storm</GizmoDesc>
+        <PathToIcon>Abilities/Storm</PathToIcon>
+        <Tier>3</Tier>
+        <AddedValueForThreat>10000</AddedValueForThreat>
+        <AbilityCostForRaid>1500</AbilityCostForRaid>
+        <Autocastable>True</Autocastable>
+        <AutocastFilterClass>PsiTech.AutocastManagement.AutocastFilter_Burst</AutocastFilterClass>
+        <Violent>True</Violent>
+        <TrainingTimeDays>5</TrainingTimeDays>
+        <EnergyPerUse>200</EnergyPerUse>
+        <Range>40</Range>
+        <CooldownSeconds>300</CooldownSeconds>
+        <BaseSuccessChance>0.15</BaseSuccessChance>
+        <PossibleEffects>
+            <li Class="PsiTech.AbilityEffects.AbilityEffectMentalState">
+                <Title>Insanity</Title>
+                <Description>Causes the target to go insane for some time, attacking anyone nearby.</Description>
+                <Weight>0.50</Weight>
+                <MentalState>PTInsanity</MentalState>
+            </li>
+            <li Class="PsiTech.AbilityEffects.AbilityEffectMentalBreak">
+                <Title>Catatonia</Title>
+                <Description>Causes the target to go catatonic for some time.</Description>
+                <Weight>0.05</Weight>
+                <MentalBreak>Catatonic</MentalBreak>
+            </li>
+            <li Class="PsiTech.AbilityEffects.AbilityEffectMentalState">
+                <Title>Panic</Title>
+                <Description>Causes the target to panic and flee.</Description>
+                <Weight>0.15</Weight>
+                <MentalState>PTPanicFlee</MentalState>
+            </li>
+            <li Class="PsiTech.AbilityEffects.AbilityEffectMentalState">
+                <Title>Mindfray</Title>
+                <Description>Causes the target to lose touch with reality for a short time.</Description>
+                <Weight>0.1</Weight>
+                <MentalState>PTMegaMindfray</MentalState>
+            </li>
+            <li Class="PsiTech.AbilityEffects.AbilityEffectDamage">
+                <Title>Psionic Damage</Title>
+                <Description>Inflicts psionic damage on the target, causing them extreme pain and some injury.</Description>
+                <Weight>0.10</Weight>
+                <BaseDamage>10</BaseDamage>
+                <DamageType>PTPsychicDamage</DamageType>
+            </li>
+            <li Class="PsiTech.AbilityEffects.AbilityEffectDamage">
+                <Title>Massive Psionic Damage</Title>
+                <Description>Inflicts massive psionic damage on the target, causing excruciating pain and major injury.</Description>
+                <Weight>0.05</Weight>
+                <BaseDamage>30</BaseDamage>
+                <DamageType>PTPsychicDamage</DamageType>
+            </li>
+            <li Class="PsiTech.AbilityEffects.AbilityEffectDamagePart">
+                <Title>Mindmelt</Title>
+                <Description>Inflicts psionic damage on the target, but inflicts all of it directly on the brain. Instantly kills the target most of the time.</Description>
+                <Weight>0.05</Weight>
+                <BaseDamage>10</BaseDamage>
+                <DamageType>PTPsychicDamage</DamageType>
+                <Part>Brain</Part>
+            </li>
+        </PossibleEffects>
+        <SoundDefSuccessOnCaster>PTPsiStormOneshot</SoundDefSuccessOnCaster>
+        <MoteOnUserSuccess>PTMotePsiStorm</MoteOnUserSuccess>
+        <CastTimeTicks>600</CastTimeTicks>
+        <TargetValidator Class="PsiTech.TargetValidators.TargetValidatorHostiles"/>
+        <RequiredResearch>
+            <li>PTPsiStorm</li>
+        </RequiredResearch>
+    </Def>
+
+</Defs>

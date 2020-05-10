@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<!-- Copyright 2019, 2020, K
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+    
+        http://www.apache.org/licenses/LICENSE-2.0
+    
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+
+<Defs>
+
+    <SpecialThingFilterDef>
+        <defName>AllowPsychicWeapons</defName>
+        <label>allow psychic weapons</label>
+        <description>Allow weapons that have been psychically enhanced.</description>
+        <parentCategory>Weapons</parentCategory>
+        <allowedByDefault>false</allowedByDefault>
+        <saveKey>allowPsychicEquipment</saveKey>
+        <workerClass>PsiTech.Misc.SpecialThingFilterWorker_PsychicEquipment</workerClass>
+    </SpecialThingFilterDef>
+    
+    <RecipeDef>
+        <defName>PTUpgradeWeaponPsychic</defName>
+        <label>upgrade a weapon to be psychically active</label>
+        <description>Upgrades a weapon to be psychically active, improving its performance when used by a properly trained psion.</description>
+        <jobString>Upgrading a weapon.</jobString>
+        <workAmount>2000</workAmount>
+        <workSpeedStat>WorkSpeedGlobal</workSpeedStat>
+        <effectWorking>Cook</effectWorking>
+        <soundWorking>Recipe_Machining</soundWorking>
+        <ingredients>
+            <li>
+                <filter>
+                    <categories>
+                        <li>Weapons</li>
+                    </categories>
+                </filter>
+                <count>1</count>
+            </li>
+            <li>
+                <filter>
+                    <thingDefs>
+                        <li>PTAthenium</li>
+                    </thingDefs>
+                </filter>
+                <count>20</count>
+            </li>
+        </ingredients>
+        <fixedIngredientFilter>
+            <categories>
+                <li>Weapons</li>
+            </categories>
+            <thingSetMakerTagsToDisallow>
+                <li>SingleUseWeapon</li>
+            </thingSetMakerTagsToDisallow>
+            <disallowedCategories>
+                <li>Grenades</li>
+            </disallowedCategories>
+            <specialFiltersToDisallow>
+                <li>AllowPsychicWeapons</li>
+            </specialFiltersToDisallow>
+        </fixedIngredientFilter>
+        <researchPrerequisite>PTPsychicWeapons</researchPrerequisite>
+        <recipeUsers>
+            <li>PTPsychicWorkbench</li>
+        </recipeUsers>
+    </RecipeDef>
+    
+</Defs>

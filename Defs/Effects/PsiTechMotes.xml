@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<!-- Copyright 2019, 2020, K
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+    
+        http://www.apache.org/licenses/LICENSE-2.0
+    
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+
+<Defs>
+
+    <ThingDef ParentName="MoteBase">
+        <defName>PTMotePsiBlast</defName>
+        <graphicData>
+            <texPath>Effects/PsiBlast</texPath>
+            <shaderType>MoteGlow</shaderType>
+        </graphicData>
+        <thingClass>MoteThrownAttached</thingClass>
+        <altitudeLayer>Weather</altitudeLayer>
+        <drawOffscreen>true</drawOffscreen>
+        <mote>
+            <fadeInTime>0</fadeInTime>
+            <solidTime>0.25</solidTime>
+            <fadeOutTime>1</fadeOutTime>
+            <collide>false</collide>
+            <growthRate>0.5</growthRate>
+        </mote>
+    </ThingDef>
+    
+        <ThingDef ParentName="MoteBase">
+        <defName>PTMotePsiBlastGood</defName>
+        <graphicData>
+            <texPath>Effects/PsiBlast_good</texPath>
+            <shaderType>MoteGlow</shaderType>
+        </graphicData>
+        <thingClass>MoteThrownAttached</thingClass>
+        <altitudeLayer>Weather</altitudeLayer>
+        <drawOffscreen>true</drawOffscreen>
+        <mote>
+            <fadeInTime>0</fadeInTime>
+            <solidTime>0.25</solidTime>
+            <fadeOutTime>1</fadeOutTime>
+            <collide>false</collide>
+            <growthRate>0.5</growthRate>
+        </mote>
+    </ThingDef>
+
+    <ThingDef ParentName="MoteBase">
+        <defName>PTMotePsiRally</defName>
+        <graphicData>
+            <texPath>Effects/Rally</texPath>
+            <shaderType>MoteGlow</shaderType>
+        </graphicData>
+        <thingClass>MoteThrownAttached</thingClass>
+        <altitudeLayer>Weather</altitudeLayer>
+        <drawOffscreen>true</drawOffscreen>
+        <mote>
+            <fadeInTime>0</fadeInTime>
+            <solidTime>2</solidTime>
+            <fadeOutTime>2</fadeOutTime>
+            <collide>false</collide>
+            <growthRate>25</growthRate>
+        </mote>
+    </ThingDef>
+
+    <ThingDef ParentName="MoteBase">
+        <defName>PTMotePsiStorm</defName>
+        <graphicData>
+            <texPath>Effects/Storm</texPath>
+            <shaderType>MoteGlow</shaderType>
+        </graphicData>
+        <thingClass>MoteThrownAttached</thingClass>
+        <altitudeLayer>Weather</altitudeLayer>
+        <drawOffscreen>true</drawOffscreen>
+        <mote>
+            <fadeInTime>0</fadeInTime>
+            <solidTime>2</solidTime>
+            <fadeOutTime>2</fadeOutTime>
+            <collide>false</collide>
+            <growthRate>25</growthRate>
+        </mote>
+    </ThingDef>
+
+    <ThingDef ParentName="MoteBase">
+        <defName>PTMotePsiLink</defName>
+        <graphicData>
+            <texPath>Effects/PsiLink</texPath>
+            <shaderType>MoteGlow</shaderType>
+        </graphicData>
+        <thingClass>PsiTech.Misc.MoteLink</thingClass>
+        <altitudeLayer>Weather</altitudeLayer>
+        <drawOffscreen>true</drawOffscreen>
+        <mote>
+            <fadeInTime>0</fadeInTime>
+            <solidTime>0</solidTime>
+            <fadeOutTime>1</fadeOutTime>
+            <collide>false</collide>
+        </mote>
+    </ThingDef>
+    
+        <ThingDef ParentName="MoteBase">
+        <defName>PTMotePsiLinkGood</defName>
+        <graphicData>
+            <texPath>Effects/PsiLink_good</texPath>
+            <shaderType>MoteGlow</shaderType>
+        </graphicData>
+        <thingClass>PsiTech.Misc.MoteLink</thingClass>
+        <altitudeLayer>Weather</altitudeLayer>
+        <drawOffscreen>true</drawOffscreen>
+        <mote>
+            <fadeInTime>0</fadeInTime>
+            <solidTime>0</solidTime>
+            <fadeOutTime>1</fadeOutTime>
+            <collide>false</collide>
+        </mote>
+    </ThingDef>
+    
+    <ThingDef ParentName="MoteBase">
+        <defName>PTMotePointer</defName>
+        <graphicData>
+            <texPath>Effects/CastSuccess</texPath>
+            <shaderType>MoteGlow</shaderType>
+        </graphicData>
+        <thingClass>PsiTech.Misc.MotePointer</thingClass>
+        <altitudeLayer>Weather</altitudeLayer>
+        <drawOffscreen>true</drawOffscreen>
+        <mote>
+            <fadeInTime>0</fadeInTime>
+            <solidTime>0.25</solidTime>
+            <fadeOutTime>1</fadeOutTime>
+            <collide>false</collide>
+        </mote>
+    </ThingDef>
+    
+        <ThingDef ParentName="MoteBase">
+        <defName>PTMotePointerGood</defName>
+        <graphicData>
+            <texPath>Effects/CastSuccess_good</texPath>
+            <shaderType>MoteGlow</shaderType>
+        </graphicData>
+        <thingClass>PsiTech.Misc.MotePointer</thingClass>
+        <altitudeLayer>Weather</altitudeLayer>
+        <drawOffscreen>true</drawOffscreen>
+        <mote>
+            <fadeInTime>0</fadeInTime>
+            <solidTime>0.25</solidTime>
+            <fadeOutTime>1</fadeOutTime>
+            <collide>false</collide>
+        </mote>
+    </ThingDef>
+
+    <ThingDef ParentName="MoteBase">
+        <defName>PTMoteFailure</defName>
+        <graphicData>
+            <texPath>Effects/CastFail</texPath>
+            <shaderType>MoteGlow</shaderType>
+        </graphicData>
+        <thingClass>MoteThrownAttached</thingClass>
+        <altitudeLayer>Weather</altitudeLayer>
+        <drawOffscreen>true</drawOffscreen>
+        <mote>
+            <fadeInTime>0</fadeInTime>
+            <solidTime>0.5</solidTime>
+            <fadeOutTime>1</fadeOutTime>
+            <collide>false</collide>
+        </mote>
+    </ThingDef>
+    
+</Defs>

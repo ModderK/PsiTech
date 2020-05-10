@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<!-- Copyright 2019, 2020, K
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+    
+        http://www.apache.org/licenses/LICENSE-2.0
+    
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+
+<Defs>
+
+    <StatDef>
+        <defName>PTPsiEnergyRegeneration</defName>
+        <label>Psi Energy Regeneration</label>
+        <description>The rate at which this psion regenerates psi energy.</description>
+        <category>PTPsionicsStats</category>
+        <defaultBaseValue>0</defaultBaseValue>
+        <hideAtValue>0</hideAtValue>
+        <toStringStyle>FloatTwo</toStringStyle>
+        <showIfUndefined>false</showIfUndefined>
+    </StatDef>
+
+    <StatDef>
+        <defName>PTMaxPsiEnergy</defName>
+        <label>Max Psi Energy</label>
+        <description>The maximum amount of psi energy that this psion can store.</description>
+        <category>PTPsionicsStats</category>
+        <defaultBaseValue>0</defaultBaseValue>
+        <hideAtValue>0</hideAtValue>
+        <toStringStyle>Integer</toStringStyle>
+        <showIfUndefined>false</showIfUndefined>
+    </StatDef>
+
+    <StatDef>
+        <defName>PTPsiProjectionAbility</defName>
+        <label>Psi Projection Ability</label>
+        <description>The ability of this psion to project psionic abilites onto others, and their sensitivity to psionic abilities used on them.</description>
+        <category>PTPsionicsStats</category>
+        <defaultBaseValue>1</defaultBaseValue>
+        <hideAtValue>1</hideAtValue>
+        <minValue>0</minValue>
+        <toStringStyle>PercentZero</toStringStyle>
+        <showIfUndefined>false</showIfUndefined>
+    </StatDef>
+    
+    <StatDef>
+        <defName>PTPsiDefence</defName>
+        <label>Psi Defence</label>
+        <description>This psion's defence against psionic abilities.\n\nPsi defence stops both friendly and enemy abilities, making it more difficult to use abilities of any kind on this psion.</description>
+        <category>PTPsionicsStats</category>
+        <defaultBaseValue>0</defaultBaseValue>
+        <hideAtValue>0</hideAtValue>
+        <toStringStyle>PercentZero</toStringStyle>
+        <showIfUndefined>false</showIfUndefined>
+    </StatDef>
+
+    <StatDef>
+        <defName>PTPsiWeaponSynchronicity</defName>
+        <label>Psi Weapon Synchronicity</label>
+        <description>This psion's ability to properly synchronize with psychic weapons.\n\nPsychic weapons are no better than normal weapons without training to increase the user's synchronicity. With proper training, a psion can reach up to 200% synchronicity.</description>
+        <category>PTPsionicsStats</category>
+        <defaultBaseValue>0</defaultBaseValue>
+        <hideAtValue>0</hideAtValue>
+        <minValue>0</minValue>
+        <maxValue>2</maxValue>
+        <toStringStyle>PercentZero</toStringStyle>
+        <showIfUndefined>false</showIfUndefined>
+    </StatDef>
+
+    <StatDef>
+        <defName>PTPsiCooldownMultiplier</defName>
+        <label>Psi Cooldown Multiplier</label>
+        <description>A multiplier on this psion's cooldown durations.\n\nIt is extremely difficult to decrease the cooldown time of a psionic ability, due to the energy required to use them. Even so, with the right equipment and training, a psion can reduce their cooldowns to 50% of the base duration.</description>
+        <category>PTPsionicsStats</category>
+        <defaultBaseValue>1</defaultBaseValue>
+        <hideAtValue>1</hideAtValue>
+        <minValue>0.5</minValue>
+        <toStringStyle>PercentZero</toStringStyle>
+        <showIfUndefined>false</showIfUndefined>
+    </StatDef>
+
+    <StatDef>
+        <defName>PTDamageDodgeChance</defName>
+        <label>Damage Dodge Chance</label>
+        <description>The chance this pawn has to dodge attacks.</description>
+        <category>BasicsPawn</category>
+        <defaultBaseValue>0</defaultBaseValue>
+        <minValue>0</minValue>
+        <maxValue>0.6</maxValue>
+        <toStringStyle>PercentZero</toStringStyle>
+        <hideAtValue>0</hideAtValue>
+        <showIfUndefined>false</showIfUndefined>
+        <showOnAnimals>false</showOnAnimals>
+    </StatDef>
+
+    <StatDef>
+        <defName>PTDamageMultiplier</defName>
+        <label>Damage Multiplier</label>
+        <description>The multiplier on damage dealt by this pawn.</description>
+        <category>BasicsPawn</category>
+        <defaultBaseValue>1</defaultBaseValue>
+        <minValue>0</minValue>
+        <toStringStyle>PercentZero</toStringStyle>
+        <hideAtValue>1</hideAtValue>
+        <showIfUndefined>false</showIfUndefined>
+        <showOnAnimals>false</showOnAnimals>
+    </StatDef>
+    
+</Defs>

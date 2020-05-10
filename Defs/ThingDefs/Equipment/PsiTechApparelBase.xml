@@ -1,0 +1,135 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<!-- Copyright 2019, 2020, K
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+    
+        http://www.apache.org/licenses/LICENSE-2.0
+    
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+
+<Defs>
+    
+    <ThingCategoryDef>
+        <defName>PTPsi</defName>
+        <label>psi</label>
+        <parent>Apparel</parent>
+    </ThingCategoryDef>
+
+    <ThingCategoryDef>
+        <defName>PTPsiHeadgear</defName>
+        <label>psi headgear</label>
+        <parent>PTPsi</parent>
+    </ThingCategoryDef>
+    
+    <ThingDef Name="PTApparelBase" ParentName="ApparelBase" Abstract="True">
+        <recipeMaker>
+            <workSkill>Crafting</workSkill>
+            <recipeUsers>
+                <li>PTPsychicWorkbench</li>
+            </recipeUsers>
+        </recipeMaker>
+        <tradeability>Sellable</tradeability>
+        <techLevel>Spacer</techLevel>
+        <generateCommonality>0.001</generateCommonality>
+    </ThingDef>
+
+    <ThingDef Name="PTTailoredBase" ParentName="PTApparelBase" Abstract="True">
+        <thingCategories>
+            <li>PTPsi</li>
+        </thingCategories>
+        <recipeMaker>
+            <workSpeedStat>WorkSpeedGlobal</workSpeedStat>
+            <effectWorking>Tailor</effectWorking>
+            <soundWorking>Recipe_Tailor</soundWorking>
+            <unfinishedThingDef>UnfinishedApparel</unfinishedThingDef>
+            <defaultIngredientFilter>
+                <categories>
+                    <li>Root</li>
+                </categories>
+                <disallowedThingDefs>
+                    <li>Gold</li>
+                    <li>Silver</li>
+                    <li>Plasteel</li>
+                    <li>Jade</li>
+                    <li>Uranium</li>
+                </disallowedThingDefs>
+            </defaultIngredientFilter>
+        </recipeMaker>
+        <apparel>
+            <tags>
+                <li>ExoticPsiLowTier</li>
+                <li>Psychic</li>
+            </tags>
+        </apparel>
+    </ThingDef>
+
+    <ThingDef Name="PTMachinedBase" ParentName="PTApparelBase" Abstract="True">
+        <thingCategories>
+            <li>PTPsi</li>
+        </thingCategories>
+        <recipeMaker>
+            <workSpeedStat>WorkSpeedGlobal</workSpeedStat>
+            <effectWorking>Smith</effectWorking>
+            <soundWorking>Recipe_Machining</soundWorking>
+            <unfinishedThingDef>UnfinishedArmor</unfinishedThingDef>
+            <defaultIngredientFilter>
+                <categories>
+                    <li>Root</li>
+                </categories>
+                <disallowedThingDefs>
+                    <li>Gold</li>
+                    <li>Silver</li>
+                    <li>Plasteel</li>
+                    <li>Jade</li>
+                    <li>Uranium</li>
+                </disallowedThingDefs>
+            </defaultIngredientFilter>
+        </recipeMaker>
+        <comps>
+            <li Class="CompProperties_Forbiddable"/>
+        </comps>
+    </ThingDef>
+
+    <ThingDef Name="PTHatBase" ParentName="PTApparelBase" Abstract="True">
+        <thingCategories>
+            <li>PTPsiHeadgear</li>
+        </thingCategories>
+        <recipeMaker>
+            <workSpeedStat>WorkSpeedGlobal</workSpeedStat>
+            <effectWorking>Tailor</effectWorking>
+            <soundWorking>Recipe_Tailor</soundWorking>
+            <defaultIngredientFilter>
+                <categories>
+                    <li>Root</li>
+                </categories>
+                <disallowedThingDefs>
+                    <li>Gold</li>
+                    <li>Silver</li>
+                    <li>Plasteel</li>
+                    <li>Jade</li>
+                    <li>Uranium</li>
+                </disallowedThingDefs>
+            </defaultIngredientFilter>
+        </recipeMaker>
+    </ThingDef>
+
+    <ThingDef Name="PTHelmetBase" ParentName="PTHatBase" Abstract="True">
+        <recipeMaker>
+            <workSpeedStat>WorkSpeedGlobal</workSpeedStat>
+            <effectWorking>Smith</effectWorking>
+            <soundWorking>Recipe_Machining</soundWorking>
+        </recipeMaker>
+        <comps>
+            <li Class="CompProperties_Forbiddable"/>
+        </comps>
+    </ThingDef>
+    
+</Defs>

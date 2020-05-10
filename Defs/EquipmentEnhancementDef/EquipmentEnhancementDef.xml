@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<!-- Copyright 2019, 2020, K
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+    
+        http://www.apache.org/licenses/LICENSE-2.0
+    
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+
+<Defs>
+    
+    <!-- Hello there! If you're looking at this file then you're probably either curious, or trying to change the
+         balance of PsiTech. So here's how this works. -->
+    <!-- This def is sort of fake in that it's just a way to serialize data in XML. It doesn't define anything real. -->
+    <!-- This def defines the stat multipliers for Psychic equipment in PsiTech. -->
+    <!-- Now, because of the synchronicity system the numbers here are not the actual multipliers, they just define them -->
+    <!-- The actual multipliers are determined by the equation mult = 1 + mod * sync -->
+    <!-- For example, take the stat RangedWeapon_Cooldown. -->
+    <!-- Say we have a synchronicity of 1.5 or 150%, and a "mod" value of -0.25, meaning a 25% decrease in cooldown per 
+         100% sync. -->
+    <!-- By the given formula, we would have a multiplier of 62.5% to our cooldown. -->
+    <!-- Note that synchronicity can scale to 200% meaning that the numbers here are half of the max values. -->
+    <!-- Also note that mod lists are static, meaning that there should only ever be one EquipmentEnhancementDef or
+         things will start to break. -->
+    <!-- Well, that's not totally true, it's a bit more complicated than that but don't worry about it. -->
+    <Def Class="PsiTech.Misc.EquipmentEnhancementDef">
+        <defName>EquipmentEnhancementDef</defName>
+        <RangedMods>
+            <AccuracyTouch>0.4</AccuracyTouch>
+            <AccuracyShort>0.4</AccuracyShort>
+            <AccuracyMedium>0.4</AccuracyMedium>
+            <AccuracyLong>0.4</AccuracyLong>
+            <RangedWeapon_Cooldown>-0.25</RangedWeapon_Cooldown>
+        </RangedMods>
+        <MeleeMods>
+            <MeleeWeapon_DamageMultiplier>0.35</MeleeWeapon_DamageMultiplier>
+            <MeleeWeapon_CooldownMultiplier>-0.2</MeleeWeapon_CooldownMultiplier>
+        </MeleeMods>
+    </Def>
+    
+</Defs>

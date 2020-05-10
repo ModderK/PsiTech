@@ -1,0 +1,273 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<!-- Copyright 2019, 2020, K
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+    
+        http://www.apache.org/licenses/LICENSE-2.0
+    
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+
+<Defs>
+
+    <!-- Continuing the long-running theme of things that shouldn't be defs -->
+    <!-- Autocast profiles, which are given to AI pawns when spawned -->
+    <!-- Currently doesn't support conditions because I'm lazy and who cares anyway -->
+    
+    <!-- Mindfray profiles -->
+    
+    <Def Class="PsiTech.AutocastManagement.AutocastProfileDef">
+        <defName>PTAutocastProfile_Mindfray_1</defName>
+        <label>Placeholder.</label>
+        <description>Placeholder.</description>
+        <Ability>PTMindfray</Ability>
+        <TargetType>Enemies</TargetType>
+        <TargetRange>0~15</TargetRange>
+        <MinSuccessChance>0.5</MinSuccessChance>
+        <Selector>PTAutocastFilterSelector_Closest</Selector>
+        <InvertSelector>false</InvertSelector>
+        <AdditionalFilterProfiles>
+            <li>
+                <Def>PTAdditionalFilter_IsDowned</Def>
+                <Invert>true</Invert>
+            </li>
+        </AdditionalFilterProfiles>
+    </Def>
+
+    <Def Class="PsiTech.AutocastManagement.AutocastProfileDef">
+        <defName>PTAutocastProfile_Mindfray_2</defName>
+        <label>Placeholder.</label>
+        <description>Placeholder.</description>
+        <Ability>PTMindfray</Ability>
+        <TargetType>Enemies</TargetType>
+        <TargetRange>0~15</TargetRange>
+        <MinSuccessChance>0.5</MinSuccessChance>
+        <Selector>PTAutocastFilterSelector_Closest</Selector>
+        <InvertSelector>true</InvertSelector>
+        <AdditionalFilterProfiles>
+            <li>
+                <Def>PTAdditionalFilter_IsDowned</Def>
+                <Invert>true</Invert>
+            </li>
+        </AdditionalFilterProfiles>
+    </Def>
+
+    <!-- Inspire profiles -->
+
+    <Def Class="PsiTech.AutocastManagement.AutocastProfileDef">
+        <defName>PTAutocastProfile_Inspire_1</defName>
+        <label>Placeholder.</label>
+        <description>Placeholder.</description>
+        <Ability>PTInspire</Ability>
+        <TargetType>Friendlies</TargetType>
+        <TargetRange>0~15</TargetRange>
+        <MinSuccessChance>0.25</MinSuccessChance>
+        <Selector>PTAutocastFilterSelector_LowestMood</Selector>
+        <InvertSelector>false</InvertSelector>
+        <AdditionalFilterProfiles>
+            <li>
+                <Def>PTAdditionalFilter_Mood</Def>
+                <Invert>true</Invert>
+                <Threshold>0.3</Threshold>
+            </li>
+        </AdditionalFilterProfiles>
+    </Def>
+
+    <!-- Psi Heal profiles -->
+
+    <Def Class="PsiTech.AutocastManagement.AutocastProfileDef">
+        <defName>PTAutocastProfile_PsiHeal_1</defName>
+        <label>Placeholder.</label>
+        <description>Placeholder.</description>
+        <Ability>PTPsiHeal</Ability>
+        <TargetType>Friendlies</TargetType>
+        <TargetRange>0~20</TargetRange>
+        <MinSuccessChance>0.5</MinSuccessChance>
+        <Selector>PTAutocastFilterSelector_LowestHealthPercent</Selector>
+        <InvertSelector>false</InvertSelector>
+        <AdditionalFilterProfiles>
+            <li>
+                <Def>PTAdditionalFilter_HealthPercent</Def>
+                <Invert>true</Invert>
+                <Threshold>0.8</Threshold>
+            </li>
+        </AdditionalFilterProfiles>
+    </Def>
+
+    <Def Class="PsiTech.AutocastManagement.AutocastProfileDef">
+        <defName>PTAutocastProfile_PsiHeal_2</defName>
+        <label>Placeholder.</label>
+        <description>Placeholder.</description>
+        <Ability>PTPsiHeal</Ability>
+        <TargetType>Friendlies</TargetType>
+        <TargetRange>0~5</TargetRange>
+        <MinSuccessChance>0.5</MinSuccessChance>
+        <Selector>PTAutocastFilterSelector_LowestHealthPercent</Selector>
+        <InvertSelector>false</InvertSelector>
+        <AdditionalFilterProfiles>
+            <li>
+                <Def>PTAdditionalFilter_HealthPercent</Def>
+                <Invert>true</Invert>
+                <Threshold>0.9</Threshold>
+            </li>
+            <li>
+                <Def>PTAdditionalFilter_IsDowned</Def>
+                <Invert>true</Invert>
+            </li>
+        </AdditionalFilterProfiles>
+    </Def>
+
+    <!-- Mindsoothe profiles -->
+
+    <Def Class="PsiTech.AutocastManagement.AutocastProfileDef">
+        <defName>PTAutocastProfile_Mindsoothe_1</defName>
+        <label>Placeholder.</label>
+        <description>Placeholder.</description>
+        <Ability>PTMindsoothe</Ability>
+        <TargetType>Friendlies</TargetType>
+        <TargetRange>0~20</TargetRange>
+        <MinSuccessChance>0.5</MinSuccessChance>
+        <Selector>PTAutocastFilterSelector_MostDangerous</Selector>
+        <InvertSelector>false</InvertSelector>
+    </Def>
+
+    <!-- Insanity profiles -->
+
+    <Def Class="PsiTech.AutocastManagement.AutocastProfileDef">
+        <defName>PTAutocastProfile_Insanity_1</defName>
+        <label>Placeholder.</label>
+        <description>Placeholder.</description>
+        <Ability>PTInsanity</Ability>
+        <TargetType>Enemies</TargetType>
+        <TargetRange>0~15</TargetRange>
+        <MinSuccessChance>0.5</MinSuccessChance>
+        <Selector>PTAutocastFilterSelector_Closest</Selector>
+        <InvertSelector>false</InvertSelector>
+    </Def>
+
+    <Def Class="PsiTech.AutocastManagement.AutocastProfileDef">
+        <defName>PTAutocastProfile_Insanity_2</defName>
+        <label>Placeholder.</label>
+        <description>Placeholder.</description>
+        <Ability>PTInsanity</Ability>
+        <TargetType>Enemies</TargetType>
+        <TargetRange>0~30</TargetRange>
+        <MinSuccessChance>0.25</MinSuccessChance>
+        <Selector>PTAutocastFilterSelector_Closest</Selector>
+        <InvertSelector>true</InvertSelector>
+    </Def>
+
+    <Def Class="PsiTech.AutocastManagement.AutocastProfileDef">
+        <defName>PTAutocastProfile_Insanity_3</defName>
+        <label>Placeholder.</label>
+        <description>Placeholder.</description>
+        <Ability>PTInsanity</Ability>
+        <TargetType>Enemies</TargetType>
+        <TargetRange>0~30</TargetRange>
+        <MinSuccessChance>0.25</MinSuccessChance>
+        <Selector>PTAutocastFilterSelector_MostDangerous</Selector>
+        <InvertSelector>false</InvertSelector>
+        <AdditionalFilterProfiles>
+            <li>
+                <Def>PTAdditionalFilter_IsPsion</Def>
+            </li>
+        </AdditionalFilterProfiles>
+    </Def>
+
+    <!-- Mindmelt profiles -->
+
+    <Def Class="PsiTech.AutocastManagement.AutocastProfileDef">
+        <defName>PTAutocastProfile_Mindmelt_1</defName>
+        <label>Placeholder.</label>
+        <description>Placeholder.</description>
+        <Ability>PTMindmelt</Ability>
+        <TargetType>Enemies</TargetType>
+        <TargetRange>0~10</TargetRange>
+        <MinSuccessChance>0.5</MinSuccessChance>
+        <Selector>PTAutocastFilterSelector_Closest</Selector>
+        <InvertSelector>false</InvertSelector>
+    </Def>
+
+    <Def Class="PsiTech.AutocastManagement.AutocastProfileDef">
+        <defName>PTAutocastProfile_Mindmelt_2</defName>
+        <label>Placeholder.</label>
+        <description>Placeholder.</description>
+        <Ability>PTMindmelt</Ability>
+        <TargetType>Enemies</TargetType>
+        <TargetRange>0~30</TargetRange>
+        <MinSuccessChance>0.25</MinSuccessChance>
+        <Selector>PTAutocastFilterSelector_Closest</Selector>
+        <InvertSelector>true</InvertSelector>
+    </Def>
+
+    <Def Class="PsiTech.AutocastManagement.AutocastProfileDef">
+        <defName>PTAutocastProfile_Mindmelt_3</defName>
+        <label>Placeholder.</label>
+        <description>Placeholder.</description>
+        <Ability>PTMindmelt</Ability>
+        <TargetType>Enemies</TargetType>
+        <TargetRange>0~30</TargetRange>
+        <MinSuccessChance>0.25</MinSuccessChance>
+        <Selector>PTAutocastFilterSelector_MostDangerous</Selector>
+        <InvertSelector>false</InvertSelector>
+        <AdditionalFilterProfiles>
+            <li>
+                <Def>PTAdditionalFilter_IsPsion</Def>
+            </li>
+            <li>
+                <Def>PTAdditionalFilter_IsDowned</Def>
+                <Invert>true</Invert>
+            </li>
+        </AdditionalFilterProfiles>
+    </Def>
+
+    <Def Class="PsiTech.AutocastManagement.AutocastProfileDef">
+        <defName>PTAutocastProfile_Mindmelt_4</defName>
+        <label>Placeholder.</label>
+        <description>Placeholder.</description>
+        <Ability>PTMindmelt</Ability>
+        <TargetType>Enemies</TargetType>
+        <TargetRange>0~30</TargetRange>
+        <MinSuccessChance>0.25</MinSuccessChance>
+        <Selector>PTAutocastFilterSelector_MostPain</Selector>
+        <InvertSelector>false</InvertSelector>
+        <AdditionalFilterProfiles>
+            <li>
+                <Def>PTAdditionalFilter_IsDowned</Def>
+                <Invert>true</Invert>
+            </li>
+        </AdditionalFilterProfiles>
+    </Def>
+
+    <!-- Psi Rally profiles -->
+
+    <Def Class="PsiTech.AutocastManagement.AutocastProfileDef">
+        <defName>PTAutocastProfile_PsiRally_1</defName>
+        <label>Placeholder.</label>
+        <description>Placeholder.</description>
+        <Ability>PTPsiRally</Ability>
+        <TargetType>Friendlies</TargetType>
+        <TargetRange>0~40</TargetRange>
+        <MinTargetsInRange>10</MinTargetsInRange>
+    </Def>
+
+    <!-- Psi Storm profiles -->
+
+    <Def Class="PsiTech.AutocastManagement.AutocastProfileDef">
+        <defName>PTAutocastProfile_PsiStorm_1</defName>
+        <label>Placeholder.</label>
+        <description>Placeholder.</description>
+        <Ability>PTPsiStorm</Ability>
+        <TargetType>Enemies</TargetType>
+        <TargetRange>0~40</TargetRange>
+        <MinTargetsInRange>5</MinTargetsInRange>
+    </Def>
+    
+</Defs>

@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<!-- Copyright 2019, 2020, K
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+    
+        http://www.apache.org/licenses/LICENSE-2.0
+    
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+
+<Defs>
+
+    <HediffDef Name="PsiTechBuffBase" Abstract="True">
+        <hediffClass>HediffWithComps</hediffClass>
+        <tendable>false</tendable>
+        <isBad>false</isBad>
+        <scenarioCanAdd>false</scenarioCanAdd>
+    </HediffDef>
+
+    <HediffDef ParentName="PsiTechBuffBase">
+        <defName>PTBattleTrance</defName>
+        <label>Battle Trance</label>
+        <labelNoun>A battle trance</labelNoun>
+        <description>A state of heightened battlefield awareness, induced by a psion.</description>
+        <comps>
+            <li Class="HediffCompProperties_Disappears">
+                <disappearsAfterTicks>
+                    <min>25000</min>
+                    <max>35000</max>
+                </disappearsAfterTicks>
+            </li>
+        </comps>
+        <stages>
+            <li>
+                <statOffsets>
+                    <PTDamageDodgeChance>0.15</PTDamageDodgeChance>
+                    <PTDamageMultiplier>0.3</PTDamageMultiplier>
+                </statOffsets>
+            </li>
+        </stages>
+    </HediffDef>
+
+    <HediffDef ParentName="PsiTechBuffBase">
+        <defName>PTBattlefieldAwakening</defName>
+        <label>Battlefield Awakening</label>
+        <labelNoun>A battlefield awakening</labelNoun>
+        <description>A state of absolute battlefield awareness, induced by a psion.</description>
+        <comps>
+            <li Class="HediffCompProperties_Disappears">
+                <disappearsAfterTicks>
+                    <min>25000</min>
+                    <max>35000</max>
+                </disappearsAfterTicks>
+            </li>
+        </comps>
+        <stages>
+            <li>
+                <statOffsets>
+                    <PTDamageDodgeChance>0.3</PTDamageDodgeChance>
+                    <PTDamageMultiplier>0.6</PTDamageMultiplier>
+                </statOffsets>
+            </li>
+        </stages>
+    </HediffDef>
+
+    <HediffDef ParentName="PsiTechBuffBase">
+        <defName>PTMeleeMastery</defName>
+        <label>Melee Mastery</label>
+        <labelNoun>Melee mastery</labelNoun>
+        <description>A state of advance melee combat ability, induced by a psion.</description>
+        <comps>
+            <li Class="HediffCompProperties_Disappears">
+                <disappearsAfterTicks>
+                    <min>25000</min>
+                    <max>35000</max>
+                </disappearsAfterTicks>
+            </li>
+        </comps>
+        <stages>
+            <li>
+                <statOffsets>
+                    <MeleeDodgeChance>30</MeleeDodgeChance>
+                    <MeleeArmorPenetration>1.4</MeleeArmorPenetration>
+                </statOffsets>
+                <capMods>
+                    <li>
+                        <capacity>Moving</capacity>
+                        <offset>0.4</offset>
+                    </li>
+                    <li>
+                        <capacity>Manipulation</capacity>
+                        <offset>0.4</offset>
+                    </li>
+                </capMods>
+            </li>
+        </stages>
+    </HediffDef>
+
+    <HediffDef ParentName="PsiTechBuffBase">
+        <defName>PTRangedMastery</defName>
+        <label>Ranged Mastery</label>
+        <labelNoun>Ranged mastery</labelNoun>
+        <description>A state of advance ranged combat ability, induced by a psion.</description>
+        <comps>
+            <li Class="HediffCompProperties_Disappears">
+                <disappearsAfterTicks>
+                    <min>25000</min>
+                    <max>35000</max>
+                </disappearsAfterTicks>
+            </li>
+        </comps>
+        <stages>
+            <li>
+                <statOffsets>
+                    <AimingDelayFactor>-0.3</AimingDelayFactor>
+                    <ShootingAccuracyPawn>10</ShootingAccuracyPawn>
+                </statOffsets>
+                <capMods>
+                    <li>
+                        <capacity>Sight</capacity>
+                        <offset>0.4</offset>
+                    </li>
+                    <li>
+                        <capacity>Manipulation</capacity>
+                        <offset>0.4</offset>
+                    </li>
+                </capMods>
+            </li>
+        </stages>
+    </HediffDef>
+    
+</Defs>

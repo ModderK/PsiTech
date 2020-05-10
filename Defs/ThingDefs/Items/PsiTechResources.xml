@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<!-- Copyright 2019, 2020, K
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+    
+        http://www.apache.org/licenses/LICENSE-2.0
+    
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+
+<Defs>
+    
+    <ThingDef ParentName="ResourceBase">
+        <defName>PTAthenium</defName>
+        <label>Athenium</label>
+        <description>A bizarre crystalline material capable of interacting with psychic waves. It is useful in the creation of psychically active equipment and devices.</description>
+        <graphicData>
+            <texPath>Things/Items/Athenium</texPath>
+            <graphicClass>Graphic_StackCount</graphicClass>
+        </graphicData>
+        <resourceReadoutPriority>First</resourceReadoutPriority>
+        <soundInteract>Metal_Drop</soundInteract>
+        <soundDrop>Metal_Drop</soundDrop>
+        <useHitPoints>false</useHitPoints>
+        <resourceReadoutAlwaysShow>false</resourceReadoutAlwaysShow>
+        <tradeability>Sellable</tradeability>
+        <smeltable>false</smeltable>
+        <tradeTags>
+            <li>ExoticMisc</li>
+        </tradeTags>
+        <statBases>
+            <MarketValue>20</MarketValue>
+            <Mass>0.15</Mass>
+            <SharpDamageMultiplier>1.15</SharpDamageMultiplier>
+            <BluntDamageMultiplier>0.85</BluntDamageMultiplier>
+            <StuffPower_Armor_Sharp>0.45</StuffPower_Armor_Sharp>
+            <StuffPower_Armor_Blunt>0.27</StuffPower_Armor_Blunt>
+            <StuffPower_Armor_Heat>0.15</StuffPower_Armor_Heat>
+            <StuffPower_Insulation_Cold>0</StuffPower_Insulation_Cold>
+            <StuffPower_Insulation_Heat>0</StuffPower_Insulation_Heat>
+        </statBases>
+        <thingCategories>
+            <li>ResourcesRaw</li>
+        </thingCategories>
+        <stackLimit>75</stackLimit>
+        <smallVolume>false</smallVolume>
+        <stuffProps>
+            <categories>
+                <li>Metallic</li>
+            </categories>
+            <color>(115, 10, 110)</color>
+            <commonality>0.001</commonality>
+            <constructEffect>ConstructMetal</constructEffect>
+            <soundImpactStuff>BulletImpact_Metal</soundImpactStuff>
+            <soundMeleeHitSharp>MeleeHit_Metal_Sharp</soundMeleeHitSharp>
+            <soundMeleeHitBlunt>MeleeHit_Metal_Blunt</soundMeleeHitBlunt>
+            <statOffsets>
+                <Beauty>2</Beauty>
+            </statOffsets>
+            <statFactors>
+                <MaxHitPoints>0.5</MaxHitPoints>
+                <Flammability>0.1</Flammability>
+                <Beauty>1</Beauty>
+                <WorkToMake>2.5</WorkToMake>
+                <MeleeWeapon_CooldownMultiplier>0.9</MeleeWeapon_CooldownMultiplier>
+            </statFactors>
+        </stuffProps>
+        <terrainAffordanceNeeded>Medium</terrainAffordanceNeeded>
+    </ThingDef>
+
+    <!-- Doesn't really belong here but whatever -->
+    <TerrainDef ParentName="TileMetalBase">
+        <defName>AtheniumTile</defName>
+        <label>athenium tile</label>
+        <renderPrecedence>243</renderPrecedence>
+        <description>Athenium tiles, for that rich cultist look. They are pretty, and the smooth tile surface gets a bonus to cleanliness.</description>
+        <color>(100, 10, 85)</color>
+        <statBases>
+            <WorkToBuild>800</WorkToBuild>
+            <Beauty>3</Beauty>
+            <Cleanliness>0.2</Cleanliness>
+        </statBases>
+        <costList>
+            <PTAthenium>7</PTAthenium>
+        </costList>
+    </TerrainDef>
+    
+</Defs>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<!-- Copyright 2019, 2020, K
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+    
+        http://www.apache.org/licenses/LICENSE-2.0
+    
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+
+<Defs>
+
+    <WorkGiverDef>
+        <defName>DoBillsPsychicWorkbench</defName>
+        <label>work with psychic equipment</label>
+        <giverClass>WorkGiver_DoBill</giverClass>
+        <workType>Smithing</workType>
+        <priorityInType>60</priorityInType>
+        <fixedBillGiverDefs>
+            <li>PTPsychicWorkbench</li>
+        </fixedBillGiverDefs>
+        <verb>work</verb>
+        <gerund>working at</gerund>
+        <requiredCapacities>
+            <li>Manipulation</li>
+        </requiredCapacities>
+        <prioritizeSustains>true</prioritizeSustains>
+    </WorkGiverDef>
+
+    <WorkGiverDef>
+        <defName>PsionGoToTrainingTube</defName>
+        <label>train psionic abilities</label>
+        <giverClass>PsiTech.AI.WorkGiver_TrainInTube</giverClass>
+        <priorityInType>-1000</priorityInType>
+        <workType>PatientBedRest</workType>
+        <verb>get in psionic trainer</verb>
+        <gerund>getting in psionic trainer</gerund>
+    </WorkGiverDef>
+    
+</Defs>

@@ -1,0 +1,479 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<!-- Copyright 2019, 2020, K
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+    
+        http://www.apache.org/licenses/LICENSE-2.0
+    
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+
+<Defs>
+
+    <!-- Note that making a scaled passive that changes psychic sensitivity will crash the game! Infinite recursion! -->
+    
+    <!-- Unlocking the Subconscious Abilities -->
+    <Def Class="PsiTech.Psionics.PsiTechAbilityDef">
+        <defName>PTPsiDefence</defName>
+        <label>Psi Defense</label>
+        <description>Psi defense is a defensive technique that decreases a psion's susceptibility to psionic abilities, including friendly ones.</description>
+        <AbilityClass>PsiTech.Psionics.PsiTechAbilityScaledPassive</AbilityClass>
+        <Tier>1</Tier>
+        <TrainingTimeDays>1</TrainingTimeDays>
+        <AddedValueForThreat>0</AddedValueForThreat>
+        <AbilityCostForRaid>10</AbilityCostForRaid>
+        <StatOffsets>
+            <PTPsiDefence>0.35</PTPsiDefence>
+        </StatOffsets>
+        <RequiredResearch>
+            <li>PTUnlockingTheSubconscious</li>
+        </RequiredResearch>
+        <ConflictingAbilities>
+            <li>PTPerfectedDefence</li>
+            <li>PTTranscendentDefense</li>
+        </ConflictingAbilities>
+    </Def>
+    
+    <Def Class="PsiTech.Psionics.PsiTechAbilityDef">
+        <defName>PTPsiTrance</defName>
+        <label>Psi Trance</label>
+        <description>Psi trance is a simple meditation technique allows a psion to rest more effectively than simple sleep, resulting in less time spent sleeping.</description>
+        <AbilityClass>PsiTech.Psionics.PsiTechAbilityScaledPassive</AbilityClass>
+        <Tier>1</Tier>
+        <TrainingTimeDays>1</TrainingTimeDays>
+        <AddedValueForThreat>0</AddedValueForThreat>
+        <AbilityCostForRaid>5</AbilityCostForRaid>
+        <StatOffsets>
+            <RestRateMultiplier>0.1</RestRateMultiplier>
+        </StatOffsets>
+        <RequiredResearch>
+            <li>PTUnlockingTheSubconscious</li>
+        </RequiredResearch>
+    </Def>
+
+    <Def Class="PsiTech.Psionics.PsiTechAbilityDef">
+        <defName>PTInsulation</defName>
+        <label>Insulation</label>
+        <description>Insulation is a technique that allows a psion's body to function normally in a wider temperature range than would otherwise be possible.</description>
+        <AbilityClass>PsiTech.Psionics.PsiTechAbilityScaledPassive</AbilityClass>
+        <Tier>1</Tier>
+        <TrainingTimeDays>1</TrainingTimeDays>
+        <AddedValueForThreat>0</AddedValueForThreat>
+        <AbilityCostForRaid>10</AbilityCostForRaid>
+        <StatOffsets>
+            <ComfyTemperatureMin>-20</ComfyTemperatureMin>
+            <ComfyTemperatureMax>20</ComfyTemperatureMax>
+        </StatOffsets>
+        <RequiredResearch>
+            <li>PTUnlockingTheSubconscious</li>
+        </RequiredResearch>
+    </Def>
+
+    <Def Class="PsiTech.Psionics.PsiTechAbilityDef">
+        <defName>PTSerenity</defName>
+        <label>Serenity</label>
+        <description>Serenity is a technique that steels a psion's mind against the stresses of the world, lowering their chance to have a mental break.</description>
+        <AbilityClass>PsiTech.Psionics.PsiTechAbilityScaledPassive</AbilityClass>
+        <Tier>1</Tier>
+        <TrainingTimeDays>1</TrainingTimeDays>
+        <AddedValueForThreat>0</AddedValueForThreat>
+        <AbilityCostForRaid>5</AbilityCostForRaid>
+        <StatOffsets>
+            <MentalBreakThreshold>-0.05</MentalBreakThreshold>
+        </StatOffsets>
+        <RequiredResearch>
+            <li>PTUnlockingTheSubconscious</li>
+        </RequiredResearch>
+    </Def>
+
+    <!-- Weapon Synchronicity -->
+    <Def Class="PsiTech.Psionics.PsiTechAbilityDef">
+        <defName>PTWeaponSynchronicity</defName>
+        <label>Weapon Synchronicity</label>
+        <description>Weapon synchronicity is a technique developed to allow a psion to properly utilize the potential of a psychic weapon. Without any training, psychic weapons are no different from their normal couterparts. With weapon synchronicity, the psion can improve the performance of psychic weapons.</description>
+        <AbilityClass>PsiTech.Psionics.PsiTechAbilityScaledPassive</AbilityClass>
+        <Tier>1</Tier>
+        <TrainingTimeDays>1</TrainingTimeDays>
+        <AddedValueForThreat>100</AddedValueForThreat>
+        <AbilityCostForRaid>20</AbilityCostForRaid>
+        <StatOffsets>
+            <PTPsiWeaponSynchronicity>0.3</PTPsiWeaponSynchronicity>
+        </StatOffsets>
+        <RequiredResearch>
+            <li>PTPsychicWeapons</li>
+        </RequiredResearch>
+        <ConflictingAbilities>
+            <li>PTPerfectedSynchronicity</li>
+        </ConflictingAbilities>
+    </Def>
+    
+    <!-- Psi Forging -->
+    <Def Class="PsiTech.Psionics.PsiTechAbilityDef">
+        <defName>PTPsiForging</defName>
+        <label>Psi Forging</label>
+        <description>Psi forging is a technique that allows a psion to manipulate psychically resonant materials more easily. Psions trained in this ability can use it to create athenium from simpler materials.</description>
+        <AbilityClass>PsiTech.Psionics.PsiTechAbilityScaledPassive</AbilityClass>
+        <Tier>1</Tier>
+        <TrainingTimeDays>2</TrainingTimeDays>
+        <AddedValueForThreat>0</AddedValueForThreat>
+        <AbilityCostForRaid>5</AbilityCostForRaid>
+        <StatOffsets>
+            <WorkSpeedGlobal>0.06</WorkSpeedGlobal>
+        </StatOffsets>
+        <RequiredResearch>
+            <li>PTAtheniumCreation</li>
+        </RequiredResearch>
+    </Def>
+    
+    <!-- Psi Combat Abilities -->
+    <Def Class="PsiTech.Psionics.PsiTechAbilityDef">
+        <defName>PTCombatPrecognition</defName>
+        <label>Combat Precognition</label>
+        <description>Combat precognition is a technique that allows a psion to predict an adversary's movement before it happens, making them better at dodging attacks.</description>
+        <AbilityClass>PsiTech.Psionics.PsiTechAbilityScaledPassive</AbilityClass>
+        <Tier>1</Tier>
+        <TrainingTimeDays>1</TrainingTimeDays>
+        <AddedValueForThreat>50</AddedValueForThreat>
+        <AbilityCostForRaid>20</AbilityCostForRaid>
+        <StatOffsets>
+            <MeleeDodgeChance>15</MeleeDodgeChance>
+        </StatOffsets>
+        <RequiredResearch>
+            <li>PTPsiCombat</li>
+        </RequiredResearch>
+    </Def>
+
+    <Def Class="PsiTech.Psionics.PsiTechAbilityDef">
+        <defName>PTCombatInsight</defName>
+        <label>Combat Insight</label>
+        <description>Combat insight is a technique that allows a psion to more easily see an adversary's weaknesses, making them more effective at penetrating armor.</description>
+        <AbilityClass>PsiTech.Psionics.PsiTechAbilityScaledPassive</AbilityClass>
+        <Tier>1</Tier>
+        <TrainingTimeDays>1</TrainingTimeDays>
+        <AddedValueForThreat>50</AddedValueForThreat>
+        <AbilityCostForRaid>20</AbilityCostForRaid>
+        <StatFactors>
+            <MeleeArmorPenetration>1.20</MeleeArmorPenetration>
+        </StatFactors>
+        <RequiredResearch>
+            <li>PTPsiCombat</li>
+        </RequiredResearch>
+    </Def>
+
+    <Def Class="PsiTech.Psionics.PsiTechAbilityDef">
+        <defName>PTCombatIntuition</defName>
+        <label>Combat Intuition</label>
+        <description>Combat intuition is a technique that gives a psion insight into an adversary's next moves, allowing them to more easily track and shoot targets, faster.</description>
+        <AbilityClass>PsiTech.Psionics.PsiTechAbilityScaledPassive</AbilityClass>
+        <Tier>1</Tier>
+        <TrainingTimeDays>1</TrainingTimeDays>
+        <AddedValueForThreat>50</AddedValueForThreat>
+        <AbilityCostForRaid>20</AbilityCostForRaid>
+        <StatOffsets>
+            <AimingDelayFactor>-0.15</AimingDelayFactor>
+        </StatOffsets>
+        <RequiredResearch>
+            <li>PTPsiCombat</li>
+        </RequiredResearch>
+    </Def>
+
+    <Def Class="PsiTech.Psionics.PsiTechAbilityDef">
+        <defName>PTCombatPrecision</defName>
+        <label>Combat Precision</label>
+        <description>Combat precision is a technique that helps a psion stay calm in the pressure of combat, improving their precision with shooting weapons.</description>
+        <AbilityClass>PsiTech.Psionics.PsiTechAbilityScaledPassive</AbilityClass>
+        <Tier>1</Tier>
+        <TrainingTimeDays>1</TrainingTimeDays>
+        <AddedValueForThreat>50</AddedValueForThreat>
+        <AbilityCostForRaid>20</AbilityCostForRaid>
+        <StatOffsets>
+            <ShootingAccuracyPawn>5</ShootingAccuracyPawn>
+        </StatOffsets>
+        <RequiredResearch>
+            <li>PTPsiCombat</li>
+        </RequiredResearch>
+    </Def>
+
+    <!-- Psi Empathy Abilities -->
+    <Def Class="PsiTech.Psionics.PsiTechAbilityDef">
+        <defName>PTEmpatheticNegotiation</defName>
+        <label>Empathetic Negotiation</label>
+        <description>Empathetic negotiation is a technique that makes a psion more receptive to the needs of others, improving their negotiation abilities.</description>
+        <AbilityClass>PsiTech.Psionics.PsiTechAbilityScaledPassive</AbilityClass>
+        <Tier>1</Tier>
+        <TrainingTimeDays>1</TrainingTimeDays>
+        <AddedValueForThreat>0</AddedValueForThreat>
+        <AbilityCostForRaid>5</AbilityCostForRaid>
+        <StatOffsets>
+            <NegotiationAbility>0.30</NegotiationAbility>
+        </StatOffsets>
+        <RequiredResearch>
+            <li>PTPsiEmpaty</li>
+        </RequiredResearch>
+    </Def>
+
+    <Def Class="PsiTech.Psionics.PsiTechAbilityDef">
+        <defName>PTEmpatheticBargaining</defName>
+        <label>Empathetic Bargaining</label>
+        <description>Empathetic bargaining is a technique that makes a psion more receptive to the wants of others, improving their bargaining abilities.</description>
+        <AbilityClass>PsiTech.Psionics.PsiTechAbilityScaledPassive</AbilityClass>
+        <Tier>1</Tier>
+        <TrainingTimeDays>1</TrainingTimeDays>
+        <AddedValueForThreat>0</AddedValueForThreat>
+        <AbilityCostForRaid>5</AbilityCostForRaid>
+        <StatOffsets>
+            <TradePriceImprovement>0.075</TradePriceImprovement>
+        </StatOffsets>
+        <RequiredResearch>
+            <li>PTPsiEmpaty</li>
+        </RequiredResearch>
+    </Def>
+
+    <Def Class="PsiTech.Psionics.PsiTechAbilityDef">
+        <defName>PTEmpatheticHandling</defName>
+        <label>Empathetic Handling</label>
+        <description>Empathetic handling is a technique that makes a psion more receptive to the feelings of animals, improving their ability to tame and train animals.</description>
+        <AbilityClass>PsiTech.Psionics.PsiTechAbilityScaledPassive</AbilityClass>
+        <Tier>1</Tier>
+        <TrainingTimeDays>1</TrainingTimeDays>
+        <AddedValueForThreat>0</AddedValueForThreat>
+        <AbilityCostForRaid>5</AbilityCostForRaid>
+        <StatOffsets>
+            <TameAnimalChance>0.15</TameAnimalChance>
+            <TrainAnimalChance>0.25</TrainAnimalChance>
+        </StatOffsets>
+        <RequiredResearch>
+            <li>PTPsiEmpaty</li>
+        </RequiredResearch>
+    </Def>
+    
+    <!-- Psi Meditation Abilities -->
+    <Def Class="PsiTech.Psionics.PsiTechAbilityDef">
+        <defName>PTPsiAttunement</defName>
+        <label>Psi Attunement</label>
+        <description>Psi attunement is a meditation technique increases a psion's synchronization with psychic phenomenon, increasing their psychic sensitivity by 40%.</description>
+        <AbilityClass>PsiTech.Psionics.PsiTechAbilityUnscaledPassive</AbilityClass>
+        <Tier>1</Tier>
+        <TrainingTimeDays>1</TrainingTimeDays>
+        <AddedValueForThreat>100</AddedValueForThreat>
+        <AbilityCostForRaid>25</AbilityCostForRaid>
+        <StatOffsets>
+            <PsychicSensitivity>0.4</PsychicSensitivity>
+        </StatOffsets>
+        <RequiredResearch>
+            <li>PTPsiMeditation</li>
+        </RequiredResearch>
+        <ConflictingAbilities>
+            <li>PTPerfectedAttunement</li>
+        </ConflictingAbilities>
+    </Def>
+
+    <Def Class="PsiTech.Psionics.PsiTechAbilityDef">
+        <defName>PTPsiFocus</defName>
+        <label>Psi Focus</label>
+        <description>Psi focus is a meditation technique that increases a psion's psi energy regeneration by 0.5, scaled by their ability modifier.\n\nPsi focus is not counted for the purposes of unlocking new ability slots.</description>
+        <AbilityClass>PsiTech.Psionics.PsiTechAbilityScaledPassive</AbilityClass>
+        <Tier>1</Tier>
+        <TrainingTimeDays>1</TrainingTimeDays>
+        <AddedValueForThreat>50</AddedValueForThreat>
+        <AbilityCostForRaid>15</AbilityCostForRaid>
+        <StatOffsets>
+            <PTPsiEnergyRegeneration>0.5</PTPsiEnergyRegeneration>
+        </StatOffsets>
+        <RequiredResearch>
+            <li>PTPsiMeditation</li>
+        </RequiredResearch>
+        <ConflictingAbilities>
+            <li>PTPerfectedFocus</li>
+        </ConflictingAbilities>
+    </Def>
+
+    <Def Class="PsiTech.Psionics.PsiTechAbilityDef">
+        <defName>PTPsiCapacitance</defName>
+        <label>Psi Capacitance</label>
+        <description>Psi capacitance is a meditation technique that increases a psion's maximum psi energy by 50, scaled by their ability modifier.\n\nPsi capacitance is not counted for the purposes of unlocking new ability slots.</description>
+        <AbilityClass>PsiTech.Psionics.PsiTechAbilityScaledPassive</AbilityClass>
+        <Tier>1</Tier>
+        <TrainingTimeDays>1</TrainingTimeDays>
+        <AddedValueForThreat>50</AddedValueForThreat>
+        <AbilityCostForRaid>15</AbilityCostForRaid>
+        <StatOffsets>
+            <PTMaxPsiEnergy>50</PTMaxPsiEnergy>
+        </StatOffsets>
+        <RequiredResearch>
+            <li>PTPsiMeditation</li>
+        </RequiredResearch>
+        <ConflictingAbilities>
+            <li>PTPerfectedCapacitance</li>
+        </ConflictingAbilities>
+    </Def>
+    
+    <!-- Mind and Body Abilities -->
+    <Def Class="PsiTech.Psionics.PsiTechAbilityDef">
+        <defName>PTTruesight</defName>
+        <label>Truesight</label>
+        <description>Truesight is a technique that unlocks a psion's metaphorical third eye, allowing them to visualize psychic phenomenon.</description>
+        <AbilityClass>PsiTech.Psionics.PsiTechAbilityScaledPassive</AbilityClass>
+        <Tier>1</Tier>
+        <TrainingTimeDays>1</TrainingTimeDays>
+        <AddedValueForThreat>50</AddedValueForThreat>
+        <AbilityCostForRaid>15</AbilityCostForRaid>
+        <CapMods>
+            <li>
+                <capacity>Sight</capacity>
+                <offset>0.2</offset>
+            </li>
+        </CapMods>
+        <RequiredResearch>
+            <li>PTMindAndBody</li>
+        </RequiredResearch>
+    </Def>
+
+    <Def Class="PsiTech.Psionics.PsiTechAbilityDef">
+        <defName>PTConversion</defName>
+        <label>Conversion</label>
+        <description>Conversion is a technique that quickens a psion's metabolism.</description>
+        <AbilityClass>PsiTech.Psionics.PsiTechAbilityScaledPassive</AbilityClass>
+        <Tier>1</Tier>
+        <TrainingTimeDays>1</TrainingTimeDays>
+        <AddedValueForThreat>50</AddedValueForThreat>
+        <AbilityCostForRaid>5</AbilityCostForRaid>
+        <CapMods>
+            <li>
+                <capacity>Metabolism</capacity>
+                <offset>0.2</offset>
+            </li>
+        </CapMods>
+        <RequiredResearch>
+            <li>PTMindAndBody</li>
+        </RequiredResearch>
+    </Def>
+
+    <Def Class="PsiTech.Psionics.PsiTechAbilityDef">
+        <defName>PTPurity</defName>
+        <label>Purity</label>
+        <description>Purity is a technique that helps to purify a psion's body faster it than normally would.</description>
+        <AbilityClass>PsiTech.Psionics.PsiTechAbilityScaledPassive</AbilityClass>
+        <Tier>1</Tier>
+        <TrainingTimeDays>1</TrainingTimeDays>
+        <AddedValueForThreat>50</AddedValueForThreat>
+        <AbilityCostForRaid>5</AbilityCostForRaid>
+        <CapMods>
+            <li>
+                <capacity>BloodFiltration</capacity>
+                <offset>0.2</offset>
+            </li>
+        </CapMods>
+        <RequiredResearch>
+            <li>PTMindAndBody</li>
+        </RequiredResearch>
+    </Def>
+
+    <Def Class="PsiTech.Psionics.PsiTechAbilityDef">
+        <defName>PTOverdrive</defName>
+        <label>Overdrive</label>
+        <description>Overdrive is a technique that pushes a psion's body to its physical limits, improving its overall function.</description>
+        <AbilityClass>PsiTech.Psionics.PsiTechAbilityScaledPassive</AbilityClass>
+        <Tier>1</Tier>
+        <TrainingTimeDays>1</TrainingTimeDays>
+        <AddedValueForThreat>50</AddedValueForThreat>
+        <AbilityCostForRaid>15</AbilityCostForRaid>
+        <CapMods>
+            <li>
+                <capacity>BloodPumping</capacity>
+                <offset>0.2</offset>
+            </li>
+        </CapMods>
+        <RequiredResearch>
+            <li>PTMindAndBody</li>
+        </RequiredResearch>
+    </Def>
+
+    <Def Class="PsiTech.Psionics.PsiTechAbilityDef">
+        <defName>PTAlacrity</defName>
+        <label>Alacrity</label>
+        <description>Alacrity is a technique that allows a psion to move faster than would normally be possible.</description>
+        <AbilityClass>PsiTech.Psionics.PsiTechAbilityScaledPassive</AbilityClass>
+        <Tier>1</Tier>
+        <TrainingTimeDays>1</TrainingTimeDays>
+        <AddedValueForThreat>50</AddedValueForThreat>
+        <AbilityCostForRaid>15</AbilityCostForRaid>
+        <CapMods>
+            <li>
+                <capacity>Moving</capacity>
+                <offset>0.2</offset>
+            </li>
+        </CapMods>
+        <RequiredResearch>
+            <li>PTMindAndBody</li>
+        </RequiredResearch>
+    </Def>
+
+    <Def Class="PsiTech.Psionics.PsiTechAbilityDef">
+        <defName>PTPrecision</defName>
+        <label>Precision</label>
+        <description>Precision is a technique that makes it easier for a psion to precisely manipulate objects.</description>
+        <AbilityClass>PsiTech.Psionics.PsiTechAbilityScaledPassive</AbilityClass>
+        <Tier>1</Tier>
+        <TrainingTimeDays>1</TrainingTimeDays>
+        <AddedValueForThreat>50</AddedValueForThreat>
+        <AbilityCostForRaid>15</AbilityCostForRaid>
+        <CapMods>
+            <li>
+                <capacity>Manipulation</capacity>
+                <offset>0.2</offset>
+            </li>
+        </CapMods>
+        <RequiredResearch>
+            <li>PTMindAndBody</li>
+        </RequiredResearch>
+    </Def>
+    
+    <Def Class="PsiTech.Psionics.PsiTechAbilityDef">
+        <defName>PTInfluence</defName>
+        <label>Influence</label>
+        <description>Influence is a technique that integrates the use of psionics in social interactions, making the psion more convincing.</description>
+        <AbilityClass>PsiTech.Psionics.PsiTechAbilityScaledPassive</AbilityClass>
+        <Tier>1</Tier>
+        <TrainingTimeDays>1</TrainingTimeDays>
+        <AddedValueForThreat>50</AddedValueForThreat>
+        <AbilityCostForRaid>5</AbilityCostForRaid>
+        <CapMods>
+            <li>
+                <capacity>Talking</capacity>
+                <offset>0.2</offset>
+            </li>
+        </CapMods>
+        <RequiredResearch>
+            <li>PTMindAndBody</li>
+        </RequiredResearch>
+    </Def>
+
+    <Def Class="PsiTech.Psionics.PsiTechAbilityDef">
+        <defName>PTInsight</defName>
+        <label>Insight</label>
+        <description>Insight is a technique that integrates the use of psionics in social interactions, making the psion more understanding.</description>
+        <AbilityClass>PsiTech.Psionics.PsiTechAbilityScaledPassive</AbilityClass>
+        <Tier>1</Tier>
+        <TrainingTimeDays>1</TrainingTimeDays>
+        <AddedValueForThreat>50</AddedValueForThreat>
+        <AbilityCostForRaid>5</AbilityCostForRaid>
+        <CapMods>
+            <li>
+                <capacity>Hearing</capacity>
+                <offset>0.2</offset>
+            </li>
+        </CapMods>
+        <RequiredResearch>
+            <li>PTMindAndBody</li>
+        </RequiredResearch>
+    </Def>
+    
+</Defs>

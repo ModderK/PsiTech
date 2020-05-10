@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<!-- Copyright 2019, 2020, K
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+    
+        http://www.apache.org/licenses/LICENSE-2.0
+    
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+
+<Defs>
+
+    <MentalStateDef>
+        <defName>PTMindfray</defName>
+        <label>Mindfray</label>
+        <stateClass>MentalState_WanderConfused</stateClass>
+        <category>Misc</category>
+        <minTicksBeforeRecovery>900</minTicksBeforeRecovery>
+        <maxTicksBeforeRecovery>900</maxTicksBeforeRecovery>
+        <blockNormalThoughts>true</blockNormalThoughts>
+        <nameColor>(201, 61, 224)</nameColor>
+        <baseInspectLine>Mindfrayed: wandering through a hallucination</baseInspectLine>
+        <unspawnedCanDo>false</unspawnedCanDo>
+    </MentalStateDef>
+
+    <MentalStateDef>
+        <defName>PTMegaMindfray</defName>
+        <label>Mindfray</label>
+        <stateClass>MentalState_WanderConfused</stateClass>
+        <category>Misc</category>
+        <minTicksBeforeRecovery>3600</minTicksBeforeRecovery>
+        <maxTicksBeforeRecovery>3600</maxTicksBeforeRecovery>
+        <blockNormalThoughts>true</blockNormalThoughts>
+        <nameColor>(201, 61, 224)</nameColor>
+        <baseInspectLine>Mindfrayed: wandering through a hallucination</baseInspectLine>
+        <unspawnedCanDo>false</unspawnedCanDo>
+    </MentalStateDef>
+    
+    <MentalStateDef>
+        <defName>PTInsanity</defName>
+        <label>Insanity</label>
+        <stateClass>MentalState_Berserk</stateClass>
+        <category>Aggro</category>
+        <minTicksBeforeRecovery>2400</minTicksBeforeRecovery>
+        <maxTicksBeforeRecovery>2400</maxTicksBeforeRecovery>
+        <blockNormalThoughts>true</blockNormalThoughts>
+        <nameColor>(230, 51, 128)</nameColor>
+        <baseInspectLine>Insane: attacking the monsters!</baseInspectLine>
+        <stateEffecter>Berserk</stateEffecter>
+        <unspawnedCanDo>false</unspawnedCanDo>
+    </MentalStateDef>
+    
+    <MentalStateDef>
+        <defName>PTPanicFlee</defName>
+        <label>Panicked</label>
+        <stateClass>MentalState_PanicFlee</stateClass>
+        <category>Misc</category>
+        <minTicksBeforeRecovery>6000</minTicksBeforeRecovery>
+        <maxTicksBeforeRecovery>6000</maxTicksBeforeRecovery>
+        <blockNormalThoughts>true</blockNormalThoughts>
+        <nameColor>(161, 230, 237)</nameColor>
+        <baseInspectLine>Panicked: running from the monsters!</baseInspectLine>
+        <unspawnedCanDo>false</unspawnedCanDo>   
+    </MentalStateDef>
+    
+</Defs>

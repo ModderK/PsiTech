@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<!-- Copyright 2019, 2020, K
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+    
+        http://www.apache.org/licenses/LICENSE-2.0
+    
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+
+<Defs>
+
+    <!-- These defs don't really do much -->
+    <!-- They're use to track the types of conditions, label them, and give them descriptions -->
+    <!-- All the heavy lifting is done in C# -->
+    <Def Class="PsiTech.AutocastManagement.AutocastConditionDef">
+        <defName>PTAutocastCondition_Drafted</defName>
+        <label>Drafted</label>
+        <description>Requires the psion to be drafted to activate.\n\nWhen inverted, this requires the psion to be undrafted to activate.</description>
+        <ConditionClass>PsiTech.AutocastManagement.AutocastCondition_Drafted</ConditionClass>
+    </Def>
+
+    <Def Class="PsiTech.AutocastManagement.AutocastConditionDef">
+        <defName>PTAutocastCondition_Energy</defName>
+        <label>Psi Energy Threshold</label>
+        <description>Requires the psion to have more than a certain amount of energy to activate.\n\nWhen inverted, this requires the psion to have less than a certain amount of energy to activate.</description>
+        <ConditionClass>PsiTech.AutocastManagement.AutocastCondition_Energy</ConditionClass>
+    </Def>
+
+    <Def Class="PsiTech.AutocastManagement.AutocastConditionDef">
+        <defName>PTAutocastCondition_EnergyRemaining</defName>
+        <label>Psi Remaining Energy Threshold</label>
+        <description>Requires the psion to have more than a certain amount of energy remaining after cast to activate.\n\nWhen inverted, this requires the psion to have less than a certain amount of energy remaining after cast to activate.</description>
+        <ConditionClass>PsiTech.AutocastManagement.AutocastCondition_EnergyRemaining</ConditionClass>
+    </Def>
+
+    <Def Class="PsiTech.AutocastManagement.AutocastConditionDef">
+        <defName>PTAutocastCondition_Pain</defName>
+        <label>Pain Threshold</label>
+        <description>Requires the psion to be in more than a certain amount of pain to activate.\n\nWhen inverted, this requires the psion to be in less than a certain amount of pain to activate.</description>
+        <ConditionClass>PsiTech.AutocastManagement.AutocastCondition_Pain</ConditionClass>
+    </Def>
+
+    <Def Class="PsiTech.AutocastManagement.AutocastConditionDef">
+        <defName>PTAutocastCondition_HealthPercent</defName>
+        <label>Health Percent Threshold</label>
+        <description>Requires the psion to have more than a certain health percentage to activate.\n\nWhen inverted, this requires the psion to have less than a certain health percentage to activate.</description>
+        <ConditionClass>PsiTech.AutocastManagement.AutocastCondition_HealthPercent</ConditionClass>
+    </Def>
+
+    <Def Class="PsiTech.AutocastManagement.AutocastConditionDef">
+        <defName>PTAutocastCondition_AbilityModifier</defName>
+        <label>Ability Modifier Threshold</label>
+        <description>Requires the psion to have more than a certain ability modifier to activate.\n\nWhen inverted, this requires the psion to be in less than a certain ability modifier to activate.</description>
+        <ConditionClass>PsiTech.AutocastManagement.AutocastCondition_AbilityModifier</ConditionClass>
+    </Def>
+    
+</Defs>

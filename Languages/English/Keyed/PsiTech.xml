@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<!-- Copyright 2019, 2020, K
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+    
+        http://www.apache.org/licenses/LICENSE-2.0
+    
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+
+<LanguageData>
+
+    <PsiTech.Interface.TabPsi>Psi</PsiTech.Interface.TabPsi>
+    <PsiTech.Interface.PsiEnergy>Psi Energy</PsiTech.Interface.PsiEnergy>
+    <PsiTech.Interface.PsiEnergyTip>Psi Energy: {0}/{1}\nPsions consume psi energy to use psionic abilities. Psi energy regenerates over time.</PsiTech.Interface.PsiEnergyTip>
+    <PsiTech.Interface.EnergyNodes>Energy Nodes</PsiTech.Interface.EnergyNodes>
+    <PsiTech.Interface.EnergyNodesTip>Energy Nodes: {0}\nEach energy node increases maximum psi energy by 50. Clicking this icon will queue this pawn for energy training.</PsiTech.Interface.EnergyNodesTip>
+    <PsiTech.Interface.FocusNodes>Focus Nodes</PsiTech.Interface.FocusNodes>
+    <PsiTech.Interface.FocusNodesTip>Focus Nodes: {0}\nEach focus node increases psi energy regeneration by 0.5. Clicking this icon will queue this pawn for focus training.</PsiTech.Interface.FocusNodesTip>
+    <PsiTech.Interface.Essence>Essence: {0}</PsiTech.Interface.Essence>
+    <PsiTech.Interface.EssenceTip>Essence measures the loss of a psion's ability due to prosthetics. Each prosthetic a psion has will reduce their essence by {0}. </PsiTech.Interface.EssenceTip>
+    <PsiTech.Interface.PsychicSensitivity>Psychic Sensitivity: {0}</PsiTech.Interface.PsychicSensitivity>
+    <PsiTech.Interface.PsychicSensitivityTip>Use of psionic abilities requires sensitivity to psychic phenomenon. Psychic sensitivity can be modified by traits and equipment.</PsiTech.Interface.PsychicSensitivityTip>
+    <PsiTech.Interface.AbilityModifier>Ability Modifier: {0}</PsiTech.Interface.AbilityModifier>
+    <PsiTech.Interface.AbilityModifierTip>The overall ability modifier on psionic abilities. It affects the power and success chance of abilities.</PsiTech.Interface.AbilityModifierTip>
+    <PsiTech.Interface.Tier1Abilities>Subconsious Abilities</PsiTech.Interface.Tier1Abilities>
+    <PsiTech.Interface.Tier1AbilitiesTip>Subconsious abilities are the lowest level of psionic abilities. They have passive effects on the user.</PsiTech.Interface.Tier1AbilitiesTip>
+    <PsiTech.Interface.Tier2Abilities>Awoken Abilities</PsiTech.Interface.Tier2Abilities>
+    <PsiTech.Interface.Tier2AbilitiesTip>Awoken abilities are the middle level of psionic abilities. They have powerful passive effects on the user, or active effects on targets.</PsiTech.Interface.Tier2AbilitiesTip>
+    <PsiTech.Interface.Tier3Abilities>Transcendent Abilities</PsiTech.Interface.Tier3Abilities>
+    <PsiTech.Interface.Tier3AbilitiesTip>Transcendent abilities are the highest level of psionic abilities. They consume large amounts of psi energy but have extremely powerful effects.</PsiTech.Interface.Tier3AbilitiesTip>
+    <PsiTech.Interface.EmptyAbilitySlot>Empty Slot</PsiTech.Interface.EmptyAbilitySlot>
+    <PsiTech.Interface.LockedAbilitySlotPlural>Locked (need {0} more nodes)</PsiTech.Interface.LockedAbilitySlotPlural>
+    <PsiTech.Interface.LockedAbilitySlotSingular>Locked (need {0} more node)</PsiTech.Interface.LockedAbilitySlotSingular>
+    <PsiTech.Interface.NoAvailableTrainers>No psychic trainers are available and operating</PsiTech.Interface.NoAvailableTrainers>
+    <PsiTech.Interface.AbilityList>Configure Autocasting</PsiTech.Interface.AbilityList>
+    <PsiTech.Interface.ShowTrainingQueue>Show Training Queue</PsiTech.Interface.ShowTrainingQueue>
+    <PsiTech.Interface.HideTrainingQueue>Hide Training Queue</PsiTech.Interface.HideTrainingQueue>
+    <PsiTech.Interface.TrainingQueue>Training Queue</PsiTech.Interface.TrainingQueue>
+    <PsiTech.Interface.QueuedAbility>Queued: {0}</PsiTech.Interface.QueuedAbility>
+    <PsiTech.Interface.EnergyTraining>Energy</PsiTech.Interface.EnergyTraining>
+    <PsiTech.Interface.FocusTraining>Focus</PsiTech.Interface.FocusTraining>
+    <PsiTech.Interface.RemoveAbility>Remove {0}</PsiTech.Interface.RemoveAbility>
+
+    <PsiTech.Interface.HideAutocastToggleGizmo>Hide Autocast Toggle Button</PsiTech.Interface.HideAutocastToggleGizmo>
+    <PsiTech.Interface.AbilityLabel>Ability</PsiTech.Interface.AbilityLabel>
+    <PsiTech.Interface.AutocastLabel>Autocast</PsiTech.Interface.AutocastLabel>
+    <PsiTech.Interface.PriorityLabel>Priority</PsiTech.Interface.PriorityLabel>
+    <PsiTech.Interface.PriorityHigh>High</PsiTech.Interface.PriorityHigh>
+    <PsiTech.Interface.PriorityNormal>Normal</PsiTech.Interface.PriorityNormal>
+    <PsiTech.Interface.PriorityLow>Low</PsiTech.Interface.PriorityLow>
+    <PsiTech.Interface.AutocastConditions>Autocast Conditions</PsiTech.Interface.AutocastConditions>
+    <PsiTech.Interface.AddAutocastCondition>Add Autocast Condition</PsiTech.Interface.AddAutocastCondition>
+    <PsiTech.Interface.AutocastFilter>Autocast Target Filter</PsiTech.Interface.AutocastFilter>
+    <PsiTech.Interface.AdditionalTargetFilters>Additional Target Filters</PsiTech.Interface.AdditionalTargetFilters>
+    <PsiTech.Interface.AddAdditionalTargetFilter>Add Additional Target Filter</PsiTech.Interface.AddAdditionalTargetFilter>
+    
+    <PsiTech.AutocastManagement.ConditionMet>Condition Currently Met</PsiTech.AutocastManagement.ConditionMet>
+    <PsiTech.AutocastManagement.ConditionNotMet>Condition Currently Not Met</PsiTech.AutocastManagement.ConditionNotMet>
+    <PsiTech.AutocastManagement.Invert>Invert</PsiTech.AutocastManagement.Invert>
+    <PsiTech.AutocastManagement.Remove>Remove</PsiTech.AutocastManagement.Remove>
+    <PsiTech.AutocastManagement.EnergyThreshold>Energy threshold:</PsiTech.AutocastManagement.EnergyThreshold>
+    <PsiTech.AutocastManagement.RemainingEnergyThreshold>Remaining energy threshold:</PsiTech.AutocastManagement.RemainingEnergyThreshold>
+    <PsiTech.AutocastManagement.PainThreshold>Pain threshold:</PsiTech.AutocastManagement.PainThreshold>
+    <PsiTech.AutocastManagement.HealthPercentThreshold>Health percent threshold:</PsiTech.AutocastManagement.HealthPercentThreshold>
+    <PsiTech.AutocastManagement.AbilityModifier>Ability modifier threshold:</PsiTech.AutocastManagement.AbilityModifier>
+    <PsiTech.AutocastManagement.MinimumSuccessChance>Minimum success chance:</PsiTech.AutocastManagement.MinimumSuccessChance>
+    <PsiTech.AutocastManagement.TargetRange>Target range:</PsiTech.AutocastManagement.TargetRange>
+    <PsiTech.AutocastManagement.FilterTargetType>Target type:</PsiTech.AutocastManagement.FilterTargetType>
+    <PsiTech.AutocastManagement.FilterTargetTypeEnemies>Enemies</PsiTech.AutocastManagement.FilterTargetTypeEnemies>
+    <PsiTech.AutocastManagement.FilterTargetTypeHostiles>Hostiles</PsiTech.AutocastManagement.FilterTargetTypeHostiles>
+    <PsiTech.AutocastManagement.FilterTargetTypeFriendlies>Friendlies</PsiTech.AutocastManagement.FilterTargetTypeFriendlies>
+    <PsiTech.AutocastManagement.FilterTargetTypeAny>Any</PsiTech.AutocastManagement.FilterTargetTypeAny>
+    <PsiTech.AutocastManagement.TargetSelector>Target selector:</PsiTech.AutocastManagement.TargetSelector>
+    <PsiTech.AutocastManagement.MinimumTargetsInRange>Minimum targets in range:</PsiTech.AutocastManagement.MinimumTargetsInRange>
+    <PsiTech.AutocastManagement.CountedTargetRange>Counted target range:</PsiTech.AutocastManagement.CountedTargetRange>
+    <PsiTech.AutocastManagement.FilterCountedTargetType>Counted target type:</PsiTech.AutocastManagement.FilterCountedTargetType>
+    <PsiTech.AutocastManagement.PsionLevel>Psion level threshold:</PsiTech.AutocastManagement.PsionLevel>
+    <PsiTech.AutocastManagement.MoodPercent>Mood percent threshold:</PsiTech.AutocastManagement.MoodPercent>
+
+    <PsiTech.Psionics.RequiredResearch>Required research</PsiTech.Psionics.RequiredResearch>
+    <PsiTech.Psionics.RequiredResearchDesc>These research projects were completed to unlock this ability.</PsiTech.Psionics.RequiredResearchDesc>
+    <PsiTech.Psionics.RequiredAbility>Required ability</PsiTech.Psionics.RequiredAbility>
+    <PsiTech.Psionics.RequiredAbilityDesc>To train this ability, the psion must already have every required ability.</PsiTech.Psionics.RequiredAbilityDesc>
+    <PsiTech.Psionics.ConflictingAbility>Conflicting ability</PsiTech.Psionics.ConflictingAbility>
+    <PsiTech.Psionics.ConflictingAbilityDesc>Conflicting abilities are removed from a psion's abilities when this ability is trained, if they are present.</PsiTech.Psionics.ConflictingAbilityDesc>
+    <PsiTech.Psionics.TrainingTimeDays>Training time (days)</PsiTech.Psionics.TrainingTimeDays>
+    <PsiTech.Psionics.TrainingTimeDaysDesc>The time in days that it takes to train a psion to use this ability, assuming their training is uninterrupted.\n\nTraining progress is lost entirely if a psion is removed from training prematurely.</PsiTech.Psionics.TrainingTimeDaysDesc>
+    <PsiTech.Psionics.EnergyPerUse>Psi energy per use</PsiTech.Psionics.EnergyPerUse>
+    <PsiTech.Psionics.EnergyPerUseDesc>The amount of psi energy that it takes to use this ability.</PsiTech.Psionics.EnergyPerUseDesc>
+    <PsiTech.Psionics.EnergyPerSecondActive>Psi energy per second while active</PsiTech.Psionics.EnergyPerSecondActive>
+    <PsiTech.Psionics.EnergyPerSecondActiveDesc>The amount of psi energy that this ability consumes each second it is active.</PsiTech.Psionics.EnergyPerSecondActiveDesc>
+    <PsiTech.Psionics.Range>Range</PsiTech.Psionics.Range>
+    <PsiTech.Psionics.RangeDesc>The range of this ability. Psionic abilities are unimpeded by physical obsticles.</PsiTech.Psionics.RangeDesc>
+    <PsiTech.Psionics.CooldownSeconds>Cooldown (seconds)</PsiTech.Psionics.CooldownSeconds>
+    <PsiTech.Psionics.CooldownSecondsDesc>The cooldown of this ability after use, in seconds.\n\nThere are 1000 seconds in one day.</PsiTech.Psionics.CooldownSecondsDesc>
+    <PsiTech.Psionics.BaseSuccessChance>Base success chance</PsiTech.Psionics.BaseSuccessChance>
+    <PsiTech.Psionics.BaseSuccessChanceDesc>The base chance for this ability to suceed on a target before modifiers are applied.</PsiTech.Psionics.BaseSuccessChanceDesc>
+    <PsiTech.Psionics.EffectProbability>Probability: {0}</PsiTech.Psionics.EffectProbability>
+    <PsiTech.Psionics.NotEnoughEnergy>Not enough psi energy to use {0} ({1}/{2})</PsiTech.Psionics.NotEnoughEnergy>
+    <PsiTech.Psionics.OnCooldown>{0} is on cooldown ({1} hours)</PsiTech.Psionics.OnCooldown>
+    <PsiTech.Psionics.EssenceDisable>{0} has no essence ({1} artificial body parts)</PsiTech.Psionics.EssenceDisable>
+    <PsiTech.Psionics.SensitivityDisable>{0} has {1}% psychic sensitivity</PsiTech.Psionics.SensitivityDisable>
+    <PsiTech.Psionics.ProjectionDisabled>{0} cannot use active abilities (projection disabled)</PsiTech.Psionics.ProjectionDisabled>
+    <PsiTech.Psionics.CancelActive>Cancel active ability {0}</PsiTech.Psionics.CancelActive>
+    <PsiTech.Psionics.CancelActiveDesc>Cancel {0}, ending its effects and energy use</PsiTech.Psionics.CancelActiveDesc>
+    <PsiTech.Psionics.AutocastLabel>Autocasting</PsiTech.Psionics.AutocastLabel>
+    <PsiTech.Psionics.AutocastDesc>Toggle autocasting. When enabled, pawns will autocast abilites that have been set to autocast.</PsiTech.Psionics.AutocastDesc>
+
+    <PsiTech.AbilityEffects.BaseDamage>Base damage: {0}</PsiTech.AbilityEffects.BaseDamage>
+    <PsiTech.AbilityEffects.BaseStun>Base stun duration: {0} seconds</PsiTech.AbilityEffects.BaseStun>
+    <PsiTech.AbilityEffects.DamageType>Damage type: {0}</PsiTech.AbilityEffects.DamageType>
+    <PsiTech.AbilityEffects.TargetPart>Target part: {0}</PsiTech.AbilityEffects.TargetPart>
+    <PsiTech.AbilityEffects.BaseHeal>Base heal: {0}</PsiTech.AbilityEffects.BaseHeal>
+    <PsiTech.AbilityEffects.BaseSkilTransfer>Base skill transfer: {0}</PsiTech.AbilityEffects.BaseSkilTransfer>
+    
+    <PsiTech.Training.CannotUseNoTrainingQueued>Cannot use (no training queued)</PsiTech.Training.CannotUseNoTrainingQueued>
+    <PsiTech.Training.CannotUseNotOperating>Cannot use (not operating)</PsiTech.Training.CannotUseNotOperating>
+    <PsiTech.Training.EnterPsychicTrainerAwaken>Awaken psychic abilites</PsiTech.Training.EnterPsychicTrainerAwaken>
+    <PsiTech.Training.EnterPsychicTrainerTraining>Enter psychic trainer</PsiTech.Training.EnterPsychicTrainerTraining>
+    <PsiTech.Training.TrainingSummary>Currently training: {0}\nTraining time remaining: {1} days</PsiTech.Training.TrainingSummary>
+    <PsiTech.Training.RemovingSummary>Currently removing: {0}\nTime remaining: {1} days</PsiTech.Training.RemovingSummary>
+    <PsiTech.Training.TrainingSummaryAwakening>Currently awakening.\nAwakening time remaining: {0} days</PsiTech.Training.TrainingSummaryAwakening>
+    
+    <PsiTech.Utility.EnablePsychicFactionRaids>Enable Psychic Faction Raids</PsiTech.Utility.EnablePsychicFactionRaids>
+    <PsiTech.Utility.EssenceLossPerPart>Percent Essence Loss Per Bionic Body Part:</PsiTech.Utility.EssenceLossPerPart>
+    <PsiTech.Utility.EssenceLossPerPartDesc>By default, psions lose 10% of their essence per bionic body part. This setting allows that value to be configured between 0% and 100%.</PsiTech.Utility.EssenceLossPerPartDesc>
+    <PsiTech.Utility.PatchAllRaces>Patch all races</PsiTech.Utility.PatchAllRaces>
+    <PsiTech.Utility.PatchAllRacesDesc>Some alien races do not get the Psi tab applied to them by default. Checking this option forces all pawns with needs to get the Psi tab. The game must be restarted for this setting to take effect.\n\nSince this may cause incompatibilities, this option is disabled by default.</PsiTech.Utility.PatchAllRacesDesc>
+    
+    <PsiTech.PsionicAbilitiesReport>Psionic Abilities</PsiTech.PsionicAbilitiesReport>
+    <PsiTech.AbilityNotValidOnTarget>{0} is not a valid target for {1}</PsiTech.AbilityNotValidOnTarget>
+    <PsiTech.AbilityByPawn>{0} by {1}: {2}</PsiTech.AbilityByPawn>
+    <PsiTech.BaseSuccessChance>Base sucess chance: {0}</PsiTech.BaseSuccessChance>
+    <PsiTech.AbilityModifier>Ability modifier: {0}</PsiTech.AbilityModifier>
+    <PsiTech.TargetSensitivity>Target sensitivity: {0}</PsiTech.TargetSensitivity>
+    <PsiTech.PsychicWeaponDesc>\n\nThis weapon has been upgraded to be psychically active. In the hands of a properly trained psion it will have increased effectiveness.</PsiTech.PsychicWeaponDesc>
+    <PsiTech.PsychicWeaponReport>Psychic enhancement: </PsiTech.PsychicWeaponReport>
+    <PsiTech.NeedPsiForging>need psi forging ability</PsiTech.NeedPsiForging>
+    
+</LanguageData>

@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<!-- Copyright 2019, 2020, K
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+    
+        http://www.apache.org/licenses/LICENSE-2.0
+    
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+
+<Defs>
+
+    <RecipeDef>
+        <defName>PTWorkbenchCreatePsychicFoil</defName>
+        <label>create psychic foil helmet</label>
+        <description>Carefully assemble a psychic foil helmet from athenium and steel.\n\nAs it turns out, psychic foil helmets block psychic waves due to the presence of misaligned athenium crystal structures. With some athenium and steel, it's easy to create such helmets.</description>
+        <jobString>Creating a psychic foil helmet.</jobString>
+        <workAmount>800</workAmount>
+        <workSpeedStat>WorkSpeedGlobal</workSpeedStat>
+        <effectWorking>Cook</effectWorking>
+        <soundWorking>Recipe_Machining</soundWorking>
+        <ingredients>
+            <li>
+                <filter>
+                    <thingDefs>
+                        <li>PTAthenium</li>
+                    </thingDefs>
+                </filter>
+                <count>5</count>
+            </li>
+            <li>
+                <filter>
+                    <thingDefs>
+                        <li>Steel</li>
+                    </thingDefs>
+                </filter>
+                <count>5</count>
+            </li>
+        </ingredients>
+        <products>
+            <Apparel_PsychicFoilHelmet>1</Apparel_PsychicFoilHelmet>
+        </products>
+        <researchPrerequisite>PTPsychicEquipment</researchPrerequisite>
+        <recipeUsers>
+            <li>PTPsychicWorkbench</li>
+        </recipeUsers>
+    </RecipeDef>
+
+    <RecipeDef>
+        <defName>PTWorkbenchCreateAdvancedPsychicFoil</defName>
+        <label>create an advanced psychic foil helmet</label>
+        <description>Carefully assemble an advanced psychic foil helmet from athenium and steel.\n\nImproving upon the design of the basic psychic foil helmet, the advanced psychic foil helmet uses multilayered, highly optimized misaligned athenium crystal structures to insulate the wearer from most psychic waves.</description>
+        <jobString>Creating an advanced psychic foil helmet.</jobString>
+        <workAmount>1200</workAmount>
+        <workSpeedStat>WorkSpeedGlobal</workSpeedStat>
+        <effectWorking>Cook</effectWorking>
+        <soundWorking>Recipe_Machining</soundWorking>
+        <ingredients>
+            <li>
+                <filter>
+                    <thingDefs>
+                        <li>PTAthenium</li>
+                    </thingDefs>
+                </filter>
+                <count>10</count>
+            </li>
+            <li>
+                <filter>
+                    <thingDefs>
+                        <li>Steel</li>
+                    </thingDefs>
+                </filter>
+                <count>10</count>
+            </li>
+        </ingredients>
+        <products>
+            <PTAdvancedPsychicFoil>1</PTAdvancedPsychicFoil>
+        </products>
+        <researchPrerequisite>PTAdvancedPsychicEquipment</researchPrerequisite>
+        <recipeUsers>
+            <li>PTPsychicWorkbench</li>
+        </recipeUsers>
+    </RecipeDef>
+
+</Defs>

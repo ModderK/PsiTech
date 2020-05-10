@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<!-- Copyright 2019, 2020, K
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+    
+        http://www.apache.org/licenses/LICENSE-2.0
+    
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+
+<Patch>
+
+    <Operation Class="PatchOperationAdd">
+        <xpath>/Defs/ThinkTreeDef[defName="MentalStateNonCritical"]/thinkRoot/subNodes</xpath>
+        <value>
+            <li Class="ThinkNode_ConditionalMentalState">
+              <state>PTMindfray</state>
+              <subNodes>
+                <li Class="JobGiver_WanderAnywhere">
+                  <maxDanger>Deadly</maxDanger>
+                </li>
+              </subNodes>
+            </li>
+        </value>
+    </Operation>
+    
+    <Operation Class="PatchOperationAdd">
+        <xpath>/Defs/ThinkTreeDef[defName="MentalStateNonCritical"]/thinkRoot/subNodes</xpath>
+        <value>
+            <li Class="ThinkNode_ConditionalMentalState">
+              <state>PTMegaMindfray</state>
+              <subNodes>
+                <li Class="JobGiver_WanderAnywhere">
+                  <maxDanger>Deadly</maxDanger>
+                </li>
+              </subNodes>
+            </li>
+        </value>
+    </Operation>
+
+    <Operation Class="PatchOperationAdd">
+        <xpath>/Defs/ThinkTreeDef[defName="MentalStateCritical"]/thinkRoot/subNodes</xpath>
+        <value>
+          <li Class="ThinkNode_ConditionalMentalState">
+          <state>PTInsanity</state>
+          <subNodes>
+            <li Class="ThinkNode_Priority">
+              <subNodes>
+                <li Class="JobGiver_Berserk" />
+                <li Class="JobGiver_WanderAnywhere">
+                  <maxDanger>Deadly</maxDanger>
+                </li>
+                </subNodes>
+            </li>
+          </subNodes>
+        </li>
+        </value>
+    </Operation>
+    
+    <Operation Class="PatchOperationAdd">
+        <xpath>/Defs/ThinkTreeDef[defName="MentalStateNonCritical"]/thinkRoot/subNodes</xpath>
+        <value>
+            <li Class="ThinkNode_ConditionalMentalState">
+              <state>PTPanicFlee</state>
+              <subNodes>
+                <li Class="JobGiver_ExitMapPanic" />
+                <li Class="JobGiver_WanderAnywhere">
+                  <!-- Can happen if there is no way to exit the map -->
+                  <maxDanger>Some</maxDanger>
+                  <locomotionUrgency>Jog</locomotionUrgency>
+                </li>
+              </subNodes>
+            </li>
+        </value>
+    </Operation>
+    
+</Patch>

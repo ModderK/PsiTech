@@ -1,0 +1,365 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<!-- Copyright 2019, 2020, K
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+    
+        http://www.apache.org/licenses/LICENSE-2.0
+    
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+
+<Defs>
+
+    <!-- Assault set - psionic commando armor & helmet -->
+    <ThingDef ParentName="PTMachinedBase">
+        <defName>PTPsionicCommandoArmor</defName>
+        <label>psionic commando armor</label>
+        <description>An advanced suit of power armor with embedded psychic conduits allowing for enhanced usage of psionics. This version is focused on defensive capability, to the detriment of psionic enhancement.</description>
+        <recipeMaker>
+            <researchPrerequisite>PTAdvancedPsychicEquipment</researchPrerequisite>
+            <unfinishedThingDef>UnfinishedTechArmor</unfinishedThingDef>
+            <skillRequirements>
+                <Crafting>9</Crafting>
+            </skillRequirements>
+        </recipeMaker>
+        <graphicData>
+            <texPath>Things/Equipment/CommandoArmor/Armor</texPath>
+            <graphicClass>Graphic_Single</graphicClass>
+        </graphicData>
+        <costList>
+            <ComponentSpacer>4</ComponentSpacer>
+            <Plasteel>100</Plasteel>
+            <Uranium>20</Uranium>
+            <PTAthenium>40</PTAthenium>
+        </costList>
+        <thingCategories>
+            <li>Apparel</li>
+        </thingCategories>
+        <statBases>
+            <WorkToMake>60000</WorkToMake>
+            <MaxHitPoints>340</MaxHitPoints>
+            <Mass>15</Mass>
+            <Flammability>0.4</Flammability>
+            <ArmorRating_Sharp>1.10</ArmorRating_Sharp>
+            <ArmorRating_Blunt>0.50</ArmorRating_Blunt>
+            <ArmorRating_Heat>0.6</ArmorRating_Heat>
+            <Insulation_Cold>34</Insulation_Cold>
+            <Insulation_Heat>10</Insulation_Heat>
+            <EquipDelay>15</EquipDelay>
+        </statBases>
+        <equippedStatOffsets>
+            <PsychicSensitivity>0.40</PsychicSensitivity>
+            <PTDamageDodgeChance>0.1</PTDamageDodgeChance>
+            <MoveSpeed>-0.4</MoveSpeed>
+        </equippedStatOffsets>
+        <apparel>
+            <bodyPartGroups>
+                <li>Torso</li>
+                <li>Neck</li>
+                <li>Shoulders</li>
+                <li>Arms</li>
+                <li>Legs</li>
+            </bodyPartGroups>
+            <wornGraphicPath>Things/Equipment/CommandoArmor/Armor</wornGraphicPath>
+            <layers>
+                <li>Middle</li>
+                <li>Shell</li>
+            </layers>
+            <useDeflectMetalEffect>true</useDeflectMetalEffect>
+            <tags>
+                <li>ExoticPsiCommando</li>
+                <li>RoyalCombatGear</li>
+            </tags>
+        </apparel>
+    </ThingDef>
+    
+    <ThingDef ParentName="PTHelmetBase">
+        <defName>PTPsionicCommandoHelmet</defName>
+        <label>psionic commando helmet</label>
+        <description>An advanced power armor helmet with embedded psychic conduits allowing for enhanced usage of psionics. This version is focused on defensive capability, to the detriment of psionic enhancement.</description>       
+        <recipeMaker>
+            <researchPrerequisite>PTAdvancedPsychicEquipment</researchPrerequisite>
+            <unfinishedThingDef>UnfinishedTechArmor</unfinishedThingDef>
+            <skillRequirements>
+                <Crafting>9</Crafting>
+            </skillRequirements>
+        </recipeMaker>
+        <graphicData>
+            <texPath>Things/Equipment/CommandoHelmet/Helmet</texPath>
+            <graphicClass>Graphic_Single</graphicClass>
+            <drawSize>1.5</drawSize>
+        </graphicData>
+        <costList>
+            <PTAthenium>20</PTAthenium>
+            <ComponentSpacer>1</ComponentSpacer>
+            <Plasteel>40</Plasteel>
+        </costList>
+        <statBases>
+            <WorkToMake>21000</WorkToMake>
+            <MaxHitPoints>160</MaxHitPoints>
+            <Mass>2.7</Mass>
+            <Flammability>0.4</Flammability>
+            <ArmorRating_Sharp>1.10</ArmorRating_Sharp>
+            <ArmorRating_Blunt>0.50</ArmorRating_Blunt>
+            <ArmorRating_Heat>0.6</ArmorRating_Heat>
+            <Insulation_Cold>4</Insulation_Cold>
+            <Insulation_Heat>2</Insulation_Heat>
+            <EquipDelay>4</EquipDelay>
+        </statBases>
+        <equippedStatOffsets>
+            <PsychicSensitivity>0.20</PsychicSensitivity>
+            <PTDamageDodgeChance>0.05</PTDamageDodgeChance>
+        </equippedStatOffsets>
+        <apparel>
+            <bodyPartGroups>
+                <li>FullHead</li>
+            </bodyPartGroups>
+            <wornGraphicPath>Things/Equipment/CommandoHelmet/Helmet</wornGraphicPath>
+            <layers>
+                <li>Overhead</li>
+            </layers>
+            <useDeflectMetalEffect>true</useDeflectMetalEffect>
+            <tags>
+                <li>ExoticPsiCommando</li>
+                <li>RoyalCombatGear</li>
+            </tags>
+        </apparel>
+    </ThingDef>
+
+    <!-- Balanced set - psionic warrior armor & helmet -->
+    <ThingDef ParentName="PTMachinedBase">
+        <defName>PTPsionicWarriorArmor</defName>
+        <label>psionic warrior armor</label>
+        <description>An advanced suit of power armor with embedded psychic conduits allowing for enhanced usage of psionics. This version has a balanced focus between defensive capability and psionic enhancement.</description>
+        <recipeMaker>
+            <researchPrerequisite>PTAdvancedPsychicEquipment</researchPrerequisite>
+            <unfinishedThingDef>UnfinishedTechArmor</unfinishedThingDef>
+            <skillRequirements>
+                <Crafting>9</Crafting>
+            </skillRequirements>
+        </recipeMaker>
+        <graphicData>
+            <texPath>Things/Equipment/WarriorArmor/Armor</texPath>
+            <graphicClass>Graphic_Single</graphicClass>
+        </graphicData>
+        <costList>
+            <ComponentSpacer>4</ComponentSpacer>
+            <Plasteel>70</Plasteel>
+            <Uranium>20</Uranium>
+            <PTAthenium>60</PTAthenium>
+        </costList>
+        <thingCategories>
+            <li>Apparel</li>
+        </thingCategories>
+        <statBases>
+            <WorkToMake>60000</WorkToMake>
+            <MaxHitPoints>340</MaxHitPoints>
+            <Mass>15</Mass>
+            <Flammability>0.4</Flammability>
+            <ArmorRating_Sharp>1.06</ArmorRating_Sharp>
+            <ArmorRating_Blunt>0.45</ArmorRating_Blunt>
+            <ArmorRating_Heat>0.54</ArmorRating_Heat>
+            <Insulation_Cold>34</Insulation_Cold>
+            <Insulation_Heat>10</Insulation_Heat>
+            <EquipDelay>15</EquipDelay>
+        </statBases>
+        <equippedStatOffsets>
+            <PsychicSensitivity>0.60</PsychicSensitivity>
+            <PTPsiWeaponSynchronicity>0.30</PTPsiWeaponSynchronicity>
+            <MoveSpeed>-0.2</MoveSpeed>
+        </equippedStatOffsets>
+        <apparel>
+            <bodyPartGroups>
+                <li>Torso</li>
+                <li>Neck</li>
+                <li>Shoulders</li>
+                <li>Arms</li>
+                <li>Legs</li>
+            </bodyPartGroups>
+            <wornGraphicPath>Things/Equipment/WarriorArmor/Armor</wornGraphicPath>
+            <layers>
+                <li>Middle</li>
+                <li>Shell</li>
+            </layers>
+            <useDeflectMetalEffect>true</useDeflectMetalEffect>
+            <tags>
+                <li>ExoticPsiWarrior</li>
+                <li>RoyalCombatGear</li>
+            </tags>
+        </apparel>
+    </ThingDef>
+
+    <ThingDef ParentName="PTHelmetBase">
+        <defName>PTPsionicWarriorHelmet</defName>
+        <label>psionic warrior helmet</label>
+        <description>An advanced power armor helmet with embedded psychic conduits allowing for enhanced usage of psionics. This version has a balanced focus between defensive capability and psionic enhancement.</description>
+        <recipeMaker>
+            <researchPrerequisite>PTAdvancedPsychicEquipment</researchPrerequisite>
+            <unfinishedThingDef>UnfinishedTechArmor</unfinishedThingDef>
+            <skillRequirements>
+                <Crafting>9</Crafting>
+            </skillRequirements>
+        </recipeMaker>
+        <graphicData>
+            <texPath>Things/Equipment/WarriorHelmet/Helmet</texPath>
+            <graphicClass>Graphic_Single</graphicClass>
+        </graphicData>
+        <costList>
+            <PTAthenium>30</PTAthenium>
+            <ComponentSpacer>1</ComponentSpacer>
+            <Plasteel>30</Plasteel>
+        </costList>
+        <statBases>
+            <WorkToMake>21000</WorkToMake>
+            <MaxHitPoints>160</MaxHitPoints>
+            <Mass>2.7</Mass>
+            <Flammability>0.4</Flammability>
+            <ArmorRating_Sharp>1.06</ArmorRating_Sharp>
+            <ArmorRating_Blunt>0.45</ArmorRating_Blunt>
+            <ArmorRating_Heat>0.54</ArmorRating_Heat>
+            <Insulation_Cold>4</Insulation_Cold>
+            <Insulation_Heat>2</Insulation_Heat>
+            <EquipDelay>4</EquipDelay>
+        </statBases>
+        <equippedStatOffsets>
+            <PsychicSensitivity>0.30</PsychicSensitivity>
+            <PTPsiWeaponSynchronicity>0.15</PTPsiWeaponSynchronicity>
+        </equippedStatOffsets>
+        <apparel>
+            <bodyPartGroups>
+                <li>FullHead</li>
+            </bodyPartGroups>
+            <wornGraphicPath>Things/Equipment/WarriorHelmet/Helmet</wornGraphicPath>
+            <layers>
+                <li>Overhead</li>
+            </layers>
+            <useDeflectMetalEffect>true</useDeflectMetalEffect>
+            <tags>
+                <li>ExoticPsiWarrior</li>
+                <li>RoyalCombatGear</li>
+            </tags>
+        </apparel>
+    </ThingDef>
+
+    <!-- psion set - psionic conduit armor & helmet -->
+    <ThingDef ParentName="PTMachinedBase">
+        <defName>PTPsionicConduitArmor</defName>
+        <label>psionic conduit armor</label>
+        <description>An advanced suit of power armor with embedded psychic conduits allowing for enhanced usage of psionics. This version is focused on enhancing psionic capability to the detriment of defensive capacity.</description>
+        <recipeMaker>
+            <researchPrerequisite>PTAdvancedPsychicEquipment</researchPrerequisite>
+            <unfinishedThingDef>UnfinishedTechArmor</unfinishedThingDef>
+            <skillRequirements>
+                <Crafting>9</Crafting>
+            </skillRequirements>
+        </recipeMaker>
+        <graphicData>
+            <texPath>Things/Equipment/ConduitArmor/Armor</texPath>
+            <graphicClass>Graphic_Single</graphicClass>
+        </graphicData>
+        <costList>
+            <ComponentSpacer>4</ComponentSpacer>
+            <Plasteel>40</Plasteel>
+            <Uranium>20</Uranium>
+            <PTAthenium>80</PTAthenium>
+        </costList>
+        <thingCategories>
+            <li>Apparel</li>
+        </thingCategories>
+        <statBases>
+            <WorkToMake>60000</WorkToMake>
+            <MaxHitPoints>340</MaxHitPoints>
+            <Mass>15</Mass>
+            <Flammability>0.4</Flammability>
+            <ArmorRating_Sharp>1.02</ArmorRating_Sharp>
+            <ArmorRating_Blunt>0.41</ArmorRating_Blunt>
+            <ArmorRating_Heat>0.50</ArmorRating_Heat>
+            <Insulation_Cold>34</Insulation_Cold>
+            <Insulation_Heat>10</Insulation_Heat>
+            <EquipDelay>15</EquipDelay>
+        </statBases>
+        <equippedStatOffsets>
+            <PsychicSensitivity>0.80</PsychicSensitivity>
+            <PTPsiCooldownMultiplier>-0.1</PTPsiCooldownMultiplier>
+        </equippedStatOffsets>
+        <apparel>
+            <bodyPartGroups>
+                <li>Torso</li>
+                <li>Neck</li>
+                <li>Shoulders</li>
+                <li>Arms</li>
+                <li>Legs</li>
+            </bodyPartGroups>
+            <wornGraphicPath>Things/Equipment/ConduitArmor/Armor</wornGraphicPath>
+            <layers>
+                <li>Middle</li>
+                <li>Shell</li>
+            </layers>
+            <useDeflectMetalEffect>true</useDeflectMetalEffect>
+            <tags>
+                <li>ExoticPsiConduit</li>
+                <li>RoyalCombatGear</li>
+            </tags>
+        </apparel>
+    </ThingDef>
+
+    <ThingDef ParentName="PTHelmetBase">
+        <defName>PTPsionicConduitHelmet</defName>
+        <label>psionic conduit helmet</label>
+        <description>An advanced power armor helmet with embedded psychic conduits allowing for enhanced usage of psionics.</description>
+        <recipeMaker>
+            <researchPrerequisite>PTAdvancedPsychicEquipment</researchPrerequisite>
+            <unfinishedThingDef>UnfinishedTechArmor</unfinishedThingDef>
+            <skillRequirements>
+                <Crafting>9</Crafting>
+            </skillRequirements>
+        </recipeMaker>
+        <graphicData>
+            <texPath>Things/Equipment/ConduitHelmet/Helmet</texPath>
+            <graphicClass>Graphic_Single</graphicClass>
+        </graphicData>
+        <costList>
+            <PTAthenium>40</PTAthenium>
+            <ComponentSpacer>1</ComponentSpacer>
+            <Plasteel>20</Plasteel>
+        </costList>
+        <statBases>
+            <WorkToMake>21000</WorkToMake>
+            <MaxHitPoints>160</MaxHitPoints>
+            <Mass>2.7</Mass>
+            <Flammability>0.4</Flammability>
+            <ArmorRating_Sharp>1.02</ArmorRating_Sharp>
+            <ArmorRating_Blunt>0.41</ArmorRating_Blunt>
+            <ArmorRating_Heat>0.50</ArmorRating_Heat>
+            <Insulation_Cold>4</Insulation_Cold>
+            <Insulation_Heat>2</Insulation_Heat>
+            <EquipDelay>4</EquipDelay>
+        </statBases>
+        <equippedStatOffsets>
+            <PsychicSensitivity>0.40</PsychicSensitivity>
+            <PTPsiCooldownMultiplier>-0.05</PTPsiCooldownMultiplier>
+        </equippedStatOffsets>
+        <apparel>
+            <bodyPartGroups>
+                <li>FullHead</li>
+            </bodyPartGroups>
+            <wornGraphicPath>Things/Equipment/ConduitHelmet/Helmet</wornGraphicPath>
+            <layers>
+                <li>Overhead</li>
+            </layers>
+            <useDeflectMetalEffect>true</useDeflectMetalEffect>
+            <tags>
+                <li>ExoticPsiConduit</li>
+                <li>RoyalCombatGear</li>
+            </tags>
+        </apparel>
+    </ThingDef>
+
+</Defs>

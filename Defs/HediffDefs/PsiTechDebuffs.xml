@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<!-- Copyright 2019, 2020, K
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+    
+        http://www.apache.org/licenses/LICENSE-2.0
+    
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+
+<Defs>
+
+    <HediffDef ParentName="PsiTechBuffBase">
+        <defName>PTPsychicSuppression</defName>
+        <label>Psychically Suppressed</label>
+        <labelNoun>A psychic suppression</labelNoun>
+        <description>A state of decreased psychic sensitivity, induced by a psion.</description>
+        <comps>
+            <li Class="HediffCompProperties_Disappears">
+                <disappearsAfterTicks>
+                    <min>3000</min>
+                    <max>4200</max>
+                </disappearsAfterTicks>
+            </li>
+        </comps>
+        <stages>
+            <li>
+                <statOffsets>
+                    <PsychicSensitivity>-1</PsychicSensitivity>
+                </statOffsets>
+            </li>
+        </stages>
+    </HediffDef>
+
+    <HediffDef ParentName="PsiTechBuffBase">
+        <defName>PTPsychicSilence</defName>
+        <label>Psychically Silenced</label>
+        <labelNoun>A psychic suppression</labelNoun>
+        <description>A state of massively decreased psychic sensitivity, induced by a psion.</description>
+        <comps>
+            <li Class="HediffCompProperties_Disappears">
+                <disappearsAfterTicks>
+                    <min>3600</min>
+                    <max>4800</max>
+                </disappearsAfterTicks>
+            </li>
+        </comps>
+        <stages>
+            <li>
+                <statOffsets>
+                    <PsychicSensitivity>-2</PsychicSensitivity>
+                </statOffsets>
+            </li>
+        </stages>
+    </HediffDef>
+    
+</Defs>
