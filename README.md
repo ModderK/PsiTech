@@ -1,5 +1,8 @@
 # PsiTech
-PsiTech is a modification (mod) for RimWorld. PsiTech adds an array of psionic abilities to turn your pawns into powerful psions.
+PsiTech is a mod for [RimWorld](https://rimworldgame.com/). PsiTech adds an array of psionic abilities to turn your pawns into powerful psions.
+
+# How to get PsiTech
+PsiTech can be built from the source available in this repo. If you'd rather receive prebuilt binaries, they're available from [the Steam workshop](https://steamcommunity.com/sharedfiles/filedetails/?id=2078892294) or [the Ludeon forums](https://ludeon.com/forums/index.php?topic=51887.0). For historical reasons prebuilt binary releases are not posted in this repo.
 
 # License
 Three different licenses are used for various portions of this mod. Where possible, file headers have been included which specify the licensing terms of that specific file. The license scheme is as follows:
