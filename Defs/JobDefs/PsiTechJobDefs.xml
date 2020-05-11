@@ -23,6 +23,7 @@
         <reportString>channeling a psychic burst.</reportString>
         <casualInterruptible>false</casualInterruptible>
         <collideWithPawns>true</collideWithPawns>
+        <neverShowWeapon>true</neverShowWeapon>
     </JobDef>
 
     <JobDef>
@@ -31,6 +32,7 @@
         <reportString>invading the mind of TargetA.</reportString>
         <casualInterruptible>false</casualInterruptible>
         <collideWithPawns>true</collideWithPawns>
+        <neverShowWeapon>true</neverShowWeapon>
     </JobDef>
     
 </Defs>
