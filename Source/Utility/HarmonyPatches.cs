@@ -27,6 +27,7 @@ using PsiTech.AI;
 using PsiTech.AutocastManagement;
 using PsiTech.Misc;
 using PsiTech.Psionics;
+using PsiTech.SuppressionField;
 using RimWorld;
 using UnityEngine;
 using Verse;
@@ -63,7 +64,16 @@ namespace PsiTech.Utility {
         public static float Postfix(float __result, StatRequest req, StatDef ___stat) {
             if(!req.HasThing || !PsiTechCachingUtility.CachedAffectedStats.Contains(___stat)) return __result;
             
-            if (req.Thing is Pawn pawn && pawn.PsiTracker().Activated) {
+            if (req.Thing is Pawn pawn) {
+                if (___stat == StatDefOf.PsychicSensitivity) {
+                    var field = pawn.Map?.GetComponent<SuppressionFieldManager>().GetEffectOnCell(pawn.Position) ?? 0f;
+                    if (field != 0f) {
+                        __result += field;
+                    }
+                }
+
+                if (!pawn.PsiTracker().Activated) return __result;
+                
                 __result += pawn.PsiTracker().GetTotalOffsetOfStat(___stat);
                 __result *= pawn.PsiTracker().GetTotalFactorOfStat(___stat);
             }else if (req.Thing.PsiEquipmentTracker().IsPsychic) {
@@ -116,6 +126,14 @@ namespace PsiTech.Utility {
                 if (didHaveEffect) {
                     __result += "\n\n" + sb;
                 }
+
+                if (___stat != StatDefOf.PsychicSensitivity) return __result;
+                
+                var field = pawn.Map?.GetComponent<SuppressionFieldManager>().GetEffectOnCell(pawn.Position) ?? 0f;
+                if (field == 0f) return __result;
+
+                __result += "\n" + "PsiTech.SuppressionFieldEffect".Translate(
+                    field.ToStringByStyle(___stat.ToStringStyleUnfinalized, ToStringNumberSense.Offset));
             }else if (req.Thing.PsiEquipmentTracker()?.IsPsychic ?? false) {
                 var equip = req.Thing.TryGetComp<CompEquippable>();
                 if (equip == null || !(equip.PrimaryVerb.caster is Pawn caster)) return __result;
@@ -607,7 +625,7 @@ namespace PsiTech.Utility {
 
     [HarmonyPatch(typeof(FactionDef), "RaidCommonalityFromPoints")]
     public class RaidFactionWeightPatch {
-        // And now maybe you're asking yourself, "What the is this?"
+        // And now maybe you're asking yourself, "What is this?"
         // Well, there's no way to set conditions on a faction being used for a raid, for some reason.
 
         public static float Postfix(float __result, FactionDef __instance) {

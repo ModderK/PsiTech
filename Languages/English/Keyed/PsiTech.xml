@@ -61,7 +61,10 @@
     <PsiTech.Interface.AutocastFilter>Autocast Target Filter</PsiTech.Interface.AutocastFilter>
     <PsiTech.Interface.AdditionalTargetFilters>Additional Target Filters</PsiTech.Interface.AdditionalTargetFilters>
     <PsiTech.Interface.AddAdditionalTargetFilter>Add Additional Target Filter</PsiTech.Interface.AddAdditionalTargetFilter>
-    
+    <PsiTech.Interface.TargetEffect>Target psychic sensitivity decrease: {0}</PsiTech.Interface.TargetEffect>
+    <PsiTech.Interface.TargetRadius>Target radius: {0}</PsiTech.Interface.TargetRadius>
+    <PsiTech.Interface.PowerConsumption>Predicted power consumption: {0}W</PsiTech.Interface.PowerConsumption>
+
     <PsiTech.AutocastManagement.ConditionMet>Condition Currently Met</PsiTech.AutocastManagement.ConditionMet>
     <PsiTech.AutocastManagement.ConditionNotMet>Condition Currently Not Met</PsiTech.AutocastManagement.ConditionNotMet>
     <PsiTech.AutocastManagement.Invert>Invert</PsiTech.AutocastManagement.Invert>
@@ -129,6 +132,11 @@
     <PsiTech.Training.RemovingSummary>Currently removing: {0}\nTime remaining: {1} days</PsiTech.Training.RemovingSummary>
     <PsiTech.Training.TrainingSummaryAwakening>Currently awakening.\nAwakening time remaining: {0} days</PsiTech.Training.TrainingSummaryAwakening>
     
+    <PsiTech.SuppressionField.CurrentEffect>Psychic sensitivity decrease: {0}</PsiTech.SuppressionField.CurrentEffect>
+    <PsiTech.SuppressionField.CurrentRadius>Current radius: {0}</PsiTech.SuppressionField.CurrentRadius>
+    <PsiTech.SuppressionField.ConfigureSuppressionField>Configure suppression field</PsiTech.SuppressionField.ConfigureSuppressionField>
+    <PsiTech.SuppressionField.ConfigureSuppressionFieldDesc>Configure the radius and strength of the suppression field.</PsiTech.SuppressionField.ConfigureSuppressionFieldDesc>
+    
     <PsiTech.Utility.EnablePsychicFactionRaids>Enable Psychic Faction Raids</PsiTech.Utility.EnablePsychicFactionRaids>
     <PsiTech.Utility.EssenceLossPerPart>Percent Essence Loss Per Bionic Body Part:</PsiTech.Utility.EssenceLossPerPart>
     <PsiTech.Utility.EssenceLossPerPartDesc>By default, psions lose 10% of their essence per bionic body part. This setting allows that value to be configured between 0% and 100%.</PsiTech.Utility.EssenceLossPerPartDesc>
@@ -136,6 +144,7 @@
     <PsiTech.Utility.PatchAllRacesDesc>Some alien races do not get the Psi tab applied to them by default. Checking this option forces all pawns with needs to get the Psi tab. The game must be restarted for this setting to take effect.\n\nSince this may cause incompatibilities, this option is disabled by default.</PsiTech.Utility.PatchAllRacesDesc>
     
     <PsiTech.PsionicAbilitiesReport>Psionic Abilities</PsiTech.PsionicAbilitiesReport>
+    <PsiTech.SuppressionFieldEffect>Psychic suppression field: {0}</PsiTech.SuppressionFieldEffect>
     <PsiTech.AbilityNotValidOnTarget>{0} is not a valid target for {1}</PsiTech.AbilityNotValidOnTarget>
     <PsiTech.AbilityByPawn>{0} by {1}: {2}</PsiTech.AbilityByPawn>
     <PsiTech.BaseSuccessChance>Base sucess chance: {0}</PsiTech.BaseSuccessChance>

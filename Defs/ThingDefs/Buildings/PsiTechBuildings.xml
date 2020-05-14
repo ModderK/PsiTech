@@ -148,5 +148,68 @@
             <li>PlaceWorker_PreventInteractionSpotOverlap</li>
         </placeWorkers>
     </ThingDef>
+    
+    <!-- Psychic Suppression Field Projector -->
+    <ThingDef ParentName="BuildingBase">
+        <defName>PTPsychicSuppressionFieldProjector</defName>
+        <label>Psychic Suppression Field Projector</label>
+        <description>A building which projects a psychic suppression field in a small area around it, lower the psychic sensitivity of those nearby. They can be tuned to different intensities and radii, though it takes time for them to change to new targets.\n\nDue to the complex wave interactions, suppression fields do not stack.</description>
+        <thingClass>PsiTech.SuppressionField.Building_PsychicSuppressionField</thingClass>
+        <graphicData>
+            <texPath>Things/Buildings/SuppressionFieldProjector</texPath>
+            <graphicClass>Graphic_Single</graphicClass>
+            <drawSize>(1,1)</drawSize>
+        </graphicData>
+        <researchPrerequisites>
+            <li>PTPsychicSuppressionField</li>
+        </researchPrerequisites>
+        <size>(1,1)</size>
+        <rotatable>false</rotatable>
+        <altitudeLayer>Building</altitudeLayer>
+        <passability>PassThroughOnly</passability>
+        <designationCategory>Misc</designationCategory>
+        <minifiedDef>MinifiedThing</minifiedDef>
+        <thingCategories>
+            <li>BuildingsMisc</li>
+        </thingCategories>
+        <canOverlapZones>false</canOverlapZones>
+        <surfaceType>Item</surfaceType>
+        <tickerType>Normal</tickerType>
+        <statBases>
+            <MaxHitPoints>100</MaxHitPoints>
+            <WorkToBuild>2000</WorkToBuild>
+            <Flammability>1.0</Flammability>
+            <Mass>10</Mass>
+        </statBases>
+        <costList>
+            <Steel>50</Steel>
+            <Gold>10</Gold>
+            <ComponentSpacer>2</ComponentSpacer>
+            <PTAthenium>20</PTAthenium>
+        </costList>
+        <comps>
+            <li Class="CompProperties_Power">
+                <compClass>CompPowerTrader</compClass>
+                <shortCircuitInRain>true</shortCircuitInRain>
+                <!-- Note this power consumption is overwritten by the suppression field comp and doesn't matter -->
+                <basePowerConsumption>50</basePowerConsumption>
+            </li>
+            <li Class="CompProperties_Flickable"/>
+            <li Class="CompProperties_Breakdownable"/>
+            <li Class="PsiTech.SuppressionField.CompProperties_PsychicSuppressionField">
+                <MinEffect>-2</MinEffect>
+                <MaxEffect>0</MaxEffect>
+                <EffectStep>0.1</EffectStep>
+                <EffectChangeSpeedPerSecond>0.02</EffectChangeSpeedPerSecond>
+                <MinRadius>1</MinRadius>
+                <MaxRadius>5</MaxRadius>
+                <RadiusChangeSpeedPerSecond>0.04</RadiusChangeSpeedPerSecond>
+                <BasePowerConsumption>50</BasePowerConsumption>
+                <PowerPerCellEffect>1</PowerPerCellEffect>
+            </li>
+        </comps>
+        <constructEffect>ConstructMetal</constructEffect>
+        <constructionSkillPrerequisite>10</constructionSkillPrerequisite>
+    </ThingDef>
 
 </Defs>

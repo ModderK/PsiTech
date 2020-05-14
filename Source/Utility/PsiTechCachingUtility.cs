@@ -50,6 +50,11 @@ namespace PsiTech.Utility {
                 }
             }
             
+            // Cache psychic sensitivity for the suppression field just in case
+            if (!CachedAffectedStats.Contains(StatDefOf.PsychicSensitivity)) {
+                CachedAffectedStats.Add(StatDefOf.PsychicSensitivity);
+            }
+            
             // Cache stats that can be affected on weapons
             var equipmentEffects = DefDatabase<EquipmentEnhancementDef>.AllDefsListForReading;
 

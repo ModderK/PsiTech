@@ -156,6 +156,7 @@
     <Compile Include="Interface\ITab_Pawn_Psi.cs" />
     <Compile Include="Interface\PawnPsiCard.cs" />
     <Compile Include="Interface\PsiTechUiTextureHelper.cs" />
+    <Compile Include="Interface\SuppressionFieldSettingsWindow.cs" />
     <Compile Include="Misc\CommandIndicator.cs" />
     <Compile Include="Misc\CommandPsionic.cs" />
     <Compile Include="Misc\CommandTargetedPsionic.cs" />
@@ -179,6 +180,10 @@
     <Compile Include="Psionics\PsiTechAbilityTargeted.cs" />
     <Compile Include="Psionics\PsiTechTracker.cs" />
     <Compile Include="Psionics\Verb_Psionic.cs" />
+    <Compile Include="SuppressionField\Building_PsychicSuppressionField.cs" />
+    <Compile Include="SuppressionField\CompProperties_PsychicSuppressionField.cs" />
+    <Compile Include="SuppressionField\CompPsychicSuppressionField.cs" />
+    <Compile Include="SuppressionField\SuppressionFieldManager.cs" />
     <Compile Include="TargetValidators\TargetValidator.cs" />
     <Compile Include="TargetValidators\TargetValidatorAny.cs" />
     <Compile Include="TargetValidators\TargetValidatorAnyButUser.cs" />
