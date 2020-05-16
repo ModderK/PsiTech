@@ -41,7 +41,6 @@ namespace PsiTech.Utility {
     public class HarmonyPatches {
 
         static HarmonyPatches() {
-            Harmony.DEBUG = true;
             var harmony = new Harmony("K.PsiTech");
             harmony.PatchAll(Assembly.GetExecutingAssembly());
         }
