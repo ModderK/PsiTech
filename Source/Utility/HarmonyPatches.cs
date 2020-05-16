@@ -18,9 +18,11 @@
  *
  */
 
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.Reflection.Emit;
 using System.Text;
 using HarmonyLib;
 using PsiTech.AI;
@@ -39,6 +41,7 @@ namespace PsiTech.Utility {
     public class HarmonyPatches {
 
         static HarmonyPatches() {
+            Harmony.DEBUG = true;
             var harmony = new Harmony("K.PsiTech");
             harmony.PatchAll(Assembly.GetExecutingAssembly());
         }
@@ -636,6 +639,62 @@ namespace PsiTech.Utility {
 
             return __result;
         }
+    }
+
+    [HarmonyPatch(typeof(Building_CryptosleepCasket), "FindCryptosleepCasketFor")]
+    public class FindCryptosleepCasketTranspiler {
+        // The purpose of this transpiler is to prevent a really minor issue where pawns can haul other pawns to
+        // training tubes because they're derived from Building_CryptosleepCasket. As it turns out, it also functions
+        // as an optimization.
+        // What we're trying to do is take this LINQ query:
+        //   DefDatabase<ThingDef>.AllDefs.Where(def => typeof (Building_CryptosleepCasket).IsAssignableFrom(def.thingClass))
+        // and replace it with a cache built at start-up in the PsiTechCachingUtility. Since we control the cache, we
+        // can also remove the training tube from the possible buildings list. 
+
+        public static IEnumerable<CodeInstruction> Transpiler(IEnumerable<CodeInstruction> instructions, ILGenerator generator) {
+
+            var codes = new List<CodeInstruction>(instructions);
+            var patching = false;
+            var changedLdsfld = false;
+            var changedCallvirt = false;
+
+            var toRemove = new List<CodeInstruction>();
+            
+            // It's like writing a cookbook to a different language they said
+            // Does that metaphor even make any sense?
+            for (var k = 1; k < codes.Count; k++) {
+                var code = codes[k];
+                
+                // We're looking for the first call, that's the start of the LINQ query
+                if (code.opcode == OpCodes.Call && !patching) {
+                    patching = true; // Begin patching
+                }else if (code.opcode == OpCodes.Stloc_1) {
+                    break; // We've reached the beginning of the loop
+                }
+
+                if (!patching) continue; // Don't modify if we're not patching
+
+                if (code.opcode == OpCodes.Ldsfld && !changedLdsfld) { // Get our field onto the stack
+                    var operand = AccessTools.Field(typeof(PsiTechCachingUtility), "CachedCryptosleepDefs");
+                    codes[k] = new CodeInstruction(OpCodes.Ldsfld, operand);
+                    changedLdsfld = true;
+                }else if (code.opcode == OpCodes.Callvirt && !changedCallvirt) { // Get the enumerator from our field
+                    var operand = AccessTools.Method(typeof(IEnumerable<ThingDef>), nameof(IEnumerable<ThingDef>.GetEnumerator));
+                    codes[k] = new CodeInstruction(OpCodes.Callvirt, operand);
+                    changedCallvirt = true;
+                }
+                else { // Mark instruction for removal
+                    toRemove.Add(code);
+                }
+                
+            }
+            
+            // Clean up instructions afterwards
+            toRemove.ForEach(code => codes.Remove(code));
+
+            return codes.AsEnumerable();
+        }
+
     }
 
 }

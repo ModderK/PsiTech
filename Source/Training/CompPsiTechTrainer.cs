@@ -37,7 +37,7 @@ namespace PsiTech.Training {
         
         private BuildingPsiTechTrainer Building => parent as BuildingPsiTechTrainer;
         
-        private int timeLeft = -1;
+        private float timeLeft = -1;
         private TrainingQueueEntry curEntry;
         private const int DayToSeconds = 1000;
 
@@ -72,7 +72,7 @@ namespace PsiTech.Training {
 
             // Decrease the time left each second
             if (timeLeft > 0) {
-                timeLeft--;
+                timeLeft -= PsiTechSettings.Get().TrainingSpeedMultiplier;
             }
 
             // Check if we've completed a training cycle
@@ -94,24 +94,25 @@ namespace PsiTech.Training {
         }
 
         public void ResetComp(Pawn pawn) {
-            if (timeLeft == -1) return;
+            if (timeLeft < 0) return;
 
             timeLeft = -1;
             pawn.PsiTracker().ClearTrainingQueueLock();
         }
 
         public override string CompInspectStringExtra() {
-
             if (InnerPawn == null) return "";
-
+            
             if (curEntry.Type == TrainingType.Ability && curEntry.Def == null) { // We're awakening
-                return TrainingSummaryAwakeningKey.Translate((timeLeft / (float) DayToSeconds)
+                return TrainingSummaryAwakeningKey.Translate(
+                    (timeLeft / (PsiTechSettings.Get().TrainingSpeedMultiplier * DayToSeconds))
                     .ToStringDecimalIfSmall());
             }
 
             if (curEntry.Type == TrainingType.Remove) { // We're removing and want to use the special remove format
                 return RemovingSummaryKey.Translate(curEntry.Def.label,
-                    (timeLeft / (float) DayToSeconds).ToStringDecimalIfSmall());
+                    (timeLeft / (PsiTechSettings.Get().TrainingSpeedMultiplier * DayToSeconds))
+                    .ToStringDecimalIfSmall());
             }
 
             string label = curEntry.Type switch {
@@ -120,8 +121,9 @@ namespace PsiTech.Training {
                 TrainingType.Energy => EnergyTrainingKey.Translate(),
                 _ => throw new ArgumentOutOfRangeException()
             };
-                
-            return TrainingSummaryKey.Translate(label, (timeLeft / (float) DayToSeconds).ToStringDecimalIfSmall());
+
+            return TrainingSummaryKey.Translate(label,
+                (timeLeft / (PsiTechSettings.Get().TrainingSpeedMultiplier * DayToSeconds)).ToStringDecimalIfSmall());
         }
 
         public override IEnumerable<Gizmo> CompGetGizmosExtra() {

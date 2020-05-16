@@ -110,6 +110,6 @@ namespace PsiTech.Training {
             innerContainer.TryDropAll(InteractionCell, Map, ThingPlaceMode.Near);
             contentsKnown = true;
         }
-        
+
     }
 }

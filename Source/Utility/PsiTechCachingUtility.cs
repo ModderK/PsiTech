@@ -22,6 +22,7 @@ using System.Collections.Generic;
 using System.Linq;
 using PsiTech.Misc;
 using PsiTech.Psionics;
+using PsiTech.Training;
 using RimWorld;
 using Verse;
 
@@ -30,7 +31,8 @@ namespace PsiTech.Utility {
     public static class PsiTechCachingUtility {
 
         public static readonly HashSet<StatDef> CachedAffectedStats = new HashSet<StatDef>();
-
+        public static readonly List<ThingDef> CachedCryptosleepDefs = new List<ThingDef>();
+        
         static PsiTechCachingUtility() {
             
             // Cache stats abilites effects
@@ -63,6 +65,16 @@ namespace PsiTech.Utility {
                 CachedAffectedStats.AddRange(effects.RangedMods.Select(mod => mod.stat));
                 CachedAffectedStats.AddRange(effects.MeleeMods.Select(mod => mod.stat));
             }
+            
+            // Secret optimization/fix - build a custom cache of possible cryptosleep casket types
+            var things = DefDatabase<ThingDef>.AllDefsListForReading;
+            foreach (var thing in things) {
+                if (!typeof(Building_CryptosleepCasket).IsAssignableFrom(thing.thingClass) ||
+                    typeof(BuildingPsiTechTrainer).IsAssignableFrom(thing.thingClass)) continue;
+                
+                CachedCryptosleepDefs.Add(thing);
+            }
+            
         }
         
     }

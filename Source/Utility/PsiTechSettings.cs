@@ -27,15 +27,20 @@ namespace PsiTech.Utility {
         //Use PsiTechSettings.Get().setting to refer to settings
         public bool EnablePsychicFactionRaids = true;
         public float EssenceLossPerPart => essenceLossPerPartInternal / 100f;
+        public float TrainingSpeedMultiplier => trainingSpeedMultiplierInternal / 100f;
         public bool PatchAllRaces;
 
         private int essenceLossPerPartInternal = 10;
+        private int trainingSpeedMultiplierInternal = 100;
 
         private string essenceLossBuffer;
+        private string trainingSpeedMultiplierBuffer;
         
         private const string EnablePsychicFactionRaidsKey = "PsiTech.Utility.EnablePsychicFactionRaids";
         private const string EssenceLossPerPartKey = "PsiTech.Utility.EssenceLossPerPart";
         private const string EssenceLossPerPartDescKey = "PsiTech.Utility.EssenceLossPerPartDesc";
+        private const string TrainingSpeedMultiplierKey = "PsiTech.Utility.TrainingSpeedMultiplier";
+        private const string TrainingSpeedMultiplierDescKey = "PsiTech.Utility.TrainingSpeedMultiplierDesc";
         private const string PatchAllRacesKey = "PsiTech.Utility.PatchAllRaces";
         private const string PatchAllRacesDescKey = "PsiTech.Utility.PatchAllRacesDesc";
 
@@ -47,15 +52,24 @@ namespace PsiTech.Utility {
             var options = new Listing_Standard();
             options.Begin(rect);
 
+            // Psychic raids
             options.CheckboxLabeled(EnablePsychicFactionRaidsKey.Translate(), ref EnablePsychicFactionRaids);
             
             options.GapLine();
 
+            // Essence loss
             options.Label(EssenceLossPerPartKey.Translate(), -1f, EssenceLossPerPartDescKey.Translate());
             options.TextFieldNumeric(ref essenceLossPerPartInternal, ref essenceLossBuffer, 0, 100);
             
             options.GapLine();
             
+            // Training speed
+            options.Label(TrainingSpeedMultiplierKey.Translate(), -1f, TrainingSpeedMultiplierDescKey.Translate());
+            options.TextFieldNumeric(ref trainingSpeedMultiplierInternal, ref trainingSpeedMultiplierBuffer, 1, 1000);
+            
+            options.GapLine();
+            
+            // Patch races
             options.CheckboxLabeled(PatchAllRacesKey.Translate(), ref PatchAllRaces, PatchAllRacesDescKey.Translate());
             
             options.End();
@@ -64,6 +78,7 @@ namespace PsiTech.Utility {
         public override void ExposeData() {
             Scribe_Values.Look(ref EnablePsychicFactionRaids, "EnablePsychicFactionRaids", true);
             Scribe_Values.Look(ref essenceLossPerPartInternal, "essenceLossPerPartInternal", 10);
+            Scribe_Values.Look(ref trainingSpeedMultiplierInternal, "trainingSpeedMultiplierInternal", 100);
             Scribe_Values.Look(ref PatchAllRaces, "PatchAllRaces");
         }
         
