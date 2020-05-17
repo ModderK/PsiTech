@@ -61,9 +61,11 @@ namespace PsiTech.Training {
             if (timeLeft < 0) {
                 if (!InnerPawn.PsiTracker().Activated) { // Are we awakening a pawn or training a skill?
                     timeLeft = PsiTechTracker.ActivationTimeSeconds;
+                    InnerPawn.PsiTracker().TrainingSuspended = false;
                 }
                 else if(InnerPawn.PsiTracker().TryBeginNextTrainingEntry(out curEntry)) {
                     timeLeft = curEntry.TrainingTimeSeconds;
+                    InnerPawn.PsiTracker().TrainingSuspended = false;
                 }
                 else {
                     Building.EjectContents();

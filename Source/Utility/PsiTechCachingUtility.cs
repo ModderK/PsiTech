@@ -35,7 +35,7 @@ namespace PsiTech.Utility {
         
         static PsiTechCachingUtility() {
             
-            // Cache stats abilites effects
+            // Cache stats abilities effects
             var abilities = DefDatabase<PsiTechAbilityDef>.AllDefsListForReading;
 
             foreach (var ability in abilities) {

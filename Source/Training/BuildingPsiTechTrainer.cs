@@ -103,6 +103,9 @@ namespace PsiTech.Training {
                 PawnComponentsUtility.AddComponentsForSpawn(pawn);
                 pawn.filth.GainFilth(filthSlime);
                 Trainer.ResetComp(pawn);
+                if (!pawn.PsiTracker().Activated) continue;
+
+                pawn.PsiTracker().TrainingSuspended = true;
             }
 
             if (!Destroyed) SoundDefOf.CryptosleepCasket_Eject.PlayOneShot(SoundInfo.InMap(new TargetInfo(Position, Map)));

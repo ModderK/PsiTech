@@ -21,6 +21,7 @@
 using System;
 using System.Collections.Generic;
 using PsiTech.Psionics;
+using PsiTech.Training;
 using PsiTech.Utility;
 using RimWorld;
 using UnityEngine;
@@ -55,6 +56,7 @@ namespace PsiTech.Interface {
         private const string EmptyAbilitySlotKey = "PsiTech.Interface.EmptyAbilitySlot";
         private const string LockedAbilitySlotPluralKey = "PsiTech.Interface.LockedAbilitySlotPlural";
         private const string LockedAbilitySlotSingularKey = "PsiTech.Interface.LockedAbilitySlotSingular";
+        private const string QueueableAbilitySlotKey = "PsiTech.Interface.QueueableSlot";
         private const string NoTrainersAvailableKey = "PsiTech.Interface.NoAvailableTrainers";
         private const string AbilityListKey = "PsiTech.Interface.AbilityList";
         private const string ShowTrainingQueueKey = "PsiTech.Interface.ShowTrainingQueue";
@@ -64,6 +66,8 @@ namespace PsiTech.Interface {
         private const string EnergyTrainingKey = "PsiTech.Interface.EnergyTraining";
         private const string FocusTrainingKey = "PsiTech.Interface.FocusTraining";
         private const string RemoveAbilityKey = "PsiTech.Interface.RemoveAbility";
+        private const string SuspendTrainingKey = "PsiTech.Interface.SuspendTraining";
+        private const string UnsuspendTrainingKey = "PsiTech.Interface.UnsuspendTraining";
 
         private const float XMargin = 10f;
         private const float YPadding = 2f;
@@ -196,13 +200,14 @@ namespace PsiTech.Interface {
                     2 => PsiTechUiTextureHelper.FocusNodes2pre2,
                     _ => PsiTechUiTextureHelper.FocusNodes1
                 },
-                2 => pawn.PsiTracker().QueuedEnergy switch {
+                2 => pawn.PsiTracker().QueuedFocus switch {
                     1 => PsiTechUiTextureHelper.FocusNodes3pre,
                     _ => PsiTechUiTextureHelper.FocusNodes2
                 },
                 3 => PsiTechUiTextureHelper.FocusNodes3,
                 _ => throw new ArgumentOutOfRangeException()
             };
+            
 
             xAnchor += 5f;
             var focusNodesRect = new Rect(xAnchor + ExtraFocusNodePadding, yAnchor, FocusIconWidth, FocusIconHeight);
@@ -256,6 +261,7 @@ namespace PsiTech.Interface {
                 new TipSignal(() => AbilityModifierTipKey.Translate(), abilityModifierRect.GetHashCode()));
 
             var abilitySlots = pawn.PsiTracker().UnlockedAbilitySlots();
+            var queueableSlots = pawn.PsiTracker().QueueableAbilitySlots();
             
             //* Third horizontal area - tier 1 abilities *//
             yAnchor += 25f + YSeparationForSections;
@@ -268,7 +274,7 @@ namespace PsiTech.Interface {
             TooltipHandler.TipRegion(labelRect,
                 new TipSignal(() => Tier1AbilitiesTipKey.Translate(), labelRect.GetHashCode()));
 
-            yAnchor = DrawAbilitySlotsGrid(new Vector2(xAnchor, yAnchor), abilitySlots[0],
+            yAnchor = DrawAbilitySlotsGrid(new Vector2(xAnchor, yAnchor), abilitySlots[0], queueableSlots[0],
                 PsiTechTracker.Tier1Abilities, 1, pawn, inTrainer);
 
             //* Fourth horizontal area - tier 2 abilities *//
@@ -282,7 +288,7 @@ namespace PsiTech.Interface {
             TooltipHandler.TipRegion(labelRect,
                 new TipSignal(() => Tier2AbilitiesTipKey.Translate(), labelRect.GetHashCode()));
             
-            yAnchor = DrawAbilitySlotsGrid(new Vector2(xAnchor, yAnchor), abilitySlots[1],
+            yAnchor = DrawAbilitySlotsGrid(new Vector2(xAnchor, yAnchor), abilitySlots[1], queueableSlots[1],
                 PsiTechTracker.Tier2Abilities, 2, pawn, inTrainer);
 
             //* Fifth horizontal area - tier 3 abilities *//
@@ -296,7 +302,7 @@ namespace PsiTech.Interface {
             TooltipHandler.TipRegion(labelRect,
                 new TipSignal(() => Tier3AbilitiesTipKey.Translate(), labelRect.GetHashCode()));
             
-            yAnchor = DrawAbilitySlotsGrid(new Vector2(xAnchor, yAnchor), abilitySlots[2],
+            yAnchor = DrawAbilitySlotsGrid(new Vector2(xAnchor, yAnchor), abilitySlots[2], queueableSlots[2],
                 PsiTechTracker.Tier3Abilities, 3, pawn, inTrainer);
             
             //* Sixth horizontal area - ability window button and training queue toggle *//
@@ -345,9 +351,10 @@ namespace PsiTech.Interface {
             // Training Queue label
             Widgets.Label(new Rect(drawBox.x + 20f, drawBox.y - 10f, drawBox.width, 22f), TrainingQueueKey.Translate());
             
+            // Scroll area for training queue
             var needed = (TrainingQueueEntryHeight + 5f) * pawn.PsiTracker().TrainingQueue.Count;
             var viewRect = new Rect(0, 0, drawBox.width - 16f, needed);
-            var outRect = new Rect(drawBox.x, drawBox.y + 16f, drawBox.width, drawBox.height - 16f);
+            var outRect = new Rect(drawBox.x, drawBox.y + 16f, drawBox.width, drawBox.height - 32f);
             var scrollAnchor = 0f;
             Widgets.BeginScrollView(outRect, ref _trainingQueueScrollAnchor, viewRect);
             foreach (var entry in pawn.PsiTracker().TrainingQueue) {
@@ -356,6 +363,17 @@ namespace PsiTech.Interface {
                 scrollAnchor += TrainingQueueEntryHeight + 5f;
             }
             Widgets.EndScrollView();
+            
+            // Suspend/Unsuspend training toggle if we're not in a training tube
+            if (!(pawn.ParentHolder is BuildingPsiTechTrainer)) {
+                var label = pawn.PsiTracker().TrainingSuspended
+                    ? UnsuspendTrainingKey.Translate()
+                    : SuspendTrainingKey.Translate();
+                if (Widgets.ButtonText(new Rect(drawBox.x + 16f, drawBox.yMax - 10f, drawBox.width - 20f, 22f),
+                    label)) {
+                    pawn.PsiTracker().TrainingSuspended = !pawn.PsiTracker().TrainingSuspended;
+                }
+            }
 
             // Resolve move entries and delete entries since you can't modify a collection while enumerating.
             // I guess you could just copy instead but that's mildly inefficient
@@ -397,7 +415,8 @@ namespace PsiTech.Interface {
             }
             
             var inRect = drawBox.ContractedBy(5f);
-            var baseColor = Color.white;
+            var baseColor = pawn.PsiTracker().TrainingSuspended ? Color.gray : Color.white;
+            GUI.color = baseColor;
 
             // Draw reorder arrows
             if (pawn.PsiTracker().CanMoveTrainingEntryUp(entry)) {
@@ -443,15 +462,18 @@ namespace PsiTech.Interface {
                 Widgets.InfoCardButton(drawBox.xMax - 24f, drawBox.yMax - 24f, entry.Def);
             }
 
+            GUI.color = Color.white;
+
         }
-        
-        private static float DrawAbilitySlotsGrid(Vector2 startPos, int unlockedSlots, int totalSlots, int tier, Pawn pawn, bool inTrainer) {
+
+        private static float DrawAbilitySlotsGrid(Vector2 startPos, int unlockedSlots, int queueableSlots,
+            int totalSlots, int tier, Pawn pawn, bool inTrainer) {
             var yAnchor = startPos.y;
             var xAnchor = startPos.x;
             var drawn = 0;
             while (drawn < totalSlots) {
                 for (var k = 0; k < AbilitySlotsPerRow; k++) {
-                    if (drawn < unlockedSlots) {
+                    if (drawn < queueableSlots) {
 
                         string label;
                         
@@ -460,10 +482,17 @@ namespace PsiTech.Interface {
                         if (queued != null) {
                             label = QueuedAbilityFormatKey.Translate(queued.label);
                         }
-                        else {
-                            label = ability == null ? (string)EmptyAbilitySlotKey.Translate() : ability.Def.label;
+                        else if (ability != null) {
+                            label = ability.Def.label;
                         }
+                        else {
+                            label = drawn < unlockedSlots
+                                ? EmptyAbilitySlotKey.Translate()
+                                : QueueableAbilitySlotKey.Translate();
+                        }
+
                         
+
                         DrawAbilitySlot(new Rect(xAnchor, yAnchor, AbilitySlotWidth, AbilitySlotHeight), label, drawn,
                             tier, false, pawn, inTrainer, ability?.Def);
                     }

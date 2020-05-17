@@ -29,7 +29,7 @@ namespace PsiTech.AI {
     public class JobGiver_TrainInTube : ThinkNode {
         
         public override ThinkResult TryIssueJobPackage(Pawn pawn, JobIssueParams jobParams) {
-            if (!pawn.PsiTracker().TrainingQueue.Any()) return ThinkResult.NoJob;
+            if (!pawn.PsiTracker().ShouldTrain()) return ThinkResult.NoJob;
             
             var availableTrainer = Current.Game.GetComponent<PsiTechManager>().GetOpenTrainerForPawn(pawn);
             return availableTrainer == null

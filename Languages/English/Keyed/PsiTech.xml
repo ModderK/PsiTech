@@ -39,6 +39,7 @@
     <PsiTech.Interface.EmptyAbilitySlot>Empty Slot</PsiTech.Interface.EmptyAbilitySlot>
     <PsiTech.Interface.LockedAbilitySlotPlural>Locked (need {0} more nodes)</PsiTech.Interface.LockedAbilitySlotPlural>
     <PsiTech.Interface.LockedAbilitySlotSingular>Locked (need {0} more node)</PsiTech.Interface.LockedAbilitySlotSingular>
+    <PsiTech.Interface.QueueableSlot>Queueable</PsiTech.Interface.QueueableSlot>
     <PsiTech.Interface.NoAvailableTrainers>No psychic trainers are available and operating</PsiTech.Interface.NoAvailableTrainers>
     <PsiTech.Interface.AbilityList>Configure Autocasting</PsiTech.Interface.AbilityList>
     <PsiTech.Interface.ShowTrainingQueue>Show Training Queue</PsiTech.Interface.ShowTrainingQueue>
@@ -48,6 +49,8 @@
     <PsiTech.Interface.EnergyTraining>Energy</PsiTech.Interface.EnergyTraining>
     <PsiTech.Interface.FocusTraining>Focus</PsiTech.Interface.FocusTraining>
     <PsiTech.Interface.RemoveAbility>Remove {0}</PsiTech.Interface.RemoveAbility>
+    <PsiTech.Interface.SuspendTraining>Suspend Training</PsiTech.Interface.SuspendTraining>
+    <PsiTech.Interface.UnsuspendTraining>Unsuspend Training</PsiTech.Interface.UnsuspendTraining>
 
     <PsiTech.Interface.HideAutocastToggleGizmo>Hide Autocast Toggle Button</PsiTech.Interface.HideAutocastToggleGizmo>
     <PsiTech.Interface.AbilityLabel>Ability</PsiTech.Interface.AbilityLabel>

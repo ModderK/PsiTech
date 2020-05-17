@@ -47,6 +47,7 @@ namespace PsiTech.Psionics {
 
         public PsiTechAbility CurrentAbility;
 
+        public bool TrainingSuspended;
         public List<TrainingQueueEntry> TrainingQueue = new List<TrainingQueueEntry>();
         private int nextTrainingId;
 
@@ -149,8 +150,16 @@ namespace PsiTech.Psionics {
         }
 
         public int[] UnlockedAbilitySlots() {
-            var level = focusLevel + energyLevel;
+            return SlotsForLevel(TotalLevel);
+        }
 
+        public int[] QueueableAbilitySlots() {
+            var level = TotalLevel + TrainingQueue.Count(EntryIsLevelling);
+
+            return SlotsForLevel(level);
+        }
+
+        private static int[] SlotsForLevel(int level) {
             switch (level) {
                 case 2:
                     return new[] {Tier1Abilities / 4, 0, 0};
@@ -303,6 +312,10 @@ namespace PsiTech.Psionics {
             }
         }
 
+        public bool ShouldTrain() {
+            return TrainingQueue.Any() && !TrainingSuspended;
+        }
+
         public bool CanMoveTrainingEntryUp(TrainingQueueEntry entry) {
             var index = TrainingQueue.FindIndex(existing => existing.Id == entry.Id);
 
@@ -316,8 +329,11 @@ namespace PsiTech.Psionics {
             // We're not a locked ability
             // We're not below a locked ability (this is only for the top ability while training)
             // We're not trying to move above a required ability
+            // We're not trying to move above a focus or energy node that unlocked the slot we're in
             if (index == 0 || entry.Locked || TrainingQueue[index - 1].Locked ||
-                (entry.Def?.RequiredAbilities.Contains(TrainingQueue[index - 1].Def) ?? false)) return false;
+                (entry.Def?.RequiredAbilities.Contains(TrainingQueue[index - 1].Def) ?? false) ||
+                (entry.Type == TrainingType.Ability && EntryIsLevelling(TrainingQueue[index - 1]) &&
+                 QueuedNodesAbove(index) <= QueuedNodesNeededAbove(entry.Slot, entry.Def?.Tier ?? 1))) return false;
 
             return true;
         }
@@ -334,9 +350,13 @@ namespace PsiTech.Psionics {
             // We're not already at the bottom
             // We're not a locked ability
             // We're not above a locked ability (this is only for the top ability while training, not really necessary)
-            // We're not trying to move above a required ability
+            // We're not trying a required ability trying to move below something that needs us
+            // We're not a focus or energy node trying to move below an ability in a slot we unlock
             if (index == TrainingQueue.Count - 1 || entry.Locked || TrainingQueue[index + 1].Locked ||
-                (TrainingQueue[index + 1].Def?.RequiredAbilities.Contains(entry.Def) ?? false)) return false;
+                (TrainingQueue[index + 1].Def?.RequiredAbilities.Contains(entry.Def) ?? false) ||
+                (EntryIsLevelling(entry) && TrainingQueue[index + 1].Type == TrainingType.Ability &&
+                 QueuedNodesAbove(index + 1) <= QueuedNodesNeededAbove(TrainingQueue[index + 1].Slot,
+                     TrainingQueue[index + 1].Def?.Tier ?? 1))) return false;
 
             return true;
         }
@@ -348,11 +368,32 @@ namespace PsiTech.Psionics {
 
         public void RemoveTrainingEntry(TrainingQueueEntry entry) {
             TrainingQueue.Remove(entry);
-            foreach (var req in TrainingQueue.Where(existing =>
-                    existing.Type == TrainingType.Ability && existing.Def.RequiredAbilities.Contains(entry.Def))
-                .ToList().ListFullCopy()) {
-                RemoveTrainingEntry(req);
+            if (EntryIsLevelling(entry)) {
+                var toRemove = TrainingQueue.Where((existing, k) =>
+                    existing.Type == TrainingType.Ability &&
+                    QueuedNodesAbove(k) < QueuedNodesNeededAbove(existing.Slot, existing.Def.Tier)).ToList();
+                
+                toRemove.ForEach(RemoveTrainingEntry);
+            }else if (entry.Type == TrainingType.Ability) {
+                foreach (var req in TrainingQueue.Where(existing =>
+                        existing.Type == TrainingType.Ability && existing.Def.RequiredAbilities.Contains(entry.Def))
+                    .ToList().ListFullCopy()) {
+                    RemoveTrainingEntry(req);
+                }
             }
+        }
+        
+        private static bool EntryIsLevelling(TrainingQueueEntry entry) {
+            return entry.Type == TrainingType.Energy || entry.Type == TrainingType.Focus;
+        }
+
+        private int QueuedNodesAbove(int index) {
+            return TrainingQueue.GetRange(0, index).Count(EntryIsLevelling);
+        }
+
+        private int QueuedNodesNeededAbove(int slot, int tier) {
+            var needed = LevelsNeededForSlot(slot, tier) - TotalLevel;
+            return Mathf.Clamp(needed, 0, int.MaxValue);
         }
 
         public void MoveTrainingEntryUp(TrainingQueueEntry entry) {
@@ -444,7 +485,7 @@ namespace PsiTech.Psionics {
 
             if (entry.Type == TrainingType.Ability && entry.Def == null) return false;
 
-            if (entry.Type == TrainingType.Energy || entry.Type == TrainingType.Focus) {
+            if (EntryIsLevelling(entry)) {
                 entry.TrainingTimeSeconds = TrainingTimeForFocusEnergy();
             }
 
@@ -796,6 +837,7 @@ namespace PsiTech.Psionics {
             Scribe_Values.Look(ref AutocastEnabled, "AutocastEnabled", true);
             Scribe_Values.Look(ref HideAutocastToggleGizmo, "HideAutocastToggleGizmo");
 
+            Scribe_Values.Look(ref TrainingSuspended, "TrainingSuspended");
             Scribe_Collections.Look(ref TrainingQueue, "trainingQueue", LookMode.Deep);
             Scribe_Values.Look(ref nextTrainingId, "NextTrainingId");
 
