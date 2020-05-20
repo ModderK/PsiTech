@@ -53,14 +53,14 @@ namespace PsiTech.AI {
 
                 tickAction = delegate {
 
-                    if (!TargetA.IsValid) {
-                        EndJobWith(JobCondition.Succeeded);
+                    if (!TargetA.IsValid  || !TargetB.IsValid) {
+                        EndJobWith(JobCondition.Incompletable);
                         return;
                     }
 
                     var target = TargetThingB as Pawn;
-                    if (target?.Dead ?? true) {
-                        EndJobWith(JobCondition.Succeeded);
+                    if ((target?.Dead ?? true) || !(target.ParentHolder is Map)) {
+                        EndJobWith(JobCondition.Incompletable);
                         return;
                     }
 

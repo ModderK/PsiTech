@@ -632,7 +632,7 @@ namespace PsiTech.Psionics {
             var autocastable = Abilities.Where(ability => ability.CanAutocast).ToList();
 
             // Valid targets
-            var targets = pawn.Map.mapPawns.AllPawns.Where(p => p.needs.mood != null).ToList();
+            var targets = pawn.Map.mapPawns.AllPawns.Where(p => p.needs.mood != null && p.ParentHolder is Map).ToList();
 
             // Get entries
             var entries = new List<AutocastEntry>();

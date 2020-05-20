@@ -325,7 +325,7 @@ namespace PsiTech.Utility {
 
         static void Prefix(DamageInfo? dinfo, Pawn_HealthTracker __instance, Pawn ___pawn) {
 
-            if (__instance.Dead || !___pawn.PsiTracker().Activated) return;
+            if (__instance.Dead || !___pawn.PsiTracker().Activated || dinfo == null || dinfo.Value.Amount < 1e-4) return;
 
             var instigator = dinfo?.Instigator as Pawn;
             
