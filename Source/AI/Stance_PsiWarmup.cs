@@ -26,6 +26,9 @@ namespace PsiTech.AI {
         private bool targetStartedDowned;
         private bool showPie;
 
+        // For scribe
+        public Stance_PsiWarmup() { }
+        
         public Stance_PsiWarmup(int ticks, LocalTargetInfo target, bool showPie = false) : base(ticks, target, null) {
             this.showPie = showPie;
 
