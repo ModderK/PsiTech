@@ -100,6 +100,7 @@ namespace PsiTech.Training {
 
             timeLeft = -1;
             pawn.PsiTracker().ClearTrainingQueueLock();
+            curEntry = new TrainingQueueEntry();
         }
 
         public override string CompInspectStringExtra() {

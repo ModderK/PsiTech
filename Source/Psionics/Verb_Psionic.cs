@@ -27,7 +27,7 @@ namespace PsiTech.Psionics {
         private Pawn target;
 
         public void DoCast(Pawn t) {
-            this.target = t;
+            target = t;
             TryCastShot();
         }
 
@@ -53,7 +53,8 @@ namespace PsiTech.Psionics {
 
         public override void ExposeData() {
             base.ExposeData();
-            Scribe_Deep.Look(ref Ability, "Ability");
+            Scribe_References.Look(ref Ability, "Ability");
+            Scribe_References.Look(ref caster, "caster"); // Game doesn't save this for some reason
         }
     }
 }

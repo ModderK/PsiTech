@@ -46,7 +46,9 @@ namespace PsiTech.Utility {
         private int nextTrackerId;
         private int nextAbilityId;
 
-        public PsiTechManager(Game game) { }
+        public PsiTechManager(Game game) {
+            ExtensionMethods.Manager = this;
+        }
 
         public PsiTechTracker this[Pawn pawn] {
             get {

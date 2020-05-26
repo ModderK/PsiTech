@@ -28,7 +28,7 @@ namespace PsiTech.AI {
     public class JobDriver_SingleTargetPsionic : JobDriver {
 
         private float totalTicksRequired = 99999f;
-        private Verb_Psionic Verb => pawn.CurJob.verbToUse as Verb_Psionic;
+        private Verb_Psionic verb;
 
         public override bool TryMakePreToilReservations(bool errorOnFailed) {
             return true;
@@ -38,7 +38,13 @@ namespace PsiTech.AI {
             yield return Toils_Misc.ThrowColonistAttackingMote(TargetIndex.B);
             yield return new Toil{
                 initAction = delegate {
-                    ticksLeftThisToil = Verb.Ability.Def.CastTimeTicks;
+                    verb = pawn.CurJob.verbToUse as Verb_Psionic;
+                    if (verb == null) {
+                        Log.Error("PsiTech tried to start a SingleTargetPsionic job with no verb.");
+                        EndJobWith(JobCondition.Errored);
+                        return;
+                    }
+                    ticksLeftThisToil = verb.Ability.Def.CastTimeTicks;
                     totalTicksRequired = ticksLeftThisToil;
 
                     var target = TargetThingB as Pawn;
@@ -64,14 +70,14 @@ namespace PsiTech.AI {
                         return;
                     }
 
-                    if (!Verb.Ability.CanHitTarget(target)) {
+                    if (!verb.Ability.CanHitTarget(target)) {
                         EndJobWith(JobCondition.Incompletable);
                         return;
                     }
 
                     if (ticksLeftThisToil > 0) return;
 
-                    Verb.DoCast(TargetB.Thing as Pawn);
+                    verb.DoCast(TargetB.Thing as Pawn);
                     EndJobWith(JobCondition.Succeeded);
 
                 },
@@ -83,6 +89,7 @@ namespace PsiTech.AI {
         public override void ExposeData() {
             base.ExposeData();
             Scribe_Values.Look(ref totalTicksRequired, "TotalTicksRequired");
+            Scribe_Deep.Look(ref verb, "verb");
         }
     }
 }

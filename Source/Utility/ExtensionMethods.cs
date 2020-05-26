@@ -25,12 +25,14 @@ using Verse;
 namespace PsiTech.Utility {
     public static class ExtensionMethods {
 
+        public static PsiTechManager Manager;
+
         public static PsiTechTracker PsiTracker(this Pawn pawn) {
-            return Current.Game.GetComponent<PsiTechManager>()[pawn];
+            return Manager[pawn];
         }
 
         public static PsiTechEquipmentTracker PsiEquipmentTracker(this Thing thing) {
-            return Current.Game.GetComponent<PsiTechManager>()[thing];
+            return Manager[thing];
         }
 
         public static float TicksToHours(this int numTicks) {

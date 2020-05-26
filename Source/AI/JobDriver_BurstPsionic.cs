@@ -29,8 +29,8 @@ namespace PsiTech.AI {
         private float totalTicksRequired = 99999f;
         private const float DamageInterruptMin = 1f;
         private bool jobInterrupted;
-        private Verb_Psionic Verb => pawn.CurJob.verbToUse as Verb_Psionic;
-        
+        private Verb_Psionic verb;
+
         public override bool TryMakePreToilReservations(bool errorOnFailed) {
             return true;
         }
@@ -38,7 +38,13 @@ namespace PsiTech.AI {
         protected override IEnumerable<Toil> MakeNewToils() {
             yield return new Toil{
                 initAction = delegate {
-                    ticksLeftThisToil = Verb.Ability.Def.CastTimeTicks;
+                    verb = pawn.CurJob.verbToUse as Verb_Psionic;
+                    if (verb == null) {
+                        Log.Error("PsiTech tried to start a BurstPsionic job with no verb.");
+                        EndJobWith(JobCondition.Errored);
+                        return;
+                    }
+                    ticksLeftThisToil = verb.Ability.Def.CastTimeTicks;
                     totalTicksRequired = ticksLeftThisToil;
                     pawn.stances.SetStance(new Stance_PsiWarmup(ticksLeftThisToil, pawn.Position + IntVec3.South * 2,
                         true));
@@ -52,7 +58,7 @@ namespace PsiTech.AI {
 
                     if (ticksLeftThisToil > 0) return;
 
-                    Verb.DoCast(null);
+                    verb.DoCast(null);
                     EndJobWith(JobCondition.Succeeded);
                 },
 
@@ -71,6 +77,7 @@ namespace PsiTech.AI {
         public override void ExposeData() {
             base.ExposeData();
             Scribe_Values.Look(ref totalTicksRequired, "TotalTicksRequired");
+            Scribe_Deep.Look(ref verb, "verb");
         }
     }
 }
