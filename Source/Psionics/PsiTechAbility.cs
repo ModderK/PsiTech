@@ -43,7 +43,6 @@ namespace PsiTech.Psionics {
             verb ??= new Verb_Psionic {
                 Ability = this,
                 caster = User,
-                verbProps = new VerbProperties()
             };
 
         // Autocast and AI control variables

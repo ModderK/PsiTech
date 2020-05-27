@@ -75,7 +75,7 @@
             <useDeflectMetalEffect>true</useDeflectMetalEffect>
             <tags>
                 <li>ExoticPsiCommando</li>
-                <li>RoyalCombatGear</li>
+                <li>PrestigeCombatGear</li>
             </tags>
         </apparel>
     </ThingDef>
@@ -128,7 +128,7 @@
             <useDeflectMetalEffect>true</useDeflectMetalEffect>
             <tags>
                 <li>ExoticPsiCommando</li>
-                <li>RoyalCombatGear</li>
+                <li>PrestigeCombatGear</li>
             </tags>
         </apparel>
     </ThingDef>
@@ -191,7 +191,7 @@
             <useDeflectMetalEffect>true</useDeflectMetalEffect>
             <tags>
                 <li>ExoticPsiWarrior</li>
-                <li>RoyalCombatGear</li>
+                <li>PrestigeCombatGear</li>
             </tags>
         </apparel>
     </ThingDef>
@@ -243,7 +243,7 @@
             <useDeflectMetalEffect>true</useDeflectMetalEffect>
             <tags>
                 <li>ExoticPsiWarrior</li>
-                <li>RoyalCombatGear</li>
+                <li>PrestigeCombatGear</li>
             </tags>
         </apparel>
     </ThingDef>
@@ -305,7 +305,7 @@
             <useDeflectMetalEffect>true</useDeflectMetalEffect>
             <tags>
                 <li>ExoticPsiConduit</li>
-                <li>RoyalCombatGear</li>
+                <li>PrestigeCombatGear</li>
             </tags>
         </apparel>
     </ThingDef>
@@ -357,7 +357,7 @@
             <useDeflectMetalEffect>true</useDeflectMetalEffect>
             <tags>
                 <li>ExoticPsiConduit</li>
-                <li>RoyalCombatGear</li>
+                <li>PrestigeCombatGear</li>
             </tags>
         </apparel>
     </ThingDef>

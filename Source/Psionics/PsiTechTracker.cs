@@ -21,6 +21,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using PsiTech.AutocastManagement;
 using PsiTech.Utility;
 using RimWorld;
@@ -637,7 +638,7 @@ namespace PsiTech.Psionics {
             // Get entries
             var entries = new List<AutocastEntry>();
             foreach (var ability in autocastable) {
-                entries.Add(ability.TryGetAutocastEntry(targets.ListFullCopy()));
+                entries.Add(ability.TryGetAutocastEntry(targets));
             }
 
             // Remove entries without targets

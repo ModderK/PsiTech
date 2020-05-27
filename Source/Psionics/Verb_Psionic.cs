@@ -26,6 +26,10 @@ namespace PsiTech.Psionics {
         public PsiTechAbility Ability;
         private Pawn target;
 
+        public Verb_Psionic() {
+            verbProps = new VerbProperties();
+        }
+
         public void DoCast(Pawn t) {
             target = t;
             TryCastShot();
@@ -33,7 +37,7 @@ namespace PsiTech.Psionics {
 
         public override bool CanHitTargetFrom(IntVec3 root, LocalTargetInfo targ) {
             var pawn = (Pawn)targ;
-            return (pawn != null) && root.InHorDistOf(targ.Cell, Ability.Def.Range) && Ability.CanHitTarget((Pawn) targ);
+            return pawn != null && root.InHorDistOf(targ.Cell, Ability.Def.Range) && Ability.CanHitTarget((Pawn) targ);
         }
 
         protected override bool TryCastShot() {

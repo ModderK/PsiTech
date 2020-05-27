@@ -53,7 +53,6 @@ namespace PsiTech.Utility {
             }
             
             // Cache psychic sensitivity for the suppression field just in case
-            // Cache psychic sensitivity for the suppression field just in case
             if (!CachedAffectedStats.Contains(StatDefOf.PsychicSensitivity)) {
                 CachedAffectedStats.Add(StatDefOf.PsychicSensitivity);
             }
