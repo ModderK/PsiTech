@@ -25,7 +25,7 @@ using Verse;
 namespace PsiTech.AutocastManagement {
     public class AutocastFilterSelector_Closest : AutocastFilterSelector {
         
-        public override Pawn SelectBestTarget(Pawn user, List<Pawn> targets, PsiTechAbility ability, bool inverted) {
+        public override Pawn SelectBestTarget(Pawn user, IEnumerable<Pawn> targets, PsiTechAbility ability, bool inverted) {
             return inverted
                 ? targets.MaxBy(target => target.Position.DistanceTo(user.Position))
                 : targets.MinBy(target => target.Position.DistanceTo(user.Position));

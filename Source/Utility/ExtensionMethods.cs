@@ -18,6 +18,7 @@
  *
  */
 
+using System.Collections.Generic;
 using PsiTech.Misc;
 using PsiTech.Psionics;
 using Verse;
@@ -33,6 +34,10 @@ namespace PsiTech.Utility {
 
         public static PsiTechEquipmentTracker PsiEquipmentTracker(this Thing thing) {
             return Manager[thing];
+        }
+
+        public static HashSet<Pawn> PotentialPsiTargets(this Map map) {
+            return PsiTechMapTargetPawnsUtility.TargetPawnUtilities.TryGetValue(map, out var utility) ? utility.PotentialTargetPawns : null;
         }
 
         public static float TicksToHours(this int numTicks) {

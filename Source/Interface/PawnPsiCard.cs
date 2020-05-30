@@ -74,7 +74,8 @@ namespace PsiTech.Interface {
         private const float YSeparationForSections = 10f;
 
         private const float NodeTitleWidth = 90f;
-        private const float EnergyIconSize = 32f;
+        private const float EnergyIconWidth = 52f;
+        private const float EnergyIconHeight = 32f;
         private const float EnergyIconBarSeparation = 15f;
         private const float EnergyBarHeight = 20f;
         private const float EnergyBarWidth = 200f;
@@ -82,8 +83,8 @@ namespace PsiTech.Interface {
         private const float EnergyBarFocusSeparation = 15f;
         private const float FocusIconWidth = 52f;
         private const float FocusIconHeight = 32f;
-        private const float ExtraEnergyNodePadding = 27f;
-        private const float ExtraFocusNodePadding = 12f;
+        private const float ExtraEnergyNodePadding = 18f;
+        private const float ExtraFocusNodePadding = 13f;
 
         private const float EssenceWidth = 115f;
         private const float PsychicSensitivityWidth = 175f;
@@ -154,7 +155,7 @@ namespace PsiTech.Interface {
                 _ => throw new ArgumentOutOfRangeException()
             };
 
-            var energyNodesRect = new Rect(xAnchor + ExtraEnergyNodePadding, yAnchor, EnergyIconSize, EnergyIconSize);
+            var energyNodesRect = new Rect(xAnchor + ExtraEnergyNodePadding, yAnchor, EnergyIconWidth, EnergyIconHeight);
             if (Widgets.ButtonImage(energyNodesRect, energyIcon) && (PsiTechManager.PsiTechDebug || pawn.IsColonist)) {
                 if (_devInstantTraining) {
                     pawn.PsiTracker().EnergyLevel += 1;
@@ -178,7 +179,7 @@ namespace PsiTech.Interface {
             xAnchor += NodeTitleWidth + EnergyIconBarSeparation;
 
             // Psi Energy Bar
-            var energyBarRect = new Rect(xAnchor, yAnchor + (EnergyIconSize - EnergyBarHeight) / 2, EnergyBarWidth,
+            var energyBarRect = new Rect(xAnchor, yAnchor + (EnergyIconHeight - EnergyBarHeight) / 2, EnergyBarWidth,
                 EnergyBarHeight);
             var energyBar = Widgets.FillableBar(energyBarRect, pawn.PsiTracker().EnergyPercentOfMax());
 

@@ -26,7 +26,7 @@ namespace PsiTech.AutocastManagement {
         
         public override float Height => 92f;
 
-        public override void Draw(Rect inRect, AutocastFilter_SingleTarget filter) {
+        public override void Draw(Rect inRect, AutocastFilter filter) {
             Widgets.DrawBoxSolid(inRect, new Color(21f/256f, 25f/256f, 29f/256f));
 
             var drawBox = inRect.ContractedBy(5f);

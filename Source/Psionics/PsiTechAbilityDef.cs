@@ -57,6 +57,8 @@ namespace PsiTech.Psionics {
         public List<StatModifier> StatFactors = new List<StatModifier>();
         
         public List<AbilityEffect> PossibleEffects = new List<AbilityEffect>();
+        
+        public List<AbilityEffect> PossibleEffectsOnUser = new List<AbilityEffect>();
 
         public List<PawnCapacityModifier> CapMods = new List<PawnCapacityModifier>();
         
@@ -161,6 +163,13 @@ namespace PsiTech.Psionics {
                         GenerateEffectValueString(effect), (int) Math.Round(effect.Weight * 10));
                 }
             }
+            
+            if (!PossibleEffectsOnUser.NullOrEmpty()) {
+                foreach (var effect in PossibleEffectsOnUser) {
+                    yield return new StatDrawEntry(PsiTechDefOf.PTEffectsOnUser, effect.Title, "",
+                        GenerateEffectValueString(effect, true), (int) Math.Round(effect.Weight * 10));
+                }
+            }
 
             if (!StatOffsets.NullOrEmpty()) {
                 foreach (var offset in StatOffsets) {
@@ -189,21 +198,21 @@ namespace PsiTech.Psionics {
             }
         }
 
-        private string GenerateEffectValueString(AbilityEffect effect) {
+        private string GenerateEffectValueString(AbilityEffect effect, bool onUser = false) {
             var sb = new StringBuilder();
             sb.AppendLine(effect.Title);
             sb.AppendLine();
             sb.AppendLine(effect.Description);
             sb.AppendLine();
-            sb.AppendLine(EffectProbabilityKey.Translate(GetProbabilityOfEffect(effect).ToStringPercent()));
+            sb.AppendLine(EffectProbabilityKey.Translate(GetProbabilityOfEffect(effect, onUser).ToStringPercent()));
             sb.AppendLine();
             sb.AppendLine(effect.ExtraListingString());
             
             return sb.ToString();
         }
 
-        private float GetProbabilityOfEffect(AbilityEffect effect) {
-            return effect.Weight / PossibleEffects.Sum(possible => possible.Weight);
+        private float GetProbabilityOfEffect(AbilityEffect effect, bool onUser) {
+            return effect.Weight / (onUser ? PossibleEffectsOnUser : PossibleEffects).Sum(possible => possible.Weight);
         }
     }
 }

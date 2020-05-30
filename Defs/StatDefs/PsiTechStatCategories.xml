@@ -32,21 +32,27 @@
     </StatCategoryDef>
 
     <StatCategoryDef>
+        <defName>PTEffectsOnUser</defName>
+        <label>Possible Effects On User</label>
+        <displayOrder>40</displayOrder>
+    </StatCategoryDef>
+
+    <StatCategoryDef>
         <defName>PTStatOffsets</defName>
         <label>Stat Offsets</label>
-        <displayOrder>40</displayOrder>
+        <displayOrder>50</displayOrder>
     </StatCategoryDef>
 
     <StatCategoryDef>
         <defName>PTStatFactors</defName>
         <label>Stat Factors</label>
-        <displayOrder>50</displayOrder>
+        <displayOrder>60</displayOrder>
     </StatCategoryDef>
     
     <StatCategoryDef>
         <defName>PTCapMods</defName>
         <label>Capacity Modifiers</label>
-        <displayOrder>60</displayOrder>
+        <displayOrder>70</displayOrder>
     </StatCategoryDef>
     
     <!-- Stat category for psionics stats -->

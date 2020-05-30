@@ -27,7 +27,7 @@ namespace PsiTech.AutocastManagement {
 
         public AutocastFilterSelectorDef Def;
         
-        public abstract Pawn SelectBestTarget(Pawn user, List<Pawn> targets, PsiTechAbility ability, bool inverted);
+        public abstract Pawn SelectBestTarget(Pawn user, IEnumerable<Pawn> targets, PsiTechAbility ability, bool inverted);
         
         public void ExposeData() {
             Scribe_Defs.Look(ref Def, "Def");

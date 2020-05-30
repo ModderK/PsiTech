@@ -25,7 +25,7 @@ using Verse;
 namespace PsiTech.AutocastManagement {
     public class AutocastFilterSelector_LowestHealthPercent : AutocastFilterSelector {
         
-        public override Pawn SelectBestTarget(Pawn user, List<Pawn> targets, PsiTechAbility ability, bool invert) {
+        public override Pawn SelectBestTarget(Pawn user, IEnumerable<Pawn> targets, PsiTechAbility ability, bool invert) {
             return invert
                 ? targets.MaxBy(target => target.health.summaryHealth.SummaryHealthPercent)
                 : targets.MinBy(target => target.health.summaryHealth.SummaryHealthPercent);

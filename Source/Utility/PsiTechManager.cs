@@ -48,6 +48,10 @@ namespace PsiTech.Utility {
 
         public PsiTechManager(Game game) {
             ExtensionMethods.Manager = this;
+
+            if (Scribe.mode == LoadSaveMode.LoadingVars) {
+                PsiTechMapTargetPawnsUtility.TargetPawnUtilities.Clear();
+            }
         }
 
         public PsiTechTracker this[Pawn pawn] {

@@ -696,4 +696,28 @@ namespace PsiTech.Utility {
 
     }
 
+    // This pair of patches is for keeping track of potential targets on a map
+    // Vanilla has a way to do this already but it's dreadfully slow, so building our own cache is a much better idea
+    [HarmonyPatch(typeof(MapPawns), "RegisterPawn")]
+    public class MapPawnRegisterPatch {
+
+        public static void Postfix(Pawn p, Map ___map) {
+            if(!PsiTechMapTargetPawnsUtility.TargetPawnUtilities.TryGetValue(___map, out var utility)) return;
+            
+            utility.Notify_PawnSpawned(p);
+        }
+        
+    }
+    
+    [HarmonyPatch(typeof(MapPawns), "DeRegisterPawn")]
+    public class MapPawnDeregisterPatch {
+
+        public static void Postfix(Pawn p, Map ___map) {
+            if(!PsiTechMapTargetPawnsUtility.TargetPawnUtilities.TryGetValue(___map, out var utility)) return;
+            
+            utility.Notify_PawnDespawned(p);
+        }
+        
+    }
+
 }

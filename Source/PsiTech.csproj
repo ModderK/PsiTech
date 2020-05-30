@@ -105,6 +105,7 @@
     <Compile Include="AbilityEffects\AbilityEffectHeal.cs" />
     <Compile Include="AbilityEffects\AbilityEffectMentalBreak.cs" />
     <Compile Include="AbilityEffects\AbilityEffectMentalState.cs" />
+    <Compile Include="AbilityEffects\AbilityEffectNothing.cs" />
     <Compile Include="AbilityEffects\AbilityEffectRemoveMentalState.cs" />
     <Compile Include="AbilityEffects\AbilityEffectSkillTransfer.cs" />
     <Compile Include="AbilityEffects\AbilityEffectStun.cs" />
@@ -201,6 +202,7 @@
     <Compile Include="Utility\PsiTechCachingUtility.cs" />
     <Compile Include="Utility\PsiTechDefOf.cs" />
     <Compile Include="Utility\PsiTechManager.cs" />
+    <Compile Include="Utility\PsiTechMapTargetPawnsUtility.cs" />
     <Compile Include="Utility\PsiTechRenderUtility.cs" />
     <Compile Include="Utility\PsiTechSettings.cs" />
     <Compile Include="Utility\PsiTechSkillTransferUtility.cs" />

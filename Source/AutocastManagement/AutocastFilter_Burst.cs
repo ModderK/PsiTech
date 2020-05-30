@@ -19,6 +19,7 @@
  */
 
 using System.Collections.Generic;
+using System.Linq;
 using PsiTech.Utility;
 using UnityEngine;
 using Verse;
@@ -42,15 +43,21 @@ namespace PsiTech.AutocastManagement {
         private const float TargetTypeLabelWidth = 140f;
         private const float TargetTypeDropdownWidth = 120f;
         
-        public override Pawn GetBestTarget(List<Pawn> targets) {
-            targets.RemoveAll(target => !TargetRange.Contains(target.Position.DistanceTo(User.Position)));
-            FilterForTargetType(ref targets);
-
-            return targets.Count >= MinTargetsInRange ? new Pawn() : null;
+        public override Pawn GetBestTarget(IEnumerable<Pawn> targets) {
+            return GetValidTargetsCount(targets) >= MinTargetsInRange ? new Pawn() : null;
         }
 
+        private int GetValidTargetsCount(IEnumerable<Pawn> targets) {
+            return targets.Count(target =>
+                TargetRange.Contains(target.Position.DistanceTo(User.Position)) && TargetMatchesTargetType(target) &&
+                AdditionalFilters.All(filter => filter.TargetMeetsFilter(target)));
+        }
+        
         public override void Draw(Rect inRect) {
-            Widgets.DrawBoxSolid(inRect, new Color(21f/256f, 25f/256f, 29f/256f));
+            
+            ResolveRemovedFilters();
+            
+            Widgets.DrawBoxSolid(new Rect(inRect.x, inRect.y, inRect.width, 87f), new Color(21f/256f, 25f/256f, 29f/256f));
 
             var drawBox = inRect.ContractedBy(5f);
             
@@ -80,6 +87,11 @@ namespace PsiTech.AutocastManagement {
             Widgets.Dropdown(new Rect(xAnchor, yAnchor, TargetTypeDropdownWidth, OptionHeight), FilterTargetType,
                 type => type.ToString(), priority => GenerateTargetTypeOptions(),
                 LocalizeTargetType(FilterTargetType));
+            
+            // Draw additional filters
+            xAnchor = drawBox.x;
+            yAnchor += OptionHeight + 2 * YSeparation;
+            DrawAdditionalFilters(drawBox, xAnchor, yAnchor);
 
         }
 

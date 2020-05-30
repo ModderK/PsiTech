@@ -82,6 +82,7 @@ namespace PsiTech.Psionics {
             if (success) {
                 Def.SoundDefSuccessOnCaster?.PlayOneShot(new TargetInfo(User.Position, User.Map));
                 Def.SoundDefSuccessOnTarget?.PlayOneShot(new TargetInfo(instigator.Position, instigator.Map));
+                TryPickAndDoEffectOnUser();
             }
             else {
                 Def.SoundDefFailure.PlayOneShot(new TargetInfo(User.Position, User.Map));

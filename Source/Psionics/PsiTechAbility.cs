@@ -105,6 +105,8 @@ namespace PsiTech.Psionics {
         }
 
         protected virtual bool TryPickAndDoEffect(Pawn target) {
+            if (!Def.PossibleEffects.Any()) return false;
+            
             var weightsTotal = Def.PossibleEffects.Sum(ef => ef.Weight);
             var rand = Rand.Value * weightsTotal;
 
@@ -112,6 +114,22 @@ namespace PsiTech.Psionics {
                 rand -= possible.Weight;
                 if (rand <= 0) {
                     return possible.TryDoEffectOnPawn(User, target);
+                }
+            }
+
+            return false;
+        }
+        
+        protected virtual bool TryPickAndDoEffectOnUser() {
+            if (!Def.PossibleEffectsOnUser.Any()) return false;
+            
+            var weightsTotal = Def.PossibleEffectsOnUser.Sum(ef => ef.Weight);
+            var rand = Rand.Value * weightsTotal;
+
+            foreach (var possible in Def.PossibleEffectsOnUser) {
+                rand -= possible.Weight;
+                if (rand <= 0) {
+                    return possible.TryDoEffectOnPawn(User, User);
                 }
             }
 
@@ -173,7 +191,7 @@ namespace PsiTech.Psionics {
             return false;
         }
 
-        public virtual AutocastEntry TryGetAutocastEntry(List<Pawn> targets) {
+        public virtual AutocastEntry TryGetAutocastEntry(IEnumerable<Pawn> targets) {
 
             if (!CanCast() || AutocastConditions.Any(condition => !condition.CanDoAutocast())) {
                 return new AutocastEntry{
@@ -181,11 +199,11 @@ namespace PsiTech.Psionics {
                     Target = null
                 };
             }
-            
-            targets.RemoveAll(target => !Def.TargetValidator.IsValidTarget(User, target) || !target.Position.InHorDistOf(User.Position, Def.Range));
+
+            var possibleTargets = targets.Where(target => Def.TargetValidator.IsValidTarget(User, target) && target.Position.InHorDistOf(User.Position, Def.Range));
             return new AutocastEntry{
                 Ability = this,
-                Target = AutocastFilter.GetBestTarget(targets)
+                Target = AutocastFilter.GetBestTarget(possibleTargets)
             };
         }
 

@@ -25,7 +25,7 @@ using Verse;
 namespace PsiTech.AutocastManagement {
     public class AutocastFilterSelector_LowestMood : AutocastFilterSelector {
         
-        public override Pawn SelectBestTarget(Pawn user, List<Pawn> targets, PsiTechAbility ability, bool inverted) {
+        public override Pawn SelectBestTarget(Pawn user, IEnumerable<Pawn> targets, PsiTechAbility ability, bool inverted) {
             return inverted
                 ? targets.MaxBy(target => target.needs.mood.CurLevelPercentage)
                 : targets.MinBy(target => target.needs.mood.CurLevelPercentage);

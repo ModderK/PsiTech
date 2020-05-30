@@ -48,7 +48,7 @@ namespace PsiTech.AutocastManagement {
         public abstract bool TargetMeetsFilter(Pawn target);
 
         public virtual float Height => 100f;
-        public abstract void Draw(Rect inRec, AutocastFilter_SingleTarget filter);
+        public abstract void Draw(Rect inRec, AutocastFilter filter);
 
         protected void DrawTopMatter(float xAnchor, ref float yAnchor, float width) {
             
@@ -68,7 +68,7 @@ namespace PsiTech.AutocastManagement {
             xAnchor += InvertCheckSize + XSeparation;
         }
         
-        protected void DrawBottomMatter(float xAnchor, float yAnchor, float width, AutocastFilter_SingleTarget filter) {
+        protected void DrawBottomMatter(float xAnchor, float yAnchor, float width, AutocastFilter filter) {
 
             // Draw info button
             Widgets.InfoCardButton(xAnchor, yAnchor, Def);

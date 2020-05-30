@@ -42,7 +42,7 @@ namespace PsiTech.Psionics {
         private int loadId;
         public bool Activated;
         public const int ActivationTimeSeconds = 2 * DayToSeconds;
-        public const int RemoveTimeSeconds = DayToSeconds/2;
+        public const int RemoveTimeSeconds = DayToSeconds / 2;
         public bool AutocastEnabled = true;
         public bool HideAutocastToggleGizmo;
 
@@ -52,10 +52,49 @@ namespace PsiTech.Psionics {
         public List<TrainingQueueEntry> TrainingQueue = new List<TrainingQueueEntry>();
         private int nextTrainingId;
 
-        public float AbilityModifier => PsychicSensitivity * Essence;
-        private float cachedAbilityModifier;
-        public float PsychicSensitivity => pawn.GetStatValue(StatDefOf.PsychicSensitivity);
+        public float AbilityModifier;
+        private float abilityModifier => PsychicSensitivity * Essence;
+
         public float Essence => GetEssenceModifier();
+
+        public float PsychicSensitivity {
+            get {
+                if (hasCachedSensitivity) return psychicSensitivity;
+
+                psychicSensitivity = pawn.GetStatValue(StatDefOf.PsychicSensitivity);
+                hasCachedSensitivity = true;
+                return psychicSensitivity;
+            }
+        }
+
+        private float psychicSensitivity;
+        private bool hasCachedSensitivity;
+
+        private float ProjectionAbility {
+            get {
+                if (hasCachedProjection) return projectionAbility;
+
+                projectionAbility = pawn.GetStatValue(PsiTechDefOf.PTPsiProjectionAbility);
+                hasCachedProjection = true;
+                return projectionAbility;
+            }
+        }
+
+        private float projectionAbility;
+        private bool hasCachedProjection;
+
+        private float PsiDefense {
+            get {
+                if (hasCachedDefense) return psiDefense;
+
+                psiDefense = pawn.GetStatValue(PsiTechDefOf.PTPsiDefence);
+                hasCachedDefense = true;
+                return psiDefense;
+            }
+        }
+
+        private float psiDefense;
+        private bool hasCachedDefense;
 
         private int focusLevel = 1;
         private const int MaxFocusLevel = 3;
@@ -100,7 +139,7 @@ namespace PsiTech.Psionics {
         public const int Tier2Abilities = 4;
         public const int Tier3Abilities = 2;
 
-        private static int[][] LevelForSlot = {new [] {2, 2, 3, 3, 4, 4, 4, 4}, new [] {3, 4, 5, 5}, new [] {4, 5}};
+        private static int[][] LevelForSlot = {new[] {2, 2, 3, 3, 4, 4, 4, 4}, new[] {3, 4, 5, 5}, new[] {4, 5}};
 
         private bool lastCachedDebug;
         private bool lastCachedDraft;
@@ -133,8 +172,12 @@ namespace PsiTech.Psionics {
                 lastCachedDebug = Prefs.DevMode && PsiTechManager.PsiTechDebug;
             }
 
-            if (AbilityModifier != cachedAbilityModifier) {
-                cachedAbilityModifier = AbilityModifier;
+            // There's no better way to invalidate our caches unfortunately, since there's no notify methods
+            ClearStatCaches();
+
+            var current = abilityModifier;
+            if (current != AbilityModifier) {
+                AbilityModifier = current;
                 ClearCaches();
             }
 
@@ -269,9 +312,10 @@ namespace PsiTech.Psionics {
         }
 
         public PsiTechAbility AddAbility(int slot, PsiTechAbilityDef def) {
-            var abilityInSlot = Abilities.Find(existingAbility => existingAbility.Def.Tier == def.Tier && existingAbility.Slot == slot);
+            var abilityInSlot = Abilities.Find(existingAbility =>
+                existingAbility.Def.Tier == def.Tier && existingAbility.Slot == slot);
             if (abilityInSlot != null) Abilities.Remove(abilityInSlot);
-            
+
             def.ConflictingAbilities.ForEach(conflict => Abilities.RemoveAll(existing => existing.Def == conflict));
 
             var ability = (PsiTechAbility) Activator.CreateInstance(def.AbilityClass);
@@ -299,6 +343,7 @@ namespace PsiTech.Psionics {
             Abilities.Add(ability);
 
             ClearCaches();
+            ClearStatCaches();
             hasCachedGizmos = false;
 
             return ability;
@@ -310,6 +355,7 @@ namespace PsiTech.Psionics {
                 Abilities.Remove(abilityToRemove);
                 hasCachedGizmos = false;
                 ClearCaches();
+                ClearStatCaches();
             }
         }
 
@@ -373,9 +419,10 @@ namespace PsiTech.Psionics {
                 var toRemove = TrainingQueue.Where((existing, k) =>
                     existing.Type == TrainingType.Ability &&
                     QueuedNodesAbove(k) < QueuedNodesNeededAbove(existing.Slot, existing.Def.Tier)).ToList();
-                
+
                 toRemove.ForEach(RemoveTrainingEntry);
-            }else if (entry.Type == TrainingType.Ability) {
+            }
+            else if (entry.Type == TrainingType.Ability) {
                 foreach (var req in TrainingQueue.Where(existing =>
                         existing.Type == TrainingType.Ability && existing.Def.RequiredAbilities.Contains(entry.Def))
                     .ToList().ListFullCopy()) {
@@ -383,7 +430,7 @@ namespace PsiTech.Psionics {
                 }
             }
         }
-        
+
         private static bool EntryIsLevelling(TrainingQueueEntry entry) {
             return entry.Type == TrainingType.Energy || entry.Type == TrainingType.Focus;
         }
@@ -421,12 +468,12 @@ namespace PsiTech.Psionics {
             if (existing.Def != null) {
                 RemoveTrainingEntry(existing);
             }
-            
+
             var entry = new TrainingQueueEntry {
                 Type = TrainingType.Ability,
                 Def = def,
                 Id = nextTrainingId++,
-                TrainingTimeSeconds = (int)(def.TrainingTimeDays * DayToSeconds),
+                TrainingTimeSeconds = (int) (def.TrainingTimeDays * DayToSeconds),
                 Slot = slot
             };
             TrainingQueue.Add(entry);
@@ -439,7 +486,7 @@ namespace PsiTech.Psionics {
             if (existing.Def != null) {
                 RemoveTrainingEntry(existing);
             }
-            
+
             var entry = new TrainingQueueEntry {
                 Type = TrainingType.Remove,
                 Def = defToRemove,
@@ -456,8 +503,8 @@ namespace PsiTech.Psionics {
                 Id = nextTrainingId++,
             };
             TrainingQueue.Add(entry);
-        }    
-        
+        }
+
         public void AddEnergyToTrainingQueue() {
             var entry = new TrainingQueueEntry {
                 Type = TrainingType.Energy,
@@ -465,23 +512,25 @@ namespace PsiTech.Psionics {
             };
             TrainingQueue.Add(entry);
         }
-        
+
         private int TrainingTimeForFocusEnergy() {
             return (int) (Mathf.Pow(2, TotalLevel - 2) * DayToSeconds);
         }
 
         public int QueuedFocus => TrainingQueue.Count(entry => entry.Type == TrainingType.Focus);
+
         public bool CanAddFocusToTrainingQueue() {
             return FocusLevel + QueuedFocus < MaxFocusLevel;
         }
 
         public int QueuedEnergy => TrainingQueue.Count(entry => entry.Type == TrainingType.Energy);
+
         public bool CanAddEnergyToTrainingQueue() {
             return EnergyLevel + QueuedEnergy < MaxEnergyLevel;
         }
-        
+
         public bool TryBeginNextTrainingEntry(out TrainingQueueEntry entry) {
-            
+
             entry = TrainingQueue.FirstOrDefault();
 
             if (entry.Type == TrainingType.Ability && entry.Def == null) return false;
@@ -497,7 +546,7 @@ namespace PsiTech.Psionics {
 
         public void ClearTrainingQueueLock() {
             var entry = TrainingQueue.FirstOrDefault();
-            
+
             if (entry.Type == TrainingType.Ability && entry.Def == null) return;
 
             entry.Locked = false;
@@ -537,7 +586,7 @@ namespace PsiTech.Psionics {
 
             TrainingQueue.Remove(entry);
         }
-        
+
         public float TotalAddedValueForThreat() {
             return Abilities.Sum(ability => ability.Def.AddedValueForThreat);
         }
@@ -598,7 +647,7 @@ namespace PsiTech.Psionics {
         }
 
         public float GetTotalModifierActive() {
-            return AbilityModifier * pawn.GetStatValue(PsiTechDefOf.PTPsiProjectionAbility);
+            return AbilityModifier * ProjectionAbility;
         }
 
         public bool CanUseActiveAbilities() {
@@ -611,8 +660,7 @@ namespace PsiTech.Psionics {
 
         public float GetTotalModifierSensitivity() {
             return Mathf.Clamp(
-                (PsychicSensitivity * pawn.GetStatValue(PsiTechDefOf.PTPsiProjectionAbility) -
-                 pawn.GetStatValue(PsiTechDefOf.PTPsiDefence)) * Mathf.Max(GetEssenceModifier(), 0.5f), 0,
+                (PsychicSensitivity * ProjectionAbility - PsiDefense) * Mathf.Max(GetEssenceModifier(), 0.5f), 0,
                 Mathf.Infinity);
         }
 
@@ -633,7 +681,8 @@ namespace PsiTech.Psionics {
             var autocastable = Abilities.Where(ability => ability.CanAutocast).ToList();
 
             // Valid targets
-            var targets = pawn.Map.mapPawns.AllPawns.Where(p => p.needs.mood != null && p.ParentHolder is Map).ToList();
+            var targets = pawn.Map.PotentialPsiTargets();
+            if (targets == null) return null;
 
             // Get entries
             var entries = new List<AutocastEntry>();
@@ -697,15 +746,15 @@ namespace PsiTech.Psionics {
 
             // Ensure responsiveness to drafting and undrafting when paused
             if (pawn.Drafted != lastCachedDraft) hasCachedGizmos = false;
-            
+
             // Ensure responsiveness to changing the gizmo status when paused
             if (HideAutocastToggleGizmo != lastCachedHideAutocastGizmo) hasCachedGizmos = false;
-            
+
             // And all the stats and such
             if (lastCachedAbilityModifier != AbilityModifier ||
-                lastCachedProjectionStat != pawn.GetStatValue(PsiTechDefOf.PTPsiProjectionAbility))
+                lastCachedProjectionStat != ProjectionAbility)
                 hasCachedGizmos = false;
-            
+
             if (hasCachedGizmos) return cachedGizmos;
 
             // Rebuild cache if needed
@@ -739,7 +788,7 @@ namespace PsiTech.Psionics {
             lastCachedDraft = pawn.Drafted;
             lastCachedHideAutocastGizmo = HideAutocastToggleGizmo;
             lastCachedAbilityModifier = AbilityModifier;
-            lastCachedProjectionStat = pawn.GetStatValue(PsiTechDefOf.PTPsiProjectionAbility);
+            lastCachedProjectionStat = ProjectionAbility;
             hasCachedGizmos = true;
 
             return gizmos;
@@ -825,7 +874,13 @@ namespace PsiTech.Psionics {
             cachedStatFactors.Clear();
         }
 
-        public string GetUniqueLoadID() {
+        public void ClearStatCaches() {
+            hasCachedProjection = false;
+            hasCachedSensitivity = false;
+            hasCachedDefense = false;
+        }
+
+    public string GetUniqueLoadID() {
             return "PsiTechTracker_" + loadId;
         }
 
@@ -847,6 +902,11 @@ namespace PsiTech.Psionics {
             Scribe_Values.Look(ref currentEnergy, "CurrentEnergy");
 
             Scribe_Collections.Look(ref Abilities, "Abilities", LookMode.Deep);
+
+            // So we don't have to tick to build the fill the cache after a load
+            if (Scribe.mode == LoadSaveMode.PostLoadInit) {
+                AbilityModifier = abilityModifier;
+            }
         }
 
         // This is pretty terrible, but it is what it is

@@ -97,7 +97,7 @@
         <EnergyPerUse>150</EnergyPerUse>
         <CooldownSeconds>1000</CooldownSeconds>
         <BaseSuccessChance>1</BaseSuccessChance>
-        <PossibleEffects>
+        <PossibleEffectsOnUser>
             <li Class="PsiTech.AbilityEffects.AbilityEffectHeal">
                 <Title>Resurgence</Title>
                 <Description>Heals wounds on the user.</Description>
@@ -112,7 +112,7 @@
                 <BaseHeal>200</BaseHeal>
                 <IsPassive>true</IsPassive>
             </li>
-        </PossibleEffects>
+        </PossibleEffectsOnUser>
         <AlwaysHits>true</AlwaysHits>
         <SoundDefSuccessOnCaster>PTPhoenixOneshot</SoundDefSuccessOnCaster>
         <MoteOnTarget>PTMotePsiBlastGood</MoteOnTarget>

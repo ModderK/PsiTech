@@ -35,7 +35,7 @@
         </mote>
     </ThingDef>
     
-        <ThingDef ParentName="MoteBase">
+    <ThingDef ParentName="MoteBase">
         <defName>PTMotePsiBlastGood</defName>
         <graphicData>
             <texPath>Effects/PsiBlast_good</texPath>
@@ -106,7 +106,7 @@
         </mote>
     </ThingDef>
     
-        <ThingDef ParentName="MoteBase">
+    <ThingDef ParentName="MoteBase">
         <defName>PTMotePsiLinkGood</defName>
         <graphicData>
             <texPath>Effects/PsiLink_good</texPath>
@@ -140,7 +140,7 @@
         </mote>
     </ThingDef>
     
-        <ThingDef ParentName="MoteBase">
+    <ThingDef ParentName="MoteBase">
         <defName>PTMotePointerGood</defName>
         <graphicData>
             <texPath>Effects/CastSuccess_good</texPath>

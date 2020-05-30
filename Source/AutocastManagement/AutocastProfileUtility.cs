@@ -72,41 +72,6 @@ namespace PsiTech.AutocastManagement {
                         single.InvertSelector = profile.InvertSelector;
                     }
 
-                    foreach (var filterStruct in profile.AdditionalFilterProfiles) {
-                        var filter = Activator.CreateInstance(filterStruct.Def.FilterClass) as AdditionalTargetFilter;
-
-                        if (filter == null) {
-                            Log.Error("PsiTech tried to instantiate an AdditionalTargetFilter of type " +
-                                      profile.Selector.SelectorClass +
-                                      " and failed. This indicates a misconfigured additional filter def or profile.");
-                            continue;
-                        }
-
-                        filter.Ability = ability;
-                        filter.Def = filterStruct.Def;
-                        filter.User = ability.User;
-                    
-                        AdditionalTargetFilter final;
-                        if (filter is AdditionalTargetFilter_Boolean boolean) {
-                            boolean.Inverted = filterStruct.Invert;
-                            final = boolean;
-                        }else if (filter is AdditionalTargetFilter_ThresholdInt integer) {
-                            integer.Inverted = filterStruct.Invert;
-                            integer.Threshold = (int)filterStruct.Threshold;
-                            final = integer;
-                        }else if (filter is AdditionalTargetFilter_ThresholdPercent percent) {
-                            percent.Inverted = filterStruct.Invert;
-                            percent.Threshold = filterStruct.Threshold;
-                            final = percent;
-                        }
-                        else {
-                            Log.Error("PsiTech tried to create an additional filter for profile " + profile.defName + " but the type was unrecognized.");
-                            continue;
-                        }
-                    
-                        single.AddAdditionalFilter(final);
-                    }
-
                     break;
                 }
                 case AutocastFilter_Burst burst:
@@ -115,6 +80,44 @@ namespace PsiTech.AutocastManagement {
                 default:
                     Log.Error("PsiTech tried to implement an autocast profile for " + ability.Def.defName + ", which doesn't have an AutocastFilterClass.");
                     break;
+            }
+            
+            foreach (var filterStruct in profile.AdditionalFilterProfiles) {
+                var filter = Activator.CreateInstance(filterStruct.Def.FilterClass) as AdditionalTargetFilter;
+
+                if (filter == null) {
+                    Log.Error("PsiTech tried to instantiate an AdditionalTargetFilter of type " +
+                              profile.Selector.SelectorClass +
+                              " and failed. This indicates a misconfigured additional filter def or profile.");
+                    continue;
+                }
+
+                filter.Ability = ability;
+                filter.Def = filterStruct.Def;
+                filter.User = ability.User;
+                    
+                AdditionalTargetFilter final;
+                switch (filter) {
+                    case AdditionalTargetFilter_Boolean boolean:
+                        boolean.Inverted = filterStruct.Invert;
+                        final = boolean;
+                        break;
+                    case AdditionalTargetFilter_ThresholdInt integer:
+                        integer.Inverted = filterStruct.Invert;
+                        integer.Threshold = (int)filterStruct.Threshold;
+                        final = integer;
+                        break;
+                    case AdditionalTargetFilter_ThresholdPercent percent:
+                        percent.Inverted = filterStruct.Invert;
+                        percent.Threshold = filterStruct.Threshold;
+                        final = percent;
+                        break;
+                    default:
+                        Log.Error("PsiTech tried to create an additional filter for profile " + profile.defName + " but the type was unrecognized.");
+                        continue;
+                }
+                    
+                ability.AutocastFilter.AddAdditionalFilter(final);
             }
         }
         

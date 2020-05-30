@@ -26,13 +26,15 @@ namespace PsiTech.AbilityEffects {
 
         public HediffDef Hediff;
         public BodyPartDef Part;
+        public float Severity = 1f;
 
         public override bool TryDoEffectOnPawn(Pawn user, Pawn target) {
             
             if(Part != null && target.health.hediffSet.GetNotMissingParts().All(part => part.def != Part)) return false;
 
             var bodyPart = target.health.hediffSet.GetNotMissingParts().FirstOrDefault(part => part.def == Part);
-            target.health.AddHediff(Hediff, bodyPart);
+            var hediff = target.health.AddHediff(Hediff, bodyPart);
+            hediff.Severity = Severity;
 
             return true;
 

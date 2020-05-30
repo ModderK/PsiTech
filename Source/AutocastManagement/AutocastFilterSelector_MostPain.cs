@@ -25,7 +25,7 @@ using Verse;
 namespace PsiTech.AutocastManagement {
     public class AutocastFilterSelector_MostPain: AutocastFilterSelector {
         
-        public override Pawn SelectBestTarget(Pawn user, List<Pawn> targets, PsiTechAbility ability, bool invert) {
+        public override Pawn SelectBestTarget(Pawn user, IEnumerable<Pawn> targets, PsiTechAbility ability, bool invert) {
             return invert
                 ? targets.MinBy(target => target.health.hediffSet.PainTotal)
                 : targets.MaxBy(target => target.health.hediffSet.PainTotal);

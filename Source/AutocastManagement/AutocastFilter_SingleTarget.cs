@@ -20,7 +20,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using PsiTech.Utility;
 using UnityEngine;
 using Verse;
@@ -37,19 +36,14 @@ namespace PsiTech.AutocastManagement {
         };
 
         public bool InvertSelector;
-        private List<AdditionalTargetFilter> additionalFilters = new List<AdditionalTargetFilter>();
-        private List<AdditionalTargetFilter> filtersToRemove = new List<AdditionalTargetFilter>();
-        private List<AdditionalTargetFilterDef> filtersForAdd = new List<AdditionalTargetFilterDef>();
-        private Vector2 scrollPosition;
-        private int lastFiltersCount;
+
+        private bool anyValidTargets;
 
         private const string MinimumSuccessChanceKey = "PsiTech.AutocastManagement.MinimumSuccessChance";
         private const string TargetRangeKey = "PsiTech.AutocastManagement.TargetRange";
         private const string TargetSelectorKey = "PsiTech.AutocastManagement.TargetSelector";
         private const string FilterTargetTypeKey = "PsiTech.AutocastManagement.FilterTargetType";
         private const string InvertKey = "PsiTech.AutocastManagement.Invert";
-        private const string AdditionalTargetFiltersKey = "PsiTech.Interface.AdditionalTargetFilters";
-        private const string AddAdditionalTargetFilterKey = "PsiTech.Interface.AddAdditionalTargetFilter";
 
         private const float MinimumSuccessLabelWidth = 180f;
         private const float MinimumSuccessFillableWidth = 100f;
@@ -65,36 +59,35 @@ namespace PsiTech.AutocastManagement {
         
         private const float InvertWidth = 40f;
         private const float InvertCheckSize = 20f;
-        
-        private const float FilterTitleHeight = 25f;
-        private const float AddFilterButtonWidth = 200f;
 
-        public AutocastFilter_SingleTarget() {
-            RebuildFilterCache();
+        public AutocastFilter_SingleTarget() { }
+        
+        public override Pawn GetBestTarget(IEnumerable<Pawn> targets) {
+            anyValidTargets = false;
+            var validTargets = GetValidTargets(targets);
+            return anyValidTargets ? Selector.SelectBestTarget(User, validTargets, Ability, InvertSelector) : null;
         }
-        
-        public override Pawn GetBestTarget(List<Pawn> targets) {
-            targets.RemoveAll(target => !TargetRange.Contains(target.Position.DistanceTo(User.Position)));
-            targets.RemoveAll(target => Ability.SuccessChanceOnTarget(target) < MinSuccessChance);
-            FilterForTargetType(ref targets);
-            targets.RemoveAll(target => additionalFilters.Any(filter => !filter.TargetMeetsFilter(target)));
 
-            return targets.Any() ? Selector.SelectBestTarget(User, targets, Ability, InvertSelector) : null;
+        // The reason that this is this way is because iterators are very fast - but they can't have out parameters.
+        // Instead, we need to provide a place outside the method to pass whether we found a valid target.
+        // Why do this at all? It avoids a very expensive ToList call that we would otherwise need to prevent multiple
+        // enumeration.
+        private IEnumerable<Pawn> GetValidTargets(IEnumerable<Pawn> targets) {
+            foreach (var target in targets) {
+                if(!TargetRange.Contains(target.Position.DistanceTo(User.Position)) ||
+                   Ability.SuccessChanceOnTarget(target) < MinSuccessChance ||
+                   !TargetMatchesTargetType(target) ||
+                   AdditionalFilters.Any(filter => !filter.TargetMeetsFilter(target))) continue;
+
+                anyValidTargets = true;
+                yield return target;
+            }
         }
 
         public override void Draw(Rect inRect) {
-            
-            // Remove filters that are marked for removal
-            filtersToRemove.ForEach(filter => additionalFilters.Remove(filter));
-            filtersToRemove.Clear();
-            
-            // Rebuild cache if needed
-            if (additionalFilters.Count != lastFiltersCount) {
-                RebuildFilterCache();
-                lastFiltersCount = additionalFilters.Count;
-            }
-            
-            
+
+            ResolveRemovedFilters();
+
             Widgets.DrawBoxSolid(new Rect(inRect.x, inRect.y, inRect.width, 113f), new Color(21f/256f, 25f/256f, 29f/256f));
 
             var drawBox = inRect.ContractedBy(5f);
@@ -149,95 +142,11 @@ namespace PsiTech.AutocastManagement {
             xAnchor += InvertWidth + XSeparation;
             Widgets.Checkbox(xAnchor, yAnchor + (OptionHeight - InvertCheckSize) / 2, ref InvertSelector, InvertCheckSize);
 
-            // Draw additional filters label and add button
+            // Draw additional filters
             xAnchor = drawBox.x;
             yAnchor += OptionHeight + 2 * YSeparation;
-            
-            Text.Anchor = TextAnchor.MiddleLeft;
-            
-            Widgets.Label(new Rect(xAnchor, yAnchor, drawBox.width, FilterTitleHeight), AdditionalTargetFiltersKey.Translate());
+            DrawAdditionalFilters(drawBox, xAnchor, yAnchor);
 
-            // Add filter button
-            if (Widgets.ButtonText(
-                new Rect(drawBox.xMax - AddFilterButtonWidth, yAnchor, AddFilterButtonWidth, FilterTitleHeight),
-                AddAdditionalTargetFilterKey.Translate())) {
-                var options = new List<FloatMenuOption>();
-                foreach (var filter in filtersForAdd) {
-                    options.Add(GenerateAdditionalFilterOption(filter));
-                }
-
-                if (!options.NullOrEmpty()) {
-                    Find.WindowStack.Add(new FloatMenu(options));
-                }
-                    
-            }
-
-            yAnchor += FilterTitleHeight + YSeparation;
-
-            var filterBox = new Rect(xAnchor, yAnchor, drawBox.width,
-                drawBox.height - 113f - FilterTitleHeight - 2 * YSeparation);
-            
-            // Find the total needed height and available height, see if we need to draw a scroll bar
-            var needed = additionalFilters.Sum(condition => condition.Height + YSeparation);
-            var available = filterBox.height;
-
-            if (needed > available) { // Need to draw a scrollbar
-                var outRect = new Rect(xAnchor, yAnchor, filterBox.width, available);
-                var viewRect = new Rect(0, 0, filterBox.width - 16f, needed);
-                var scrollAnchor = 0f;
-                Widgets.BeginScrollView(outRect, ref scrollPosition, viewRect);
-                foreach (var filter in additionalFilters) {
-                    var height = filter.Height;
-                    filter.Draw(new Rect(0, scrollAnchor, filterBox.width - 21f, height), this);
-                    scrollAnchor += height + YSeparation;
-                }
-                Widgets.EndScrollView();
-            }
-            else { // No need to draw a scrollbar
-                foreach (var filter in additionalFilters) {
-                    var height = filter.Height;
-                    filter.Draw(new Rect(xAnchor, yAnchor, filterBox.width, height), this);
-                    yAnchor += height + YSeparation;
-                }
-            }
-            
-        }
-
-        public void MarkAdditionalFilterForRemoval(AdditionalTargetFilter filter) {
-            filtersToRemove.Add(filter);
-        }
-
-        public void AddAdditionalFilter(AdditionalTargetFilter filter) {
-            additionalFilters.Add(filter);
-        }
-        
-        private FloatMenuOption GenerateAdditionalFilterOption(AdditionalTargetFilterDef entry) {
-            void Action() {
-                if (!(Activator.CreateInstance(entry.FilterClass) is AdditionalTargetFilter instance)) {
-                    Log.Error("PsiTech tried to instantiate an AdditionalTargetFilter of type " + entry.FilterClass +
-                              " and failed. This indicates a misconfigured additional filter def.");
-                }
-                else {
-                    instance.User = User;
-                    instance.Ability = Ability;
-                    instance.Def = entry;
-                    additionalFilters.Add(instance);
-                    RebuildFilterCache();
-                }
-            }
-
-            var floatMenuOption = new FloatMenuOption(entry.label, Action) {
-                extraPartWidth = 29f,
-                extraPartOnGUI = rect => Widgets.InfoCardButton(rect.x + 5f, rect.y + (rect.height - 24f) / 2f, entry)
-            };
-            
-            return floatMenuOption;
-        }
-        
-        private void RebuildFilterCache() {
-            filtersForAdd = DefDatabase<AdditionalTargetFilterDef>.AllDefsListForReading.ListFullCopy();
-            filtersForAdd.RemoveAll(condition =>
-                additionalFilters.Any(existing => existing.GetType() == condition.FilterClass));
         }
 
         private FloatMenuOption GenerateSelectorOption(AutocastFilterSelectorDef entry) {
@@ -264,17 +173,6 @@ namespace PsiTech.AutocastManagement {
             Scribe_Values.Look(ref MinSuccessChance, "MinSuccessChance");
             Scribe_Deep.Look(ref Selector, "Selector");
             Scribe_Values.Look(ref InvertSelector, "InvertSelector");
-            Scribe_Collections.Look(ref additionalFilters, "additionalFilters", LookMode.Deep);
-            
-            // For save compatibility, create the list if null
-            additionalFilters ??= new List<AdditionalTargetFilter>();
         }
-    }
-    
-    public enum FilterTargetType {
-        Enemies,
-        Hostiles,
-        Friendlies,
-        Any
     }
 }

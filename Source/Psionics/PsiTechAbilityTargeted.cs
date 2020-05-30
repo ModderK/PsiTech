@@ -59,6 +59,7 @@ namespace PsiTech.Psionics {
             Def.SoundDefSuccessOnCaster?.PlayOneShot(new TargetInfo(User.Position, User.Map));
             Def.SoundDefSuccessOnCaster?.PlayOneShot(new TargetInfo(target.Position, target.Map));
             TryPickAndDoEffect(target);
+            TryPickAndDoEffectOnUser();
         }
 
         public override bool CanHitTarget(Pawn target) {

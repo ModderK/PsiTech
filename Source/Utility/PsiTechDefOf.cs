@@ -30,6 +30,7 @@ namespace PsiTech.Utility {
         // Stat categories
         public static StatCategoryDef PTAbilityStats;
         public static StatCategoryDef PTEffects;
+        public static StatCategoryDef PTEffectsOnUser;
         public static StatCategoryDef PTStatOffsets;
         public static StatCategoryDef PTStatFactors;
         public static StatCategoryDef PTCapMods;

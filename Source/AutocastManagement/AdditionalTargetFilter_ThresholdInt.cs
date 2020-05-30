@@ -36,7 +36,7 @@ namespace PsiTech.AutocastManagement {
         protected virtual int MinValue => int.MinValue;
         protected virtual int MaxValue => int.MaxValue;
 
-        public override void Draw(Rect inRect, AutocastFilter_SingleTarget filter) {
+        public override void Draw(Rect inRect, AutocastFilter filter) {
             Widgets.DrawBoxSolid(inRect, new Color(21f/256f, 25f/256f, 29f/256f));
 
             var drawBox = inRect.ContractedBy(5f);
