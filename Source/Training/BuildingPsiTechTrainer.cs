@@ -61,8 +61,12 @@ namespace PsiTech.Training {
 
         public override IEnumerable<FloatMenuOption> GetFloatMenuOptions(Pawn myPawn) {
             if (innerContainer.Count != 0) yield break;
-            
-            if (!myPawn.CanReach(this, PathEndMode.InteractionCell, Danger.Deadly)) {
+
+            if (myPawn.IsQuestLodger()) {
+                yield return new FloatMenuOption(
+                    "CannotUseReason".Translate("CryptosleepCasketGuestsNotAllowed".Translate()), null);
+            }
+            else if (!myPawn.CanReach(this, PathEndMode.InteractionCell, Danger.Deadly)) {
                 var failer = new FloatMenuOption("CannotUseNoPath".Translate(), null);
                 yield return failer;
             }

@@ -37,7 +37,7 @@
       <HintPath>../../../Harmony.2.0.1.0/Release/net472/0Harmony.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Assembly-CSharp, Version=1.1.7452.26906, Culture=neutral, PublicKeyToken=null">
+    <Reference Include="Assembly-CSharp, Version=1.1.7459.20236, Culture=neutral, PublicKeyToken=null">
       <HintPath>../../../RimWorldLinux_Data/Managed/Assembly-CSharp.dll</HintPath>
       <Private>False</Private>
     </Reference>
