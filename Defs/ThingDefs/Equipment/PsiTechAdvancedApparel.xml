@@ -76,6 +76,7 @@
             <tags>
                 <li>ExoticPsiCommando</li>
                 <li>PrestigeCombatGear</li>
+                <li>EVA</li>
             </tags>
         </apparel>
     </ThingDef>
@@ -129,6 +130,7 @@
             <tags>
                 <li>ExoticPsiCommando</li>
                 <li>PrestigeCombatGear</li>
+                <li>EVA</li>
             </tags>
         </apparel>
     </ThingDef>
@@ -192,6 +194,7 @@
             <tags>
                 <li>ExoticPsiWarrior</li>
                 <li>PrestigeCombatGear</li>
+                <li>EVA</li>
             </tags>
         </apparel>
     </ThingDef>
@@ -244,6 +247,7 @@
             <tags>
                 <li>ExoticPsiWarrior</li>
                 <li>PrestigeCombatGear</li>
+                <li>EVA</li>
             </tags>
         </apparel>
     </ThingDef>
@@ -306,6 +310,7 @@
             <tags>
                 <li>ExoticPsiConduit</li>
                 <li>PrestigeCombatGear</li>
+                <li>EVA</li>
             </tags>
         </apparel>
     </ThingDef>
@@ -358,6 +363,7 @@
             <tags>
                 <li>ExoticPsiConduit</li>
                 <li>PrestigeCombatGear</li>
+                <li>EVA</li>
             </tags>
         </apparel>
     </ThingDef>

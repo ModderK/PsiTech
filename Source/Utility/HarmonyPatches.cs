@@ -711,13 +711,13 @@ namespace PsiTech.Utility {
     
     [HarmonyPatch(typeof(MapPawns), "DeRegisterPawn")]
     public class MapPawnDeregisterPatch {
-
+        
         public static void Postfix(Pawn p, Map ___map) {
             if(!PsiTechMapTargetPawnsUtility.TargetPawnUtilities.TryGetValue(___map, out var utility)) return;
             
             utility.Notify_PawnDespawned(p);
         }
-        
+
     }
 
 }
