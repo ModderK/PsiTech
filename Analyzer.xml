@@ -3,7 +3,8 @@
     <PsiTech> 
         <Methods> 
         </Methods> 
-        <Types> 
+        <Types>
+            <li>PsiTech.Psionics.PsiTechTracker</li>
         </Types> 
     </PsiTech>
 </Analyzer> 

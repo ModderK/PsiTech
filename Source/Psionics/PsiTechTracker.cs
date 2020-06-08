@@ -904,7 +904,7 @@ namespace PsiTech.Psionics {
             Scribe_Collections.Look(ref Abilities, "Abilities", LookMode.Deep);
 
             // So we don't have to tick to build the fill the cache after a load
-            if (Scribe.mode == LoadSaveMode.PostLoadInit) {
+            if (pawn != null && Scribe.mode == LoadSaveMode.PostLoadInit) {
                 AbilityModifier = abilityModifier;
             }
         }

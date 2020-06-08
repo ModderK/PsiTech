@@ -40,8 +40,7 @@ namespace PsiTech.Training {
 
         public bool IsOperating => (powerTrader?.PowerOn ?? true) && !(breakdownable?.BrokenDown ?? false);
         public Pawn InnerPawn => innerContainer.FirstOrDefault() as Pawn;
-        
-        
+
         private const int TickRate = 60;
 
         public CompPsiTechTrainer Trainer;
@@ -57,6 +56,10 @@ namespace PsiTech.Training {
         public override void DeSpawn(DestroyMode mode = DestroyMode.Vanish) {
             base.DeSpawn(mode);
             Current.Game.GetComponent<PsiTechManager>().UnregisterTrainer(this);
+        }
+
+        public override bool Accepts(Thing thing) {
+            return base.Accepts(thing) && innerContainer.Count == 0;
         }
 
         public override IEnumerable<FloatMenuOption> GetFloatMenuOptions(Pawn myPawn) {
