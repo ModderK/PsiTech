@@ -20,6 +20,7 @@
 
 using System.Collections.Generic;
 using PsiTech.Utility;
+using RimWorld;
 using UnityEngine;
 using Verse;
 using Verse.Sound;
@@ -65,6 +66,7 @@ namespace PsiTech.Psionics {
             CooldownTicker = CooldownTicks;
 
             if (!Rand.Chance(SuccessChanceOnTarget(target))) {
+                MoteMaker.ThrowText(target.Position.ToVector3(), target.Map, ResistedKey.Translate(), 1.9f);
                 Def.SoundDefFailure.PlayOneShot(new TargetInfo(User.Position, User.Map));
                 TryThrowFailMoteOnUser();
                 return;

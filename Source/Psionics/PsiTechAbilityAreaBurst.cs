@@ -22,6 +22,7 @@ using System.Collections.Generic;
 using System.Linq;
 using PsiTech.Misc;
 using PsiTech.Utility;
+using RimWorld;
 using UnityEngine;
 using Verse;
 using Verse.AI;
@@ -53,7 +54,10 @@ namespace PsiTech.Psionics {
 
             var cachedToAffect = PawnsToAffect.ToList().ListFullCopy();
             foreach (var pawn in cachedToAffect) {
-                if (!pawn.Position.InHorDistOf(User.Position, Def.Range)) continue;
+                if (!pawn.Position.InHorDistOf(User.Position, Def.Range)) {
+                    MoteMaker.ThrowText(pawn.Position.ToVector3(), pawn.Map, ResistedKey.Translate(), 1.9f);
+                    continue;
+                }
 
                 var stackMod = 0f;
                 while (Rand.Chance(SuccessChanceOnTarget(pawn) - stackMod)){

@@ -119,7 +119,8 @@
     <PsiTech.Psionics.CancelActiveDesc>Cancel {0}, ending its effects and energy use</PsiTech.Psionics.CancelActiveDesc>
     <PsiTech.Psionics.AutocastLabel>Autocasting</PsiTech.Psionics.AutocastLabel>
     <PsiTech.Psionics.AutocastDesc>Toggle autocasting. When enabled, pawns will autocast abilites that have been set to autocast.</PsiTech.Psionics.AutocastDesc>
-
+    <PsiTech.Psionics.Resisted>Resisted</PsiTech.Psionics.Resisted>
+    
     <PsiTech.AbilityEffects.BaseDamage>Base damage: {0}</PsiTech.AbilityEffects.BaseDamage>
     <PsiTech.AbilityEffects.BaseStun>Base stun duration: {0} seconds</PsiTech.AbilityEffects.BaseStun>
     <PsiTech.AbilityEffects.DamageType>Damage type: {0}</PsiTech.AbilityEffects.DamageType>

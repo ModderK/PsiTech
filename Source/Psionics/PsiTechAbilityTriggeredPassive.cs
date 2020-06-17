@@ -22,6 +22,7 @@ using System.Collections.Generic;
 using System.Linq;
 using PsiTech.Misc;
 using PsiTech.Utility;
+using RimWorld;
 using UnityEngine;
 using Verse;
 using Verse.Sound;
@@ -46,7 +47,11 @@ namespace PsiTech.Psionics {
                 case TargetType.Single:
                     var target = Def.TargetValidator.SelectBestTargetFromLists(User,
                         User.Map.mapPawns.AllPawns.Where(pawn => Def.TargetValidator.IsValidTarget(User, pawn)).ToList());
-                    if (target == null || !Rand.Chance(SuccessChanceOnTarget(target))) break;
+                    if (target == null) break;
+                    if (!Rand.Chance(SuccessChanceOnTarget(target))) {
+                        MoteMaker.ThrowText(target.Position.ToVector3(), target.Map, ResistedKey.Translate(), 1.9f);
+                        break;
+                    }
                     TryThrowMoteOnTarget(target);
                     TryPickAndDoEffect(target);
                     success = true;
@@ -56,7 +61,11 @@ namespace PsiTech.Psionics {
                     var targets =
                         User.Map.mapPawns.AllPawns.Where(pawn => Def.TargetValidator.IsValidTarget(User, pawn));
                     foreach (var targ in targets) {
-                        if (targ == null || !Rand.Chance(SuccessChanceOnTarget(targ))) continue;
+                        if(targ == null) continue;
+                        if (!Rand.Chance(SuccessChanceOnTarget(targ))) {
+                            MoteMaker.ThrowText(targ.Position.ToVector3(), targ.Map, ResistedKey.Translate(), 1.9f);
+                            continue;
+                        }
                         TryThrowMoteOnTarget(targ);
                         TryPickAndDoEffect(targ);
                         success = true;
@@ -64,8 +73,11 @@ namespace PsiTech.Psionics {
                     break;
                 
                 case TargetType.Attacker:
-                    if (instigator == null || !Def.TargetValidator.IsValidTarget(User, instigator) ||
-                        !Rand.Chance(SuccessChanceOnTarget(instigator))) break;
+                    if (instigator == null || !Def.TargetValidator.IsValidTarget(User, instigator)) break;
+                    if (!Rand.Chance(SuccessChanceOnTarget(instigator))) {
+                        MoteMaker.ThrowText(instigator.Position.ToVector3(), instigator.Map, ResistedKey.Translate(), 1.9f);
+                        break;
+                    }
                     TryThrowMoteOnTarget(instigator);
                     TryPickAndDoEffect(instigator);
                     success = true;

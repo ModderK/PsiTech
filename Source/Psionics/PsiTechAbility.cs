@@ -62,6 +62,7 @@ namespace PsiTech.Psionics {
         protected const string ProjectionDisabledKey = "PsiTech.Psionics.ProjectionDisabled";
         protected const string CancelActiveKey = "PsiTech.Psionics.CancelActive";
         protected const string CancelActiveDescKey = "PsiTech.Psionics.CancelActiveDesc";
+        protected const string ResistedKey = "PsiTech.Psionics.Resisted";
 
         protected const string CancelIconPath = "Abilities/CancelAbility";
 
