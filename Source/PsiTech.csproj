@@ -34,7 +34,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="0Harmony, Version=2.0.1.0, Culture=neutral, PublicKeyToken=null">
-      <HintPath>../../../Harmony.2.0.1.0/Release/net472/0Harmony.dll</HintPath>
+      <HintPath>../../../Extra/Harmony.2.0.1.0/Release/net472/0Harmony.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Assembly-CSharp, Version=1.1.7459.20236, Culture=neutral, PublicKeyToken=null">
