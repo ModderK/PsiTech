@@ -20,6 +20,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using PsiTech.Utility;
 using UnityEngine;
 using Verse;
@@ -37,7 +38,7 @@ namespace PsiTech.AutocastManagement {
 
         public bool InvertSelector;
 
-        private bool anyValidTargets;
+        private List<Pawn> targetList = new List<Pawn>();
 
         private const string MinimumSuccessChanceKey = "PsiTech.AutocastManagement.MinimumSuccessChance";
         private const string TargetRangeKey = "PsiTech.AutocastManagement.TargetRange";
@@ -63,24 +64,19 @@ namespace PsiTech.AutocastManagement {
         public AutocastFilter_SingleTarget() { }
         
         public override Pawn GetBestTarget(IEnumerable<Pawn> targets) {
-            anyValidTargets = false;
-            var validTargets = GetValidTargets(targets);
-            return anyValidTargets ? Selector.SelectBestTarget(User, validTargets, Ability, InvertSelector) : null;
+            GetValidTargets(targets);
+            return targetList.Any() ? Selector.SelectBestTarget(User, targetList, Ability, InvertSelector) : null;
         }
 
-        // The reason that this is this way is because iterators are very fast - but they can't have out parameters.
-        // Instead, we need to provide a place outside the method to pass whether we found a valid target.
-        // Why do this at all? It avoids a very expensive ToList call that we would otherwise need to prevent multiple
-        // enumeration.
-        private IEnumerable<Pawn> GetValidTargets(IEnumerable<Pawn> targets) {
+        private void GetValidTargets(IEnumerable<Pawn> targets) {
+            targetList.Clear();
             foreach (var target in targets) {
                 if(!TargetRange.Contains(target.Position.DistanceTo(User.Position)) ||
                    Ability.SuccessChanceOnTarget(target) < MinSuccessChance ||
                    !TargetMatchesTargetType(target) ||
                    AdditionalFilters.Any(filter => !filter.TargetMeetsFilter(target))) continue;
 
-                anyValidTargets = true;
-                yield return target;
+                targetList.Add(target);
             }
         }
 

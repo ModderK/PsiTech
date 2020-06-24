@@ -713,7 +713,7 @@ namespace PsiTech.Psionics {
 
         public Job GetAutocastJob() {
             if (pawn.Downed || pawn.stances.FullBodyBusy || !pawn.jobs.IsCurrentJobPlayerInterruptible()) return null;
-
+            
             var entries = GetAbilitiesToAutocast();
 
             if (!entries.Any()) return null;
