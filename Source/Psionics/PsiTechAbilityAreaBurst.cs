@@ -54,16 +54,19 @@ namespace PsiTech.Psionics {
 
             var cachedToAffect = PawnsToAffect.ToList().ListFullCopy();
             foreach (var pawn in cachedToAffect) {
-                if (!pawn.Position.InHorDistOf(User.Position, Def.Range)) {
-                    MoteMaker.ThrowText(pawn.Position.ToVector3(), pawn.Map, ResistedKey.Translate(), 1.9f);
-                    continue;
-                }
+                if (!pawn.Position.InHorDistOf(User.Position, Def.Range)) continue;
 
                 var stackMod = 0f;
+                var didEffect = false;
                 while (Rand.Chance(SuccessChanceOnTarget(pawn) - stackMod)){
                     TryPickAndDoEffect(pawn);
                     stackMod += 1.0f;
+                    didEffect = true;
                     if (pawn.Dead) break;
+                }
+
+                if (!didEffect) {
+                    MoteMaker.ThrowText(pawn.Position.ToVector3(), pawn.Map, ResistedKey.Translate(), 1.9f);
                 }
             }
             
