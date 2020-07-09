@@ -543,7 +543,7 @@ namespace PsiTech.Utility {
             var money = psiKind.PsiAbilitiesMoney.RandomInRange;
 
             // Prep pawn and get ability pool copy for manipulation
-            __result.PsiTracker().Activated = true;
+            __result.PsiTracker().ActivateTracker();
             __result.PsiTracker().Abilities.Clear();
             __result.PsiTracker().FocusLevel = psiKind.FocusRange.RandomInRange;
             __result.PsiTracker().EnergyLevel = psiKind.TotalLevelRange.RandomInRange - __result.PsiTracker().FocusLevel;

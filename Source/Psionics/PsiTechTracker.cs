@@ -40,7 +40,9 @@ namespace PsiTech.Psionics {
 
         private Pawn pawn;
         private int loadId;
-        public bool Activated;
+        
+        private bool activated;
+        public bool Activated => activated;
         public const int ActivationTimeSeconds = 2 * DayToSeconds;
         public const int RemoveTimeSeconds = DayToSeconds / 2;
         public bool AutocastEnabled = true;
@@ -555,7 +557,7 @@ namespace PsiTech.Psionics {
 
         public void FinishTraining() {
             if (!Activated) {
-                Activated = true;
+                ActivateTracker();
                 return;
             }
 
@@ -585,6 +587,11 @@ namespace PsiTech.Psionics {
             }
 
             TrainingQueue.Remove(entry);
+        }
+
+        public void ActivateTracker() {
+            activated = true;
+            Current.Game.GetComponent<PsiTechManager>().Notify_PawnAwakened(this);
         }
 
         public float TotalAddedValueForThreat() {
@@ -810,7 +817,7 @@ namespace PsiTech.Psionics {
                     defaultLabel = "DEBUG Enable Psi",
                     defaultDesc = "",
                     action = () => {
-                        Activated = true;
+                        ActivateTracker();
                         hasCachedGizmos = false;
                     }
                 };
@@ -889,7 +896,7 @@ namespace PsiTech.Psionics {
 
             Scribe_References.Look(ref pawn, "pawn");
             Scribe_Values.Look(ref loadId, "loadId");
-            Scribe_Values.Look(ref Activated, "Activated");
+            Scribe_Values.Look(ref activated, "Activated");
             Scribe_Values.Look(ref AutocastEnabled, "AutocastEnabled", true);
             Scribe_Values.Look(ref HideAutocastToggleGizmo, "HideAutocastToggleGizmo");
 

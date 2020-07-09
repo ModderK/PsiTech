@@ -19,6 +19,7 @@
  */
 
 using System.Collections.Generic;
+using System.Linq;
 using PsiTech.Misc;
 using PsiTech.Psionics;
 using PsiTech.Training;
@@ -35,6 +36,9 @@ namespace PsiTech.Utility {
         private Dictionary<Thing, PsiTechEquipmentTracker> equipmentTrackers = new Dictionary<Thing, PsiTechEquipmentTracker>();
 
         private List<BuildingPsiTechTrainer> trainers = new List<BuildingPsiTechTrainer>();
+        
+        // For ticking
+        private List<PsiTechTracker> trackersForTick = new List<PsiTechTracker>();
 
         // Required for saving dictionary
         private List<Pawn> pawnsForScribe;
@@ -101,12 +105,14 @@ namespace PsiTech.Utility {
         }
 
         public override void GameComponentTick() {
-            foreach (var entry in trackers) {
-                if (!entry.Value.Activated) continue;
-                
-                entry.Value.TrackerTick();
+            foreach (var tracker in trackersForTick) {
+                tracker.TrackerTick();
             }
             trainers.FindAll(trainer => trainer.Spawned).ForEach(trainer => trainer.BuildingTick());
+        }
+
+        public void Notify_PawnAwakened(PsiTechTracker tracker) {
+            trackersForTick.Add(tracker);
         }
 
         public override void ExposeData() {
@@ -137,6 +143,13 @@ namespace PsiTech.Utility {
             
             Scribe_Values.Look(ref nextTrackerId, "nextTrackerId");
             Scribe_Values.Look(ref nextAbilityId, "nextAbilityId");
+            
+            // Add all awakened pawns to the tick list after load
+            if (Scribe.mode == LoadSaveMode.PostLoadInit) {
+                foreach (var entry in trackers.Where(entry => entry.Value.Activated)) {
+                    trackersForTick.Add(entry.Value);
+                }
+            }
         }
     }
 }
