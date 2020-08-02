@@ -33,7 +33,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="0Harmony, Version=2.0.1.0, Culture=neutral, PublicKeyToken=null">
+    <Reference Include="0Harmony, Version=2.0.2.0, Culture=neutral, PublicKeyToken=null">
       <HintPath>../../../Extra/Harmony.2.0.1.0/Release/net472/0Harmony.dll</HintPath>
       <Private>False</Private>
     </Reference>
@@ -156,6 +156,7 @@
     <Compile Include="Interface\AbilityWindow.cs" />
     <Compile Include="Interface\ITab_Pawn_Psi.cs" />
     <Compile Include="Interface\PawnPsiCard.cs" />
+    <Compile Include="Interface\EssenceConfigurationWindow.cs" />
     <Compile Include="Interface\PsiTechUiTextureHelper.cs" />
     <Compile Include="Interface\SuppressionFieldSettingsWindow.cs" />
     <Compile Include="Misc\CommandIndicator.cs" />
@@ -195,6 +196,7 @@
     <Compile Include="Training\BuildingPsiTechTrainer.cs" />
     <Compile Include="Training\CompPropertiesPsiTechBuilding.cs" />
     <Compile Include="Training\CompPsiTechTrainer.cs" />
+    <Compile Include="Utility\EssenceCalculationUtility.cs" />
     <Compile Include="Utility\ExtensionMethods.cs" />
     <Compile Include="Utility\HarmonyPatches.cs" />
     <Compile Include="Utility\PsiTech.cs" />

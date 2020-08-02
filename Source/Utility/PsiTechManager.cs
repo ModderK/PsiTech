@@ -115,6 +115,12 @@ namespace PsiTech.Utility {
             trackersForTick.Add(tracker);
         }
 
+        public void Notify_EssenceCostsChanged() {
+            foreach (var tracker in trackers) {
+                tracker.Value.Notify_EssenceDirty();
+            }
+        }
+
         public override void ExposeData() {
             
             // The other nuclear option - clear the dictionaries and lists before a load

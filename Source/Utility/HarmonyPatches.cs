@@ -719,5 +719,15 @@ namespace PsiTech.Utility {
         }
 
     }
+    
+    // Recalculate essence cache when hediffs change
+    [HarmonyPatch(typeof(HediffSet), "DirtyCache")]
+    public class HediffDirtyPatch {
+
+        public static void Postfix(Pawn ___pawn) {
+            ___pawn.PsiTracker().Notify_EssenceDirty();
+        }
+        
+    }
 
 }

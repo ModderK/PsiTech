@@ -22,12 +22,11 @@ using UnityEngine;
 using Verse;
 
 namespace PsiTech.Utility {
+    [StaticConstructorOnStartup]
     public class PsiTech : Mod {
 
-        public PsiTech(ModContentPack content) : base(content) {
-            GetSettings<PsiTechSettings>();
-        }
-        
+        public PsiTech(ModContentPack content) : base(content) { }
+
         public override void DoSettingsWindowContents(Rect inRect) {
             base.DoSettingsWindowContents(inRect);
             GetSettings<PsiTechSettings>().DoWindowContents(inRect);
@@ -36,6 +35,5 @@ namespace PsiTech.Utility {
         public override string SettingsCategory() {
             return "PsiTech";
         }
-        
     }
 }

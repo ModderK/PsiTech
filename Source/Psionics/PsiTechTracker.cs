@@ -40,7 +40,7 @@ namespace PsiTech.Psionics {
 
         private Pawn pawn;
         private int loadId;
-        
+
         private bool activated;
         public bool Activated => activated;
         public const int ActivationTimeSeconds = 2 * DayToSeconds;
@@ -57,7 +57,7 @@ namespace PsiTech.Psionics {
         public float AbilityModifier;
         private float abilityModifier => PsychicSensitivity * Essence;
 
-        public float Essence => GetEssenceModifier();
+        public float Essence = 0f;
 
         public float PsychicSensitivity {
             get {
@@ -667,7 +667,7 @@ namespace PsiTech.Psionics {
 
         public float GetTotalModifierSensitivity() {
             return Mathf.Clamp(
-                (PsychicSensitivity * ProjectionAbility - PsiDefense) * Mathf.Max(GetEssenceModifier(), 0.5f), 0,
+                (PsychicSensitivity * ProjectionAbility - PsiDefense) * Mathf.Max(Essence, 0.5f), 0,
                 Mathf.Infinity);
         }
 
@@ -720,7 +720,7 @@ namespace PsiTech.Psionics {
 
         public Job GetAutocastJob() {
             if (pawn.Downed || pawn.stances.FullBodyBusy || !pawn.jobs.IsCurrentJobPlayerInterruptible()) return null;
-            
+
             var entries = GetAbilitiesToAutocast();
 
             if (!entries.Any()) return null;
@@ -743,13 +743,11 @@ namespace PsiTech.Psionics {
             }
         }
 
-        private float GetEssenceModifier() {
-            return Mathf.Max(
-                1f - PsiTechSettings.Get().EssenceLossPerPart * pawn.health.hediffSet.CountAddedAndImplantedParts(),
-                0f);
+        public void Notify_EssenceDirty() {
+            Essence = 1f - pawn.health.hediffSet.CalculateEssencePenalty();
         }
 
-        public IEnumerable<Gizmo> GetGizmos() {
+    public IEnumerable<Gizmo> GetGizmos() {
 
             // Ensure responsiveness to drafting and undrafting when paused
             if (pawn.Drafted != lastCachedDraft) hasCachedGizmos = false;

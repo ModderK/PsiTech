@@ -243,7 +243,7 @@ namespace PsiTech.Interface {
             xAnchor += EssenceWidth;
 
             TooltipHandler.TipRegion(essenceRect,
-                new TipSignal(() => EssenceTipKey.Translate(PsiTechSettings.Get().EssenceLossPerPart.ToStringPercent()),
+                new TipSignal(() => EssenceTipKey.Translate(PsiTechSettings.Get().EssenceLossMultiplier.ToStringPercent()),
                     essenceRect.GetHashCode()));
 
             // Psychic Sensitivity

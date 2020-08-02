@@ -18,6 +18,10 @@
  *
  */
 
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using PsiTech.Interface;
 using UnityEngine;
 using Verse;
 
@@ -26,24 +30,29 @@ namespace PsiTech.Utility {
 
         //Use PsiTechSettings.Get().setting to refer to settings
         public bool EnablePsychicFactionRaids = true;
-        public float EssenceLossPerPart => essenceLossPerPartInternal / 100f;
+        public float EssenceLossMultiplier => essenceLossMultiplierInternal / 100f;
         public float TrainingSpeedMultiplier => trainingSpeedMultiplierInternal / 100f;
         public bool PatchAllRaces;
 
-        private int essenceLossPerPartInternal = 10;
+        private const float DefaultEssenceLoss = 0.1f;
+        public static readonly Dictionary<HediffDef, float> EssenceLossesPerPart = new Dictionary<HediffDef, float>();
+        private static Dictionary<string, float> _essenceLossesForSaving = new Dictionary<string, float>();
+
+        private int essenceLossMultiplierInternal = 100;
         private int trainingSpeedMultiplierInternal = 100;
 
         private string essenceLossBuffer;
         private string trainingSpeedMultiplierBuffer;
         
         private const string EnablePsychicFactionRaidsKey = "PsiTech.Utility.EnablePsychicFactionRaids";
-        private const string EssenceLossPerPartKey = "PsiTech.Utility.EssenceLossPerPart";
-        private const string EssenceLossPerPartDescKey = "PsiTech.Utility.EssenceLossPerPartDesc";
+        private const string EssenceLossMultiplierKey = "PsiTech.Utility.EssenceLossMultiplier";
+        private const string EssenceLossMultiplierDescKey = "PsiTech.Utility.EssenceLossMultiplierDesc";
+        private const string EssenceLossConfigurationKey = "PsiTech.Utility.EssenceLossConfiguration";
         private const string TrainingSpeedMultiplierKey = "PsiTech.Utility.TrainingSpeedMultiplier";
         private const string TrainingSpeedMultiplierDescKey = "PsiTech.Utility.TrainingSpeedMultiplierDesc";
         private const string PatchAllRacesKey = "PsiTech.Utility.PatchAllRaces";
         private const string PatchAllRacesDescKey = "PsiTech.Utility.PatchAllRacesDesc";
-
+        
         public static PsiTechSettings Get() {
             return LoadedModManager.GetMod<PsiTech>().GetSettings<PsiTechSettings>();
         }
@@ -58,8 +67,16 @@ namespace PsiTech.Utility {
             options.GapLine();
 
             // Essence loss
-            options.Label(EssenceLossPerPartKey.Translate(), -1f, EssenceLossPerPartDescKey.Translate());
-            options.TextFieldNumeric(ref essenceLossPerPartInternal, ref essenceLossBuffer, 0, 100);
+            options.Label(EssenceLossMultiplierKey.Translate(), -1f, EssenceLossMultiplierDescKey.Translate());
+            var oldMult = essenceLossMultiplierInternal;
+            options.TextFieldNumeric(ref essenceLossMultiplierInternal, ref essenceLossBuffer, 0, 1000);
+            if (essenceLossMultiplierInternal != oldMult) {
+                Current.Game.GetComponent<PsiTechManager>().Notify_EssenceCostsChanged();
+            }
+
+            if (options.ButtonText(EssenceLossConfigurationKey.Translate())) {
+                Find.WindowStack.Add(new EssenceConfigurationWindow());
+            }
             
             options.GapLine();
             
@@ -76,10 +93,61 @@ namespace PsiTech.Utility {
         }
 		
         public override void ExposeData() {
+            // Copy essence losses dictionary to string saving dictionary
+            // This is so that if a HediffDef is removed, we can keep the setting in case the mod that added it is added
+            // back into the game
+            if (Scribe.mode == LoadSaveMode.Saving) {
+                foreach (var entry in EssenceLossesPerPart) {
+                    if (_essenceLossesForSaving.ContainsKey(entry.Key.defName)) {
+                        _essenceLossesForSaving[entry.Key.defName] = entry.Value;
+                    }
+                    else {
+                        _essenceLossesForSaving.Add(entry.Key.defName, entry.Value);
+                    }
+                }
+            }
+            
             Scribe_Values.Look(ref EnablePsychicFactionRaids, "EnablePsychicFactionRaids", true);
-            Scribe_Values.Look(ref essenceLossPerPartInternal, "essenceLossPerPartInternal", 10);
+            Scribe_Values.Look(ref essenceLossMultiplierInternal, "essenceLossMultiplierInternal", 100);
             Scribe_Values.Look(ref trainingSpeedMultiplierInternal, "trainingSpeedMultiplierInternal", 100);
             Scribe_Values.Look(ref PatchAllRaces, "PatchAllRaces");
+            Scribe_Collections.Look(ref _essenceLossesForSaving, "_essenceLossesForSaving", LookMode.Value,
+                LookMode.Value);
+
+            if (Scribe.mode == LoadSaveMode.PostLoadInit) {
+                InitializeEssenceLossesDatabase();
+            }
+        }
+
+        public void InitializeEssenceLossesDatabase() {
+            if (!(_essenceLossesForSaving?.Any() ?? false)) { // Create new essence losses dictionary
+                ResetEssenceLosses();
+            }
+            else { 
+                // Parse strings from saved essence losses collection and insert them into the working dictionary 
+                // Iterate over the entire database in case hediffs have been added
+                EssenceLossesPerPart.Clear();
+                foreach (var def in DefDatabase<HediffDef>.AllDefsListForReading) {
+                    if (!_essenceLossesForSaving.TryGetValue(def.defName, out var value)) {
+                        value = DefIsArtificial(def) ? DefaultEssenceLoss : 0f;
+                    }
+                    EssenceLossesPerPart.Add(def, value);
+                }
+            }
+        }
+        
+        public static void ResetEssenceLosses() {
+            EssenceLossesPerPart.Clear();
+            foreach (var def in DefDatabase<HediffDef>.AllDefsListForReading) {
+                var value = DefIsArtificial(def) ? DefaultEssenceLoss : 0f;
+                EssenceLossesPerPart.Add(def, value);
+            }
+        }
+
+        // Basically to ensure compatibility with CyberNet (and any other mod that modifies the way added parts are
+        // counted)
+        private static bool DefIsArtificial(HediffDef def) {
+            return typeof(Hediff_Implant).IsAssignableFrom(def.hediffClass);
         }
         
     }
