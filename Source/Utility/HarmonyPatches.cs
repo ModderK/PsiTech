@@ -729,5 +729,15 @@ namespace PsiTech.Utility {
         }
         
     }
+    
+    // Initialize settings after all defs have been loaded
+    [HarmonyPatch(typeof(Root), "Start")]
+    public class StartNotifyPatch {
+
+        public static void Postfix() {
+            LoadedModManager.GetMod<PsiTech>().LateInitializeSettings();
+        }
+        
+    }
 
 }

@@ -22,10 +22,13 @@ using UnityEngine;
 using Verse;
 
 namespace PsiTech.Utility {
-    [StaticConstructorOnStartup]
     public class PsiTech : Mod {
 
         public PsiTech(ModContentPack content) : base(content) { }
+
+        public void LateInitializeSettings() {
+            GetSettings<PsiTechSettings>().InitializeEssenceLossesDatabase();
+        }
 
         public override void DoSettingsWindowContents(Rect inRect) {
             base.DoSettingsWindowContents(inRect);

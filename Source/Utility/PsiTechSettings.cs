@@ -97,14 +97,7 @@ namespace PsiTech.Utility {
             // This is so that if a HediffDef is removed, we can keep the setting in case the mod that added it is added
             // back into the game
             if (Scribe.mode == LoadSaveMode.Saving) {
-                foreach (var entry in EssenceLossesPerPart) {
-                    if (_essenceLossesForSaving.ContainsKey(entry.Key.defName)) {
-                        _essenceLossesForSaving[entry.Key.defName] = entry.Value;
-                    }
-                    else {
-                        _essenceLossesForSaving.Add(entry.Key.defName, entry.Value);
-                    }
-                }
+                CopyToSavingDictionary();
             }
             
             Scribe_Values.Look(ref EnablePsychicFactionRaids, "EnablePsychicFactionRaids", true);
@@ -122,6 +115,7 @@ namespace PsiTech.Utility {
         public void InitializeEssenceLossesDatabase() {
             if (!(_essenceLossesForSaving?.Any() ?? false)) { // Create new essence losses dictionary
                 ResetEssenceLosses();
+                CopyToSavingDictionary();
             }
             else { 
                 // Parse strings from saved essence losses collection and insert them into the working dictionary 
@@ -135,7 +129,16 @@ namespace PsiTech.Utility {
                 }
             }
         }
-        
+
+        public static float GetPenaltyForPart(HediffDef def) {
+            if (!EssenceLossesPerPart.TryGetValue(def, out var value)) {
+                value = DefIsArtificial(def) ? DefaultEssenceLoss : 0f;
+                EssenceLossesPerPart.Add(def, value);
+            }
+
+            return value;
+        }
+
         public static void ResetEssenceLosses() {
             EssenceLossesPerPart.Clear();
             foreach (var def in DefDatabase<HediffDef>.AllDefsListForReading) {
@@ -144,8 +147,18 @@ namespace PsiTech.Utility {
             }
         }
 
-        // Basically to ensure compatibility with CyberNet (and any other mod that modifies the way added parts are
-        // counted)
+        private static void CopyToSavingDictionary() {
+            _essenceLossesForSaving ??= new Dictionary<string, float>();
+            foreach (var entry in EssenceLossesPerPart) {
+                if (_essenceLossesForSaving.ContainsKey(entry.Key.defName)) {
+                    _essenceLossesForSaving[entry.Key.defName] = entry.Value;
+                }
+                else {
+                    _essenceLossesForSaving.Add(entry.Key.defName, entry.Value);
+                }
+            }
+        }
+
         private static bool DefIsArtificial(HediffDef def) {
             return typeof(Hediff_Implant).IsAssignableFrom(def.hediffClass);
         }
