@@ -17,7 +17,7 @@
     <DebugSymbols>false</DebugSymbols>
     <DebugType>none</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>..\Assemblies\</OutputPath>
+    <OutputPath>..\v1.2\Assemblies\</OutputPath>
     <DefineConstants>
     </DefineConstants>
     <ErrorReport>prompt</ErrorReport>
@@ -26,7 +26,7 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>none</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>..\..\PsiTech - Release\Assemblies\</OutputPath>
+    <OutputPath>..\..\PsiTech - Release\v1.2\Assemblies\</OutputPath>
     <DefineConstants>
     </DefineConstants>
     <ErrorReport>prompt</ErrorReport>
@@ -34,10 +34,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="0Harmony, Version=2.0.2.0, Culture=neutral, PublicKeyToken=null">
-      <HintPath>../../../Extra/Harmony.2.0.1.0/Release/net472/0Harmony.dll</HintPath>
+      <HintPath>../../../Extra/Harmony.2.0.2.0/Release/net472/0Harmony.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Assembly-CSharp, Version=1.1.7459.20236, Culture=neutral, PublicKeyToken=null">
+    <Reference Include="Assembly-CSharp, Version=1.2.7523.23570, Culture=neutral, PublicKeyToken=null">
       <HintPath>../../../RimWorldLinux_Data/Managed/Assembly-CSharp.dll</HintPath>
       <Private>False</Private>
     </Reference>
@@ -232,19 +232,19 @@
   <Target Name="AfterBuild">
     <ItemGroup>
       <_Assemblies Include="$(ProjectDir)../Assemblies/**/*.*" />
-      <_Defs Include="$(ProjectDir)../Defs/**/*.*" />
+      <_Defs Include="$(ProjectDir)../v1.2/Defs/**/*.*" />
       <_Patches Include="$(ProjectDir)../Patches/**/*.*" />
       <_Languages Include="$(ProjectDir)../Languages/**/*.*" />
       <_Sounds Include="$(ProjectDir)../Sounds/**/*.*" />
       <_Textures Include="$(ProjectDir)../Textures/**/*.*" />
     </ItemGroup>
-    <Copy SourceFiles="$(ProjectDir)../About/About-$(ConfigurationName).xml" DestinationFiles="$(TargetDir)../About/About.xml" />
-    <Copy Condition="'$(ConfigurationName)' == 'Release'" SourceFiles="$(ProjectDir)../About/Preview.png" DestinationFiles="$(TargetDir)../About/Preview.png" />
+    <!--<Copy SourceFiles="$(ProjectDir)../About/About-$(ConfigurationName).xml" DestinationFiles="$(TargetDir)../About/About.xml" />-->
+    <!--<Copy Condition="'$(ConfigurationName)' == 'Release'" SourceFiles="$(ProjectDir)../About/Preview.png" DestinationFiles="$(TargetDir)../About/Preview.png" />-->
     <!--<Copy Condition="'$(ConfigurationName)' == 'Release'" SourceFiles="@(_Assemblies)" DestinationFolder="$(TargetDir)../Assemblies" />-->
     <Copy Condition="'$(ConfigurationName)' == 'Release'" SourceFiles="@(_Defs)" DestinationFolder="$(TargetDir)../Defs/%(RecursiveDir)" SkipUnchangedFiles="true" />
-    <Copy Condition="'$(ConfigurationName)' == 'Release'" SourceFiles="@(_Patches)" DestinationFolder="$(TargetDir)../Patches/%(RecursiveDir)" SkipUnchangedFiles="true" />
-    <Copy Condition="'$(ConfigurationName)' == 'Release'" SourceFiles="@(_Languages)" DestinationFolder="$(TargetDir)../Languages/%(RecursiveDir)" SkipUnchangedFiles="true" />
-    <Copy Condition="'$(ConfigurationName)' == 'Release'" SourceFiles="@(_Sounds)" DestinationFolder="$(TargetDir)../Sounds/%(RecursiveDir)" SkipUnchangedFiles="true" />
-    <Copy Condition="'$(ConfigurationName)' == 'Release'" SourceFiles="@(_Textures)" DestinationFolder="$(TargetDir)../Textures/%(RecursiveDir)" SkipUnchangedFiles="true" />
+    <!--<Copy Condition="'$(ConfigurationName)' == 'Release'" SourceFiles="@(_Patches)" DestinationFolder="$(TargetDir)../Patches/%(RecursiveDir)" SkipUnchangedFiles="true" />-->
+    <!--<Copy Condition="'$(ConfigurationName)' == 'Release'" SourceFiles="@(_Languages)" DestinationFolder="$(TargetDir)../Languages/%(RecursiveDir)" SkipUnchangedFiles="true" />-->
+    <!--<Copy Condition="'$(ConfigurationName)' == 'Release'" SourceFiles="@(_Sounds)" DestinationFolder="$(TargetDir)../Sounds/%(RecursiveDir)" SkipUnchangedFiles="true" />-->
+    <!--<Copy Condition="'$(ConfigurationName)' == 'Release'" SourceFiles="@(_Textures)" DestinationFolder="$(TargetDir)../Textures/%(RecursiveDir)" SkipUnchangedFiles="true" />-->
   </Target>
 </Project>

@@ -75,6 +75,7 @@ namespace PsiTech.Utility {
             }
 
             if (options.ButtonText(EssenceLossConfigurationKey.Translate())) {
+                EnsureAllHediffsInitialized();
                 Find.WindowStack.Add(new EssenceConfigurationWindow());
             }
             
@@ -143,6 +144,18 @@ namespace PsiTech.Utility {
             EssenceLossesPerPart.Clear();
             foreach (var def in DefDatabase<HediffDef>.AllDefsListForReading) {
                 var value = DefIsArtificial(def) ? DefaultEssenceLoss : 0f;
+                EssenceLossesPerPart.Add(def, value);
+            }
+        }
+
+        private static void EnsureAllHediffsInitialized() {
+            foreach (var def in DefDatabase<HediffDef>.AllDefsListForReading) {
+                if (EssenceLossesPerPart.ContainsKey(def)) continue;
+
+                var value = 0f;
+                if (!(_essenceLossesForSaving?.TryGetValue(def.defName, out value) ?? false)) {
+                    value = DefIsArtificial(def) ? DefaultEssenceLoss : 0f;
+                }
                 EssenceLossesPerPart.Add(def, value);
             }
         }

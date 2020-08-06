@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<!-- Copyright 2019, 2020, K
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+    
+        http://www.apache.org/licenses/LICENSE-2.0
+    
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+
+<Defs>
+
+    <RecipeDef>
+        <defName>PTWorkbenchCreateInsanityLance</defName>
+        <label>create psychic insanity lance</label>
+        <description>Carefully assemble a psychic insanity lance from athenium and plasteel.</description>
+        <jobString>Creating a psychic artifact.</jobString>
+        <workAmount>2000</workAmount>
+        <workSpeedStat>WorkSpeedGlobal</workSpeedStat>
+        <effectWorking>Cook</effectWorking>
+        <soundWorking>Recipe_Machining</soundWorking>
+        <ingredients>
+            <li>
+                <filter>
+                    <thingDefs>
+                        <li>PTAthenium</li>
+                    </thingDefs>
+                </filter>
+                <count>20</count>
+            </li>
+            <li>
+                <filter>
+                    <thingDefs>
+                        <li>Plasteel</li>
+                    </thingDefs>
+                </filter>
+                <count>5</count>
+            </li>
+        </ingredients>
+        <products>
+            <Apparel_PsychicInsanityLance>1</Apparel_PsychicInsanityLance>
+        </products>
+        <fixedIngredientFilter>
+            <thingDefs>
+                <li>PTAthenium</li>
+                <li>Plasteel</li>
+            </thingDefs>
+        </fixedIngredientFilter>
+        <researchPrerequisite>PTArtifactCreation</researchPrerequisite>
+        <recipeUsers>
+            <li>PTPsychicWorkbench</li>
+        </recipeUsers>
+    </RecipeDef>
+    
+    <RecipeDef>
+        <defName>PTWorkbenchCreateShockLance</defName>
+        <label>create psychic shock lance</label>
+        <description>Carefully assemble a psychic shock lance from athenium and plasteel.</description>
+        <jobString>Creating a psychic artifact.</jobString>
+        <workAmount>2000</workAmount>
+        <workSpeedStat>WorkSpeedGlobal</workSpeedStat>
+        <effectWorking>Cook</effectWorking>
+        <soundWorking>Recipe_Machining</soundWorking>
+        <ingredients>
+            <li>
+                <filter>
+                    <thingDefs>
+                        <li>PTAthenium</li>
+                    </thingDefs>
+                </filter>
+                <count>20</count>
+            </li>
+            <li>
+                <filter>
+                    <thingDefs>
+                        <li>Plasteel</li>
+                    </thingDefs>
+                </filter>
+                <count>5</count>
+            </li>
+        </ingredients>
+        <products>
+            <Apparel_PsychicShockLance>1</Apparel_PsychicShockLance>
+        </products>
+        <fixedIngredientFilter>
+            <thingDefs>
+                <li>PTAthenium</li>
+                <li>Plasteel</li>
+            </thingDefs>
+        </fixedIngredientFilter>
+        <researchPrerequisite>PTArtifactCreation</researchPrerequisite>
+        <recipeUsers>
+            <li>PTPsychicWorkbench</li>
+        </recipeUsers>
+    </RecipeDef>
+
+    <RecipeDef>
+        <defName>PTWorkbenchCreateAnimalPulser</defName>
+        <label>create psychic animal pulser</label>
+        <description>Carefully assemble a psychic animal pulser from athenium and plasteel.</description>
+        <jobString>Creating a psychic artifact.</jobString>
+        <workAmount>2000</workAmount>
+        <workSpeedStat>WorkSpeedGlobal</workSpeedStat>
+        <effectWorking>Cook</effectWorking>
+        <soundWorking>Recipe_Machining</soundWorking>
+        <ingredients>
+            <li>
+                <filter>
+                    <thingDefs>
+                        <li>PTAthenium</li>
+                    </thingDefs>
+                </filter>
+                <count>20</count>
+            </li>
+            <li>
+                <filter>
+                    <thingDefs>
+                        <li>Plasteel</li>
+                    </thingDefs>
+                </filter>
+                <count>5</count>
+            </li>
+        </ingredients>
+        <products>
+            <PsychicAnimalPulser>1</PsychicAnimalPulser>
+        </products>
+        <fixedIngredientFilter>
+            <thingDefs>
+                <li>PTAthenium</li>
+                <li>Plasteel</li>
+            </thingDefs>
+        </fixedIngredientFilter>
+        <researchPrerequisite>PTArtifactCreation</researchPrerequisite>
+        <recipeUsers>
+            <li>PTPsychicWorkbench</li>
+        </recipeUsers>
+    </RecipeDef>
+
+    <RecipeDef>
+        <defName>PTWorkbenchCreateSoothePulser</defName>
+        <label>create psychic soothe pulser</label>
+        <description>Carefully assemble a psychic soothe pulser from athenium and plasteel.</description>
+        <jobString>Creating a psychic artifact.</jobString>
+        <workAmount>2000</workAmount>
+        <workSpeedStat>WorkSpeedGlobal</workSpeedStat>
+        <effectWorking>Cook</effectWorking>
+        <soundWorking>Recipe_Machining</soundWorking>
+        <ingredients>
+            <li>
+                <filter>
+                    <thingDefs>
+                        <li>PTAthenium</li>
+                    </thingDefs>
+                </filter>
+                <count>20</count>
+            </li>
+            <li>
+                <filter>
+                    <thingDefs>
+                        <li>Plasteel</li>
+                    </thingDefs>
+                </filter>
+                <count>5</count>
+            </li>
+        </ingredients>
+        <products>
+            <PsychicSoothePulser>1</PsychicSoothePulser>
+        </products>
+        <fixedIngredientFilter>
+            <thingDefs>
+                <li>PTAthenium</li>
+                <li>Plasteel</li>
+            </thingDefs>
+        </fixedIngredientFilter>
+        <researchPrerequisite>PTArtifactCreation</researchPrerequisite>
+        <recipeUsers>
+            <li>PTPsychicWorkbench</li>
+        </recipeUsers>
+    </RecipeDef>
+    
+    
+</Defs>
