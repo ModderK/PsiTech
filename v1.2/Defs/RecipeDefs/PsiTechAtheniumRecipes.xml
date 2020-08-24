@@ -31,6 +31,7 @@
                 <filter>
                     <categories>
                         <li>Artifacts</li>
+                        <li>ApparelUtility</li>
                     </categories>
                 </filter>
                 <count>1</count>
@@ -67,6 +68,7 @@
                 <filter>
                     <categories>
                         <li>Artifacts</li>
+                        <li>ApparelUtility</li>
                     </categories>
                 </filter>
                 <count>1</count>
