@@ -27,13 +27,19 @@ namespace PsiTech.Misc {
 
         public List<StatModifier> RangedMods = new List<StatModifier>();
         public List<StatModifier> MeleeMods = new List<StatModifier>();
+        public List<StatModifier> ShellMods = new List<StatModifier>();
+        public List<StatModifier> OverheadMods = new List<StatModifier>();
 
         public static Dictionary<StatDef, float> RangedModDict = new Dictionary<StatDef, float>();
         public static Dictionary<StatDef, float> MeleeModDict = new Dictionary<StatDef, float>();
+        public static Dictionary<StatDef, float> ShellModDict = new Dictionary<StatDef, float>();
+        public static Dictionary<StatDef, float> OverheadModDict = new Dictionary<StatDef, float>();
 
         public override void ResolveReferences() {
             RangedMods.ForEach(mod => RangedModDict.Add(mod.stat, mod.value));
             MeleeMods.ForEach(mod => MeleeModDict.Add(mod.stat, mod.value));
+            ShellMods.ForEach(mod => ShellModDict.Add(mod.stat, mod.value));
+            OverheadMods.ForEach(mod => OverheadModDict.Add(mod.stat, mod.value));
         }
     }
 }

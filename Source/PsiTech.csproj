@@ -32,13 +32,25 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug - 1.1|AnyCPU' ">
+    <OutputPath>..\Assemblies</OutputPath>
+    <Optimize>true</Optimize>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release - 1.1|AnyCPU' ">
+    <OutputPath>..\..\PsiTech - Release\Assemblies</OutputPath>
+    <Optimize>true</Optimize>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="0Harmony, Version=2.0.2.0, Culture=neutral, PublicKeyToken=null">
       <HintPath>../../../Extra/Harmony.2.0.2.0/Release/net472/0Harmony.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Assembly-CSharp, Version=1.2.7523.23570, Culture=neutral, PublicKeyToken=null">
-      <HintPath>../../../RimWorldLinux_Data/Managed/Assembly-CSharp.dll</HintPath>
+    <Reference Include="Assembly-CSharp, Version=1.1.7452.27212, Culture=neutral, PublicKeyToken=null" Condition="'$(Configuration)|$(Platform)' == 'Debug - 1.1|AnyCPU' Or '$(Configuration)|$(Platform)' == 'Release - 1.1|AnyCPU'">
+      <HintPath>../../../../../../../../../.steam/steam/steamapps/common/RimWorld/Extra/OldAssemblies/1.1/Assembly-CSharp.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Assembly-CSharp, Version=1.2.7528.19894, Culture=neutral, PublicKeyToken=null" Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU' Or '$(Configuration)|$(Platform)' == 'Release|AnyCPU'">
+      <HintPath>../../../../../../../../../.steam/steam/steamapps/common/RimWorld/RimWorldLinux_Data/Managed/Assembly-CSharp.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="System" />
@@ -168,6 +180,7 @@
     <Compile Include="Misc\PsiTechEquipmentTracker.cs" />
     <Compile Include="Misc\PsiTechPawnKindDef.cs" />
     <Compile Include="Misc\PsiTechThoughtMemory.cs" />
+    <Compile Include="Misc\SpecialThingFilterWorker_NonEnhanceableApparel.cs" />
     <Compile Include="Misc\SpecialThingFilterWorker_PsychicEquipment.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Psionics\PsiTechAbility.cs" />

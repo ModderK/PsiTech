@@ -19,6 +19,7 @@
  */
 
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using PsiTech.Misc;
 using PsiTech.Psionics;
@@ -64,6 +65,8 @@ namespace PsiTech.Utility {
             foreach (var effects in equipmentEffects) {
                 CachedAffectedStats.AddRange(effects.RangedMods.Select(mod => mod.stat));
                 CachedAffectedStats.AddRange(effects.MeleeMods.Select(mod => mod.stat));
+                CachedAffectedStats.AddRange(effects.ShellMods.Select(mod => mod.stat));
+                CachedAffectedStats.AddRange(effects.OverheadMods.Select(mod => mod.stat));
             }
             
             // Secret optimization/fix - build a custom cache of possible cryptosleep casket types
@@ -75,6 +78,23 @@ namespace PsiTech.Utility {
                 CachedCryptosleepDefs.Add(thing);
             }
             
+            // Fix the enhancement ThingFilter
+            var watch = Stopwatch.StartNew();
+            var enhancementRecipe = DefDatabase<RecipeDef>.GetNamed("PTUpgradeApparelPsychic");
+            var offsetStat = StatDef.Named("PsychicSensitivityOffset"); // Why does this exist
+            foreach (var thing in DefDatabase<ThingDef>.AllDefsListForReading) {
+                if (!thing.IsApparel) continue;
+                Log.Message("Fuck this " + thing.LabelCap + " " + thing.apparel.layers.Any(layer =>
+                    layer == ApparelLayerDefOf.Overhead || layer == ApparelLayerDefOf.Shell) + " " + (thing.equippedStatOffsets?.All(mod => mod.stat != StatDefOf.PsychicSensitivity) ?? true));
+                if (!thing.IsApparel ||
+                    thing.apparel.layers.Any(layer =>
+                        layer == ApparelLayerDefOf.Overhead || layer == ApparelLayerDefOf.Shell) &&
+                    (thing.equippedStatOffsets?.All(mod =>
+                        mod.stat != StatDefOf.PsychicSensitivity && mod.stat != offsetStat) ?? true)) continue;
+                
+                enhancementRecipe.fixedIngredientFilter.SetAllow(thing, false);
+            }
+            Log.Message("Total time: " + watch.Elapsed);
         }
         
     }

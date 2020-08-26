@@ -28,6 +28,8 @@
          100% sync. -->
     <!-- By the given formula, we would have a multiplier of 62.5% to our cooldown. -->
     <!-- Note that synchronicity can scale to 200% meaning that the numbers here are half of the max values. -->
+    <!-- There's also the mods for psychic apparel, the ShellMods and OverheadMods. These are not modified by 
+         synchronicity, so what you see is what you get. Unlike weapons, those mods are offsets. -->
     <!-- Also note that mod lists are static, meaning that there should only ever be one EquipmentEnhancementDef or
          things will start to break. -->
     <!-- Well, that's not totally true, it's a bit more complicated than that but don't worry about it. -->
@@ -44,6 +46,12 @@
             <MeleeWeapon_DamageMultiplier>0.35</MeleeWeapon_DamageMultiplier>
             <MeleeWeapon_CooldownMultiplier>-0.2</MeleeWeapon_CooldownMultiplier>
         </MeleeMods>
+        <ShellMods>
+            <PsychicSensitivity>0.5</PsychicSensitivity>
+        </ShellMods>
+        <OverheadMods>
+            <PsychicSensitivity>0.25</PsychicSensitivity>
+        </OverheadMods>
     </Def>
     
 </Defs>

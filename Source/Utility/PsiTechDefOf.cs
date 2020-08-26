@@ -51,6 +51,7 @@ namespace PsiTech.Utility {
         
         // Recipes
         public static RecipeDef PTUpgradeWeaponPsychic;
+        public static RecipeDef PTUpgradeApparelPsychic;
         public static RecipeDef PTWorkbenchCreateAthenium;
         
         // Abilities

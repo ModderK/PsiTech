@@ -31,13 +31,13 @@ namespace PsiTech.Misc {
         private Thing thing;
         private bool IsWeapon => thing.def.IsWeapon;
         private bool IsRanged => thing.def.IsRangedWeapon;
-        private int randomId;
+        private bool IsApparel => thing.def.IsApparel;
+        private bool? IsHeadgear => thing.def.apparel?.layers.Contains(ApparelLayerDefOf.Overhead);
         
         public PsiTechEquipmentTracker() {} // for scribe
         
         public PsiTechEquipmentTracker(Thing thing) {
             this.thing = thing;
-            randomId = Rand.Int;
         }
 
         public float GetTotalFactorOfStat(StatDef stat, Pawn user) {
@@ -52,8 +52,22 @@ namespace PsiTech.Misc {
             else {
                 if (!EquipmentEnhancementDef.MeleeModDict.TryGetValue(stat, out mod)) return 1f;
             }
-            
+                
             return 1 + mod * sync;
+        }
+
+        public float GetTotalOffsetOfStat(StatDef stat) {
+            if (!IsApparel) return 0f;
+
+            float value;
+            if (IsHeadgear ?? false) {
+                if (!EquipmentEnhancementDef.OverheadModDict.TryGetValue(stat, out value)) return 0f;
+            }
+            else {
+                if (!EquipmentEnhancementDef.ShellModDict.TryGetValue(stat, out value)) return 0f;
+            }
+
+            return value;
         }
         
         public IEnumerable<Gizmo> GetGizmos() {
@@ -77,15 +91,11 @@ namespace PsiTech.Misc {
                     action = () => IsPsychic = true
                 };
             }
-
         }
         
         public void ExposeData() {
-            
             Scribe_References.Look(ref thing, "Thing");
-            Scribe_Values.Look(ref randomId, "randomID");
             Scribe_Values.Look(ref IsPsychic, "IsPsychic");
-            
         }
 
     }

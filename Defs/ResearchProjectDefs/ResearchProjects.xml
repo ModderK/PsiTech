@@ -281,7 +281,7 @@
     <ResearchProjectDef ParentName="PsiTechProjectBase">
         <defName>PTAdvancedPsychicEquipment</defName>
         <label>Advanced Psychic Equipment</label>
-        <description>Developing new athenium composites will allow us to make psychically active armor that both protects the user and enhances their psychic abilities.</description>
+        <description>Developing new athenium composites will allow us to make psychically active armor that both protects the user and enhances their psychic abilities, and enhance existing armors to be psychically potent.</description>
         <baseCost>2000</baseCost>
         <techLevel>Ultra</techLevel>
         <prerequisites>

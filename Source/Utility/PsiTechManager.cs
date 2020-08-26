@@ -139,8 +139,7 @@ namespace PsiTech.Utility {
             // Various checks to make sure we only save things that are load referencable. Some things aren't deep-saved
             // elsewhere, but we can't know what.
             equipmentTrackers.RemoveAll(entry =>
-                (entry.Key?.Destroyed ?? true) || !entry.Value.IsPsychic || !(entry.Key is ThingWithComps thing) ||
-                thing.TryGetComp<CompEquippable>() == null);
+                (entry.Key?.Destroyed ?? true) || !entry.Value.IsPsychic || !(entry.Key is ThingWithComps));
 
             Scribe_Collections.Look(ref trackers, "Trackers", LookMode.Reference, LookMode.Deep, ref pawnsForScribe,
                 ref trackersForScribe);

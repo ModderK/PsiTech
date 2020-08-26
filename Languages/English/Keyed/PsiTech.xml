@@ -161,6 +161,7 @@
     <PsiTech.AbilityModifier>Ability modifier: {0}</PsiTech.AbilityModifier>
     <PsiTech.TargetSensitivity>Target sensitivity: {0}</PsiTech.TargetSensitivity>
     <PsiTech.PsychicWeaponDesc>\n\nThis weapon has been upgraded to be psychically active. In the hands of a properly trained psion it will have increased effectiveness.</PsiTech.PsychicWeaponDesc>
+    <PsiTech.PsychicApparelDesc>\n\nThis piece of apparel has been enhanced to be psychically potent. When equipped by a psion, it will enhance their psychic abilities.</PsiTech.PsychicApparelDesc>
     <PsiTech.PsychicWeaponReport>Psychic enhancement: </PsiTech.PsychicWeaponReport>
     <PsiTech.NeedPsiForging>need psi forging ability</PsiTech.NeedPsiForging>
     

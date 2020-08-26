@@ -18,7 +18,6 @@
  *
  */
 
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -59,26 +58,33 @@ namespace PsiTech.Utility {
         }
         
     }
-    
+
     [HarmonyPatch(typeof(StatWorker), "GetValueUnfinalized")]
     public class StatValuePatch {
-        
+
         public static float Postfix(float __result, StatRequest req, StatDef ___stat) {
-            if(!req.HasThing || !PsiTechCachingUtility.CachedAffectedStats.Contains(___stat)) return __result;
-            
+            if (!req.HasThing || !PsiTechCachingUtility.CachedAffectedStats.Contains(___stat)) return __result;
+
             if (req.Thing is Pawn pawn) {
                 if (___stat == StatDefOf.PsychicSensitivity) {
                     var field = pawn.Map?.GetComponent<SuppressionFieldManager>().GetEffectOnCell(pawn.Position) ?? 0f;
                     if (field != 0f) {
                         __result += field;
                     }
+
+                    foreach (var apparel in pawn.apparel.WornApparel) {
+                        if (!apparel.PsiEquipmentTracker().IsPsychic) continue;
+
+                        __result += apparel.PsiEquipmentTracker().GetTotalOffsetOfStat(___stat);
+                    }
                 }
 
                 if (!pawn.PsiTracker().Activated) return __result;
-                
+
                 __result += pawn.PsiTracker().GetTotalOffsetOfStat(___stat);
                 __result *= pawn.PsiTracker().GetTotalFactorOfStat(___stat);
-            }else if (req.Thing.PsiEquipmentTracker().IsPsychic) {
+            }
+            else if (req.Thing.PsiEquipmentTracker().IsPsychic) {
                 var equip = req.Thing.TryGetComp<CompEquippable>();
                 if (equip == null || !(equip.PrimaryVerb.caster is Pawn caster)) return __result;
 
@@ -87,7 +93,6 @@ namespace PsiTech.Utility {
 
             return __result;
         }
-        
     }
 
     [HarmonyPatch(typeof(StatWorker), "GetExplanationUnfinalized")]
@@ -130,6 +135,14 @@ namespace PsiTech.Utility {
                 }
 
                 if (___stat != StatDefOf.PsychicSensitivity) return __result;
+                
+                foreach (var apparel in pawn.apparel.WornApparel) {
+                    if (!apparel.PsiEquipmentTracker().IsPsychic) continue;
+
+                    __result += "\n" + apparel.LabelCap + ": " + apparel.PsiEquipmentTracker()
+                        .GetTotalOffsetOfStat(___stat).ToStringByStyle(___stat.ToStringStyleUnfinalized,
+                            ToStringNumberSense.Offset);
+                }
                 
                 var field = pawn.Map?.GetComponent<SuppressionFieldManager>().GetEffectOnCell(pawn.Position) ?? 0f;
                 if (field == 0f) return __result;
@@ -382,26 +395,50 @@ namespace PsiTech.Utility {
 
         // I might be crazy
         static void Prefix(ref List<Thing> ingredients, RecipeDef recipe) {
-            
-            if (recipe != PsiTechDefOf.PTUpgradeWeaponPsychic) return;
-            
-            if (!(ingredients.FirstOrDefault(t => t.def.IsWeapon) is ThingWithComps weapon)) {
-                Log.Error("PsiTech tried to process a weapon upgrade without a weapon (this should never happen).");
-                return;
-            }
 
-            ingredients.Remove(weapon);
+            if (recipe == PsiTechDefOf.PTUpgradeWeaponPsychic) {
+                if (!(ingredients.FirstOrDefault(t => t.def.IsWeapon) is ThingWithComps weapon)) {
+                    Log.Error("PsiTech tried to process a weapon upgrade without a weapon (this should never happen).");
+                    return;
+                }
 
-            if (weapon.PsiEquipmentTracker() == null) {
-                Log.Warning("PsiTech tried to upgrade a weapon that wasn't a ThingWithComps. This should never happen.");
-                return;
+                ingredients.Remove(weapon);
+
+                if (weapon.PsiEquipmentTracker() == null) {
+                    Log.Warning(
+                        "PsiTech tried to upgrade a weapon that wasn't a ThingWithComps. This should never happen.");
+                    return;
+                }
+
+                if (weapon.PsiEquipmentTracker().IsPsychic) {
+                    Log.Warning(
+                        "PsiTech tried to upgrade a weapon that was already psychic. This should never happen.");
+                    return;
+                }
+
+                weapon.PsiEquipmentTracker().IsPsychic = true;
+            }else if (recipe == PsiTechDefOf.PTUpgradeApparelPsychic) {
+                if (!(ingredients.FirstOrDefault(t => t.def.IsApparel) is Apparel apparel)) {
+                    Log.Error("PsiTech tried to process an apparel upgrade without an apparel (this should never happen).");
+                    return;
+                }
+
+                ingredients.Remove(apparel);
+
+                if (apparel.PsiEquipmentTracker() == null) {
+                    Log.Warning(
+                        "PsiTech tried to upgrade apparel that wasn't a ThingWithComps. This should never happen.");
+                    return;
+                }
+
+                if (apparel.PsiEquipmentTracker().IsPsychic) {
+                    Log.Warning(
+                        "PsiTech tried to upgrade apparel that was already psychic. This should never happen.");
+                    return;
+                }
+
+                apparel.PsiEquipmentTracker().IsPsychic = true;
             }
-            
-            if (weapon.PsiEquipmentTracker().IsPsychic) {
-                Log.Warning("PsiTech tried to upgrade a weapon that was already psychic. This should never happen.");
-                return;
-            }
-            weapon.PsiEquipmentTracker().IsPsychic = true;
 
         }
         
@@ -427,9 +464,15 @@ namespace PsiTech.Utility {
             
             if (!thing.PsiEquipmentTracker()?.IsPsychic ?? true) return;
 
-            __result = new StatDrawEntry(StatCategoryDefOf.BasicsImportant, "Description".Translate(), "",
-                thing.DescriptionFlavor + "PsiTech.PsychicWeaponDesc".Translate(), 99999, null,
-                Dialog_InfoCard.DefsToHyperlinks(thing.def.descriptionHyperlinks));
+            if (thing.def.IsWeapon) {
+                __result = new StatDrawEntry(StatCategoryDefOf.BasicsImportant, "Description".Translate(), "",
+                    thing.DescriptionFlavor + "PsiTech.PsychicWeaponDesc".Translate(), 99999, null,
+                    Dialog_InfoCard.DefsToHyperlinks(thing.def.descriptionHyperlinks));
+            }else if (thing.def.IsApparel) {
+                __result = new StatDrawEntry(StatCategoryDefOf.BasicsImportant, "Description".Translate(), "",
+                    thing.DescriptionFlavor + "PsiTech.PsychicApparelDesc".Translate(), 99999, null,
+                    Dialog_InfoCard.DefsToHyperlinks(thing.def.descriptionHyperlinks));
+            }
 
         }
         
