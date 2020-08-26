@@ -72,7 +72,7 @@ namespace PsiTech.Utility {
                         __result += field;
                     }
 
-                    if (pawn.apparel != null) {
+                    if (pawn.apparel?.WornApparel != null) {
                         foreach (var apparel in pawn.apparel.WornApparel) {
                             if (!apparel.PsiEquipmentTracker().IsPsychic) continue;
 
@@ -137,15 +137,17 @@ namespace PsiTech.Utility {
                 }
 
                 if (___stat != StatDefOf.PsychicSensitivity) return __result;
-                
-                foreach (var apparel in pawn.apparel.WornApparel) {
-                    if (!apparel.PsiEquipmentTracker().IsPsychic) continue;
 
-                    __result += "\n" + apparel.LabelCap + ": " + apparel.PsiEquipmentTracker()
-                        .GetTotalOffsetOfStat(___stat).ToStringByStyle(___stat.ToStringStyleUnfinalized,
-                            ToStringNumberSense.Offset);
+                if (pawn.apparel?.WornApparel != null) {
+                    foreach (var apparel in pawn.apparel.WornApparel) {
+                        if (!apparel.PsiEquipmentTracker().IsPsychic) continue;
+
+                        __result += "\n" + apparel.LabelCap + ": " + apparel.PsiEquipmentTracker()
+                            .GetTotalOffsetOfStat(___stat).ToStringByStyle(___stat.ToStringStyleUnfinalized,
+                                ToStringNumberSense.Offset);
+                    }
                 }
-                
+
                 var field = pawn.Map?.GetComponent<SuppressionFieldManager>().GetEffectOnCell(pawn.Position) ?? 0f;
                 if (field == 0f) return __result;
 
