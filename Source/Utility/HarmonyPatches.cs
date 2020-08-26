@@ -72,10 +72,12 @@ namespace PsiTech.Utility {
                         __result += field;
                     }
 
-                    foreach (var apparel in pawn.apparel.WornApparel) {
-                        if (!apparel.PsiEquipmentTracker().IsPsychic) continue;
+                    if (pawn.apparel != null) {
+                        foreach (var apparel in pawn.apparel.WornApparel) {
+                            if (!apparel.PsiEquipmentTracker().IsPsychic) continue;
 
-                        __result += apparel.PsiEquipmentTracker().GetTotalOffsetOfStat(___stat);
+                            __result += apparel.PsiEquipmentTracker().GetTotalOffsetOfStat(___stat);
+                        }
                     }
                 }
 
