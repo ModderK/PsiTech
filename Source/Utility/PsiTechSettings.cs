@@ -34,7 +34,7 @@ namespace PsiTech.Utility {
         public float TrainingSpeedMultiplier => trainingSpeedMultiplierInternal / 100f;
         public bool PatchAllRaces;
 
-        private const float DefaultEssenceLoss = 0.1f;
+        public const float DefaultEssenceLoss = 0.1f;
         public static readonly Dictionary<HediffDef, float> EssenceLossesPerPart = new Dictionary<HediffDef, float>();
         private static Dictionary<string, float> _essenceLossesForSaving = new Dictionary<string, float>();
 
