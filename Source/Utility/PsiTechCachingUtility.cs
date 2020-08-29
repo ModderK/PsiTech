@@ -80,7 +80,7 @@ namespace PsiTech.Utility {
             
             // Fix the enhancement ThingFilter
             var enhancementRecipe = DefDatabase<RecipeDef>.GetNamed("PTUpgradeApparelPsychic");
-            var offsetStat = StatDef.Named("PsychicSensitivityOffset"); // Why does this exist
+            var offsetStat = DefDatabase<StatDef>.GetNamed("PsychicSensitivityOffset", false); // Why does this exist
             foreach (var thing in DefDatabase<ThingDef>.AllDefsListForReading) {
                 if (!thing.IsApparel ||
                     thing.apparel.layers.Any(layer =>
