@@ -33,11 +33,11 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug - 1.1|AnyCPU' ">
-    <OutputPath>..\Assemblies</OutputPath>
+    <OutputPath>..\Assemblies\</OutputPath>
     <Optimize>true</Optimize>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release - 1.1|AnyCPU' ">
-    <OutputPath>..\..\PsiTech - Release\Assemblies</OutputPath>
+    <OutputPath>..\..\PsiTech - Release\Assemblies\</OutputPath>
     <Optimize>true</Optimize>
   </PropertyGroup>
   <ItemGroup>
@@ -45,11 +45,11 @@
       <HintPath>../../../Extra/Harmony.2.0.2.0/Release/net472/0Harmony.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Assembly-CSharp, Version=1.1.7452.27212, Culture=neutral, PublicKeyToken=null" Condition="'$(Configuration)|$(Platform)' == 'Debug - 1.1|AnyCPU' Or '$(Configuration)|$(Platform)' == 'Release - 1.1|AnyCPU'">
+    <Reference Include="Assembly-CSharp, Culture=neutral, PublicKeyToken=null" Condition="'$(Configuration)' == 'Debug - 1.1' Or '$(Configuration)' == 'Release - 1.1'">
       <HintPath>../../../../../../../../../.steam/steam/steamapps/common/RimWorld/Extra/OldAssemblies/1.1/Assembly-CSharp.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Assembly-CSharp, Version=1.2.7528.19894, Culture=neutral, PublicKeyToken=null" Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU' Or '$(Configuration)|$(Platform)' == 'Release|AnyCPU'">
+    <Reference Include="Assembly-CSharp, Culture=neutral, PublicKeyToken=null" Condition="'$(Configuration)' == 'Debug' Or '$(Configuration)' == 'Release'">
       <HintPath>../../../../../../../../../.steam/steam/steamapps/common/RimWorld/RimWorldLinux_Data/Managed/Assembly-CSharp.dll</HintPath>
       <Private>False</Private>
     </Reference>
@@ -244,19 +244,21 @@
   <Target Name="AfterBuild">
     <ItemGroup>
       <_Assemblies Include="$(ProjectDir)../Assemblies/**/*.*" />
-      <_Defs Include="$(ProjectDir)../v1.2/Defs/**/*.*" />
+      <_Defs Include="$(ProjectDir)../Defs/**/*.*" />
+      <_Defs12 Include="$(ProjectDir)../v1.2/Defs/**/*.*" />
       <_Patches Include="$(ProjectDir)../Patches/**/*.*" />
       <_Languages Include="$(ProjectDir)../Languages/**/*.*" />
       <_Sounds Include="$(ProjectDir)../Sounds/**/*.*" />
       <_Textures Include="$(ProjectDir)../Textures/**/*.*" />
     </ItemGroup>
-    <!--<Copy SourceFiles="$(ProjectDir)../About/About-$(ConfigurationName).xml" DestinationFiles="$(TargetDir)../About/About.xml" />-->
-    <!--<Copy Condition="'$(ConfigurationName)' == 'Release'" SourceFiles="$(ProjectDir)../About/Preview.png" DestinationFiles="$(TargetDir)../About/Preview.png" />-->
-    <!--<Copy Condition="'$(ConfigurationName)' == 'Release'" SourceFiles="@(_Assemblies)" DestinationFolder="$(TargetDir)../Assemblies" />-->
-    <Copy Condition="'$(ConfigurationName)' == 'Release'" SourceFiles="@(_Defs)" DestinationFolder="$(TargetDir)../Defs/%(RecursiveDir)" SkipUnchangedFiles="true" />
-    <!--<Copy Condition="'$(ConfigurationName)' == 'Release'" SourceFiles="@(_Patches)" DestinationFolder="$(TargetDir)../Patches/%(RecursiveDir)" SkipUnchangedFiles="true" />-->
-    <!--<Copy Condition="'$(ConfigurationName)' == 'Release'" SourceFiles="@(_Languages)" DestinationFolder="$(TargetDir)../Languages/%(RecursiveDir)" SkipUnchangedFiles="true" />-->
-    <!--<Copy Condition="'$(ConfigurationName)' == 'Release'" SourceFiles="@(_Sounds)" DestinationFolder="$(TargetDir)../Sounds/%(RecursiveDir)" SkipUnchangedFiles="true" />-->
-    <!--<Copy Condition="'$(ConfigurationName)' == 'Release'" SourceFiles="@(_Textures)" DestinationFolder="$(TargetDir)../Textures/%(RecursiveDir)" SkipUnchangedFiles="true" />-->
+    <!--<Copy SourceFiles="$(ProjectDir)../About/About-$(ConfigurationName).xml" DestinationFiles="$(ProjectDir)../../PsiTech - Release/About/About.xml" /> -->
+    <Copy Condition="'$(ConfigurationName)' == 'Release' Or '$(Configuration)' == 'Release - 1.1'" SourceFiles="$(ProjectDir)../About/Preview.png" DestinationFiles="$(ProjectDir)../../PsiTech - Release/About/Preview.png" />
+    <Copy Condition="'$(ConfigurationName)' == 'Release' Or '$(Configuration)' == 'Release - 1.1'" SourceFiles="@(_Assemblies)" DestinationFolder="$(ProjectDir)../../PsiTech - Release/Assemblies" />
+    <Copy Condition="'$(ConfigurationName)' == 'Release' Or '$(Configuration)' == 'Release - 1.1'" SourceFiles="@(_Defs)" DestinationFolder="$(ProjectDir)../../PsiTech - Release/Defs/%(RecursiveDir)" SkipUnchangedFiles="true" />
+    <Copy Condition="'$(ConfigurationName)' == 'Release' Or '$(Configuration)' == 'Release - 1.1'" SourceFiles="@(_Defs12)" DestinationFolder="$(ProjectDir)../../PsiTech - Release/v1.2/Defs/%(RecursiveDir)" SkipUnchangedFiles="true" />
+    <Copy Condition="'$(ConfigurationName)' == 'Release' Or '$(Configuration)' == 'Release - 1.1'" SourceFiles="@(_Patches)" DestinationFolder="$(ProjectDir)../../PsiTech - Release/Patches/%(RecursiveDir)" SkipUnchangedFiles="true" />
+    <Copy Condition="'$(ConfigurationName)' == 'Release' Or '$(Configuration)' == 'Release - 1.1'" SourceFiles="@(_Languages)" DestinationFolder="$(ProjectDir)../../PsiTech - Release/Languages/%(RecursiveDir)" SkipUnchangedFiles="true" />
+    <Copy Condition="'$(ConfigurationName)' == 'Release' Or '$(Configuration)' == 'Release - 1.1'" SourceFiles="@(_Sounds)" DestinationFolder="$(ProjectDir)../../PsiTech - Release/Sounds/%(RecursiveDir)" SkipUnchangedFiles="true" />
+    <Copy Condition="'$(ConfigurationName)' == 'Release' Or '$(Configuration)' == 'Release - 1.1'" SourceFiles="@(_Textures)" DestinationFolder="$(ProjectDir)../../PsiTech - Release/Textures/%(RecursiveDir)" SkipUnchangedFiles="true" />
   </Target>
 </Project>

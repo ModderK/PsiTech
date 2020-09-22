@@ -64,7 +64,7 @@ namespace PsiTech.Interface {
         }
 
         public override void PreClose() {
-            Current.Game.GetComponent<PsiTechManager>().Notify_EssenceCostsChanged();
+            Current.Game?.GetComponent<PsiTechManager>().Notify_EssenceCostsChanged();
             base.PreClose();
         }
 

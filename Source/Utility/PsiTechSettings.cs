@@ -71,7 +71,7 @@ namespace PsiTech.Utility {
             var oldMult = essenceLossMultiplierInternal;
             options.TextFieldNumeric(ref essenceLossMultiplierInternal, ref essenceLossBuffer, 0, 1000);
             if (essenceLossMultiplierInternal != oldMult) {
-                Current.Game.GetComponent<PsiTechManager>().Notify_EssenceCostsChanged();
+                Current.Game?.GetComponent<PsiTechManager>().Notify_EssenceCostsChanged();
             }
 
             if (options.ButtonText(EssenceLossConfigurationKey.Translate())) {
