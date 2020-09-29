@@ -201,6 +201,7 @@
     <Compile Include="TargetValidators\TargetValidator.cs" />
     <Compile Include="TargetValidators\TargetValidatorAny.cs" />
     <Compile Include="TargetValidators\TargetValidatorAnyButUser.cs" />
+    <Compile Include="TargetValidators\TargetValidatorDowned.cs" />
     <Compile Include="TargetValidators\TargetValidatorFriendlies.cs" />
     <Compile Include="TargetValidators\TargetValidatorHostiles.cs" />
     <Compile Include="TargetValidators\TargetValidatorPsion.cs" />
