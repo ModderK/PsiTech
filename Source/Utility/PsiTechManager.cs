@@ -149,8 +149,11 @@ namespace PsiTech.Utility {
             Scribe_Values.Look(ref nextTrackerId, "nextTrackerId");
             Scribe_Values.Look(ref nextAbilityId, "nextAbilityId");
             
+            // Scrub any disappearing pawns for safety
             // Add all awakened pawns to the tick list after load
             if (Scribe.mode == LoadSaveMode.PostLoadInit) {
+                trackers.RemoveAll(entry => entry.Key == null);
+
                 foreach (var entry in trackers.Where(entry => entry.Value.Activated)) {
                     trackersForTick.Add(entry.Value);
                 }
