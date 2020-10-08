@@ -63,7 +63,7 @@ namespace PsiTech.Utility {
     public class StatValuePatch {
 
         public static float Postfix(float __result, StatRequest req, StatDef ___stat) {
-            if (!req.HasThing || !PsiTechCachingUtility.CachedAffectedStats.Contains(___stat)) return __result;
+            if (!PsiTechCachingUtility.EverAffectsStat(___stat) || !req.HasThing) return __result;
 
             if (req.Thing is Pawn pawn) {
                 if (___stat == StatDefOf.PsychicSensitivity) {
@@ -101,8 +101,7 @@ namespace PsiTech.Utility {
     public class StatExplanationPatch {
 
         public static string Postfix(string __result, StatRequest req, StatDef ___stat) {
-
-            if (!req.HasThing || !PsiTechCachingUtility.CachedAffectedStats.Contains(___stat)) return __result;
+            if (!PsiTechCachingUtility.EverAffectsStat(___stat) || !req.HasThing) return __result;
 
             if (req.Thing is Pawn pawn) {
                 var sb = new StringBuilder();

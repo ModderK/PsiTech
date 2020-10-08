@@ -31,42 +31,47 @@ namespace PsiTech.Utility {
     [StaticConstructorOnStartup]
     public static class PsiTechCachingUtility {
 
-        public static readonly HashSet<StatDef> CachedAffectedStats = new HashSet<StatDef>();
+        private static bool[] _cachedAffectedStats;
         public static readonly List<ThingDef> CachedCryptosleepDefs = new List<ThingDef>();
         
         static PsiTechCachingUtility() {
+            
+            // Initialize cache array
+            _cachedAffectedStats = new bool[DefDatabase<StatDef>.DefCount];
             
             // Cache stats abilities effects
             var abilities = DefDatabase<PsiTechAbilityDef>.AllDefsListForReading;
 
             foreach (var ability in abilities) {
                 foreach (var stat in ability.StatOffsets) {
-                    if (CachedAffectedStats.Contains(stat.stat)) continue;
-                    
-                    CachedAffectedStats.Add(stat.stat);
+                    _cachedAffectedStats[stat.stat.index] = true;
                 }
                 
                 foreach (var stat in ability.StatFactors) {
-                    if (CachedAffectedStats.Contains(stat.stat)) continue;
-                    
-                    CachedAffectedStats.Add(stat.stat);
+                    _cachedAffectedStats[stat.stat.index] = true;
                 }
             }
             
             // Cache psychic sensitivity for the suppression field just in case
-            if (!CachedAffectedStats.Contains(StatDefOf.PsychicSensitivity)) {
-                CachedAffectedStats.Add(StatDefOf.PsychicSensitivity);
-            }
+            _cachedAffectedStats[StatDefOf.PsychicSensitivity.index] = true;
             
             // Cache stats that can be affected on weapons
             var equipmentEffects = DefDatabase<EquipmentEnhancementDef>.AllDefsListForReading;
 
             // This should only ever run once
             foreach (var effects in equipmentEffects) {
-                CachedAffectedStats.AddRange(effects.RangedMods.Select(mod => mod.stat));
-                CachedAffectedStats.AddRange(effects.MeleeMods.Select(mod => mod.stat));
-                CachedAffectedStats.AddRange(effects.ShellMods.Select(mod => mod.stat));
-                CachedAffectedStats.AddRange(effects.OverheadMods.Select(mod => mod.stat));
+                foreach (var stat in effects.RangedMods) {
+                    _cachedAffectedStats[stat.stat.index] = true;
+                }
+                foreach (var stat in effects.MeleeMods) {
+                    _cachedAffectedStats[stat.stat.index] = true;
+                }
+                foreach (var stat in effects.ShellMods) {
+                    _cachedAffectedStats[stat.stat.index] = true;
+                }
+                foreach (var stat in effects.OverheadMods) {
+                    _cachedAffectedStats[stat.stat.index] = true;
+                }
             }
             
             // Secret optimization/fix - build a custom cache of possible cryptosleep casket types
@@ -91,6 +96,9 @@ namespace PsiTech.Utility {
                 enhancementRecipe.fixedIngredientFilter.SetAllow(thing, false);
             }
         }
-        
+
+        public static bool EverAffectsStat(StatDef stat) {
+            return _cachedAffectedStats[stat.index];
+        }
     }
 }
