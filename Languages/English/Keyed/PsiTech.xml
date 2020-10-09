@@ -67,6 +67,8 @@
     <PsiTech.Interface.TargetEffect>Target psychic sensitivity decrease: {0}</PsiTech.Interface.TargetEffect>
     <PsiTech.Interface.TargetRadius>Target radius: {0}</PsiTech.Interface.TargetRadius>
     <PsiTech.Interface.PowerConsumption>Predicted power consumption: {0}W</PsiTech.Interface.PowerConsumption>
+    <PsiTech.Interface.EssenceSummary>Essence summary for {0}</PsiTech.Interface.EssenceSummary>
+    <PsiTech.Interface.TotalEssencePenalty>Total essence penalty:</PsiTech.Interface.TotalEssencePenalty>
     
     <PsiTech.Interface.Search>Search</PsiTech.Interface.Search>
     <PsiTech.Interface.ResetEssenceLosses>Reset all essence penalties to default</PsiTech.Interface.ResetEssenceLosses>

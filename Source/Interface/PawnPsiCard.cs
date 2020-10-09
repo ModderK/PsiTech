@@ -239,7 +239,10 @@ namespace PsiTech.Interface {
 
             // Essence
             var essenceRect = new Rect(xAnchor, yAnchor, EssenceWidth, 25);
-            Widgets.Label(essenceRect, EssenceKey.Translate(pawn.PsiTracker().Essence.ToStringPercent()));
+            if (Widgets.ButtonText(essenceRect, EssenceKey.Translate(pawn.PsiTracker().Essence.ToStringPercent()),
+                false)) {
+                Find.WindowStack.Add(new EssenceSummaryWindow(pawn));
+            }
             xAnchor += EssenceWidth;
 
             TooltipHandler.TipRegion(essenceRect,

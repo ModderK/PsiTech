@@ -18,6 +18,7 @@
  *
  */
 
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using JetBrains.Annotations;
@@ -103,6 +104,19 @@ namespace PsiTech.Psionics {
 
         public virtual float GetFactorOfCapacity(PawnCapacityDef cap) {
             return 1f;
+        }
+
+        public virtual IEnumerable<(StatDef stat, float offset)> GetAllStatOffsets() {
+            yield break;
+        }
+
+        public virtual IEnumerable<(StatDef stat, float factor)> GetAllStatFactors() {
+            yield break;
+        }
+
+        
+        public virtual IEnumerable<(PawnCapacityDef capacity, float offset, float factor)> GetAllCapacityMods() {
+            yield break;
         }
 
         protected virtual bool TryPickAndDoEffect(Pawn target) {

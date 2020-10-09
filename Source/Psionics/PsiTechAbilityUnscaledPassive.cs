@@ -18,6 +18,8 @@
  *
  */
 
+using System;
+using System.Collections.Generic;
 using RimWorld;
 using Verse;
 
@@ -38,6 +40,24 @@ namespace PsiTech.Psionics {
 
         public override float GetFactorOfCapacity(PawnCapacityDef cap) {
             return Def.CapMods.Find(capMod => capMod.capacity == cap)?.postFactor ?? 1;
+        }
+
+        public override IEnumerable<(StatDef stat, float offset)> GetAllStatOffsets() {
+            foreach (var offset in Def.StatOffsets) {
+                yield return (offset.stat, offset.value);
+            }
+        }
+        
+        public override IEnumerable<(StatDef stat, float factor)> GetAllStatFactors() {
+            foreach (var factor in Def.StatFactors) {
+                yield return (factor.stat, factor.value);
+            }
+        }
+
+        public override IEnumerable<(PawnCapacityDef capacity, float offset, float factor)> GetAllCapacityMods() {
+            foreach (var mod in Def.CapMods) {
+                yield return (mod.capacity, mod.offset, mod.postFactor);
+            }
         }
     }
 }

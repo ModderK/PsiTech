@@ -67,7 +67,8 @@ namespace PsiTech.Utility {
 
             if (req.Thing is Pawn pawn) {
                 if (___stat == StatDefOf.PsychicSensitivity) {
-                    var field = pawn.Map?.GetComponent<SuppressionFieldManager>().GetEffectOnCell(pawn.Position) ?? 0f;
+                    var field = SuppressionFieldAccessUtility.GetSuppressionFieldManager(pawn.Map)
+                        ?.GetEffectOnCell(pawn.Position) ?? 0f;
                     if (field != 0f) {
                         __result += field;
                     }
@@ -147,7 +148,8 @@ namespace PsiTech.Utility {
                     }
                 }
 
-                var field = pawn.Map?.GetComponent<SuppressionFieldManager>().GetEffectOnCell(pawn.Position) ?? 0f;
+                var field = SuppressionFieldAccessUtility.GetSuppressionFieldManager(pawn.Map)
+                    ?.GetEffectOnCell(pawn.Position) ?? 0f;
                 if (field == 0f) return __result;
 
                 __result += "\n" + "PsiTech.SuppressionFieldEffect".Translate(
@@ -245,9 +247,9 @@ namespace PsiTech.Utility {
             }
 
             var newResult = __result * mult + offset * originalMult * mult;
-
+            
             __result = Mathf.Min(newResult, max);
-
+            
             return GenMath.RoundedHundredth(Mathf.Max(__result, capacity.minValue));
             
         }

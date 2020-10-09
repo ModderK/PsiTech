@@ -107,7 +107,7 @@ namespace PsiTech.Psionics {
             get => focusLevel;
             set {
                 focusLevel = value;
-                ClearCaches();
+                RebuildCaches();
 
                 if (focusLevel < 0) focusLevel = 0;
                 if (focusLevel > MaxFocusLevel) focusLevel = MaxFocusLevel;
@@ -123,7 +123,7 @@ namespace PsiTech.Psionics {
             get => energyLevel;
             set {
                 energyLevel = value;
-                ClearCaches();
+                RebuildCaches();
 
                 if (energyLevel < 0) energyLevel = 0;
                 if (energyLevel > MaxEnergyLevel) energyLevel = MaxEnergyLevel;
@@ -150,18 +150,33 @@ namespace PsiTech.Psionics {
         private float lastCachedProjectionStat;
         private bool hasCachedGizmos;
 
-        private readonly Dictionary<StatDef, float> cachedStatOffsets = new Dictionary<StatDef, float>();
-        private readonly Dictionary<StatDef, float> cachedStatFactors = new Dictionary<StatDef, float>();
-        private readonly Dictionary<PawnCapacityDef, float> cachedCapacities = new Dictionary<PawnCapacityDef, float>();
+        private float[,] cachedStatMods;
+        private float[,] cachedCapacities;
         private IEnumerable<Gizmo> cachedGizmos = Enumerable.Empty<Gizmo>();
 
         public PsiTechTracker(Pawn pawn, int id) {
             this.pawn = pawn;
             loadId = id;
+            InitializeCaches();
         }
 
         // Scribe requires a no-args constructor
         public PsiTechTracker() {
+            InitializeCaches();
+        }
+
+        private void InitializeCaches() {
+            var statCount = DefDatabase<StatDef>.DefCount;
+            cachedStatMods = new float[statCount,2];
+            for (var k = 0; k < cachedStatMods.GetLength(0); k++) {
+                cachedStatMods[k,1] = 1f;
+            }
+
+            var capCount = DefDatabase<PawnCapacityDef>.DefCount;
+            cachedCapacities = new float[capCount,2];
+            for (var k = 0; k < cachedCapacities.GetLength(0); k++) {
+                cachedCapacities[k,1] = 1f;
+            }
         }
 
         public void TrackerTick() {
@@ -180,7 +195,7 @@ namespace PsiTech.Psionics {
             var current = abilityModifier;
             if (current != AbilityModifier) {
                 AbilityModifier = current;
-                ClearCaches();
+                RebuildCaches();
             }
 
             RegenEnergy();
@@ -344,7 +359,7 @@ namespace PsiTech.Psionics {
 
             Abilities.Add(ability);
 
-            ClearCaches();
+            RebuildCaches();
             ClearStatCaches();
             hasCachedGizmos = false;
 
@@ -356,7 +371,7 @@ namespace PsiTech.Psionics {
             if (abilityToRemove != null) {
                 Abilities.Remove(abilityToRemove);
                 hasCachedGizmos = false;
-                ClearCaches();
+                RebuildCaches();
                 ClearStatCaches();
             }
         }
@@ -599,53 +614,19 @@ namespace PsiTech.Psionics {
         }
 
         public float GetTotalOffsetOfStat(StatDef stat) {
-            if (cachedStatOffsets.TryGetValue(stat, out var result)) return result;
-
-            var baseValue = 0f;
-
-            if (stat == PsiTechDefOf.PTPsiEnergyRegeneration) {
-                baseValue = BaseRegen;
-            }
-
-            if (stat == PsiTechDefOf.PTMaxPsiEnergy) {
-                baseValue = BaseMaxEnergy;
-            }
-
-            var total = baseValue + Abilities.Sum(ability => ability.GetOffsetOfStat(stat));
-            cachedStatOffsets.Add(stat, total);
-
-            return total;
+            return cachedStatMods[stat.index, 0];
         }
 
         public float GetTotalFactorOfStat(StatDef stat) {
-            if (cachedStatFactors.TryGetValue(stat, out var result)) return result;
-
-            var multiplier = 1f;
-            foreach (var ability in Abilities) {
-                multiplier *= ability.GetFactorOfStat(stat);
-            }
-
-            cachedStatFactors.Add(stat, multiplier);
-
-            return multiplier;
+            return cachedStatMods[stat.index, 1];
         }
 
         public float GetTotalOffsetOfCapacity(PawnCapacityDef cap) {
-            if (cachedCapacities.TryGetValue(cap, out var result)) return result;
-
-            var total = Abilities.Sum(ability => ability.GetOffsetOfCapacity(cap));
-            cachedCapacities.Add(cap, total);
-
-            return total;
+            return cachedCapacities[cap.index, 0];
         }
 
         public float GetTotalFactorOfCapacity(PawnCapacityDef cap) {
-            var multiplier = 1f;
-            foreach (var ability in Abilities) {
-                multiplier *= ability.GetFactorOfCapacity(cap);
-            }
-
-            return multiplier;
+            return cachedCapacities[cap.index, 1];
         }
 
         public IEnumerable<PsiTechAbility> GetAllAbilitiesImpactingCapacity(PawnCapacityDef cap) {
@@ -872,11 +853,35 @@ namespace PsiTech.Psionics {
             }
         }
 
-        public void ClearCaches() {
-            cachedCapacities.Clear();
+        public void RebuildCaches() {
             pawn.health.capacities.Notify_CapacityLevelsDirty();
-            cachedStatOffsets.Clear();
-            cachedStatFactors.Clear();
+            
+            for (var k = 0; k < cachedStatMods.GetLength(0); k++) {
+                cachedStatMods[k,0] = 0f;
+                cachedStatMods[k,1] = 1f;
+            }
+
+            for (var k = 0; k < cachedCapacities.GetLength(0); k++) {
+                cachedCapacities[k,0] = 0f;
+                cachedCapacities[k,1] = 1f;
+            }
+
+            foreach (var ability in Abilities) {
+                foreach (var (stat, offset) in ability.GetAllStatOffsets()) {
+                    cachedStatMods[stat.index, 0] += offset;
+                }
+                foreach (var (stat, factor) in ability.GetAllStatFactors()) {
+                    cachedStatMods[stat.index, 1] *= factor;
+                }
+                
+                foreach (var (capacity, offset, factor) in ability.GetAllCapacityMods()) {
+                    cachedCapacities[capacity.index, 0] += offset;
+                    cachedCapacities[capacity.index, 1] *= factor;
+                }
+            }
+
+            cachedStatMods[PsiTechDefOf.PTPsiEnergyRegeneration.index, 0] += BaseRegen;
+            cachedStatMods[PsiTechDefOf.PTMaxPsiEnergy.index, 0] += BaseMaxEnergy;
         }
 
         public void ClearStatCaches() {

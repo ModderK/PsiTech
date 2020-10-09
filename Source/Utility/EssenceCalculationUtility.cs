@@ -18,6 +18,7 @@
  *
  */
 
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using Verse;
@@ -29,6 +30,22 @@ namespace PsiTech.Utility {
             var sum = set.hediffs.Sum(hediff => PsiTechSettings.GetPenaltyForPart(hediff.def)) *
                       PsiTechSettings.Get().EssenceLossMultiplier;
             return Mathf.Min(sum, 1f);
+        }
+
+        public static IEnumerable<(HediffDef hediff, float impact)> GetAllEssencePenalties(this HediffSet set) {
+            foreach (var hediff in set.hediffs) {
+                var impact = -PsiTechSettings.GetPenaltyForPart(hediff.def) *
+                              PsiTechSettings.Get().EssenceLossMultiplier;
+                
+                if(impact == 0f) continue;
+                
+                yield return (hediff.def, impact);
+            }
+        }
+
+        public static float EssencePenaltyForDisplay(this HediffSet set) {
+            return -set.hediffs.Sum(hediff => PsiTechSettings.GetPenaltyForPart(hediff.def)) *
+                      PsiTechSettings.Get().EssenceLossMultiplier;
         }
         
     }
