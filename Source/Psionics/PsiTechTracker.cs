@@ -107,10 +107,11 @@ namespace PsiTech.Psionics {
             get => focusLevel;
             set {
                 focusLevel = value;
-                RebuildCaches();
 
                 if (focusLevel < 0) focusLevel = 0;
                 if (focusLevel > MaxFocusLevel) focusLevel = MaxFocusLevel;
+                
+                RebuildCaches();
             }
         }
 
@@ -123,10 +124,11 @@ namespace PsiTech.Psionics {
             get => energyLevel;
             set {
                 energyLevel = value;
-                RebuildCaches();
 
                 if (energyLevel < 0) energyLevel = 0;
                 if (energyLevel > MaxEnergyLevel) energyLevel = MaxEnergyLevel;
+                
+                RebuildCaches();
             }
         }
 
@@ -916,6 +918,7 @@ namespace PsiTech.Psionics {
             // So we don't have to tick to build the fill the cache after a load
             if (pawn != null && Scribe.mode == LoadSaveMode.PostLoadInit) {
                 AbilityModifier = abilityModifier;
+                RebuildCaches();
             }
         }
 
