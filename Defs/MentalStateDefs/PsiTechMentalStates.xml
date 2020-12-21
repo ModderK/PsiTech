@@ -62,8 +62,8 @@
         <label>Panicked</label>
         <stateClass>MentalState_PanicFlee</stateClass>
         <category>Misc</category>
-        <minTicksBeforeRecovery>6000</minTicksBeforeRecovery>
-        <maxTicksBeforeRecovery>6000</maxTicksBeforeRecovery>
+        <minTicksBeforeRecovery>3600</minTicksBeforeRecovery>
+        <maxTicksBeforeRecovery>3600</maxTicksBeforeRecovery>
         <blockNormalThoughts>true</blockNormalThoughts>
         <nameColor>(161, 230, 237)</nameColor>
         <baseInspectLine>Panicked: running from the monsters!</baseInspectLine>

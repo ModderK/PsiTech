@@ -70,7 +70,12 @@
             <li Class="ThinkNode_ConditionalMentalState">
               <state>PTPanicFlee</state>
               <subNodes>
-                <li Class="JobGiver_ExitMapPanic" />
+                  <li Class="ThinkNode_ConditionalColonist">
+                    <invert>true</invert>
+                    <subNodes>
+                        <li Class="JobGiver_ExitMapPanic" />
+                    </subNodes>
+                  </li>
                 <li Class="JobGiver_WanderAnywhere">
                   <!-- Can happen if there is no way to exit the map -->
                   <maxDanger>Some</maxDanger>
