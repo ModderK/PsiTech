@@ -153,7 +153,7 @@
     <ThingDef ParentName="BuildingBase">
         <defName>PTPsychicSuppressionFieldProjector</defName>
         <label>Psychic Suppression Field Projector</label>
-        <description>A building which projects a psychic suppression field in a small area around it, lower the psychic sensitivity of those nearby. They can be tuned to different intensities and radii, though it takes time for them to change to new targets.\n\nDue to the complex wave interactions, suppression fields do not stack.</description>
+        <description>A building which projects a psychic suppression field in a small area around it, lowering the psychic sensitivity of those nearby. They can be tuned to different intensities and radii, though it takes time for them to change to new targets.\n\nDue to the complex wave interactions, suppression fields do not stack.</description>
         <thingClass>PsiTech.SuppressionField.Building_PsychicSuppressionField</thingClass>
         <graphicData>
             <texPath>Things/Buildings/SuppressionFieldProjector</texPath>

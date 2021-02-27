@@ -41,8 +41,8 @@
     <Optimize>true</Optimize>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="0Harmony, Version=2.0.2.0, Culture=neutral, PublicKeyToken=null">
-      <HintPath>../../../Extra/Harmony.2.0.2.0/Release/net472/0Harmony.dll</HintPath>
+    <Reference Include="0Harmony, Version=2.0.4.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>../../../Extra/Harmony/net472/0Harmony.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Assembly-CSharp, Culture=neutral, PublicKeyToken=null" Condition="'$(Configuration)' == 'Debug - 1.1' Or '$(Configuration)' == 'Release - 1.1'">
@@ -239,10 +239,6 @@
   <PropertyGroup>
     <PreBuildEvent>
     </PreBuildEvent>
-  </PropertyGroup>
-  <PropertyGroup>
-    <StartAction>Program</StartAction>
-    <StartProgram>$(SolutionDir)..\..\RimWorldWin.exe</StartProgram>
   </PropertyGroup>
   <Target Name="AfterBuild">
     <ItemGroup>

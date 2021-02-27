@@ -51,6 +51,7 @@
     <PsiTech.Interface.RemoveAbility>Remove {0}</PsiTech.Interface.RemoveAbility>
     <PsiTech.Interface.SuspendTraining>Suspend Training</PsiTech.Interface.SuspendTraining>
     <PsiTech.Interface.UnsuspendTraining>Unsuspend Training</PsiTech.Interface.UnsuspendTraining>
+    <PsiTech.Interfrace.NoAbilitiesAvailable>No abilities available (need research)</PsiTech.Interfrace.NoAbilitiesAvailable>
 
     <PsiTech.Interface.HideAutocastToggleGizmo>Hide Autocast Toggle Button</PsiTech.Interface.HideAutocastToggleGizmo>
     <PsiTech.Interface.AbilityLabel>Ability</PsiTech.Interface.AbilityLabel>

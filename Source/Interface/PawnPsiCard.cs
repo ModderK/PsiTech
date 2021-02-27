@@ -68,6 +68,7 @@ namespace PsiTech.Interface {
         private const string RemoveAbilityKey = "PsiTech.Interface.RemoveAbility";
         private const string SuspendTrainingKey = "PsiTech.Interface.SuspendTraining";
         private const string UnsuspendTrainingKey = "PsiTech.Interface.UnsuspendTraining";
+        private const string NoAbilitiesAvailableKey = "PsiTech.Interfrace.NoAbilitiesAvailable";
 
         private const float XMargin = 10f;
         private const float YPadding = 2f;
@@ -575,10 +576,13 @@ namespace PsiTech.Interface {
                     foreach (var ability in available) {
                         options.Add(GenerateAbilityOption(ability, slotNum, pawn, inTrainer));
                     }
-
-                    if (!options.NullOrEmpty()) {
-                        Find.WindowStack.Add(new FloatMenu(options));
+                    
+                    // If no abilities are available, show that's the case
+                    if (options.NullOrEmpty()) {
+                        options.Add(new FloatMenuOption(NoAbilitiesAvailableKey.Translate(), null));
                     }
+
+                    Find.WindowStack.Add(new FloatMenu(options));
                     
                 }
 
