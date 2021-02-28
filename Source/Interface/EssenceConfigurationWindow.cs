@@ -85,8 +85,9 @@ namespace PsiTech.Interface {
             yAnchor += YSeparation;
 
             // Entries
-            var drawEntries = PsiTechSettings.EssenceLossesPerPart
-                .Where(entry => entry.Key.label.ToLower().Contains(search.ToLower())).ToList();
+            var drawEntries = PsiTechSettings.EssenceLossesPerPart.Where(entry =>
+                    (entry.Key?.label ?? entry.Key?.defName ?? "").ToLower().Contains(search.ToLower()))
+                .ToList();
             var needed = (DefaultHeight + YSeparation) * drawEntries.Count;
             var outRect = new Rect(xAnchor, yAnchor, drawRect.width, HediffListHeight);
             var viewRect = new Rect(0f, 0f, drawRect.width - 16f, needed);

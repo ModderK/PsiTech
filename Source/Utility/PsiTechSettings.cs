@@ -150,7 +150,7 @@ namespace PsiTech.Utility {
 
         private static void EnsureAllHediffsInitialized() {
             foreach (var def in DefDatabase<HediffDef>.AllDefsListForReading) {
-                if (EssenceLossesPerPart.ContainsKey(def)) continue;
+                if (def == null || EssenceLossesPerPart.ContainsKey(def)) continue;
 
                 var value = 0f;
                 if (!(_essenceLossesForSaving?.TryGetValue(def.defName, out value) ?? false)) {
