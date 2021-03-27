@@ -59,10 +59,6 @@
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
-    <None Include="..\About\**" />
-    <None Include="..\Defs\**" />
-    <None Include="..\Languages\**" />
-    <None Include="..\Patches\**" />
     <Reference Include="UnityEngine, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
       <HintPath>../../../RimWorldLinux_Data/Managed/UnityEngine.dll</HintPath>
       <Private>False</Private>
@@ -99,15 +95,6 @@
       <HintPath>../../../RimWorldLinux_Data/Managed/UnityEngine.UIModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <None Update="..\Defs\ThingDefs\Equipment\PsiTechAdvancedTinFoil.xml">
-      <Link>Equipment\PsiTechAdvancedTinFoil.xml</Link>
-    </None>
-    <None Update="..\Defs\AdditionalTargetFilterDefs\PsiTechAutocastConditionDefs.xml">
-      <Link>AdditionalTargetFilterDefs\PsiTechAutocastConditionDefs.xml</Link>
-    </None>
-    <None Update="..\Defs\HediffDefs\PsiTechDebuffs.xml">
-      <Link>HediffDefs\PsiTechDebuffs.xml</Link>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AbilityEffects\AbilityEffect.cs" />
@@ -223,17 +210,6 @@
     <Compile Include="Utility\PsiTechRenderUtility.cs" />
     <Compile Include="Utility\PsiTechSettings.cs" />
     <Compile Include="Utility\PsiTechSkillTransferUtility.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="..\Defs\EquipmentEnhancementDef">
-      <Link>EquipmentEnhancementDef</Link>
-    </Folder>
-    <Folder Include="..\Defs\PawnKindDefs">
-      <Link>PawnKindDefs</Link>
-    </Folder>
-    <Folder Include="..\Languages\English\Strings">
-      <Link>English\Strings</Link>
-    </Folder>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

@@ -111,6 +111,11 @@ namespace PsiTech.Utility {
             trainers.FindAll(trainer => trainer.Spawned).ForEach(trainer => trainer.BuildingTick());
         }
 
+        public bool ShouldInterfereWithQuests() {
+            // TODO interference conditions
+            return true;
+        }
+
         public void Notify_PawnAwakened(PsiTechTracker tracker) {
             trackersForTick.Add(tracker);
         }

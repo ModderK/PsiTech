@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<!-- Copyright 2021, K
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+    
+        http://www.apache.org/licenses/LICENSE-2.0
+    
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+
+<Patch>
+
+    <Operation Class="PatchOperationFindMod">
+        <mods>
+            <li>Royalty</li>
+        </mods>
+        <match Class="PatchOperationSequence">
+            <operations>
+                <li Class="PatchOperationAdd">
+                    <xpath>/Defs/RecipeDef[defName="PTMachiningExtractAtheniumFromPsychicArtifact" or
+                        "PTWorkbenchExtractAtheniumFromPsychicArtifact"]/ingredients/li/filter/categories</xpath>
+                    <value>
+                        <li>Headgear</li>
+                        <li>Apparel</li>
+                    </value>
+                </li>
+                <li Class="PatchOperationAdd">
+                    <xpath>/Defs/RecipeDef[defName="PTMachiningExtractAtheniumFromPsychicArtifact" or
+                        "PTWorkbenchExtractAtheniumFromPsychicArtifact"]/fixedIngredientFilter/thingDefs</xpath>
+                    <value>
+                        <li>Apparel_PsyfocusHelmet</li>
+                        <li>Apparel_EltexSkullcap</li>
+                        <li>Apparel_PsyfocusShirt</li>
+                        <li>Apparel_PsyfocusVest</li>
+                        <li>Apparel_PsyfocusRobe</li>
+                    </value>
+                </li>
+            </operations>
+        </match>
+    </Operation>
+    
+</Patch>
