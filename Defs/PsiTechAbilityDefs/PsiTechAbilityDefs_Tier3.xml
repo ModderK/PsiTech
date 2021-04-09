@@ -129,7 +129,7 @@
     <Def Class="PsiTech.Psionics.PsiTechAbilityDef">
         <defName>PTMindFortress</defName>
         <label>Mind Fortress</label>
-        <description>Mind fortress is a powerful defensive technique that makes the psion immune to psionic abilities. Unfortunately, this technique also makes them unable to use active abilities.</description>
+        <description>Mind fortress is a powerful defensive technique that makes the psion immune to active psionic abilities. Unfortunately, this technique also makes them unable to use active psionic abilities.</description>
         <AbilityClass>PsiTech.Psionics.PsiTechAbilityUnscaledPassive</AbilityClass>
         <Tier>3</Tier>
         <AddedValueForThreat>0</AddedValueForThreat>
