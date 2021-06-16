@@ -550,7 +550,8 @@ namespace PsiTech.Utility {
 
         public static bool Prefix(Pawn ___pawn) {
 
-            if (!___pawn.PsiTracker().Activated || !___pawn.PsiTracker().AutocastEnabled) return true;
+            if (!___pawn.PsiTracker().Activated || !___pawn.PsiTracker().AutocastEnabled ||
+                !___pawn.Faction.IsPlayer) return true;
             
             var autocast = ___pawn.PsiTracker().GetAutocastJob();
 
@@ -579,8 +580,7 @@ namespace PsiTech.Utility {
     public class PsiPawnGenerationPatch {
 
         public static void Postfix(ref Pawn __result, PawnGenerationRequest request) {
-            if (Current.ProgramState == ProgramState.Entry || request.Faction?.def != PsiTechDefOf.PTPsionic ||
-                !(request.KindDef is PsiTechPawnKindDef psiKind) ||
+            if (Current.ProgramState == ProgramState.Entry || !(request.KindDef is PsiTechPawnKindDef psiKind) ||
                 psiKind.PsiAbilitiesMoney == FloatRange.Zero) return;
             
             // Remove psychically dull/deaf - can't enforce this in def since it's a spectrum trait...

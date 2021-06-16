@@ -215,7 +215,9 @@ namespace PsiTech.Psionics {
                 };
             }
 
-            var possibleTargets = targets.Where(target => Def.TargetValidator.IsValidTarget(User, target) && target.Position.InHorDistOf(User.Position, Def.Range));
+            var possibleTargets = targets.Where(target =>
+                Def.TargetValidator.IsValidTarget(User, target) &&
+                target.Position.InHorDistOf(User.Position, Def.Range));
             return new AutocastEntry{
                 Ability = this,
                 Target = AutocastFilter.GetBestTarget(possibleTargets)

@@ -26,7 +26,7 @@ namespace PsiTech.AI {
     public class ThinkNode_ConditionalPsiAutocast : ThinkNode_Conditional {
         
         protected override bool Satisfied(Pawn pawn) {
-            return pawn.PsiTracker().Activated &&
+            return pawn.PsiTracker().Activated && !(PsiTechSettings.Get().PrisonerCastingDisabled && pawn.IsPrisoner) &&
                    (pawn.IsColonist && pawn.PsiTracker().AutocastEnabled || !pawn.IsColonist);
         }
         

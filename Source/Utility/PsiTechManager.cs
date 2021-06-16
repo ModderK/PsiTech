@@ -64,6 +64,7 @@ namespace PsiTech.Utility {
                 if (trackers.TryGetValue(pawn, out var tracker)) return tracker;
                 
                 tracker = new PsiTechTracker(pawn, GetNextTrackerId());
+                tracker.Notify_EssenceDirty();
                 trackers.Add(pawn, tracker);
                 return tracker;
             }
@@ -101,7 +102,8 @@ namespace PsiTech.Utility {
         }
 
         public BuildingPsiTechTrainer GetOpenTrainerForPawn(Pawn pawn) {
-            return trainers.Find(trainer => trainer.IsOperating && trainer.InnerPawn == null && pawn.CanReserve((LocalTargetInfo)trainer));
+            return trainers.Find(trainer =>
+                trainer.IsOperating && trainer.InnerPawn == null && pawn.CanReserve((LocalTargetInfo) trainer));
         }
 
         public override void GameComponentTick() {

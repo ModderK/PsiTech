@@ -32,6 +32,7 @@ namespace PsiTech.Utility {
         public float EssenceLossMultiplier => essenceLossMultiplierInternal / 100f;
         public float TrainingSpeedMultiplier => trainingSpeedMultiplierInternal / 100f;
         public bool PatchAllRaces;
+        public bool PrisonerCastingDisabled;
 
         public const float DefaultEssenceLoss = 0.1f;
         public static readonly Dictionary<HediffDef, float> EssenceLossesPerPart = new Dictionary<HediffDef, float>();
@@ -51,6 +52,8 @@ namespace PsiTech.Utility {
         private const string TrainingSpeedMultiplierDescKey = "PsiTech.Utility.TrainingSpeedMultiplierDesc";
         private const string PatchAllRacesKey = "PsiTech.Utility.PatchAllRaces";
         private const string PatchAllRacesDescKey = "PsiTech.Utility.PatchAllRacesDesc";
+        private const string DisablePrisonerCastingKey = "PsiTech.Utility.DisablePrisonerCasting";
+        private const string DisablePrisonerCastingDescKey = "PsiTech.Utility.DisablePrisonerCastingDesc";
         
         public static PsiTechSettings Get() {
             return LoadedModManager.GetMod<PsiTech>().GetSettings<PsiTechSettings>();
@@ -89,6 +92,12 @@ namespace PsiTech.Utility {
             // Patch races
             options.CheckboxLabeled(PatchAllRacesKey.Translate(), ref PatchAllRaces, PatchAllRacesDescKey.Translate());
             
+            options.GapLine();
+            
+            // Disable prisoner casting
+            options.CheckboxLabeled(DisablePrisonerCastingKey.Translate(), ref PrisonerCastingDisabled,
+                DisablePrisonerCastingDescKey.Translate());
+            
             options.End();
         }
 		
@@ -104,6 +113,7 @@ namespace PsiTech.Utility {
             Scribe_Values.Look(ref essenceLossMultiplierInternal, "essenceLossMultiplierInternal", 100);
             Scribe_Values.Look(ref trainingSpeedMultiplierInternal, "trainingSpeedMultiplierInternal", 100);
             Scribe_Values.Look(ref PatchAllRaces, "PatchAllRaces");
+            Scribe_Values.Look(ref PrisonerCastingDisabled, "PrisonerCastingDisabled");
             Scribe_Collections.Look(ref _essenceLossesForSaving, "_essenceLossesForSaving", LookMode.Value,
                 LookMode.Value);
 

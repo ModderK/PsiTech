@@ -155,6 +155,8 @@
     <PsiTech.Utility.TrainingSpeedMultiplierDesc>The default training speed is 100%. This setting allows that speed to be configured between 1% and 1000%.\n\nNote, this is not the length of training but a multiplier on speed, so higher numbers lower the time taken, and lower numbers increase the time taken.</PsiTech.Utility.TrainingSpeedMultiplierDesc>
     <PsiTech.Utility.PatchAllRaces>Patch all races</PsiTech.Utility.PatchAllRaces>
     <PsiTech.Utility.PatchAllRacesDesc>Some alien races do not get the Psi tab applied to them by default. Checking this option forces all pawns with needs to get the Psi tab. The game must be restarted for this setting to take effect.\n\nSince this may cause incompatibilities, this option is disabled by default.</PsiTech.Utility.PatchAllRacesDesc>
+    <PsiTech.Utility.DisablePrisonerCasting>Disable Prisoner Psionics</PsiTech.Utility.DisablePrisonerCasting>
+    <PsiTech.Utility.DisablePrisonerCastingDesc>By default, psion prisoners will cast their psionic abilities. Enabling this setting will prevent prisoners from using psionic abilities.</PsiTech.Utility.DisablePrisonerCastingDesc>
     
     <PsiTech.PsionicAbilitiesReport>Psionic Abilities</PsiTech.PsionicAbilitiesReport>
     <PsiTech.SuppressionFieldEffect>Psychic suppression field: {0}</PsiTech.SuppressionFieldEffect>

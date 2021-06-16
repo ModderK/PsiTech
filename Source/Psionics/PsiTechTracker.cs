@@ -179,6 +179,7 @@ namespace PsiTech.Psionics {
             for (var k = 0; k < cachedCapacities.GetLength(0); k++) {
                 cachedCapacities[k,1] = 1f;
             }
+            
         }
 
         public void TrackerTick() {
@@ -932,6 +933,7 @@ namespace PsiTech.Psionics {
             // So we don't have to tick to build the fill the cache after a load
             if (pawn != null && Scribe.mode == LoadSaveMode.PostLoadInit) {
                 AbilityModifier = abilityModifier;
+                Notify_EssenceDirty();
                 RebuildCaches();
             }
         }
