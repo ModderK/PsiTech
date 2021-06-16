@@ -37,7 +37,9 @@ namespace PsiTech.Utility {
         }
 
         public static HashSet<Pawn> PotentialPsiTargets(this Map map) {
-            return PsiTechMapTargetPawnsUtility.TargetPawnUtilities.TryGetValue(map, out var utility) ? utility.PotentialTargetPawns : null;
+            return PsiTechMapTargetPawnsUtility.TargetPawnUtilities.TryGetValue(map, out var utility)
+                ? utility.PotentialTargetPawns
+                : null;
         }
 
         public static float TicksToHours(this int numTicks) {

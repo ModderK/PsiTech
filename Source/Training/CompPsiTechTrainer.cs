@@ -96,8 +96,6 @@ namespace PsiTech.Training {
         }
 
         public void ResetComp(Pawn pawn) {
-            if (timeLeft < 0) return;
-
             timeLeft = -1;
             pawn.PsiTracker().ClearTrainingQueueLock();
             curEntry = new TrainingQueueEntry();

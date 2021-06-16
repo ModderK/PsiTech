@@ -228,7 +228,7 @@
     </ItemGroup>
     <!--<Copy SourceFiles="$(ProjectDir)../About/About-$(ConfigurationName).xml" DestinationFiles="$(ProjectDir)../../PsiTech - Release/About/About.xml" /> -->
     <Copy Condition="'$(ConfigurationName)' == 'Release' Or '$(Configuration)' == 'Release - 1.1'" SourceFiles="$(ProjectDir)../About/Preview.png" DestinationFiles="$(ProjectDir)../../PsiTech - Release/About/Preview.png" />
-    <Copy Condition="'$(ConfigurationName)' == 'Release' Or '$(Configuration)' == 'Release - 1.1'" SourceFiles="@(_Assemblies)" DestinationFolder="$(ProjectDir)../../PsiTech - Release/Assemblies" />
+    <!--<Copy Condition="'$(ConfigurationName)' == 'Release' Or '$(Configuration)' == 'Release - 1.1'" SourceFiles="@(_Assemblies)" DestinationFolder="$(ProjectDir)../../PsiTech - Release/Assemblies" />-->
     <Copy Condition="'$(ConfigurationName)' == 'Release' Or '$(Configuration)' == 'Release - 1.1'" SourceFiles="@(_Defs)" DestinationFolder="$(ProjectDir)../../PsiTech - Release/Defs/%(RecursiveDir)" SkipUnchangedFiles="true" />
     <Copy Condition="'$(ConfigurationName)' == 'Release' Or '$(Configuration)' == 'Release - 1.1'" SourceFiles="@(_Defs12)" DestinationFolder="$(ProjectDir)../../PsiTech - Release/v1.2/Defs/%(RecursiveDir)" SkipUnchangedFiles="true" />
     <Copy Condition="'$(ConfigurationName)' == 'Release' Or '$(Configuration)' == 'Release - 1.1'" SourceFiles="@(_Patches)" DestinationFolder="$(ProjectDir)../../PsiTech - Release/Patches/%(RecursiveDir)" SkipUnchangedFiles="true" />

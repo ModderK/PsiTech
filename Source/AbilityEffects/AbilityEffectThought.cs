@@ -30,7 +30,7 @@ namespace PsiTech.AbilityEffects {
 
         public override bool TryDoEffectOnPawn(Pawn user, Pawn target) {
             var existingThought = target.needs?.mood?.thoughts?.memories?.GetFirstMemoryOfDef(Thought);
-            if (existingThought != null && existingThought is PsiTechThoughtMemory thought) {
+            if (existingThought is PsiTechThoughtMemory thought) {
                 thought.Renew();
                 thought.Multiplier = GetModifier(user, target);
             }

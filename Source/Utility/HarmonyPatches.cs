@@ -70,7 +70,7 @@ namespace PsiTech.Utility {
                     var field = SuppressionFieldAccessUtility.GetSuppressionFieldManager(pawn.Map)
                         ?.GetEffectOnCell(pawn.Position) ?? 0f;
                     if (field != 0f) {
-                        __result += field;
+                        __result += field * pawn.PsiTracker().GetTotalModifierSensitivityNormalized();
                     }
 
                     if (pawn.apparel?.WornApparel != null) {
@@ -655,6 +655,8 @@ namespace PsiTech.Utility {
             // Max out our energy for the assault
             __result.PsiTracker().MaxEnergy();
             
+            // Dirty essence
+            __result.PsiTracker().Notify_EssenceDirty();
         }
         
     }
@@ -784,6 +786,19 @@ namespace PsiTech.Utility {
 
         public static void Postfix() {
             LoadedModManager.GetMod<PsiTech>().LateInitializeSettings();
+        }
+        
+    }
+    
+    // Scale psychic thoughts by defense
+    [HarmonyPatch(typeof(Thought), "MoodOffset")]
+    public class PsychicThoughtPatch {
+
+        public static float Postfix(float __result, Pawn ___pawn, ThoughtDef ___def) {
+            if (___def.effectMultiplyingStat != StatDefOf.PsychicSensitivity || !___pawn.PsiTracker().Activated)
+                return __result;
+
+            return __result * ___pawn.PsiTracker().GetTotalModifierSensitivityNormalized();
         }
         
     }

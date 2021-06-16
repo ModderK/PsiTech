@@ -57,7 +57,7 @@ namespace PsiTech.Psionics {
         public float AbilityModifier;
         private float abilityModifier => PsychicSensitivity * Essence;
 
-        public float Essence = 0f;
+        public float Essence;
 
         public float PsychicSensitivity {
             get {
@@ -573,6 +573,10 @@ namespace PsiTech.Psionics {
         }
 
         public void FinishTraining() {
+            
+            // Bit of a hack - dirty essence to make sure that it's up to date after training
+            Notify_EssenceDirty();
+            
             if (!Activated) {
                 ActivateTracker();
                 return;
@@ -636,6 +640,7 @@ namespace PsiTech.Psionics {
                 ability.GetOffsetOfCapacity(cap) != 0 || ability.GetFactorOfCapacity(cap) != 1);
         }
 
+        // Modifier for casting of active abilities
         public float GetTotalModifierActive() {
             return AbilityModifier * ProjectionAbility;
         }
@@ -644,14 +649,23 @@ namespace PsiTech.Psionics {
             return GetTotalModifierActive() > 1e-04;
         }
 
+        // Modifier on effects/casting of passive abilities and triggered passives
         public float GetTotalModifierPassive() {
             return AbilityModifier;
         }
 
+        // Total sensitivity modifier, used for defense rolls
         public float GetTotalModifierSensitivity() {
             return Mathf.Clamp(
                 (PsychicSensitivity * ProjectionAbility - PsiDefense) * Mathf.Max(Essence, 0.5f), 0,
                 Mathf.Infinity);
+        }
+
+        // Normalized sensitivity modifier, essentially, what percentage of total psychic sensitivity we have
+        // Used for some specific defense-type things where we shouldn't also be scaling by psychic sensitivity
+        // I hate it
+        public float GetTotalModifierSensitivityNormalized() {
+            return GetTotalModifierSensitivity() / PsychicSensitivity;
         }
 
         public void UseEnergy(float amount) {
