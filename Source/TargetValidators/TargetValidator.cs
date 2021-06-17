@@ -26,7 +26,7 @@ namespace PsiTech.TargetValidators {
     public abstract class TargetValidator {
 
         public virtual bool IsValidTarget(Pawn user, Pawn target) {
-            return target.needs.mood != null && PostIsValidTarget(user, target);
+            return target.needs?.mood != null && PostIsValidTarget(user, target);
         }
 
         protected abstract bool PostIsValidTarget(Pawn user, Pawn target);

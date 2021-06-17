@@ -95,7 +95,7 @@
   <PawnKindDef Class="PsiTech.Misc.PsiTechPawnKindDef" ParentName="PsionNormalTiersBase">
     <defName>Psion_Initiate</defName>
     <label>initiate</label>
-    <combatPower>80</combatPower>
+    <combatPower>100</combatPower>
     <baseRecruitDifficulty>0.70</baseRecruitDifficulty>
     <FocusRange>1~2</FocusRange>
     <TotalLevelRange>3~4</TotalLevelRange>
@@ -138,7 +138,7 @@
   <PawnKindDef Class="PsiTech.Misc.PsiTechPawnKindDef" ParentName="PsionNormalTiersBase">
     <defName>Psion_Acolyte</defName>
     <label>acolyte</label>
-    <combatPower>100</combatPower>
+    <combatPower>125</combatPower>
     <baseRecruitDifficulty>0.80</baseRecruitDifficulty>
     <FocusRange>1~3</FocusRange>
     <TotalLevelRange>4~6</TotalLevelRange>
@@ -226,12 +226,12 @@
 
   <!-- Elite tier psions - commando, warrior, conduit -->
   <PawnKindDef Class="PsiTech.Misc.PsiTechPawnKindDef" Name="PsionEliteTierBase" ParentName="PsionicBase" Abstract="true">
-    <combatPower>330</combatPower>
+    <combatPower>225</combatPower>
     <baseRecruitDifficulty>0.95</baseRecruitDifficulty>
     <apparelAllowHeadgearChance>1</apparelAllowHeadgearChance>
     <FocusRange>3~3</FocusRange>
     <TotalLevelRange>6~6</TotalLevelRange>
-    <apparelMoney>5000~8000</apparelMoney>
+    <apparelMoney>7000~10000</apparelMoney>
     <inventoryOptions>
       <skipChance>0.8</skipChance>
       <subOptionsChooseOne>
@@ -242,14 +242,13 @@
       </subOptionsChooseOne>
     </inventoryOptions>
     <biocodeWeaponChance>1</biocodeWeaponChance>
-    <factionLeader>true</factionLeader>
   </PawnKindDef>
   
   <PawnKindDef Class="PsiTech.Misc.PsiTechPawnKindDef" ParentName="PsionEliteTierBase">
     <defName>Psion_Commando</defName>
     <label>commando</label>
     <weaponMoney>600~2000</weaponMoney>
-    <PsiAbilitiesMoney>700~1300</PsiAbilitiesMoney>
+    <PsiAbilitiesMoney>800~1300</PsiAbilitiesMoney>
     <apparelTags>
       <li>ExoticPsiCommando</li>
       <li>IndustrialBasic</li>
@@ -287,7 +286,7 @@
     <defName>Psion_Warrior</defName>
     <label>warrior</label>
     <weaponMoney>1200~3000</weaponMoney>
-    <PsiAbilitiesMoney>800~1500</PsiAbilitiesMoney>
+    <PsiAbilitiesMoney>1300~1800</PsiAbilitiesMoney>
     <apparelTags>
       <li>ExoticPsiWarrior</li>
       <li>IndustrialBasic</li>
@@ -327,7 +326,7 @@
     <defName>Psion_Conduit</defName>
     <label>conduit</label>
     <weaponMoney>400~1000</weaponMoney>
-    <PsiAbilitiesMoney>1500~2500</PsiAbilitiesMoney>
+    <PsiAbilitiesMoney>1800~2500</PsiAbilitiesMoney>
     <apparelTags>
       <li>ExoticPsiConduit</li>
       <li>IndustrialBasic</li>
@@ -344,13 +343,13 @@
       <li>PTCombatInsight</li>
       <li>PTCombatIntuition</li>
       <li>PTCombatPrecision</li>
+      <li>PTWeaponSynchronicity</li>
       <li>PTPerfectedAttunement</li>
       <li>PTPerfectedFocus</li>
       <li>PTPerfectedCapacitance</li>
       <li>PTTruesight</li>
-      <li>PTOverdrive</li>
-      <li>PTAlacrity</li>
       <li>PTPrecision</li>
+      <li>PTOverdrive</li>
       <li>PTPsiHeal</li>
       <li>PTMindsoothe</li>
       <li>PTInsanity</li>
@@ -363,4 +362,42 @@
     </AbilityPool>
   </PawnKindDef>
 
+  <!-- Faction Leader - Transcendent -->
+  <PawnKindDef Class="PsiTech.Misc.PsiTechPawnKindDef" ParentName="PsionEliteTierBase">
+    <defName>Psion_Transcendent</defName>
+    <label>transcendent</label>
+    <apparelMoney>999999</apparelMoney>
+    <weaponMoney>999999</weaponMoney>
+    <PsiAbilitiesMoney>999999</PsiAbilitiesMoney>
+    <factionLeader>true</factionLeader>
+    <apparelTags>
+      <li>ExoticPsiConduit</li>
+      <li>IndustrialBasic</li>
+    </apparelTags>
+    <apparelRequired>
+      <li>PTPsionicConduitArmor</li>
+      <li>PTPsionicConduitHelmet</li>
+    </apparelRequired>
+    <weaponTags>
+      <li>SpacerGun</li>
+    </weaponTags>
+    <AbilityPool>
+      <li>PTCombatPrecognition</li>
+      <li>PTCombatInsight</li>
+      <li>PTCombatIntuition</li>
+      <li>PTCombatPrecision</li>
+      <li>PTPerfectedAttunement</li>
+      <li>PTPerfectedFocus</li>
+      <li>PTPerfectedCapacitance</li>
+      <li>PTTruesight</li>
+      <li>PTOverdrive</li>
+      <li>PTAlacrity</li>
+      <li>PTPrecision</li>
+      <li>PTInsanity</li>
+      <li>PTPhoenix</li>
+      <li>PTPsiRally</li>
+      <li>PTPsiStorm</li>
+    </AbilityPool>
+  </PawnKindDef>
+  
 </Defs>

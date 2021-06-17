@@ -669,12 +669,14 @@ namespace PsiTech.Psionics {
             return GetTotalModifierSensitivity() / PsychicSensitivity;
         }
 
-        public void UseEnergy(float amount) {
+        public void UseEnergy(float amount, bool silent = false) {
             currentEnergy -= amount;
             hasCachedGizmos = false;
             if (currentEnergy > 0) return;
 
             currentEnergy = 0;
+            if (silent) return;
+            
             Log.Warning("PsiTech ability used more energy than available in the pool of pawn " + pawn.Name);
         }
 
@@ -732,8 +734,9 @@ namespace PsiTech.Psionics {
             currentEnergy += pawn.GetStatValue(PsiTechDefOf.PTPsiEnergyRegeneration);
 
             if (currentEnergy < 0) currentEnergy = 0;
-            if (currentEnergy > pawn.GetStatValue(PsiTechDefOf.PTMaxPsiEnergy))
-                currentEnergy = pawn.GetStatValue(PsiTechDefOf.PTMaxPsiEnergy);
+            var maxEnergy = pawn.GetStatValue(PsiTechDefOf.PTMaxPsiEnergy);
+            if (currentEnergy > maxEnergy)
+                currentEnergy = maxEnergy;
 
             if (currentEnergy != lastCurrentEnergy) {
                 lastCurrentEnergy = currentEnergy;
@@ -905,6 +908,10 @@ namespace PsiTech.Psionics {
             hasCachedProjection = false;
             hasCachedSensitivity = false;
             hasCachedDefense = false;
+        }
+
+        public void ForceSetAbilityModifier() {
+            AbilityModifier = abilityModifier;
         }
 
     public string GetUniqueLoadID() {

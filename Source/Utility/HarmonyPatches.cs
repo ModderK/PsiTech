@@ -627,11 +627,14 @@ namespace PsiTech.Utility {
                 }
 
                 // Force give capacitance so that they can use these abilities
-                if ((abilityToAdd == PsiTechDefOf.PTPsiRally || abilityToAdd == PsiTechDefOf.PTPsiStorm) 
-                    && copiedPool.Contains(PsiTechDefOf.PTPerfectedCapacitance)) {
+                if ((abilityToAdd == PsiTechDefOf.PTPsiRally || abilityToAdd == PsiTechDefOf.PTPsiStorm) && !__result
+                    .PsiTracker().Abilities.Any(ability => ability.Def == PsiTechDefOf.PTPerfectedCapacitance)) {
                     __result.PsiTracker().AddAbility(PsiTechDefOf.PTPerfectedCapacitance, true);
                     money -= PsiTechDefOf.PTPerfectedCapacitance.AbilityCostForRaid;
-                    copiedPool.Remove(PsiTechDefOf.PTPerfectedCapacitance);
+
+                    if (copiedPool.Contains(PsiTechDefOf.PTPerfectedCapacitance)) {
+                        copiedPool.Remove(PsiTechDefOf.PTPerfectedCapacitance);
+                    }
                 }
                 
                 // Clean up pool
@@ -652,11 +655,15 @@ namespace PsiTech.Utility {
                 __result.equipment.Primary.PsiEquipmentTracker().IsPsychic = true;
             }
             
+            // Dirty essence and rebuild caches
+            __result.PsiTracker().Notify_EssenceDirty();
+            __result.PsiTracker().ForceSetAbilityModifier();
+            __result.PsiTracker().ClearStatCaches();
+            __result.PsiTracker().RebuildCaches();
+            
             // Max out our energy for the assault
             __result.PsiTracker().MaxEnergy();
-            
-            // Dirty essence
-            __result.PsiTracker().Notify_EssenceDirty();
+
         }
         
     }

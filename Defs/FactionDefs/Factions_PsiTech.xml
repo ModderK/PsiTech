@@ -67,6 +67,9 @@
     <techLevel>Spacer</techLevel>
     <geneticVariance>1.8</geneticVariance>
     <allowedArrivalTemperatureRange>-60~65</allowedArrivalTemperatureRange>
+    <fixedLeaderKinds>
+      <li>Psion_Transcendent</li>
+    </fixedLeaderKinds>
     <raidCommonalityFromPointsCurve>
       <points>
         <li>(300,  0)</li>
@@ -86,17 +89,17 @@
     </maxPawnCostPerTotalPointsCurve>
     <pawnGroupMakers>
       <li>
-        <!-- The killer pack - complete with raid bosses! -->
+        <!-- The killer pack -->
         <kindDef>Combat</kindDef>
         <options>
-          <Psion_Penitent>15</Psion_Penitent>
-          <Psion_Uninitiated>15</Psion_Uninitiated>
-          <Psion_Initiate>10</Psion_Initiate>
+          <Psion_Penitent>7.5</Psion_Penitent>
+          <Psion_Uninitiated>7.5</Psion_Uninitiated>
+          <Psion_Initiate>7.5</Psion_Initiate>
           <Psion_Acolyte>10</Psion_Acolyte>
           <Psion_Ascendant>5</Psion_Ascendant>
-          <Psion_Commando>1</Psion_Commando>
-          <Psion_Warrior>1</Psion_Warrior>
-          <Psion_Conduit>1</Psion_Conduit>
+          <Psion_Commando>2</Psion_Commando>
+          <Psion_Warrior>2</Psion_Warrior> 
+          <Psion_Conduit>2</Psion_Conduit>
         </options>
       </li>
       <li>

@@ -88,7 +88,9 @@ namespace PsiTech.Psionics {
                     break;
             }
 
-            Tracker.UseEnergy(Def.EnergyPerUse);
+            // Use silently because somehow we can get here without enough energy despite the earlier check that we have
+            // enough energy
+            Tracker.UseEnergy(Def.EnergyPerUse, true);
             cooldownTicker = CooldownTicks;
 
             if (success) {
