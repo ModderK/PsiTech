@@ -748,8 +748,11 @@ namespace PsiTech.Psionics {
             Essence = 1f - pawn.health.hediffSet.CalculateEssencePenalty();
         }
 
-    public IEnumerable<Gizmo> GetGizmos() {
-
+        public void Notify_GizmosDirty() {
+            hasCachedGizmos = false;
+        }
+        
+        public IEnumerable<Gizmo> GetGizmos() {
             // Ensure responsiveness to drafting and undrafting when paused
             if (pawn.Drafted != lastCachedDraft) hasCachedGizmos = false;
 

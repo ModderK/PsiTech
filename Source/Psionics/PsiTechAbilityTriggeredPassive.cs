@@ -35,6 +35,7 @@ namespace PsiTech.Psionics {
         public override void AbilityTick() {
             if (cooldownTicker > 0) {
                 cooldownTicker--;
+                Tracker.Notify_GizmosDirty();
             }
         }
         

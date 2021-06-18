@@ -35,6 +35,7 @@ namespace PsiTech.Psionics {
         public override void AbilityTick() {
             if (CooldownTicker > 0) {
                 CooldownTicker--;
+                Tracker.Notify_GizmosDirty();
             }
         }
 
@@ -58,7 +59,7 @@ namespace PsiTech.Psionics {
             TryThrowMoteOnTarget(target);
             TryThrowMoteSuccessPointerToTarget(target);
             Def.SoundDefSuccessOnCaster?.PlayOneShot(new TargetInfo(User.Position, User.Map));
-            Def.SoundDefSuccessOnCaster?.PlayOneShot(new TargetInfo(target.Position, target.Map));
+            Def.SoundDefSuccessOnTarget?.PlayOneShot(new TargetInfo(target.Position, target.Map));
             TryPickAndDoEffect(target);
             TryPickAndDoEffectOnUser();
         }
