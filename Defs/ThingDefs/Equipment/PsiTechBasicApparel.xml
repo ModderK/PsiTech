@@ -33,9 +33,6 @@
         <stuffCategories>
             <li>Fabric</li>
         </stuffCategories>
-        <thingCategories>
-            <li>Apparel</li>
-        </thingCategories>
         <statBases>
             <MaxHitPoints>200</MaxHitPoints>
             <WorkToMake>10000</WorkToMake>

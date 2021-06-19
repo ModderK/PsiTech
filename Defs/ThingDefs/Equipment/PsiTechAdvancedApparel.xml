@@ -39,9 +39,6 @@
             <Uranium>20</Uranium>
             <PTAthenium>40</PTAthenium>
         </costList>
-        <thingCategories>
-            <li>Apparel</li>
-        </thingCategories>
         <statBases>
             <WorkToMake>60000</WorkToMake>
             <MaxHitPoints>340</MaxHitPoints>
@@ -157,9 +154,6 @@
             <Uranium>20</Uranium>
             <PTAthenium>60</PTAthenium>
         </costList>
-        <thingCategories>
-            <li>Apparel</li>
-        </thingCategories>
         <statBases>
             <WorkToMake>60000</WorkToMake>
             <MaxHitPoints>340</MaxHitPoints>
@@ -274,9 +268,6 @@
             <Uranium>20</Uranium>
             <PTAthenium>80</PTAthenium>
         </costList>
-        <thingCategories>
-            <li>Apparel</li>
-        </thingCategories>
         <statBases>
             <WorkToMake>60000</WorkToMake>
             <MaxHitPoints>340</MaxHitPoints>

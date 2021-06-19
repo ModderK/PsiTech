@@ -343,26 +343,20 @@ namespace PsiTech.Utility {
 
         static void Prefix(DamageInfo? dinfo, Pawn_HealthTracker __instance, Pawn ___pawn) {
 
-            if (__instance.Dead || !___pawn.PsiTracker().Activated || dinfo == null || dinfo.Value.Amount < 1e-4) return;
+            if (__instance.Dead || !___pawn.PsiTracker().Activated ||
+                __instance.summaryHealth.SummaryHealthPercent > 1 - 1e-4) return;
 
             var instigator = dinfo?.Instigator as Pawn;
-            
-            if (ShouldBeDead(__instance, ___pawn)) {
-                ___pawn.PsiTracker().TriggerAlmostDead(instigator);
-                return;
-            }
-            
-            if (ShouldBeDowned(__instance)) {
+
+            if (ShouldBeDead(__instance, ___pawn) || ShouldBeDowned(__instance)) {
                 ___pawn.PsiTracker().TriggerAlmostDead(instigator);
             }
         }
-        
-        private static bool ShouldBeDowned(Pawn_HealthTracker tracker)
-        {
-            if (!tracker.InPainShock && tracker.capacities.CanBeAwake)
-                return !tracker.capacities.CapableOf(PawnCapacityDefOf.Moving);
-            return true;
-        }
+
+        private static bool ShouldBeDowned(Pawn_HealthTracker tracker) => tracker.InPainShock ||
+                                                                          !tracker.capacities.CanBeAwake ||
+                                                                          !tracker.capacities.CapableOf(
+                                                                              PawnCapacityDefOf.Moving);
 
         private static bool ShouldBeDead(Pawn_HealthTracker tracker, Pawn pawn)
         {

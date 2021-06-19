@@ -44,8 +44,11 @@ namespace PsiTech.Psionics {
             verb ??= new Verb_Psionic {
                 Ability = this,
                 caster = User,
+                loadID = UniqueVerbId
             };
 
+        private string UniqueVerbId => "PsiTechAbility_" + Def.label + "_" + User.ThingID;
+        
         // Autocast and AI control variables
         public bool Autocast;
         public AbilityPriority Priority = AbilityPriority.Normal;
