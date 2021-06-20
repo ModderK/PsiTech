@@ -227,7 +227,7 @@
         <EnergyPerUse>200</EnergyPerUse>
         <Range>40</Range>
         <CooldownSeconds>300</CooldownSeconds>
-        <BaseSuccessChance>0.15</BaseSuccessChance>
+        <BaseSuccessChance>0.2</BaseSuccessChance>
         <PossibleEffects>
             <li Class="PsiTech.AbilityEffects.AbilityEffectMentalState">
                 <Title>Insanity</Title>
