@@ -34,7 +34,7 @@ namespace PsiTech.Psionics {
         private int cooldownTicker;
 
         private IEnumerable<Pawn> PawnsToAffect =>
-            User.Map.mapPawns.AllPawns.Where(target => Def.TargetValidator.IsValidTarget(User, target));
+            User.Map.PotentialPsiTargets().Where(target => Def.TargetValidator.IsValidTarget(User, target));
 
         public override void AbilityTick() {
             if (cooldownTicker > 0) {
@@ -50,7 +50,7 @@ namespace PsiTech.Psionics {
         }
 
         public override void DoAbility() {
-            Tracker.UseEnergy(Def.EnergyPerUse);
+            Tracker.UseEnergy(Def.EnergyPerUse, true);
             cooldownTicker = CooldownTicks;
 
             var cachedToAffect = PawnsToAffect.ToList().ListFullCopy();

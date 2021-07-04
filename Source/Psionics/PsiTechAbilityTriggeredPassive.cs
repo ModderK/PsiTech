@@ -47,7 +47,7 @@ namespace PsiTech.Psionics {
             switch(Def.Target){
                 case TargetType.Single:
                     var target = Def.TargetValidator.SelectBestTargetFromLists(User,
-                        User.Map.mapPawns.AllPawns.Where(pawn => Def.TargetValidator.IsValidTarget(User, pawn)).ToList());
+                        User.Map.PotentialPsiTargets().Where(pawn => Def.TargetValidator.IsValidTarget(User, pawn)).ToList());
                     if (target == null) break;
                     if (!Rand.Chance(SuccessChanceOnTarget(target))) {
                         MoteMaker.ThrowText(target.Position.ToVector3(), target.Map, ResistedKey.Translate(), 1.9f);
@@ -60,7 +60,7 @@ namespace PsiTech.Psionics {
                 
                 case TargetType.AllAvailable:
                     var targets =
-                        User.Map.mapPawns.AllPawns.Where(pawn => Def.TargetValidator.IsValidTarget(User, pawn));
+                        User.Map.PotentialPsiTargets().Where(pawn => Def.TargetValidator.IsValidTarget(User, pawn));
                     foreach (var targ in targets) {
                         if(targ == null) continue;
                         if (!Rand.Chance(SuccessChanceOnTarget(targ))) {
@@ -89,9 +89,7 @@ namespace PsiTech.Psionics {
                     break;
             }
 
-            // Use silently because somehow we can get here without enough energy despite the earlier check that we have
-            // enough energy
-            Tracker.UseEnergy(Def.EnergyPerUse, true);
+            Tracker.UseEnergy(Def.EnergyPerUse);
             cooldownTicker = CooldownTicks;
 
             if (success) {

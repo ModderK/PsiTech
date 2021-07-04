@@ -17,20 +17,26 @@
     <DebugSymbols>false</DebugSymbols>
     <DebugType>none</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>..\v1.2\Assemblies\</OutputPath>
-    <DefineConstants>
-    </DefineConstants>
+    <OutputPath>..\v1.3\Assemblies\</OutputPath>
+    <DefineConstants>VER13</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>none</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>..\..\PsiTech - Release\v1.2\Assemblies\</OutputPath>
-    <DefineConstants>
-    </DefineConstants>
+    <OutputPath>..\..\PsiTech - Release\v1.3\Assemblies\</OutputPath>
+    <DefineConstants>VER13</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug - 1.2|AnyCPU' ">
+    <OutputPath>..\v1.2\Assemblies\</OutputPath>
+    <Optimize>true</Optimize>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release - 1.2|AnyCPU' ">
+    <OutputPath>..\..\PsiTech - Release\v1.2\Assemblies\</OutputPath>
+    <Optimize>true</Optimize>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug - 1.1|AnyCPU' ">
     <OutputPath>..\Assemblies\</OutputPath>
@@ -47,6 +53,10 @@
     </Reference>
     <Reference Include="Assembly-CSharp, Culture=neutral, PublicKeyToken=null" Condition="'$(Configuration)' == 'Debug - 1.1' Or '$(Configuration)' == 'Release - 1.1'">
       <HintPath>../../../../../../../../../.steam/steam/steamapps/common/RimWorld/Extra/OldAssemblies/1.1/Assembly-CSharp.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Assembly-CSharp, Culture=neutral, PublicKeyToken=null" Condition="'$(Configuration)' == 'Debug - 1.2' Or '$(Configuration)' == 'Release - 1.2'">
+      <HintPath>../../../../../../../../../.steam/steam/steamapps/common/RimWorld/Extra/OldAssemblies/1.2/Assembly-CSharp.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Assembly-CSharp, Culture=neutral, PublicKeyToken=null" Condition="'$(Configuration)' == 'Debug' Or '$(Configuration)' == 'Release'">
@@ -216,24 +226,26 @@
     <PreBuildEvent>
     </PreBuildEvent>
   </PropertyGroup>
-  <Target Name="AfterBuild">
+  <Target Name="AfterBuild" Condition="'$(ConfigurationName)' == 'Release' Or '$(Configuration)' == 'Release - 1.1' Or '$(Configuration)' == 'Release - 1.2'">
     <ItemGroup>
       <_Assemblies Include="$(ProjectDir)../Assemblies/**/*.*" />
       <_Defs Include="$(ProjectDir)../Defs/**/*.*" />
       <_Defs12 Include="$(ProjectDir)../v1.2/Defs/**/*.*" />
+      <_Defs13 Include="$(ProjectDir)../v1.3/Defs/**/*.*" />
       <_Patches Include="$(ProjectDir)../Patches/**/*.*" />
       <_Languages Include="$(ProjectDir)../Languages/**/*.*" />
       <_Sounds Include="$(ProjectDir)../Sounds/**/*.*" />
       <_Textures Include="$(ProjectDir)../Textures/**/*.*" />
     </ItemGroup>
     <!--<Copy SourceFiles="$(ProjectDir)../About/About-$(ConfigurationName).xml" DestinationFiles="$(ProjectDir)../../PsiTech - Release/About/About.xml" /> -->
-    <Copy Condition="'$(ConfigurationName)' == 'Release' Or '$(Configuration)' == 'Release - 1.1'" SourceFiles="$(ProjectDir)../About/Preview.png" DestinationFiles="$(ProjectDir)../../PsiTech - Release/About/Preview.png" />
+    <Copy SourceFiles="$(ProjectDir)../About/Preview.png" DestinationFiles="$(ProjectDir)../../PsiTech - Release/About/Preview.png" />
     <!--<Copy Condition="'$(ConfigurationName)' == 'Release' Or '$(Configuration)' == 'Release - 1.1'" SourceFiles="@(_Assemblies)" DestinationFolder="$(ProjectDir)../../PsiTech - Release/Assemblies" />-->
-    <Copy Condition="'$(ConfigurationName)' == 'Release' Or '$(Configuration)' == 'Release - 1.1'" SourceFiles="@(_Defs)" DestinationFolder="$(ProjectDir)../../PsiTech - Release/Defs/%(RecursiveDir)" SkipUnchangedFiles="true" />
-    <Copy Condition="'$(ConfigurationName)' == 'Release' Or '$(Configuration)' == 'Release - 1.1'" SourceFiles="@(_Defs12)" DestinationFolder="$(ProjectDir)../../PsiTech - Release/v1.2/Defs/%(RecursiveDir)" SkipUnchangedFiles="true" />
-    <Copy Condition="'$(ConfigurationName)' == 'Release' Or '$(Configuration)' == 'Release - 1.1'" SourceFiles="@(_Patches)" DestinationFolder="$(ProjectDir)../../PsiTech - Release/Patches/%(RecursiveDir)" SkipUnchangedFiles="true" />
-    <Copy Condition="'$(ConfigurationName)' == 'Release' Or '$(Configuration)' == 'Release - 1.1'" SourceFiles="@(_Languages)" DestinationFolder="$(ProjectDir)../../PsiTech - Release/Languages/%(RecursiveDir)" SkipUnchangedFiles="true" />
-    <Copy Condition="'$(ConfigurationName)' == 'Release' Or '$(Configuration)' == 'Release - 1.1'" SourceFiles="@(_Sounds)" DestinationFolder="$(ProjectDir)../../PsiTech - Release/Sounds/%(RecursiveDir)" SkipUnchangedFiles="true" />
-    <Copy Condition="'$(ConfigurationName)' == 'Release' Or '$(Configuration)' == 'Release - 1.1'" SourceFiles="@(_Textures)" DestinationFolder="$(ProjectDir)../../PsiTech - Release/Textures/%(RecursiveDir)" SkipUnchangedFiles="true" />
+    <Copy SourceFiles="@(_Defs)" DestinationFolder="$(ProjectDir)../../PsiTech - Release/Defs/%(RecursiveDir)" SkipUnchangedFiles="true" />
+    <Copy SourceFiles="@(_Defs12)" DestinationFolder="$(ProjectDir)../../PsiTech - Release/v1.2/Defs/%(RecursiveDir)" SkipUnchangedFiles="true" />
+    <Copy SourceFiles="@(_Defs13)" DestinationFolder="$(ProjectDir)../../PsiTech - Release/v1.3/Defs/%(RecursiveDir)" SkipUnchangedFiles="true" />
+    <Copy SourceFiles="@(_Patches)" DestinationFolder="$(ProjectDir)../../PsiTech - Release/Patches/%(RecursiveDir)" SkipUnchangedFiles="true" />
+    <Copy SourceFiles="@(_Languages)" DestinationFolder="$(ProjectDir)../../PsiTech - Release/Languages/%(RecursiveDir)" SkipUnchangedFiles="true" />
+    <Copy SourceFiles="@(_Sounds)" DestinationFolder="$(ProjectDir)../../PsiTech - Release/Sounds/%(RecursiveDir)" SkipUnchangedFiles="true" />
+    <Copy SourceFiles="@(_Textures)" DestinationFolder="$(ProjectDir)../../PsiTech - Release/Textures/%(RecursiveDir)" SkipUnchangedFiles="true" />
   </Target>
 </Project>

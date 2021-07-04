@@ -18,7 +18,6 @@
  *
  */
 
-using System.Globalization;
 using System.Linq;
 using PsiTech.Utility;
 using RimWorld;

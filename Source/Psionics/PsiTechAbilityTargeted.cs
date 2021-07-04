@@ -46,7 +46,7 @@ namespace PsiTech.Psionics {
         }
 
         public override void DoAbilityOnTarget(Pawn target) {
-            Tracker.UseEnergy(Def.EnergyPerUse);
+            Tracker.UseEnergy(Def.EnergyPerUse, true);
             CooldownTicker = CooldownTicks;
 
             if (!Rand.Chance(SuccessChanceOnTarget(target))) {
@@ -117,9 +117,17 @@ namespace PsiTech.Psionics {
             }
             else if(command is CommandTargetedPsionic psi){ // We've got enough energy and we're off cooldown
                 psi.action = target => {
-                    if (!User.Position.InHorDistOf(target.Position, Def.Range) || !(target is Pawn pawn) || !Def.TargetValidator.IsValidTarget(User, pawn)) return; 
+#if VER13
+                    if (!User.Position.InHorDistOf(target.Cell, Def.Range) || target.Pawn == null ||
+                        !Def.TargetValidator.IsValidTarget(User, target.Pawn)) return;
+                    // We're in range and have a valid target
+                    var job = JobMaker.MakeJob(PsiTechDefOf.PTSingleTargetPsionic, User, target.Pawn);
+#else
+                    if (!User.Position.InHorDistOf(target.Position, Def.Range) || !(target is Pawn pawn) ||
+                        !Def.TargetValidator.IsValidTarget(User, pawn)) return;
                     // We're in range and have a valid target
                     var job = JobMaker.MakeJob(PsiTechDefOf.PTSingleTargetPsionic, User, pawn);
+#endif
                     job.verbToUse = Verb;
                     User.jobs.TryTakeOrderedJob(job);
                 };
