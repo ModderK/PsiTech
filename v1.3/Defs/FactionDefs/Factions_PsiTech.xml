@@ -24,6 +24,8 @@
     <pawnsPlural>psions</pawnsPlural>
     <categoryTag>Psionic</categoryTag>
     <description>A group of individuals who have learned how to use psychic abilities.\n\nGenerally such groups are not overtly hostile to others, except when their psychic dominion is threatened. Researching too deep into psychic abilities will draw their ire.</description>
+    <maxConfigurableAtWorldCreation>9999</maxConfigurableAtWorldCreation>
+    <configurationListOrderPriority>200</configurationListOrderPriority>
     <requiredCountAtGameStart>1</requiredCountAtGameStart>
     <settlementGenerationWeight>0.7</settlementGenerationWeight>
     <canMakeRandomly>true</canMakeRandomly>
