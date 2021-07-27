@@ -153,20 +153,18 @@ namespace PsiTech.Psionics {
 
         private float[,] cachedStatMods;
         private float[,] cachedCapacities;
+        private float[] cachedUnmodifiedCapacities;
         private IEnumerable<Gizmo> cachedGizmos = Enumerable.Empty<Gizmo>();
 
         public PsiTechTracker(Pawn pawn, int id) {
             this.pawn = pawn;
             loadId = id;
-            InitializeCaches();
         }
 
         // Scribe requires a no-args constructor
-        public PsiTechTracker() {
-            InitializeCaches();
-        }
+        public PsiTechTracker() { }
 
-        private void InitializeCaches() {
+        public void InitializeCaches() {
             var statCount = DefDatabase<StatDef>.DefCount;
             cachedStatMods = new float[statCount,2];
             for (var k = 0; k < cachedStatMods.GetLength(0); k++) {
@@ -178,7 +176,15 @@ namespace PsiTech.Psionics {
             for (var k = 0; k < cachedCapacities.GetLength(0); k++) {
                 cachedCapacities[k,1] = 1f;
             }
+
+            var capacities = DefDatabase<PawnCapacityDef>.AllDefs;
+            cachedUnmodifiedCapacities = new float[capCount];
             
+            // Trigger capacity recache to get initial values
+            pawn.health.capacities.Notify_CapacityLevelsDirty();
+            foreach (var capacity in capacities) {
+                pawn.health.capacities.GetLevel(capacity);
+            }
         }
 
         public void TrackerTick() {
@@ -635,6 +641,14 @@ namespace PsiTech.Psionics {
             return cachedCapacities[cap.index, 1];
         }
 
+        public void SetBaseCapacity(PawnCapacityDef cap, float value) {
+            cachedUnmodifiedCapacities[cap.index] = value;
+        }
+
+        public float GetBaseCapacity(PawnCapacityDef cap) {
+            return cachedUnmodifiedCapacities[cap.index];
+        }
+        
         public IEnumerable<PsiTechAbility> GetAllAbilitiesImpactingCapacity(PawnCapacityDef cap) {
             return Abilities.Where(ability =>
                 ability.GetOffsetOfCapacity(cap) != 0 || ability.GetFactorOfCapacity(cap) != 1);
@@ -939,8 +953,10 @@ namespace PsiTech.Psionics {
 
             Scribe_Collections.Look(ref Abilities, "Abilities", LookMode.Deep);
 
+            // Initialize caches after load (must be deferred to prevent infinite recursion)
             // So we don't have to tick to build the fill the cache after a load
             if (pawn != null && Scribe.mode == LoadSaveMode.PostLoadInit) {
+                InitializeCaches();
                 AbilityModifier = abilityModifier;
                 Notify_EssenceDirty();
                 RebuildCaches();

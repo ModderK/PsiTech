@@ -64,8 +64,9 @@ namespace PsiTech.Utility {
                 if (trackers.TryGetValue(pawn, out var tracker)) return tracker;
                 
                 tracker = new PsiTechTracker(pawn, GetNextTrackerId());
-                tracker.Notify_EssenceDirty();
                 trackers.Add(pawn, tracker);
+                tracker.InitializeCaches();
+                tracker.Notify_EssenceDirty();
                 return tracker;
             }
         }

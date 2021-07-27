@@ -18,6 +18,7 @@
  *
  */
 
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -221,13 +222,16 @@ namespace PsiTech.Utility {
         
     }
 
-    [HarmonyPatch(typeof(PawnCapacityUtility), "CalculateCapacityLevel")]
+    [HarmonyPatch(typeof(PawnCapacityUtility), "CalculateCapacityLevel", Priority.Last)]
     public class PawnCapacityPatch {
 
         public static float Postfix(float __result, HediffSet diffSet, PawnCapacityDef capacity,
             ref List<PawnCapacityUtility.CapacityImpactor> impactors) {
 
-            if (capacity.zeroIfCannotBeAwake && !diffSet.pawn.health.capacities.CanBeAwake) return __result;
+            diffSet.pawn.PsiTracker().SetBaseCapacity(capacity, __result);
+
+            if (!diffSet.pawn.PsiTracker().Activated ||
+                capacity.zeroIfCannotBeAwake && !diffSet.pawn.health.capacities.CanBeAwake) return __result;
 
             var max = 999f;
             var originalMult = 1f;
@@ -575,7 +579,7 @@ namespace PsiTech.Utility {
 
         public static void Postfix(ref Pawn __result, PawnGenerationRequest request) {
             if (Current.ProgramState == ProgramState.Entry || !(request.KindDef is PsiTechPawnKindDef psiKind) ||
-                psiKind.PsiAbilitiesMoney == FloatRange.Zero) return;
+                psiKind.PsiAbilitiesMoney == FloatRange.Zero || !Rand.Chance(psiKind.ChanceForPsionicAbilities)) return;
             
             // Remove psychically dull/deaf - can't enforce this in def since it's a spectrum trait...
             __result.story.traits.allTraits.RemoveAll(trait =>
@@ -803,5 +807,36 @@ namespace PsiTech.Utility {
         }
         
     }
+
+#if VER13
+    // Patches to deal with Blindsight in Ideology
+    [HarmonyPatch(typeof(ThoughtWorker_Precept_Blind), "IsBlind")]
+    public class BlindThoughtPatch {
+
+        public static bool Postfix(bool __result, Pawn p) {
+            if (__result || !p.PsiTracker().Activated) return __result;
+
+            return !BlindnessHelper.CapableOfSightWithoutPsionics(p);
+        }
+        
+    }
+    
+    [HarmonyPatch(typeof(ThoughtWorker_Precept_HalfBlind), "IsHalfBlind")]
+    public class HalfBlindThoughtPatch {
+        
+        public static bool Postfix(bool __result, Pawn p) {
+            if (!p.PsiTracker().Activated) return __result;
+
+            return __result && BlindnessHelper.CapableOfSightWithoutPsionics(p);
+        }
+        
+    }
+
+    public class BlindnessHelper {
+        public static bool CapableOfSightWithoutPsionics(Pawn p) {
+            return p.PsiTracker().GetBaseCapacity(PawnCapacityDefOf.Sight) > PawnCapacityDefOf.Sight.minForCapable;
+        }
+    }
+#endif
 
 }

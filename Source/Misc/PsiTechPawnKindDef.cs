@@ -29,6 +29,7 @@ namespace PsiTech.Misc {
         public FloatRange PsiAbilitiesMoney = FloatRange.Zero;
         public IntRange FocusRange = new IntRange(1, 3);
         public IntRange TotalLevelRange = new IntRange(2, 6);
+        public float ChanceForPsionicAbilities = 1f;
 
     }
 }
