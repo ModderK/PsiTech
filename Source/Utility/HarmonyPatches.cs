@@ -810,13 +810,13 @@ namespace PsiTech.Utility {
 
 #if VER13
     // Patches to deal with Blindsight in Ideology
-    [HarmonyPatch(typeof(ThoughtWorker_Precept_Blind), "IsBlind")]
+    [HarmonyPatch(typeof(PawnUtility), "IsBiologicallyBlind")]
     public class BlindThoughtPatch {
 
-        public static bool Postfix(bool __result, Pawn p) {
-            if (__result || !p.PsiTracker().Activated) return __result;
+        public static bool Postfix(bool __result, Pawn pawn) {
+            if (__result || !pawn.PsiTracker().Activated) return __result;
 
-            return !BlindnessHelper.CapableOfSightWithoutPsionics(p);
+            return !BlindnessHelper.CapableOfSightWithoutPsionics(pawn);
         }
         
     }
