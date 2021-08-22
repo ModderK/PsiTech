@@ -119,7 +119,7 @@ namespace PsiTech.Interface {
             
             //* Debug options at the top *//
             Text.Font = GameFont.Small;
-            if (PsiTechManager.PsiTechDebug && Prefs.DevMode) {
+            if (PsiTechSettings.PsiTechDebug && Prefs.DevMode) {
                 Widgets.CheckboxLabeled(new Rect(rect.x, rect.y - 17f, 160f, 25f), "Dev: Instant Training", ref _devInstantTraining);
                 Widgets.CheckboxLabeled(new Rect(rect.x + 170f, rect.y - 17f, 180f, 25f), "Dev: Show All Abilities", ref _devShowAllAbilities);
             }
@@ -157,7 +157,7 @@ namespace PsiTech.Interface {
             };
 
             var energyNodesRect = new Rect(xAnchor + ExtraEnergyNodePadding, yAnchor, EnergyIconWidth, EnergyIconHeight);
-            if (Widgets.ButtonImage(energyNodesRect, energyIcon) && (PsiTechManager.PsiTechDebug || pawn.IsColonist)) {
+            if (Widgets.ButtonImage(energyNodesRect, energyIcon) && (PsiTechSettings.PsiTechDebug || pawn.IsColonist)) {
                 if (_devInstantTraining) {
                     pawn.PsiTracker().EnergyLevel += 1;
                 }
@@ -213,7 +213,7 @@ namespace PsiTech.Interface {
 
             xAnchor += 5f;
             var focusNodesRect = new Rect(xAnchor + ExtraFocusNodePadding, yAnchor, FocusIconWidth, FocusIconHeight);
-            if (Widgets.ButtonImage(focusNodesRect, focusIcon) && (PsiTechManager.PsiTechDebug || pawn.IsColonist)) {
+            if (Widgets.ButtonImage(focusNodesRect, focusIcon) && (PsiTechSettings.PsiTechDebug || pawn.IsColonist)) {
                 if (_devInstantTraining) {
                     pawn.PsiTracker().FocusLevel += 1;
                 }
@@ -314,7 +314,7 @@ namespace PsiTech.Interface {
             
             //* Sixth horizontal area - ability window button and training queue toggle *//
             yAnchor += 2 * YSeparationForSections;
-            if ((PsiTechManager.PsiTechDebug || pawn.IsColonist) && pawn.PsiTracker().CanUseActiveAbilities() &&
+            if ((PsiTechSettings.PsiTechDebug || pawn.IsColonist) && pawn.PsiTracker().CanUseActiveAbilities() &&
                 pawn.PsiTracker().Abilities.Any(ability => ability.Def.Autocastable)) {
                 xAnchor = rect.x + XMargin;
                 Text.Anchor = TextAnchor.MiddleCenter;
@@ -545,7 +545,7 @@ namespace PsiTech.Interface {
 
                 var buttonRect = new Rect(slotRect.x, slotRect.y, slotRect.width - infoSize, slotRect.height);
                 Widgets.Label(buttonRect, slotText);
-                if (Widgets.ButtonText(buttonRect, "", false) && (PsiTechManager.PsiTechDebug || pawn.IsColonist)) {
+                if (Widgets.ButtonText(buttonRect, "", false) && (PsiTechSettings.PsiTechDebug || pawn.IsColonist)) {
                     
                     var options = new List<FloatMenuOption>();
                     

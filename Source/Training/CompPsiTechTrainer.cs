@@ -128,7 +128,7 @@ namespace PsiTech.Training {
         }
 
         public override IEnumerable<Gizmo> CompGetGizmosExtra() {
-            if (!Prefs.DevMode || !PsiTechManager.PsiTechDebug) yield break;
+            if (!Prefs.DevMode || !PsiTechSettings.PsiTechDebug) yield break;
             
             yield return new Command_Action {
                 defaultLabel = "DEBUG Finish training",

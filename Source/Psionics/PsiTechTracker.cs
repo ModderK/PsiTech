@@ -192,9 +192,9 @@ namespace PsiTech.Psionics {
 
             if ((Find.TickManager.TicksGame + loadId) % TickRate != 0) return;
 
-            if (lastCachedDebug != (Prefs.DevMode && PsiTechManager.PsiTechDebug)) {
+            if (lastCachedDebug != (Prefs.DevMode && PsiTechSettings.PsiTechDebug)) {
                 hasCachedGizmos = false;
-                lastCachedDebug = Prefs.DevMode && PsiTechManager.PsiTechDebug;
+                lastCachedDebug = Prefs.DevMode && PsiTechSettings.PsiTechDebug;
             }
 
             // There's no better way to invalidate our caches unfortunately, since there's no notify methods
@@ -802,7 +802,7 @@ namespace PsiTech.Psionics {
                 gizmos.AddRange(abilityGizmos);
             }
 
-            if (PsiTechManager.PsiTechDebug && Prefs.DevMode) {
+            if (PsiTechSettings.PsiTechDebug && Prefs.DevMode) {
                 gizmos.AddRange(DebugGizmos());
             }
 

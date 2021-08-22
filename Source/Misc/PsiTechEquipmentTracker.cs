@@ -75,7 +75,7 @@ namespace PsiTech.Misc {
             
             IEnumerable<Gizmo> gizmos = null;
 
-            if (PsiTechManager.PsiTechDebug && Prefs.DevMode) {
+            if (PsiTechSettings.PsiTechDebug && Prefs.DevMode) {
                 gizmos = DebugGizmos();
             }
 

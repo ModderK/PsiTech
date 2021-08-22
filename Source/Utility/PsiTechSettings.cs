@@ -27,6 +27,14 @@ using Verse;
 namespace PsiTech.Utility {
     public class PsiTechSettings : ModSettings {
 
+        [TweakValue("!PsiTechDebug")]
+        public static bool PsiTechDebug;
+
+        // Apparently there's a callback for tweakvalues changing
+        private static void PsiTechDebug_Changed() {
+            Get().Write();
+        }
+
         //Use PsiTechSettings.Get().setting to refer to settings
         public bool EnablePsychicFactionRaids = true;
         public float EssenceLossMultiplier => essenceLossMultiplierInternal / 100f;
@@ -109,6 +117,7 @@ namespace PsiTech.Utility {
                 CopyToSavingDictionary();
             }
             
+            Scribe_Values.Look(ref PsiTechDebug, "PsiTechDebug");
             Scribe_Values.Look(ref EnablePsychicFactionRaids, "EnablePsychicFactionRaids", true);
             Scribe_Values.Look(ref essenceLossMultiplierInternal, "essenceLossMultiplierInternal", 100);
             Scribe_Values.Look(ref trainingSpeedMultiplierInternal, "trainingSpeedMultiplierInternal", 100);
@@ -184,6 +193,5 @@ namespace PsiTech.Utility {
         private static bool DefIsArtificial(HediffDef def) {
             return typeof(Hediff_Implant).IsAssignableFrom(def.hediffClass);
         }
-        
     }
 }

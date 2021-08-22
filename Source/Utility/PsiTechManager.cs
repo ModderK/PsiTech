@@ -29,9 +29,6 @@ using Verse.AI;
 namespace PsiTech.Utility {
     public class PsiTechManager : GameComponent {
         
-        [TweakValue("!PsiTechDebug")]
-        public static bool PsiTechDebug = false;
-        
         private Dictionary<Pawn, PsiTechTracker> trackers = new Dictionary<Pawn, PsiTechTracker>();
         private Dictionary<Thing, PsiTechEquipmentTracker> equipmentTrackers = new Dictionary<Thing, PsiTechEquipmentTracker>();
 
