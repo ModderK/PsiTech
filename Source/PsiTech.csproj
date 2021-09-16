@@ -163,6 +163,7 @@
     <Compile Include="AutocastManagement\AutocastProfileDef.cs" />
     <Compile Include="AutocastManagement\AutocastProfileUtility.cs" />
     <Compile Include="Interface\AbilityWindow.cs" />
+    <Compile Include="Interface\EnemyAbilitiesWindow.cs" />
     <Compile Include="Interface\EssenceSummaryWindow.cs" />
     <Compile Include="Interface\ITab_Pawn_Psi.cs" />
     <Compile Include="Interface\PawnPsiCard.cs" />

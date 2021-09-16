@@ -73,6 +73,7 @@
     
     <PsiTech.Interface.Search>Search</PsiTech.Interface.Search>
     <PsiTech.Interface.ResetEssenceLosses>Reset all essence penalties to default</PsiTech.Interface.ResetEssenceLosses>
+    <PsiTech.Interface.ResetEnemyAbilities>Enable all enemy psion abilities</PsiTech.Interface.ResetEnemyAbilities>
 
     <PsiTech.AutocastManagement.ConditionMet>Condition Currently Met</PsiTech.AutocastManagement.ConditionMet>
     <PsiTech.AutocastManagement.ConditionNotMet>Condition Currently Not Met</PsiTech.AutocastManagement.ConditionNotMet>
@@ -148,6 +149,7 @@
     <PsiTech.SuppressionField.ConfigureSuppressionFieldDesc>Configure the radius and strength of the suppression field.</PsiTech.SuppressionField.ConfigureSuppressionFieldDesc>
     
     <PsiTech.Utility.EnablePsychicFactionRaids>Enable Psychic Faction Raids</PsiTech.Utility.EnablePsychicFactionRaids>
+    <PsiTech.Utility.ConfigureEnemyAbilities>Configure enemy psion abilities</PsiTech.Utility.ConfigureEnemyAbilities>
     <PsiTech.Utility.EssenceLossMultiplier>Essence Loss Multiplier:</PsiTech.Utility.EssenceLossMultiplier>
     <PsiTech.Utility.EssenceLossMultiplierDesc>The global multiplier on essence loss, as a percentage. To calculate essence loss for a health effect, the value for the effect is taken and multiplied by this value (e.g. by 1, for 100%). Essence loss due to individual health effects can be configured on a per effect basis.</PsiTech.Utility.EssenceLossMultiplierDesc>
     <PsiTech.Utility.EssenceLossConfiguration>Configure health effect essence loss</PsiTech.Utility.EssenceLossConfiguration>

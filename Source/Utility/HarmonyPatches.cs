@@ -592,14 +592,17 @@ namespace PsiTech.Utility {
             __result.PsiTracker().ActivateTracker();
             __result.PsiTracker().Abilities.Clear();
             __result.PsiTracker().FocusLevel = psiKind.FocusRange.RandomInRange;
-            __result.PsiTracker().EnergyLevel = psiKind.TotalLevelRange.RandomInRange - __result.PsiTracker().FocusLevel;
+            __result.PsiTracker().EnergyLevel =
+                psiKind.TotalLevelRange.RandomInRange - __result.PsiTracker().FocusLevel;
             
             var copiedPool = psiKind.AbilityPool.ListFullCopy();
             foreach (var ability in copiedPool.ListFullCopy()) {
-                if (ability.AbilityCostForRaid <= money && __result.PsiTracker().HasAvailableSlot(ability.Tier)) continue;
+                if (ability.AbilityCostForRaid <= money &&
+                    __result.PsiTracker().HasAvailableSlot(ability.Tier)) continue;
                 
                 copiedPool.Remove(ability);
             }
+            copiedPool.RemoveAll(ability => PsiTechSettings.DisabledEnemyAbilities[ability]);
             
             // Time to roll some abilities
             while (copiedPool.Any()) {

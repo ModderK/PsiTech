@@ -21,6 +21,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using PsiTech.Interface;
+using PsiTech.Misc;
+using PsiTech.Psionics;
 using UnityEngine;
 using Verse;
 
@@ -46,6 +48,9 @@ namespace PsiTech.Utility {
         public static readonly Dictionary<HediffDef, float> EssenceLossesPerPart = new Dictionary<HediffDef, float>();
         private static Dictionary<string, float> _essenceLossesForSaving = new Dictionary<string, float>();
 
+        public static Dictionary<PsiTechAbilityDef, bool> DisabledEnemyAbilities =
+            new Dictionary<PsiTechAbilityDef, bool>();
+        
         private int essenceLossMultiplierInternal = 100;
         private int trainingSpeedMultiplierInternal = 100;
 
@@ -53,6 +58,7 @@ namespace PsiTech.Utility {
         private string trainingSpeedMultiplierBuffer;
         
         private const string EnablePsychicFactionRaidsKey = "PsiTech.Utility.EnablePsychicFactionRaids";
+        private const string ConfigureEnemyAbilitiesKey = "PsiTech.Utility.ConfigureEnemyAbilities";
         private const string EssenceLossMultiplierKey = "PsiTech.Utility.EssenceLossMultiplier";
         private const string EssenceLossMultiplierDescKey = "PsiTech.Utility.EssenceLossMultiplierDesc";
         private const string EssenceLossConfigurationKey = "PsiTech.Utility.EssenceLossConfiguration";
@@ -73,6 +79,11 @@ namespace PsiTech.Utility {
 
             // Psychic raids
             options.CheckboxLabeled(EnablePsychicFactionRaidsKey.Translate(), ref EnablePsychicFactionRaids);
+            
+            if (options.ButtonText(ConfigureEnemyAbilitiesKey.Translate())) {
+                EnsureAllAbilitiesInitialized();
+                Find.WindowStack.Add(new EnemyAbilitiesWindow());
+            }
             
             options.GapLine();
 
@@ -125,9 +136,13 @@ namespace PsiTech.Utility {
             Scribe_Values.Look(ref PrisonerCastingDisabled, "PrisonerCastingDisabled");
             Scribe_Collections.Look(ref _essenceLossesForSaving, "_essenceLossesForSaving", LookMode.Value,
                 LookMode.Value);
+            Scribe_Collections.Look(ref DisabledEnemyAbilities, "DisabledEnemyAbilities", LookMode.Def,
+                LookMode.Value);
 
             if (Scribe.mode == LoadSaveMode.PostLoadInit) {
                 InitializeEssenceLossesDatabase();
+
+                DisabledEnemyAbilities ??= new Dictionary<PsiTechAbilityDef, bool>();
             }
         }
 
@@ -166,6 +181,12 @@ namespace PsiTech.Utility {
             }
         }
 
+        public static void ResetDisabledAbilities() {
+            foreach (var entry in DisabledEnemyAbilities.Keys.ToList()) {
+                DisabledEnemyAbilities[entry] = false;
+            }
+        }
+
         private static void EnsureAllHediffsInitialized() {
             foreach (var def in DefDatabase<HediffDef>.AllDefsListForReading) {
                 if (def == null || EssenceLossesPerPart.ContainsKey(def)) continue;
@@ -176,6 +197,22 @@ namespace PsiTech.Utility {
                 }
                 EssenceLossesPerPart.Add(def, value);
             }
+        }
+
+        private static void EnsureAllAbilitiesInitialized() {
+            foreach (var def in DefDatabase<PsiTechPawnKindDef>.AllDefsListForReading) {
+                if (def?.AbilityPool == null) continue;
+
+                var neededAbilities = def.AbilityPool.Where(ability => !DisabledEnemyAbilities.Keys.Contains(ability));
+                
+                foreach (var ability in neededAbilities) {
+                    DisabledEnemyAbilities.Add(ability, false);
+                }
+            }
+
+            // Sort to tier, then alphabetical order
+            DisabledEnemyAbilities = DisabledEnemyAbilities.OrderBy(entry => entry.Key.Tier)
+                .ThenBy(entry => entry.Key.label).ToDictionary(entry => entry.Key, entry => entry.Value);
         }
 
         private static void CopyToSavingDictionary() {
