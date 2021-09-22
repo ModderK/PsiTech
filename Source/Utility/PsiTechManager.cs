@@ -108,7 +108,7 @@ namespace PsiTech.Utility {
             foreach (var tracker in trackersForTick) {
                 tracker.TrackerTick();
             }
-            trainers.FindAll(trainer => trainer.Spawned).ForEach(trainer => trainer.BuildingTick());
+            trainers.ForEach(trainer => trainer.BuildingTick());
         }
 
         public void Notify_PawnAwakened(PsiTechTracker tracker) {
