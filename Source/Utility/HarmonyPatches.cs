@@ -602,7 +602,9 @@ namespace PsiTech.Utility {
                 
                 copiedPool.Remove(ability);
             }
-            copiedPool.RemoveAll(ability => PsiTechSettings.DisabledEnemyAbilities[ability]);
+
+            copiedPool.RemoveAll(ability =>
+                PsiTechSettings.DisabledEnemyAbilities.TryGetValue(ability, out var disabled) && disabled);
             
             // Time to roll some abilities
             while (copiedPool.Any()) {
