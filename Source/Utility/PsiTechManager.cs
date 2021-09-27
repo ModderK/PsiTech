@@ -132,7 +132,7 @@ namespace PsiTech.Utility {
                 thingsForScribe?.Clear();
                 equipmentTrackersForScribe?.Clear();
             }
-            
+
             // Clean up dictionaries before saving + "the nuclear option" - eliminate all trackers that aren't activated
             trackers.RemoveAll(entry => (entry.Key?.Destroyed ?? true) || !entry.Value.Activated);
             
@@ -148,6 +148,17 @@ namespace PsiTech.Utility {
             
             Scribe_Values.Look(ref nextTrackerId, "nextTrackerId");
             Scribe_Values.Look(ref nextAbilityId, "nextAbilityId");
+            
+            // A sort of save recovery thing if all our fields are lost, which can happen sometimes for unknown reason,
+            // likely related to conflicts of some kind breaking the saving process.
+            if (trackers == null) {
+                trackers = new Dictionary<Pawn, PsiTechTracker>();
+                equipmentTrackers ??= new Dictionary<Thing, PsiTechEquipmentTracker>();
+                nextTrackerId = 0;
+                nextAbilityId = 0;
+                Log.Error("PsiTech has recovered from catastrophic data loss. All psion and equipment data has been " +
+                          "lost. The save has been corrupted, try loading autosaves if available.");
+            }
             
             // Scrub any disappearing pawns for safety
             // Add all awakened pawns to the tick list after load
