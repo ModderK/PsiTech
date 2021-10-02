@@ -149,6 +149,10 @@
     <PsiTech.SuppressionField.ConfigureSuppressionFieldDesc>Configure the radius and strength of the suppression field.</PsiTech.SuppressionField.ConfigureSuppressionFieldDesc>
     
     <PsiTech.Utility.EnablePsychicFactionRaids>Enable Psychic Faction Raids</PsiTech.Utility.EnablePsychicFactionRaids>
+    <PsiTech.Utility.IgnorePsychicFactionRaidConditions>Ignore Psychic Faction Raid Conditions</PsiTech.Utility.IgnorePsychicFactionRaidConditions>
+    <PsiTech.Utility.IgnorePsychicFactionRaidConditionsDesc>By default, the psychic faction will not raid you until some conditions are met. Enabling this setting disables those conditions, allowing the psychic faction to raid you regardless of your technology level.\n\nNote that psychic faction raids in PsiTech are designed to be counted with psionics, so enabling this setting can make the game substantially harder.</PsiTech.Utility.IgnorePsychicFactionRaidConditionsDesc>
+    <PsiTech.Utility.PsychicFactionRaidSizeMultiplier>Psychic Faction Raid Size Multiplier:</PsiTech.Utility.PsychicFactionRaidSizeMultiplier>
+    <PsiTech.Utility.PsychicFactionRaidSizeMultiplierDesc>The multiplier on psychic raid faction size, as a percentage. Raids will be one third the size at 30%, and three times the size at 300%. Since psychic faction pawns are individually strong, this setting as a signficant effect on psychic faction raid difficulty.</PsiTech.Utility.PsychicFactionRaidSizeMultiplierDesc>
     <PsiTech.Utility.ConfigureEnemyAbilities>Configure enemy psion abilities</PsiTech.Utility.ConfigureEnemyAbilities>
     <PsiTech.Utility.EssenceLossMultiplier>Essence Loss Multiplier:</PsiTech.Utility.EssenceLossMultiplier>
     <PsiTech.Utility.EssenceLossMultiplierDesc>The global multiplier on essence loss, as a percentage. To calculate essence loss for a health effect, the value for the effect is taken and multiplied by this value (e.g. by 1, for 100%). Essence loss due to individual health effects can be configured on a per effect basis.</PsiTech.Utility.EssenceLossMultiplierDesc>

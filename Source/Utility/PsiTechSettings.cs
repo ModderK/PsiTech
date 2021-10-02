@@ -18,6 +18,7 @@
  *
  */
 
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using PsiTech.Interface;
@@ -39,6 +40,8 @@ namespace PsiTech.Utility {
 
         //Use PsiTechSettings.Get().setting to refer to settings
         public bool EnablePsychicFactionRaids = true;
+        public bool IgnorePsychicFactionRaidConditions = false;
+        public float PsychicFactionRaidSizeMultiplier => psychicFactionRaidSizeMultiplierInternal / 100f;
         public float EssenceLossMultiplier => essenceLossMultiplierInternal / 100f;
         public float TrainingSpeedMultiplier => trainingSpeedMultiplierInternal / 100f;
         public bool PatchAllRaces;
@@ -51,13 +54,22 @@ namespace PsiTech.Utility {
         public static Dictionary<PsiTechAbilityDef, bool> DisabledEnemyAbilities =
             new Dictionary<PsiTechAbilityDef, bool>();
         
+        private int psychicFactionRaidSizeMultiplierInternal = 100;
         private int essenceLossMultiplierInternal = 100;
         private int trainingSpeedMultiplierInternal = 100;
 
+        private string raidSizeBuffer;
         private string essenceLossBuffer;
         private string trainingSpeedMultiplierBuffer;
         
         private const string EnablePsychicFactionRaidsKey = "PsiTech.Utility.EnablePsychicFactionRaids";
+        private const string IgnorePsychicFactionRaidConditionsKey =
+            "PsiTech.Utility.IgnorePsychicFactionRaidConditions";
+        private const string IgnorePsychicFactionRaidConditionsDescKey =
+            "PsiTech.Utility.IgnorePsychicFactionRaidConditionsDesc";
+        private const string PsychicFactionRaidSizeMultiplierKey = "PsiTech.Utility.PsychicFactionRaidSizeMultiplier";
+        private const string PsychicFactionRaidSizeMultiplierDescKey =
+            "PsiTech.Utility.PsychicFactionRaidSizeMultiplierDesc";
         private const string ConfigureEnemyAbilitiesKey = "PsiTech.Utility.ConfigureEnemyAbilities";
         private const string EssenceLossMultiplierKey = "PsiTech.Utility.EssenceLossMultiplier";
         private const string EssenceLossMultiplierDescKey = "PsiTech.Utility.EssenceLossMultiplierDesc";
@@ -79,6 +91,20 @@ namespace PsiTech.Utility {
 
             // Psychic raids
             options.CheckboxLabeled(EnablePsychicFactionRaidsKey.Translate(), ref EnablePsychicFactionRaids);
+
+            options.CheckboxLabeled(IgnorePsychicFactionRaidConditionsKey.Translate(),
+                ref IgnorePsychicFactionRaidConditions, IgnorePsychicFactionRaidConditionsDescKey.Translate());
+            
+            // Psychic raid size
+            options.Label(PsychicFactionRaidSizeMultiplierKey.Translate(), -1f,
+                PsychicFactionRaidSizeMultiplierDescKey.Translate());
+            var oldSizeMult = psychicFactionRaidSizeMultiplierInternal;
+            options.IntEntry(ref psychicFactionRaidSizeMultiplierInternal, ref raidSizeBuffer);
+            psychicFactionRaidSizeMultiplierInternal = Mathf.Clamp(psychicFactionRaidSizeMultiplierInternal, 30, 300);
+            raidSizeBuffer = psychicFactionRaidSizeMultiplierInternal.ToString();
+            if (psychicFactionRaidSizeMultiplierInternal != oldSizeMult) {
+                UpdateRaidSizeMultiplier(PsychicFactionRaidSizeMultiplier);
+            }
             
             if (options.ButtonText(ConfigureEnemyAbilitiesKey.Translate())) {
                 EnsureAllAbilitiesInitialized();
@@ -130,6 +156,9 @@ namespace PsiTech.Utility {
             
             Scribe_Values.Look(ref PsiTechDebug, "PsiTechDebug");
             Scribe_Values.Look(ref EnablePsychicFactionRaids, "EnablePsychicFactionRaids", true);
+            Scribe_Values.Look(ref IgnorePsychicFactionRaidConditions, "IgnorePsychicFactionRaidConditions");
+            Scribe_Values.Look(ref psychicFactionRaidSizeMultiplierInternal, "psychicFactionRaidSizeMultiplierInternal",
+                100);
             Scribe_Values.Look(ref essenceLossMultiplierInternal, "essenceLossMultiplierInternal", 100);
             Scribe_Values.Look(ref trainingSpeedMultiplierInternal, "trainingSpeedMultiplierInternal", 100);
             Scribe_Values.Look(ref PatchAllRaces, "PatchAllRaces");
@@ -141,6 +170,7 @@ namespace PsiTech.Utility {
 
             if (Scribe.mode == LoadSaveMode.PostLoadInit) {
                 InitializeEssenceLossesDatabase();
+                UpdateRaidSizeMultiplier(PsychicFactionRaidSizeMultiplier);
 
                 DisabledEnemyAbilities ??= new Dictionary<PsiTechAbilityDef, bool>();
             }
@@ -173,6 +203,10 @@ namespace PsiTech.Utility {
             return value;
         }
 
+        private static void UpdateRaidSizeMultiplier(float multiplier) {
+            DefDatabase<PsiTechPawnKindDef>.AllDefsListForReading.ForEach(def => def.UpdateCombatPower(multiplier));
+        }
+        
         public static void ResetEssenceLosses() {
             EssenceLossesPerPart.Clear();
             foreach (var def in DefDatabase<HediffDef>.AllDefsListForReading) {

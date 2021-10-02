@@ -20,6 +20,7 @@
 
 using System.Collections.Generic;
 using PsiTech.Psionics;
+using PsiTech.Utility;
 using Verse;
 
 namespace PsiTech.Misc {
@@ -31,5 +32,15 @@ namespace PsiTech.Misc {
         public IntRange TotalLevelRange = new IntRange(2, 6);
         public float ChanceForPsionicAbilities = 1f;
 
+        private float originalPower;
+        
+        public override void PostLoad() {
+            base.PostLoad();
+            originalPower = combatPower;
+        }
+
+        public void UpdateCombatPower(float multiplier) {
+            combatPower = originalPower * 1 / multiplier;
+        }
     }
 }

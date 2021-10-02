@@ -691,8 +691,8 @@ namespace PsiTech.Utility {
         // Well, there's no way to set conditions on a faction being used for a raid, for some reason.
 
         public static float Postfix(float __result, FactionDef __instance) {
-            if (__instance == PsiTechDefOf.PTPsionic && (!PsiTechSettings.Get().EnablePsychicFactionRaids ||
-                                                         !PsiTechDefOf.PTProjectionTheory.IsFinished)) {
+            if (__instance == PsiTechDefOf.PTPsionic && !PsiTechSettings.Get().IgnorePsychicFactionRaidConditions &&
+                (!PsiTechSettings.Get().EnablePsychicFactionRaids || !PsiTechDefOf.PTProjectionTheory.IsFinished)) {
                 return 0f;
             }
 
