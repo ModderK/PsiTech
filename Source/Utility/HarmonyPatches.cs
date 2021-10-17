@@ -578,8 +578,9 @@ namespace PsiTech.Utility {
     public class PsiPawnGenerationPatch {
 
         public static void Postfix(ref Pawn __result, PawnGenerationRequest request) {
-            if (Current.ProgramState == ProgramState.Entry || !(request.KindDef is PsiTechPawnKindDef psiKind) ||
-                psiKind.PsiAbilitiesMoney == FloatRange.Zero || !Rand.Chance(psiKind.ChanceForPsionicAbilities)) return;
+            if (Current.ProgramState == ProgramState.Entry || __result == null ||
+                !(request.KindDef is PsiTechPawnKindDef psiKind) || psiKind.PsiAbilitiesMoney == FloatRange.Zero ||
+                !Rand.Chance(psiKind.ChanceForPsionicAbilities)) return;
             
             // Remove psychically dull/deaf - can't enforce this in def since it's a spectrum trait...
             __result.story.traits.allTraits.RemoveAll(trait =>
