@@ -24,8 +24,9 @@
         <match Class="PatchOperationSequence">
             <operations>
                 <li Class="PatchOperationAdd">
-                    <xpath>/Defs/RecipeDef[defName="PTMachiningExtractAtheniumFromPsychicArtifact" or
-                        "PTWorkbenchExtractAtheniumFromPsychicArtifact"]/ingredients/li/filter/categories</xpath>
+                    <xpath>/Defs/RecipeDef[defName="PTMachiningExtractAtheniumFromPsychicArtifact" or 
+                        defName="PTWorkbenchExtractAtheniumFromPsychicArtifact"]/ingredients/li/filter/categories
+                    </xpath>
                     <value>
                         <li>Headgear</li>
                         <li>Apparel</li>
@@ -33,7 +34,8 @@
                 </li>
                 <li Class="PatchOperationAdd">
                     <xpath>/Defs/RecipeDef[defName="PTMachiningExtractAtheniumFromPsychicArtifact" or
-                        "PTWorkbenchExtractAtheniumFromPsychicArtifact"]/fixedIngredientFilter/thingDefs</xpath>
+                        defName="PTWorkbenchExtractAtheniumFromPsychicArtifact"]/fixedIngredientFilter/thingDefs
+                    </xpath>
                     <value>
                         <li>Apparel_PsyfocusHelmet</li>
                         <li>Apparel_EltexSkullcap</li>
