@@ -643,6 +643,13 @@ namespace PsiTech.Psionics {
 
         public void SetBaseCapacity(PawnCapacityDef cap, float value) {
             cachedUnmodifiedCapacities[cap.index] = value;
+
+#if VER13
+            // Clear entry in blindness cache if we changed the pawn's base sight
+            if (cap != PawnCapacityDefOf.Sight) return;
+
+            BlindnessHelper.ClearEntryForPawn(pawn);
+#endif
         }
 
         public float GetBaseCapacity(PawnCapacityDef cap) {

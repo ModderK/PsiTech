@@ -820,7 +820,7 @@ namespace PsiTech.Utility {
     public class BlindThoughtPatch {
 
         public static bool Postfix(bool __result, Pawn pawn) {
-            if (__result || !pawn.PsiTracker().Activated) return __result;
+            if (__result) return __result;
 
             return !BlindnessHelper.CapableOfSightWithoutPsionics(pawn);
         }
@@ -831,16 +831,31 @@ namespace PsiTech.Utility {
     public class HalfBlindThoughtPatch {
         
         public static bool Postfix(bool __result, Pawn p) {
-            if (!p.PsiTracker().Activated) return __result;
-
             return __result && BlindnessHelper.CapableOfSightWithoutPsionics(p);
         }
         
     }
 
-    public class BlindnessHelper {
+    public static class BlindnessHelper {
+
+        private static readonly Dictionary<Pawn, bool> capableCache = new Dictionary<Pawn, bool>();
+        
         public static bool CapableOfSightWithoutPsionics(Pawn p) {
-            return p.PsiTracker().GetBaseCapacity(PawnCapacityDefOf.Sight) > PawnCapacityDefOf.Sight.minForCapable;
+            if (capableCache.TryGetValue(p, out var capable)) return capable;
+            
+            capable = p.PsiTracker().GetBaseCapacity(PawnCapacityDefOf.Sight) >
+                      PawnCapacityDefOf.Sight.minForCapable;
+            capableCache.Add(p, capable);
+            
+            return capable;
+        }
+
+        public static void ClearEntryForPawn(Pawn p) {
+            capableCache.Remove(p);
+        }
+        
+        public static void ClearCache() {
+            capableCache.Clear();
         }
     }
 #endif
