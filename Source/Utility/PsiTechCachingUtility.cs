@@ -91,8 +91,7 @@ namespace PsiTech.Utility {
                         layer == ApparelLayerDefOf.Overhead || layer == ApparelLayerDefOf.Shell) &&
                     (thing.equippedStatOffsets?.All(mod =>
                          mod.stat != StatDefOf.PsychicSensitivity && mod.stat != offsetStat ||
-                         0.05f <= mod.value && mod.value <= 0.05f) ??
-                     true)) continue;
+                         mod.value <= 0.05f) ?? true)) continue;
                 // We also allow clothing with 5% or less impact on psychic sensitivity, primarily so that 
                 // prestige Royalty armor variants can be enhanced.
 

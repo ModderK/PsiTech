@@ -50,12 +50,12 @@ namespace PsiTech.Utility {
         public PsiTechManager(Game game) {
             ExtensionMethods.Manager = this;
 
-#if VER13
             if (Scribe.mode == LoadSaveMode.LoadingVars) {
                 PsiTechMapTargetPawnsUtility.TargetPawnUtilities.Clear();
+#if VER13
                 BlindnessHelper.ClearCache();
-            }
 #endif
+            }
         }
 
         public PsiTechTracker this[Pawn pawn] {
