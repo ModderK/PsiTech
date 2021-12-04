@@ -165,8 +165,8 @@ namespace PsiTech.AutocastManagement {
 
         protected bool TargetMatchesTargetType(Pawn target) {
             return FilterTargetType switch {
-                FilterTargetType.Enemies => target.Faction.HostileTo(User.Faction),
-                FilterTargetType.Hostiles => target.Faction.HostileTo(User.Faction) || target.InAggroMentalState,
+                FilterTargetType.Enemies => target.HostileTo(User) && target.Faction.HostileTo(User.Faction),
+                FilterTargetType.Hostiles => target.HostileTo(User),
                 FilterTargetType.Friendlies => target.Faction.AllyOrNeutralTo(User.Faction),
                 FilterTargetType.Any => true,
                 _ => throw new ArgumentOutOfRangeException()
