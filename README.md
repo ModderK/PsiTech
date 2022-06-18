@@ -23,4 +23,4 @@ For art assets, found in the /Textures folder and Preview.png found in /About:
 
 Make sure to replace \(File Name\) with the name of the file that you're using.
 
-If you're unsure of your rights under the licensing scheme of this repo and need clarification, please contact me. I can be reached on [the Ludeon forums](https://ludeon.com/forums/index.php?action=profile), Discord via the [K's Mods Discord](https://discord.gg/nafJcyg), or [on Steam under the name Bad Vlad](https://steamcommunity.com/id/0x536563726574/).
+If you're unsure of your rights under the licensing scheme of this repo and need clarification, please contact me. I can be reached on [the Ludeon forums](https://ludeon.com/forums/index.php?action=profile;u=98551), Discord via the [K's Mods Discord](https://discord.gg/nafJcyg), or [on Steam](https://steamcommunity.com/id/0x536563726574/).
