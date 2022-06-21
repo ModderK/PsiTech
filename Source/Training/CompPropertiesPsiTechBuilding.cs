@@ -23,5 +23,7 @@ using Verse;
 namespace PsiTech.Training {
     public class CompPropertiesPsiTechBuilding : CompProperties {
 
+        public float SpeedModifier = 1f;
+
     }
 }

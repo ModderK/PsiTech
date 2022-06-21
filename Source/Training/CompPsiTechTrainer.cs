@@ -74,7 +74,7 @@ namespace PsiTech.Training {
 
             // Decrease the time left each second
             if (timeLeft > 0) {
-                timeLeft -= PsiTechSettings.Get().TrainingSpeedMultiplier;
+                timeLeft -= PsiTechSettings.Get().TrainingSpeedMultiplier * Properties.SpeedModifier;
             }
 
             // Check if we've completed a training cycle
@@ -106,13 +106,15 @@ namespace PsiTech.Training {
             
             if (curEntry.Type == TrainingType.Ability && curEntry.Def == null) { // We're awakening
                 return TrainingSummaryAwakeningKey.Translate(
-                    (timeLeft / (PsiTechSettings.Get().TrainingSpeedMultiplier * DayToSeconds))
+                    (timeLeft /
+                     (PsiTechSettings.Get().TrainingSpeedMultiplier * Properties.SpeedModifier * DayToSeconds))
                     .ToStringDecimalIfSmall());
             }
 
             if (curEntry.Type == TrainingType.Remove) { // We're removing and want to use the special remove format
                 return RemovingSummaryKey.Translate(curEntry.Def.label,
-                    (timeLeft / (PsiTechSettings.Get().TrainingSpeedMultiplier * DayToSeconds))
+                    (timeLeft /
+                     (PsiTechSettings.Get().TrainingSpeedMultiplier * Properties.SpeedModifier * DayToSeconds))
                     .ToStringDecimalIfSmall());
             }
 
@@ -124,7 +126,8 @@ namespace PsiTech.Training {
             };
 
             return TrainingSummaryKey.Translate(label,
-                (timeLeft / (PsiTechSettings.Get().TrainingSpeedMultiplier * DayToSeconds)).ToStringDecimalIfSmall());
+                (timeLeft / (PsiTechSettings.Get().TrainingSpeedMultiplier * Properties.SpeedModifier * DayToSeconds))
+                .ToStringDecimalIfSmall());
         }
 
         public override IEnumerable<Gizmo> CompGetGizmosExtra() {
