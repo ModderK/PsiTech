@@ -498,7 +498,7 @@
         <label>Mindlash</label>
         <description>Mindlash is an ability that stuns anyone who attacks the psion for a short time.\n\nMindlash is not an active ability, and is triggered when the psion is attacked.</description>
         <AbilityClass>PsiTech.Psionics.PsiTechAbilityTriggeredPassive</AbilityClass>
-        <GizmoDesc>When the psion is attacked they will the attacker for a short time.</GizmoDesc>
+        <GizmoDesc>When the psion is attacked they will stun the attacker for a short time.</GizmoDesc>
         <PathToIcon>Abilities/Mindlash</PathToIcon>
         <Tier>2</Tier>
         <AddedValueForThreat>0</AddedValueForThreat>
