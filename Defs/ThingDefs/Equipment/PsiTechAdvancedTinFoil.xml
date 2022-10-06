@@ -25,6 +25,10 @@
             <texPath>Things/Pawn/Humanlike/Apparel/PsychicFoilHelmet/PsychicFoilHelmet</texPath>
             <graphicClass>Graphic_Single</graphicClass>
         </graphicData>
+        <costList>
+            <Steel>10</Steel>
+            <PTAthenium>10</PTAthenium>
+        </costList>
         <uiIconScale>1.3</uiIconScale>
         <statBases>
             <MaxHitPoints>80</MaxHitPoints>

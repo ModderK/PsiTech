@@ -1,0 +1,411 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<!-- Copyright 2019, 2020, K
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+    
+        http://www.apache.org/licenses/LICENSE-2.0
+    
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+
+<Defs>
+
+  <PawnKindDef Name="PsionicBase" Abstract="True">
+    <race>Human</race>
+    <defaultFactionType>PTPsionic</defaultFactionType>
+    <chemicalAddictionChance>0</chemicalAddictionChance>
+    <invNutrition>2.55</invNutrition>
+    <itemQuality>Normal</itemQuality>
+    <backstoryCryptosleepCommonality>0.08</backstoryCryptosleepCommonality>
+    <maxGenerationAge>65</maxGenerationAge>
+    <combatEnhancingDrugsChance>0</combatEnhancingDrugsChance>
+    <biocodeWeaponChance>0</biocodeWeaponChance>
+    <apparelAllowHeadgearChance>0</apparelAllowHeadgearChance>
+    <disallowedTraits>
+      <li>Transhumanist</li>
+    </disallowedTraits>
+  </PawnKindDef>
+  
+  <!-- Low tier "psions" - penitents, uninitiated -->
+
+  <PawnKindDef Class="PsiTech.Misc.PsiTechPawnKindDef" ParentName="PsionicBase">
+    <defName>Psion_Penitent</defName>
+    <label>penitent</label>
+    <combatPower>35</combatPower>
+    <invNutrition>0</invNutrition>
+    <itemQuality>Poor</itemQuality>
+    <gearHealthRange>0.2~1.1</gearHealthRange>
+    <apparelMoney>100~250</apparelMoney>
+    <weaponMoney>90~150</weaponMoney>
+    <apparelTags>
+      <li>IndustrialBasic</li>
+    </apparelTags>
+    <weaponTags>
+      <li>NeolithicMeleeAdvanced</li>
+      <li>MedievalMeleeBasic</li>
+      <li>MedievalMeleeDecent</li>
+    </weaponTags>
+    <initialWillRange>1~2</initialWillRange>
+    <initialResistanceRange>7~16</initialResistanceRange>
+  </PawnKindDef>
+
+  <PawnKindDef Class="PsiTech.Misc.PsiTechPawnKindDef" ParentName="PsionicBase">
+    <defName>Psion_Uninitiated</defName>
+    <label>uninitiated</label>
+    <combatPower>40</combatPower>
+    <itemQuality>Poor</itemQuality>
+    <gearHealthRange>0.5~2.0</gearHealthRange>
+    <apparelMoney>150~300</apparelMoney>
+    <weaponMoney>150~250</weaponMoney>
+    <apparelTags>
+      <li>IndustrialBasic</li>
+    </apparelTags>
+    <weaponTags>
+      <li>SimpleGun</li>
+    </weaponTags>
+    <initialWillRange>1~2</initialWillRange>
+    <initialResistanceRange>7~16</initialResistanceRange>
+  </PawnKindDef>
+
+  <!-- Low tier psions - initiates -->
+  <PawnKindDef Class="PsiTech.Misc.PsiTechPawnKindDef" Name="PsionNormalTiersBase" ParentName="PsionicBase" Abstract="True">
+    <apparelTags>
+      <li>ExoticPsiLowTier</li>
+      <li>IndustrialBasic</li>
+    </apparelTags>
+    <specificApparelRequirements>
+      <li>
+        <bodyPartGroup>Torso</bodyPartGroup>
+        <apparelLayer>Shell</apparelLayer>
+        <requiredTag>ExoticPsiLowTier</requiredTag>
+      </li>
+      <li>
+        <bodyPartGroup>UpperHead</bodyPartGroup>
+        <apparelLayer>Overhead</apparelLayer>
+        <requiredTag>ExoticPsiLowTier</requiredTag>
+      </li>
+    </specificApparelRequirements>
+  </PawnKindDef>
+  
+  <PawnKindDef Class="PsiTech.Misc.PsiTechPawnKindDef" ParentName="PsionNormalTiersBase">
+    <defName>Psion_Initiate</defName>
+    <label>initiate</label>
+    <combatPower>100</combatPower>
+    <FocusRange>1~2</FocusRange>
+    <TotalLevelRange>3~4</TotalLevelRange>
+    <gearHealthRange>0.7~2.3</gearHealthRange>
+    <apparelMoney>1000~2000</apparelMoney>
+    <weaponMoney>200~400</weaponMoney>
+    <PsiAbilitiesMoney>10~50</PsiAbilitiesMoney>
+    <specificApparelRequirements>
+      <li>
+        <bodyPartGroup>Torso</bodyPartGroup>
+        <apparelLayer>Shell</apparelLayer>
+        <requiredTag>ExoticPsiLowTier</requiredTag>
+      </li>
+    </specificApparelRequirements>
+    <weaponTags>
+      <li>SimpleGun</li>
+    </weaponTags>
+    <AbilityPool>
+      <li>PTPsiDefence</li>
+      <li>PTPsiTrance</li>
+      <li>PTInsulation</li>
+      <li>PTSerenity</li>
+      <li>PTPsiForging</li>
+      <li>PTEmpatheticNegotiation</li>
+      <li>PTEmpatheticBargaining</li>
+      <li>PTEmpatheticHandling</li>
+      <li>PTPsiAttunement</li>
+      <li>PTTruesight</li>
+      <li>PTConversion</li>
+      <li>PTPurity</li>
+      <li>PTOverdrive</li>
+      <li>PTAlacrity</li>
+      <li>PTPrecision</li>
+      <li>PTInfluence</li>
+      <li>PTInsight</li>
+    </AbilityPool>
+    <initialWillRange>1~3</initialWillRange>
+    <initialResistanceRange>11~20</initialResistanceRange>
+  </PawnKindDef>
+
+  <!-- Mid tier psions - acolytes -->
+  <PawnKindDef Class="PsiTech.Misc.PsiTechPawnKindDef" ParentName="PsionNormalTiersBase">
+    <defName>Psion_Acolyte</defName>
+    <label>acolyte</label>
+    <combatPower>125</combatPower>
+    <FocusRange>1~3</FocusRange>
+    <TotalLevelRange>4~6</TotalLevelRange>
+    <apparelMoney>1200~2400</apparelMoney>
+    <weaponMoney>300~1000</weaponMoney>
+    <PsiAbilitiesMoney>40~100</PsiAbilitiesMoney>
+    <weaponTags>
+      <li>Gun</li>
+    </weaponTags>
+    <AbilityPool>
+      <li>PTPsiDefence</li>
+      <li>PTPerfectedDefence</li>
+      <li>PTCombatPrecognition</li>
+      <li>PTCombatInsight</li>
+      <li>PTCombatIntuition</li>
+      <li>PTCombatPrecision</li>
+      <li>PTPsiAttunement</li>
+      <li>PTPerfectedAttunement</li>
+      <li>PTPsiFocus</li>
+      <li>PTPerfectedFocus</li>
+      <li>PTPsiCapacitance</li>
+      <li>PTPerfectedCapacitance</li>
+      <li>PTTruesight</li>
+      <li>PTConversion</li>
+      <li>PTPurity</li>
+      <li>PTOverdrive</li>
+      <li>PTAlacrity</li>
+      <li>PTPrecision</li>
+      <li>PTInfluence</li>
+      <li>PTInsight</li>
+      <li>PTMindfray</li>
+      <li>PTInspire</li>
+      <li>PTPerfectedSynchronicity</li>
+      <li>PTPsiHeal</li>
+      <li>PTMindsoothe</li>
+      <li>PTMindmelt</li>
+    </AbilityPool>
+    <initialWillRange>2~4</initialWillRange>
+    <initialResistanceRange>13~22</initialResistanceRange>
+  </PawnKindDef>
+
+  <!-- High tier psions - ascendant -->
+  <PawnKindDef Class="PsiTech.Misc.PsiTechPawnKindDef" ParentName="PsionNormalTiersBase">
+    <defName>Psion_Ascendant</defName>
+    <label>ascendant</label>
+    <FocusRange>2~3</FocusRange>
+    <TotalLevelRange>5~6</TotalLevelRange>
+    <combatPower>150</combatPower>
+    <apparelMoney>1400~2800</apparelMoney>
+    <weaponMoney>500~1000</weaponMoney>
+    <PsiAbilitiesMoney>175~400</PsiAbilitiesMoney>
+    <apparelAllowHeadgearChance>1</apparelAllowHeadgearChance>
+    <weaponTags>
+      <li>Gun</li>
+    </weaponTags>
+    <AbilityPool>
+      <li>PTPerfectedDefence</li>
+      <li>PTTranscendentDefense</li>
+      <li>PTCombatPrecognition</li>
+      <li>PTCombatInsight</li>
+      <li>PTCombatIntuition</li>
+      <li>PTCombatPrecision</li>
+      <li>PTBattlefieldPrecognition</li>
+      <li>PTBattlefieldPrecision</li>
+      <li>PTPerfectedAttunement</li>
+      <li>PTPerfectedFocus</li>
+      <li>PTPerfectedCapacitance</li>
+      <li>PTTruesight</li>
+      <li>PTConversion</li>
+      <li>PTPurity</li>
+      <li>PTOverdrive</li>
+      <li>PTAlacrity</li>
+      <li>PTPrecision</li>
+      <li>PTInfluence</li>
+      <li>PTInsight</li>
+      <li>PTMindfray</li>
+      <li>PTInspire</li>
+      <li>PTPerfectedSynchronicity</li>
+      <li>PTPsiHeal</li>
+      <li>PTMindsoothe</li>
+      <li>PTInsanity</li>
+      <li>PTMindmelt</li>
+      <li>PTMindlash</li>
+    </AbilityPool>
+    <initialWillRange>3~5</initialWillRange>
+    <initialResistanceRange>15~24</initialResistanceRange>
+  </PawnKindDef>
+
+  <!-- Elite tier psions - commando, warrior, conduit -->
+  <PawnKindDef Class="PsiTech.Misc.PsiTechPawnKindDef" Name="PsionEliteTierBase" ParentName="PsionicBase" Abstract="true">
+    <combatPower>225</combatPower>
+    <apparelAllowHeadgearChance>1</apparelAllowHeadgearChance>
+    <FocusRange>3~3</FocusRange>
+    <TotalLevelRange>6~6</TotalLevelRange>
+    <apparelMoney>7000~10000</apparelMoney>
+    <inventoryOptions>
+      <skipChance>0.8</skipChance>
+      <subOptionsChooseOne>
+        <li>
+          <thingDef>PTAthenium</thingDef>
+          <countRange>10~20</countRange>
+        </li>
+      </subOptionsChooseOne>
+    </inventoryOptions>
+    <biocodeWeaponChance>1</biocodeWeaponChance>
+    <initialWillRange>4~6</initialWillRange>
+    <initialResistanceRange>17~26</initialResistanceRange>
+  </PawnKindDef>
+  
+  <PawnKindDef Class="PsiTech.Misc.PsiTechPawnKindDef" ParentName="PsionEliteTierBase">
+    <defName>Psion_Commando</defName>
+    <label>commando</label>
+    <weaponMoney>600~2000</weaponMoney>
+    <PsiAbilitiesMoney>800~1300</PsiAbilitiesMoney>
+    <apparelTags>
+      <li>ExoticPsiCommando</li>
+      <li>IndustrialBasic</li>
+    </apparelTags>
+    <apparelRequired>
+      <li>PTPsionicCommandoArmor</li>
+      <li>PTPsionicCommandoHelmet</li>
+    </apparelRequired>
+    <weaponTags>
+      <li>MedievalMeleeAdvanced</li>
+      <li>SpacerGun</li>
+    </weaponTags>
+    <AbilityPool>
+      <li>PTCombatPrecognition</li>
+      <li>PTCombatInsight</li>
+      <li>PTCombatIntuition</li>
+      <li>PTCombatPrecision</li>
+      <li>PTBattlefieldPrecognition</li>
+      <li>PTBattlefieldPrecision</li>
+      <li>PTPerfectedAttunement</li>
+      <li>PTPerfectedFocus</li>
+      <li>PTPerfectedCapacitance</li>
+      <li>PTTruesight</li>
+      <li>PTOverdrive</li>
+      <li>PTAlacrity</li>
+      <li>PTPrecision</li>
+      <li>PTPerfectedSynchronicity</li>
+      <li>PTMindlash</li>
+      <li>PTPhoenix</li>
+      <li>PTMindFortress</li>
+    </AbilityPool>
+  </PawnKindDef>
+
+  <PawnKindDef Class="PsiTech.Misc.PsiTechPawnKindDef" ParentName="PsionEliteTierBase">
+    <defName>Psion_Warrior</defName>
+    <label>warrior</label>
+    <weaponMoney>1200~3000</weaponMoney>
+    <PsiAbilitiesMoney>1300~1800</PsiAbilitiesMoney>
+    <apparelTags>
+      <li>ExoticPsiWarrior</li>
+      <li>IndustrialBasic</li>
+    </apparelTags>
+    <apparelRequired>
+      <li>PTPsionicWarriorArmor</li>
+      <li>PTPsionicWarriorHelmet</li>
+    </apparelRequired>
+    <weaponTags>
+      <li>SpacerGun</li>
+    </weaponTags>
+    <AbilityPool>
+      <li>PTCombatPrecognition</li>
+      <li>PTCombatInsight</li>
+      <li>PTCombatIntuition</li>
+      <li>PTCombatPrecision</li>
+      <li>PTBattlefieldPrecognition</li>
+      <li>PTBattlefieldPrecision</li>
+      <li>PTPerfectedAttunement</li>
+      <li>PTPerfectedFocus</li>
+      <li>PTPerfectedCapacitance</li>
+      <li>PTTruesight</li>
+      <li>PTOverdrive</li>
+      <li>PTAlacrity</li>
+      <li>PTPrecision</li>
+      <li>PTPerfectedSynchronicity</li>
+      <li>PTMindfray</li>
+      <li>PTInsanity</li>
+      <li>PTMindmelt</li>
+      <li>PTMindlash</li>
+      <li>PTPhoenix</li>
+      <li>PTTranscendentDefense</li>
+    </AbilityPool>
+  </PawnKindDef>
+
+  <PawnKindDef Class="PsiTech.Misc.PsiTechPawnKindDef" ParentName="PsionEliteTierBase">
+    <defName>Psion_Conduit</defName>
+    <label>conduit</label>
+    <weaponMoney>400~1000</weaponMoney>
+    <PsiAbilitiesMoney>1800~2500</PsiAbilitiesMoney>
+    <apparelTags>
+      <li>ExoticPsiConduit</li>
+      <li>IndustrialBasic</li>
+    </apparelTags>
+    <apparelRequired>
+      <li>PTPsionicConduitArmor</li>
+      <li>PTPsionicConduitHelmet</li>
+    </apparelRequired>
+    <weaponTags>
+      <li>Gun</li>
+    </weaponTags>
+    <AbilityPool>
+      <li>PTCombatPrecognition</li>
+      <li>PTCombatInsight</li>
+      <li>PTCombatIntuition</li>
+      <li>PTCombatPrecision</li>
+      <li>PTWeaponSynchronicity</li>
+      <li>PTPerfectedAttunement</li>
+      <li>PTPerfectedFocus</li>
+      <li>PTPerfectedCapacitance</li>
+      <li>PTTruesight</li>
+      <li>PTPrecision</li>
+      <li>PTOverdrive</li>
+      <li>PTPsiHeal</li>
+      <li>PTMindsoothe</li>
+      <li>PTInsanity</li>
+      <li>PTMindmelt</li>
+      <li>PTMindlash</li>
+      <li>PTPhoenix</li>
+      <li>PTTranscendentDefense</li>
+      <!-- <li>PTPsiRally</li> --> <!-- Commented out so that multistacks on entry don't happen -->
+      <li>PTPsiStorm</li>
+    </AbilityPool>
+  </PawnKindDef>
+
+  <!-- Faction Leader - Transcendent -->
+  <PawnKindDef Class="PsiTech.Misc.PsiTechPawnKindDef" ParentName="PsionEliteTierBase">
+    <defName>Psion_Transcendent</defName>
+    <label>transcendent</label>
+    <apparelMoney>999999</apparelMoney>
+    <weaponMoney>999999</weaponMoney>
+    <PsiAbilitiesMoney>999999</PsiAbilitiesMoney>
+    <factionLeader>true</factionLeader>
+    <apparelTags>
+      <li>ExoticPsiConduit</li>
+      <li>IndustrialBasic</li>
+    </apparelTags>
+    <apparelRequired>
+      <li>PTPsionicConduitArmor</li>
+      <li>PTPsionicConduitHelmet</li>
+    </apparelRequired>
+    <weaponTags>
+      <li>SpacerGun</li>
+    </weaponTags>
+    <AbilityPool>
+      <li>PTCombatPrecognition</li>
+      <li>PTCombatInsight</li>
+      <li>PTCombatIntuition</li>
+      <li>PTCombatPrecision</li>
+      <li>PTPerfectedAttunement</li>
+      <li>PTPerfectedFocus</li>
+      <li>PTPerfectedCapacitance</li>
+      <li>PTTruesight</li>
+      <li>PTOverdrive</li>
+      <li>PTAlacrity</li>
+      <li>PTPrecision</li>
+      <li>PTInsanity</li>
+      <li>PTPhoenix</li>
+      <li>PTPsiRally</li>
+      <li>PTPsiStorm</li>
+    </AbilityPool>
+    <initialWillRange>16~19</initialWillRange>
+    <initialResistanceRange>38~58</initialResistanceRange>
+  </PawnKindDef>
+  
+</Defs>

@@ -447,7 +447,11 @@ namespace PsiTech.Utility {
         
     }
 
+#if VER14
+    [HarmonyPatch(typeof(GenLabel), "ThingLabel", typeof(Thing), typeof(int), typeof(bool), typeof(bool))]
+#else
     [HarmonyPatch(typeof(GenLabel), "ThingLabel", typeof(Thing), typeof(int), typeof(bool))]
+#endif
     static class GenLabelPatch {
 
         static string Postfix(string __result, Thing t) {
