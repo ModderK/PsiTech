@@ -204,6 +204,14 @@ namespace PsiTech.Psionics {
         
         public virtual void ResetAbility() { }
 
+        public void DetachFromUser() {
+            User = null;
+        }
+
+        public void AttachToUser(Pawn pawn) {
+            User = pawn;
+        }
+        
         public virtual bool CanCast() {
             return false;
         }

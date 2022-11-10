@@ -164,6 +164,16 @@ namespace PsiTech.Psionics {
         // Scribe requires a no-args constructor
         public PsiTechTracker() { }
 
+        public void DetachFromPawn() {
+            pawn = null;
+            Abilities.ForEach(ability => ability.DetachFromUser());
+        }
+
+        public void AttachToPawn(Pawn newPawn) {
+            pawn = newPawn;
+            Abilities.ForEach(ability => ability.AttachToUser(newPawn));
+        }
+        
         public void InitializeCaches() {
             var statCount = DefDatabase<StatDef>.DefCount;
             cachedStatMods = new float[statCount,2];

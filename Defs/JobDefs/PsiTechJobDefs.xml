@@ -29,7 +29,7 @@
     <JobDef>
         <defName>PTSingleTargetPsionic</defName>
         <driverClass>PsiTech.AI.JobDriver_SingleTargetPsionic</driverClass>
-        <reportString>invading the mind of TargetA.</reportString>
+        <reportString>invading the mind of TargetB.</reportString>
         <casualInterruptible>false</casualInterruptible>
         <collideWithPawns>true</collideWithPawns>
         <neverShowWeapon>true</neverShowWeapon>

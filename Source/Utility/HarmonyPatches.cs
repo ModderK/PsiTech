@@ -817,6 +817,26 @@ namespace PsiTech.Utility {
         }
         
     }
+    
+    // Notify manager on pawn death to remove trackers from the tick list.
+    [HarmonyPatch(typeof(Pawn), "Kill")]
+    public class NotifyPawnDiedPatch {
+
+        public static void Postfix(Pawn __instance) {
+            Current.Game.GetComponent<PsiTechManager>().Notify_PawnDied(__instance);
+        }
+        
+    }
+    
+    // Notify manager on revive to move a tracker back to the active list if available.
+    [HarmonyPatch(typeof(ResurrectionUtility), "Resurrect")]
+    public class NotifyResurrectedPatch {
+
+        public static void Postfix(Pawn pawn) {
+            Current.Game.GetComponent<PsiTechManager>().Notify_PawnResurrected(pawn);
+        }
+        
+    }
 
 #if VER13
     // Patches to deal with Blindsight in Ideology
