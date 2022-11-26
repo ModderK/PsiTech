@@ -151,6 +151,7 @@ namespace PsiTech.Utility {
             deadTracker.Tracker.InitializeCaches();
             deadTracker.Tracker.Notify_EssenceDirty();
             Notify_PawnAwakened(deadTracker.Tracker);
+            deadTracker.Tracker.RebuildCaches();
             
             // Clean out this entry from the dead trackers dictionary
             deadTrackers.Remove(pawn.ThingID);

@@ -37,10 +37,10 @@ namespace PsiTech.Psionics {
             User.Map.PotentialPsiTargets().Where(target => Def.TargetValidator.IsValidTarget(User, target));
 
         public override void AbilityTick() {
-            if (cooldownTicker > 0) {
-                cooldownTicker--;
-                Tracker.Notify_GizmosDirty();
-            }
+            if (cooldownTicker <= 0) return;
+            
+            cooldownTicker--;
+            Tracker.Notify_GizmosDirty();
         }
         
         public override Job GetAutocastJob(Pawn target) {

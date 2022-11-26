@@ -37,6 +37,7 @@ namespace PsiTech.Utility {
         }
 
         public static HashSet<Pawn> PotentialPsiTargets(this Map map) {
+            if (map == null) return null;
             return PsiTechMapTargetPawnsUtility.TargetPawnUtilities.TryGetValue(map, out var utility)
                 ? utility.PotentialTargetPawns
                 : null;

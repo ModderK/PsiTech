@@ -33,10 +33,10 @@ namespace PsiTech.Psionics {
         protected int CooldownTicker;
 
         public override void AbilityTick() {
-            if (CooldownTicker > 0) {
-                CooldownTicker--;
-                Tracker.Notify_GizmosDirty();
-            }
+            if (CooldownTicker <= 0) return;
+            
+            CooldownTicker--;
+            Tracker.Notify_GizmosDirty();
         }
 
         public override Job GetAutocastJob(Pawn target) {

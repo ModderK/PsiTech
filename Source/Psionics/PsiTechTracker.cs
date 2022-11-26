@@ -60,6 +60,7 @@ namespace PsiTech.Psionics {
 
         public float PsychicSensitivity {
             get {
+                if (pawn == null) return 0f;
                 if (hasCachedSensitivity) return psychicSensitivity;
 
                 psychicSensitivity = pawn.GetStatValue(StatDefOf.PsychicSensitivity);
@@ -73,6 +74,7 @@ namespace PsiTech.Psionics {
 
         private float ProjectionAbility {
             get {
+                if (pawn == null) return 0f;
                 if (hasCachedProjection) return projectionAbility;
 
                 projectionAbility = pawn.GetStatValue(PsiTechDefOf.PTPsiProjectionAbility);
@@ -86,6 +88,7 @@ namespace PsiTech.Psionics {
 
         private float PsiDefense {
             get {
+                if (pawn == null) return 0f;
                 if (hasCachedDefense) return psiDefense;
 
                 psiDefense = pawn.GetStatValue(PsiTechDefOf.PTPsiDefence);
@@ -198,6 +201,7 @@ namespace PsiTech.Psionics {
         }
 
         public void TrackerTick() {
+            if (pawn == null) return;
             Abilities.ForEach(ability => ability.AbilityTick());
 
             if ((Find.TickManager.TicksGame + loadId) % TickRate != 0) return;
@@ -220,11 +224,11 @@ namespace PsiTech.Psionics {
         }
 
         public float EnergyPercentOfMax() {
-            return CurrentEnergy / pawn.GetStatValue(PsiTechDefOf.PTMaxPsiEnergy);
+            return CurrentEnergy / pawn?.GetStatValue(PsiTechDefOf.PTMaxPsiEnergy) ?? 0f;
         }
 
         public void MaxEnergy() {
-            currentEnergy = pawn.GetStatValue(PsiTechDefOf.PTMaxPsiEnergy);
+            currentEnergy = pawn?.GetStatValue(PsiTechDefOf.PTMaxPsiEnergy) ?? 0f;
             hasCachedGizmos = false;
         }
 
@@ -761,6 +765,7 @@ namespace PsiTech.Psionics {
         }
 
         private void RegenEnergy() {
+            if (pawn == null) return;
             currentEnergy += pawn.GetStatValue(PsiTechDefOf.PTPsiEnergyRegeneration);
 
             if (currentEnergy < 0) currentEnergy = 0;
@@ -775,7 +780,7 @@ namespace PsiTech.Psionics {
         }
 
         public void Notify_EssenceDirty() {
-            Essence = 1f - pawn.health.hediffSet.CalculateEssencePenalty();
+            Essence = 1f - pawn?.health.hediffSet.CalculateEssencePenalty() ?? 0f;
         }
 
         public void Notify_GizmosDirty() {
@@ -907,6 +912,8 @@ namespace PsiTech.Psionics {
         }
 
         public void RebuildCaches() {
+            if (pawn == null) return;
+            
             pawn.health.capacities.Notify_CapacityLevelsDirty();
             
             for (var k = 0; k < cachedStatMods.GetLength(0); k++) {

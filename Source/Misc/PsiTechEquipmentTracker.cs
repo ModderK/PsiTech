@@ -71,7 +71,7 @@ namespace PsiTech.Misc {
         }
         
         public IEnumerable<Gizmo> GetGizmos() {
-            if (!IsWeapon) return null;
+            if (!IsWeapon && !IsApparel) return null;
             
             IEnumerable<Gizmo> gizmos = null;
 
