@@ -30,13 +30,15 @@ namespace PsiTech.Utility {
     [StaticConstructorOnStartup]
     public static class PsiTechCachingUtility {
 
+        private static int _totalStatsInGame;
         private static bool[] _cachedAffectedStats;
         public static readonly List<ThingDef> CachedCryptosleepDefs = new List<ThingDef>();
         
         static PsiTechCachingUtility() {
             
             // Initialize cache array
-            _cachedAffectedStats = new bool[DefDatabase<StatDef>.DefCount];
+            _totalStatsInGame = DefDatabase<StatDef>.DefCount;
+            _cachedAffectedStats = new bool[_totalStatsInGame];
             
             // Cache stats abilities effects
             var abilities = DefDatabase<PsiTechAbilityDef>.AllDefsListForReading;
@@ -100,7 +102,7 @@ namespace PsiTech.Utility {
         }
 
         public static bool EverAffectsStat(StatDef stat) {
-            return _cachedAffectedStats[stat.index];
+            return stat.index < _totalStatsInGame && _cachedAffectedStats[stat.index];
         }
     }
 }

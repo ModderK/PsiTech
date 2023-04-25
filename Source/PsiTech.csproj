@@ -57,9 +57,8 @@
     <Optimize>true</Optimize>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="0Harmony, Culture=neutral, PublicKeyToken=null">
-      <HintPath>../../../Extra/Harmony/net472/0Harmony.dll</HintPath>
-      <Private>False</Private>
+    <Reference Include="0Harmony">
+      <HintPath>..\..\..\Extra\Harmony\net472\0Harmony.dll</HintPath>
     </Reference>
     <Reference Include="Assembly-CSharp, Culture=neutral, PublicKeyToken=null" Condition="'$(Configuration)' == 'Debug - 1.1' Or '$(Configuration)' == 'Release - 1.1'">
       <HintPath>../../../../../../../../../.steam/steam/steamapps/common/RimWorld/Extra/OldAssemblies/1.1/Assembly-CSharp.dll</HintPath>
@@ -247,7 +246,7 @@
       <_Defs Include="$(ProjectDir)../Defs/**/*.*" />
       <_Defs12 Include="$(ProjectDir)../v1.2/Defs/**/*.*" />
       <_Defs13 Include="$(ProjectDir)../v1.3/Defs/**/*.*" />
-      <_Defs14 Include="$(ProjectDir)../v1.4/Defs/**/*.*"/>
+      <_Defs14 Include="$(ProjectDir)../v1.4/Defs/**/*.*" />
       <_Patches Include="$(ProjectDir)../Patches/**/*.*" />
       <_Languages Include="$(ProjectDir)../Languages/**/*.*" />
       <_Sounds Include="$(ProjectDir)../Sounds/**/*.*" />
