@@ -21,6 +21,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using PsiTech.AutocastManagement;
 using PsiTech.Utility;
 using RimWorld;
@@ -692,7 +693,7 @@ namespace PsiTech.Psionics {
         // Total sensitivity modifier, used for defense rolls
         public float GetTotalModifierSensitivity() {
             return Mathf.Clamp(
-                (PsychicSensitivity * ProjectionAbility - PsiDefense) * Mathf.Max(Essence, 0.5f), 0,
+                PsychicSensitivity * ProjectionAbility * (1 - PsiDefense) * Mathf.Max(Essence, 0.5f), 0,
                 Mathf.Infinity);
         }
 
@@ -700,7 +701,7 @@ namespace PsiTech.Psionics {
         // Used for some specific defense-type things where we shouldn't also be scaling by psychic sensitivity
         // I hate it
         public float GetTotalModifierSensitivityNormalized() {
-            return GetTotalModifierSensitivity() / PsychicSensitivity;
+            return Mathf.Clamp(ProjectionAbility * (1 - PsiDefense) * Mathf.Max(Essence, 0.5f), 0, Mathf.Infinity);
         }
 
         public void UseEnergy(float amount, bool silent = false) {
@@ -939,7 +940,7 @@ namespace PsiTech.Psionics {
                     cachedCapacities[capacity.index, 1] *= factor;
                 }
             }
-
+            
             cachedStatMods[PsiTechDefOf.PTPsiEnergyRegeneration.index, 0] += BaseRegen;
             cachedStatMods[PsiTechDefOf.PTMaxPsiEnergy.index, 0] += BaseMaxEnergy;
         }

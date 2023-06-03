@@ -72,10 +72,12 @@ namespace PsiTech.Interface {
                 TargetEffectKey.Translate(comp.TargetEffect.ToStringPercent()));
             yAnchor += 22f + YSeparation;
             
-            // Draw effect slider
+            // Draw effect slider. All these various negative signs and other strangeness are to make the slider value
+            // positive, since apparently having a negative slider value broke in 1.4.
             var effectRect = new Rect(xAnchor, yAnchor, drawBox.width, 22f);
-            comp.TargetEffect = Widgets.HorizontalSlider(effectRect, comp.TargetEffect, comp.Props.MaxEffect,
-                comp.Props.MinEffect, false, null, null, null, comp.Props.EffectStep);
+            var tempTargetEffect = Widgets.HorizontalSlider(effectRect, -comp.TargetEffect, comp.Props.MaxEffect,
+                -comp.Props.MinEffect, false, null, null, null, comp.Props.EffectStep);
+            comp.TargetEffect = -tempTargetEffect;
             yAnchor += 22f + 2*YSeparation;
             
             // Draw current radius label

@@ -22,7 +22,7 @@
         <defName>PTTranscendentDefense</defName>
         <label>Transcendent Defense</label>
         <description>Transcendent defense is a highly advanced defensive technique that decreases a psion's susceptibility to psionic abilities, including friendly ones.\n\nTo train transcendent defense, the psion must already be trained in perfected defence. Perfected defence will be upgraded to its transcendent variant upon training completion.</description>
-        <AbilityClass>PsiTech.Psionics.PsiTechAbilityScaledPassive</AbilityClass>
+        <AbilityClass>PsiTech.Psionics.PsiTechAbilityUnscaledPassive</AbilityClass>
         <Tier>3</Tier>
         <AddedValueForThreat>0</AddedValueForThreat>
         <AbilityCostForRaid>100</AbilityCostForRaid>

@@ -24,7 +24,7 @@
         <defName>PTPsiDefence</defName>
         <label>Psi Defense</label>
         <description>Psi defense is a defensive technique that decreases a psion's susceptibility to psionic abilities, including friendly ones.</description>
-        <AbilityClass>PsiTech.Psionics.PsiTechAbilityScaledPassive</AbilityClass>
+        <AbilityClass>PsiTech.Psionics.PsiTechAbilityUnscaledPassive</AbilityClass>
         <Tier>1</Tier>
         <TrainingTimeDays>1</TrainingTimeDays>
         <AddedValueForThreat>0</AddedValueForThreat>

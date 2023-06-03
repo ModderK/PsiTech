@@ -22,7 +22,7 @@
         <defName>PTPerfectedDefence</defName>
         <label>Perfected Defense</label>
         <description>Perfected defense is an advanced defensive technique that decreases a psion's susceptibility to psionic abilities, including friendly ones.\n\nTo train perfected defense, the psion must already be trained in psi defence. Psi defence will be upgraded to its perfected variant upon training completion.</description>
-        <AbilityClass>PsiTech.Psionics.PsiTechAbilityScaledPassive</AbilityClass>
+        <AbilityClass>PsiTech.Psionics.PsiTechAbilityUnscaledPassive</AbilityClass>
         <Tier>2</Tier>
         <TrainingTimeDays>2</TrainingTimeDays>
         <AddedValueForThreat>0</AddedValueForThreat>

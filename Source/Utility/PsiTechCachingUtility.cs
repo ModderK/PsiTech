@@ -30,7 +30,7 @@ namespace PsiTech.Utility {
     [StaticConstructorOnStartup]
     public static class PsiTechCachingUtility {
 
-        private static int _totalStatsInGame;
+        public static int _totalStatsInGame;
         private static bool[] _cachedAffectedStats;
         public static readonly List<ThingDef> CachedCryptosleepDefs = new List<ThingDef>();
         

@@ -153,6 +153,7 @@ namespace PsiTech.Utility {
                     ?.GetEffectOnCell(pawn.Position) ?? 0f;
                 if (field == 0f) return __result;
 
+                field *= pawn.PsiTracker().GetTotalModifierSensitivityNormalized();
                 __result += "\n" + "PsiTech.SuppressionFieldEffect".Translate(
                     field.ToStringByStyle(___stat.ToStringStyleUnfinalized, ToStringNumberSense.Offset));
             }else if (req.Thing.PsiEquipmentTracker()?.IsPsychic ?? false) {
