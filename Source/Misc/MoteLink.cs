@@ -36,7 +36,11 @@ namespace PsiTech.Misc {
             target.y = AltitudeLayer.MoteOverhead.AltitudeFor();
         }
 
+#if VER15
+        protected override void DrawAt(Vector3 drawLoc, bool flip = false) {
+#else
         public override void Draw() {
+#endif
             if (beam == null || start == target) return;
             
             var alpha = Alpha;

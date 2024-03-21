@@ -17,18 +17,28 @@
     <DebugSymbols>false</DebugSymbols>
     <DebugType>none</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>..\v1.4\Assemblies\</OutputPath>
-    <DefineConstants>VER13;VER14</DefineConstants>
+    <OutputPath>..\v1.5\Assemblies\</OutputPath>
+    <DefineConstants>VER13;VER14;VER15</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>none</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>..\..\PsiTech - Release\v1.4\Assemblies\</OutputPath>
-    <DefineConstants>VER13;VER14</DefineConstants>
+    <OutputPath>..\..\PsiTech - Release\v1.5\Assemblies\</OutputPath>
+    <DefineConstants>VER13;VER14;VER15</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug - 1.4|AnyCPU' ">
+    <Optimize>true</Optimize>
+    <OutputPath>..\v1.4\Assemblies\</OutputPath>
+    <DefineConstants>VER13;VER14</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release - 1.4|AnyCPU' ">
+    <Optimize>true</Optimize>
+    <OutputPath>..\..\PsiTech - Release\v1.4\Assemblies\</OutputPath>
+    <DefineConstants>VER13;VER14</DefineConstants>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug - 1.3|AnyCPU' ">
     <Optimize>true</Optimize>
@@ -71,6 +81,10 @@
     </Reference>
     <Reference Include="Assembly-CSharp, Culture=neutral, PublicKeyToken=null" Condition="'$(Configuration)' == 'Debug - 1.3' Or '$(Configuration)' == 'Release - 1.3'">
       <HintPath>../../../../../../../../../.steam/steam/steamapps/common/RimWorld/Extra/OldAssemblies/1.3/Assembly-CSharp.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Assembly-CSharp, Culture=neutral, PublicKeyToken=null" Condition="'$(Configuration)' == 'Debug - 1.4' Or '$(Configuration)' == 'Release - 1.4'">
+      <HintPath>../../../../../../../../../.steam/steam/steamapps/common/RimWorld/Extra/OldAssemblies/1.4/Assembly-CSharp.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Assembly-CSharp, Culture=neutral, PublicKeyToken=null" Condition="'$(Configuration)' == 'Debug' Or '$(Configuration)' == 'Release'">
@@ -248,6 +262,7 @@
       <_Defs12 Include="$(ProjectDir)../v1.2/Defs/**/*.*" />
       <_Defs13 Include="$(ProjectDir)../v1.3/Defs/**/*.*" />
       <_Defs14 Include="$(ProjectDir)../v1.4/Defs/**/*.*" />
+      <_Defs15 Include="$(ProjectDir)../v1.5/Defs/**/*.*" />
       <_Patches Include="$(ProjectDir)../Patches/**/*.*" />
       <_Languages Include="$(ProjectDir)../Languages/**/*.*" />
       <_Sounds Include="$(ProjectDir)../Sounds/**/*.*" />
@@ -260,6 +275,7 @@
     <Copy SourceFiles="@(_Defs12)" DestinationFolder="$(ProjectDir)../../PsiTech - Release/v1.2/Defs/%(RecursiveDir)" SkipUnchangedFiles="true" />
     <Copy SourceFiles="@(_Defs13)" DestinationFolder="$(ProjectDir)../../PsiTech - Release/v1.3/Defs/%(RecursiveDir)" SkipUnchangedFiles="true" />
     <Copy SourceFiles="@(_Defs14)" DestinationFolder="$(ProjectDir)../../PsiTech - Release/v1.4/Defs/%(RecursiveDir)" SkipUnchangedFiles="true" />
+    <Copy SourceFiles="@(_Defs15)" DestinationFolder="$(ProjectDir)../../PsiTech - Release/v1.5/Defs/%(RecursiveDir)" SkipUnchangedFiles="true" />
     <Copy SourceFiles="@(_Patches)" DestinationFolder="$(ProjectDir)../../PsiTech - Release/Patches/%(RecursiveDir)" SkipUnchangedFiles="true" />
     <Copy SourceFiles="@(_Languages)" DestinationFolder="$(ProjectDir)../../PsiTech - Release/Languages/%(RecursiveDir)" SkipUnchangedFiles="true" />
     <Copy SourceFiles="@(_Sounds)" DestinationFolder="$(ProjectDir)../../PsiTech - Release/Sounds/%(RecursiveDir)" SkipUnchangedFiles="true" />

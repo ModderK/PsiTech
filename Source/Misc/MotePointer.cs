@@ -37,7 +37,11 @@ namespace PsiTech.Misc {
             target.y = AltitudeLayer.MoteOverhead.AltitudeFor();
         }
 
+#if VER15
+        protected override void DrawAt(Vector3 drawLoc, bool flip = false) {
+#else
         public override void Draw() {
+#endif
             if (beam == null || start == target) return;
             
             var alpha = Alpha;
@@ -57,7 +61,11 @@ namespace PsiTech.Misc {
             
             var q = Quaternion.LookRotation(start - target);
             var matrix = new Matrix4x4();
+#if VER15
+            matrix.SetTRS(pos, q, linearScale);
+#else
             matrix.SetTRS(pos, q, exactScale);
+#endif
             Graphics.DrawMesh(MeshPool.plane10, matrix, beam, 0);
         }
         

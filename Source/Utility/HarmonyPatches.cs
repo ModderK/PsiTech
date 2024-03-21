@@ -588,8 +588,13 @@ namespace PsiTech.Utility {
                 !Rand.Chance(psiKind.ChanceForPsionicAbilities)) return;
             
             // Remove psychically dull/deaf - can't enforce this in def since it's a spectrum trait...
+#if VER15
+            __result.story.traits.allTraits.RemoveAll(trait =>
+                trait.def == TraitDef.Named("PsychicSensitivity") && trait.Degree < 0);
+#else
             __result.story.traits.allTraits.RemoveAll(trait =>
                 trait.def == TraitDefOf.PsychicSensitivity && trait.Degree < 0);
+#endif
             
             // We've got psi ability money to burn
             var money = psiKind.PsiAbilitiesMoney.RandomInRange;
@@ -830,7 +835,11 @@ namespace PsiTech.Utility {
     }
     
     // Notify manager on revive to move a tracker back to the active list if available.
+#if VER15
+    [HarmonyPatch(typeof(ResurrectionUtility), "TryResurrect")]
+#else
     [HarmonyPatch(typeof(ResurrectionUtility), "Resurrect")]
+#endif
     public class NotifyResurrectedPatch {
 
         public static void Postfix(Pawn pawn) {

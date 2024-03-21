@@ -26,7 +26,12 @@ namespace PsiTech.AbilityEffects {
         public MentalStateDef MentalState;
         
         public override bool TryDoEffectOnPawn(Pawn user, Pawn target) {
+#if VER15
+            return target.mindState.mentalStateHandler.TryStartMentalState(MentalState, forceWake: true,
+                transitionSilently: true);
+#else
             return target.mindState.mentalStateHandler.TryStartMentalState(MentalState, null, true, false, null, true);
+#endif
         }
     }
 }

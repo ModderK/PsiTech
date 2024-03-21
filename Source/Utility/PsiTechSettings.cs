@@ -21,6 +21,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+#if VER15
+using LudeonTK;
+#endif
 using PsiTech.Interface;
 using PsiTech.Misc;
 using PsiTech.Psionics;
