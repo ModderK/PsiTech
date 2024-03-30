@@ -713,6 +713,38 @@ namespace PsiTech.Utility {
 
     [HarmonyPatch(typeof(Building_CryptosleepCasket), "FindCryptosleepCasketFor")]
     public class FindCryptosleepCasketTranspiler {
+#if VER15
+        // In version 1.5 Ludeon introduced a cryptosleep casket cache much like the one which was previously
+        // implemented by the previous transpiler (which is still conditionally compiled below). Due to this, we now
+        // don't need to build out a cryptosleep casket cache ourselves, we just need to inject after the cache is built
+        // and pull the PsiTech trainer out after the cache is built.
+
+        private static FieldInfo cachedCasketsField =
+            AccessTools.Field(typeof(Building_CryptosleepCasket), nameof(Building_CryptosleepCasket.cachedCaskets));
+
+        private static MethodInfo removeMethod = SymbolExtensions.GetMethodInfo(() => RemovePsiTechTrainer());
+        
+        public static IEnumerable<CodeInstruction> Transpiler(IEnumerable<CodeInstruction> instructions) {
+
+            var patched = false;
+
+            foreach (var instruction in instructions) {
+                yield return instruction;
+
+                if (patched || !instruction.StoresField(cachedCasketsField)) continue;
+                
+                yield return new CodeInstruction(OpCodes.Call, removeMethod);
+                patched = true;
+            }
+
+        }
+
+        private static void RemovePsiTechTrainer() {
+            if (!Building_CryptosleepCasket.cachedCaskets.Remove(PsiTechDefOf.PTPsychicTraier)) {
+                Log.Warning("Failed to remove PsiTechTrainer from cachedCaskets.");
+            }
+        }
+#else
         // The purpose of this transpiler is to prevent a really minor issue where pawns can haul other pawns to
         // training tubes because they're derived from Building_CryptosleepCasket. As it turns out, it also functions
         // as an optimization.
@@ -764,7 +796,7 @@ namespace PsiTech.Utility {
 
             return codes.AsEnumerable();
         }
-
+#endif
     }
 
     // This pair of patches is for keeping track of potential targets on a map

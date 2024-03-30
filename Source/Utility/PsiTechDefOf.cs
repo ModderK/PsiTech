@@ -69,6 +69,9 @@ namespace PsiTech.Utility {
         
         // Research projects
         public static ResearchProjectDef PTProjectionTheory;
+        
+        // Things
+        public static ThingDef PTPsychicTraier;
 
         static PsiTechDefOf() {
             DefOfHelper.EnsureInitializedInCtor(typeof(PsiTechDefOf));

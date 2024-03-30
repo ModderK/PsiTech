@@ -32,7 +32,9 @@ namespace PsiTech.Utility {
 
         public static int _totalStatsInGame;
         private static bool[] _cachedAffectedStats;
+#if !VER15
         public static readonly List<ThingDef> CachedCryptosleepDefs = new List<ThingDef>();
+#endif
         
         static PsiTechCachingUtility() {
             
@@ -75,6 +77,7 @@ namespace PsiTech.Utility {
                 }
             }
             
+#if !VER15
             // Secret optimization/fix - build a custom cache of possible cryptosleep casket types
             var things = DefDatabase<ThingDef>.AllDefsListForReading;
             foreach (var thing in things) {
@@ -83,6 +86,7 @@ namespace PsiTech.Utility {
                 
                 CachedCryptosleepDefs.Add(thing);
             }
+#endif
             
             // Fix the enhancement ThingFilter
             var enhancementRecipe = DefDatabase<RecipeDef>.GetNamed("PTUpgradeApparelPsychic");
